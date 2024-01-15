@@ -104,7 +104,7 @@
                                             <td>{{ $list->initial }}</td>
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="edit"></i></button>
-                                                <button class="btn btn-danger rem-element px-2 py-1" title="Delete Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="trash-2"></i> </button>
+                                                <button class="btn btn-danger rem-element px-2 py-1" title="Delete Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="toggle-left"></i> </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -247,7 +247,7 @@
     $("#buttons-datatables").on("click", ".rem-element", function(e) {
         e.preventDefault();
         swal({
-            title: "Are you sure to delete this fire Station?",
+            title: "Are you sure to inactive this fire Station?",
             // text: "Make sure if you have filled Vendor details before proceeding further",
             icon: "info",
             buttons: ["Cancel", "Confirm"]

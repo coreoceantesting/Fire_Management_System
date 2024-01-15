@@ -52,6 +52,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     // Masters
     Route::resource('wards', App\Http\Controllers\Admin\Masters\WardController::class );
     Route::resource('firestations', App\Http\Controllers\Admin\Masters\FireStationController::class );
+    Route::resource('vehicle_details', App\Http\Controllers\Admin\Masters\VehicleDetailsController::class );
 
 
 

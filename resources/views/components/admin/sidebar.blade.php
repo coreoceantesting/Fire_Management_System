@@ -50,6 +50,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('firestations.index') }}" class="nav-link" data-key="t-horizontal">Fire Stations</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('firestations.index') }}" class="nav-link" data-key="t-horizontal">Vehicle Detalis</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
