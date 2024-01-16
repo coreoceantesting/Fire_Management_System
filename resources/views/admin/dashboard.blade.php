@@ -8,7 +8,7 @@
             <div class="d-flex flex-column h-100">
                 <div class="row h-100">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" style="display: none">
                             <div class="card-body p-0">
                                 <div class="alert alert-warning border-0 rounded-0 m-0 d-flex align-items-center" role="alert">
                                     <i data-feather="alert-triangle" class="text-warning me-2 icon-sm"></i>
@@ -59,13 +59,13 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium text-muted mb-0">
-                                            Users
-                                        </p>
+                                        <a href="#" class="fw-medium text-muted mb-0">
+                                            Today's Slip
+                                        </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="28.05">0</span>k
+                                            <span class="counter-value" data-target="0">0</span>
                                         </h2>
-                                        <p class="mb-0 text-muted">
+                                        <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0"><i class="ri-arrow-up-line align-middle"></i>
                                                 16.24 %
                                             </span>
@@ -76,7 +76,7 @@
                                     <div>
                                         <div class="avatar-sm flex-shrink-0">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
-                                                <i data-feather="users" class="text-info"></i>
+                                                <i data-feather="award" class="text-info"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -93,13 +93,13 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium text-muted mb-0">
-                                            Sessions
-                                        </p>
+                                        <a href="#" class="fw-medium text-muted mb-0">
+                                            Montly Slip
+                                        </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="97.66">0</span>k
+                                            <span class="counter-value" data-target="0">0</span>
                                         </h2>
-                                        <p class="mb-0 text-muted">
+                                        <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
                                                 <i class="ri-arrow-down-line align-middle"></i>
                                                 3.96 %
@@ -111,7 +111,7 @@
                                     <div>
                                         <div class="avatar-sm flex-shrink-0">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
-                                                <i data-feather="activity" class="text-info"></i>
+                                                <i data-feather="box" class="text-info"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -130,15 +130,13 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium text-muted mb-0">
-                                            Avg. Visit
-                                            Duration
-                                        </p>
+                                        <a href="#" class="fw-medium text-muted mb-0">
+                                            Yearly Slip
+                                        </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="3">0</span>m
-                                            <span class="counter-value" data-target="40">0</span>sec
+                                            <span class="counter-value" data-target="0">0</span>
                                         </h2>
-                                        <p class="mb-0 text-muted">
+                                        <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
                                                 <i class="ri-arrow-down-line align-middle"></i>
                                                 0.24 %
@@ -150,7 +148,7 @@
                                     <div>
                                         <div class="avatar-sm flex-shrink-0">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
-                                                <i data-feather="clock" class="text-info"></i>
+                                                <i data-feather="list" class="text-info"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -162,7 +160,7 @@
                     </div>
                     <!-- end col-->
 
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display: none">
                         <div class="card card-animate">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
@@ -203,7 +201,7 @@
         <div class="col-xxl-7">
             <div class="row h-100">
                 <div class="col-xl-6">
-                    <div class="card card-height-100">
+                    <div class="card card-height-100" style="display: none">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">
                                 Live Users By Country
@@ -272,7 +270,7 @@
                 <!-- end col -->
 
                 <div class="col-xl-6">
-                    <div class="card card-height-100">
+                    <div class="card card-height-100" style="display: none">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">
                                 Sessions by Countries
