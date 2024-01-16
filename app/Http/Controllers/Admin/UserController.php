@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Ward;
+use App\Models\FireStation;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,8 +27,9 @@ class UserController extends Controller
     {
         $users = User::whereNot('id', Auth::user()->id)->latest()->get();
         $roles = Role::orderBy('id', 'DESC')->whereNot('name', 'like', '%super%')->get();
+        $fire_stations = FireStation::where('fire_station_is_active','0')->latest()->get();
 
-        return view('admin.users')->with(['users'=> $users, 'roles'=> $roles]);
+        return view('admin.users')->with(['users'=> $users, 'roles'=> $roles, 'fire_stations' => $fire_stations]);
     }
 
     /**
@@ -132,7 +134,7 @@ class UserController extends Controller
 
     public function toggle(Request $request, User $user)
     {
-        $current_status = DB::table('app_users')->where('id', $user->id)->value('active_status');
+        $current_status = DB::table('users')->where('id', $user->id)->value('active_status');
         try
         {
             DB::beginTransaction();

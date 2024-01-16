@@ -38,6 +38,33 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="gender">Select Gender <span class="text-danger">*</span></label>
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="">--Select Gender--</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <span class="text-danger error-text gender_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="dob">User Date Of Birth <span class="text-danger">*</span></label>
+                                <input class="form-control" id="dob" name="dob" type="date" placeholder="Enter Date of birth">
+                                <span class="text-danger error-text dob_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="fire_station_id">Select Fire Station <span class="text-danger">*</span></label>
+                                <select class="form-control" id="fire_station_id" name="fire_station_id">
+                                    <option value="">--Select Fire Station--</option>
+                                    @foreach ($fire_stations as $list)
+                                        <option value="{{ $list->fire_station_id }}">{{ $list->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger error-text fire_station_id_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
                                 <label class="col-form-label" for="role">Select User Type / Role <span class="text-danger">*</span></label>
                                 <select class="js-example-basic-single col-sm-12" id="role" name="role">
                                     <option value="">--Select Role--</option>
@@ -105,6 +132,33 @@
                                 <input class="form-control" name="mobile" type="number" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                                     placeholder="Enter User Mobile">
                                 <span class="text-danger error-text mobile_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="gender">Select Gender <span class="text-danger">*</span></label>
+                                <select class="form-control" id="gender" name="gender">
+                                    <option value="">--Select Gender--</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <span class="text-danger error-text gender_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="dob">User Date Of Birth <span class="text-danger">*</span></label>
+                                <input class="form-control" id="dob" name="dob" type="date" placeholder="Enter Date of birth">
+                                <span class="text-danger error-text dob_err"></span>
+                            </div>
+
+                            <div class="col-md-4 mt-3">
+                                <label class="col-form-label" for="fire_station_id">Select Fire Station <span class="text-danger">*</span></label>
+                                <select class="form-control" id="fire_station_id" name="fire_station_id">
+                                    <option value="">--Select Fire Station--</option>
+                                    @foreach ($fire_stations as $list)
+                                        <option value="{{ $list->fire_station_id }}">{{ $list->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger error-text fire_station_id_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
@@ -467,15 +521,13 @@
 
                 if (!data.error) {
                     $("#editForm input[name='edit_model_id']").val(data.user.id);
-                    $("#editForm input[name='emp_code']").val(data.user.emp_code);
-                    $("#editForm select[name='department_id']").html(data.departmentHtml);
-                    $("#editForm select[name='sub_department_id']").html(data.subDepartmentHtml);
-                    $("#editForm input[name='dob']").val(data.user.dob);
-                    data.user.gender == 'm' ? $("#editForm input[name='gender'][value='m']").prop("checked", true) : $("#editForm input[name='gender'][value='f']").prop("checked", true);
                     $("#editForm select[name='role']").html(data.roleHtml);
                     $("#editForm input[name='name']").val(data.user.name);
                     $("#editForm input[name='email']").val(data.user.email);
                     $("#editForm input[name='mobile']").val(data.user.mobile);
+                    $("#editForm select[name='gender']").val(data.user.gender);
+                    $("#editForm input[name='dob']").val(data.user.dob);
+                    $("#editForm select[name='fire_station_id']").val(data.user.fire_station_id);
                     $("#editForm select[name='ward_id']").html(data.wardHtml);
                 } else {
                     swal("Error!", data.error, "error");

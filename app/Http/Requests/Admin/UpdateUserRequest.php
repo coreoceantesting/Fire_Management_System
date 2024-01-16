@@ -25,6 +25,9 @@ class UpdateUserRequest extends FormRequest
         return [
             'role' => 'required',
             'name' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'fire_station_id' => 'required',
             'email' => 'required|email',
             'mobile' => 'required|digits:10',
         ];
