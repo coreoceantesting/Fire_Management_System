@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Admin\Masters;
 
 use App\Http\Controllers\Admin\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Masters\StoreVehicleDetailsRequest;
-use App\Http\Requests\Admin\Masters\UpdateVehicleDetailsRequest;
-use App\Models\VehicleDetail;
+use App\Http\Requests\Admin\Masters\StoreDesignationsRequest;
+use App\Http\Requests\Admin\Masters\UpdateDesignationsRequest;
+use App\Models\Designation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
-class VehicleDetailsController extends Controller
+class DesignationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vehicle_list = VehicleDetail::where('is_deleted','0')->latest()->get();
+        $designation_list = Designation::where('is_deleted','0')->latest()->get();
 
-        return view('admin.masters.vehicle_details')->with(['vehicle_list'=> $vehicle_list]);
+        return view('admin.masters.designations')->with(['designation_list'=> $designation_list]);
     }
 
     /**
@@ -34,7 +34,7 @@ class VehicleDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVehicleDetailsRequest $request)
+    public function store(StoreDesignationsRequest $request)
     {
         try
         {
@@ -42,14 +42,14 @@ class VehicleDetailsController extends Controller
             $input = $request->validated();
             $input['created_by'] = Auth::user()->id;
             $input['created_at'] = date('Y-m-d H:i:s');
-            VehicleDetail::create( Arr::only( $input, VehicleDetail::getFillables() ) );
+            Designation::create( Arr::only( $input, Designation::getFillables() ) );
             DB::commit();
 
-            return response()->json(['success'=> 'Vehicle Details Store successfully!']);
+            return response()->json(['success'=> 'Designation Store successfully!']);
         }
         catch(\Exception $e)
         {
-            return $this->respondWithAjax($e, 'creating', 'Vehicle Details');
+            return $this->respondWithAjax($e, 'creating', 'Designation');
         }
     }
 
@@ -64,13 +64,13 @@ class VehicleDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VehicleDetail $vehicle_detail)
+    public function edit(Designation $designation)
     {
-        if ($vehicle_detail)
+        if ($designation)
         {
             $response = [
                 'result' => 1,
-                'vehicle' => $vehicle_detail,
+                'designation' => $designation,
             ];
         }
         else
@@ -83,42 +83,42 @@ class VehicleDetailsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVehicleDetailsRequest $request, VehicleDetail $vehicle_detail)
+    public function update(UpdateDesignationsRequest $request, Designation $designation)
     {
         try
         {
             DB::beginTransaction();
             $input = $request->validated();
-            $input['vehicle_number'] = $input['vehicle_number'];
-            $input['vehicle_type'] = $input['vehicle_type'];
+            $input['designation_name'] = $input['designation_name'];
+            $input['designation_initial'] = $input['designation_initial'];
             $input['updated_by'] = Auth::user()->id;
             $input['updated_at'] = date('Y-m-d H:i:s');
-            $vehicle_detail->update( Arr::only( $input, VehicleDetail::getFillables() ) );
+            $designation->update( Arr::only( $input, Designation::getFillables() ) );
             DB::commit();
 
-            return response()->json(['success'=> 'Vehicle Details updated successfully!']);
+            return response()->json(['success'=> 'Designation updated successfully!']);
         }
         catch(\Exception $e)
         {
-            return $this->respondWithAjax($e, 'updating', 'Vehicle Details');
+            return $this->respondWithAjax($e, 'updating', 'Designation');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VehicleDetail $vehicle_detail)
+    public function destroy(Designation $designation)
     {
         try
         {
             DB::beginTransaction();
-            $vehicle_detail->update(['is_deleted' => '1']);
+            $designation->update(['is_deleted' => '1']);
             DB::commit();
-            return response()->json(['success'=> 'Vehicle Details deleted successfully!']);
+            return response()->json(['success'=> 'Designation deleted successfully!']);
         }
         catch(\Exception $e)
         {
-            return $this->respondWithAjax($e, 'deleting', 'Vehicle Details');
+            return $this->respondWithAjax($e, 'deleting', 'Designation');
         }
     }
 }
