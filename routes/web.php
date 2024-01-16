@@ -54,6 +54,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::resource('firestations', App\Http\Controllers\Admin\Masters\FireStationController::class );
     Route::resource('vehicle_details', App\Http\Controllers\Admin\Masters\VehicleDetailsController::class );
     Route::resource('designations', App\Http\Controllers\Admin\Masters\DesignationsController::class );
+    Route::resource('driver_details', App\Http\Controllers\Admin\Masters\DriversDetailsController::class );
 
 
 
