@@ -413,7 +413,7 @@
                 dataType: 'json',
                 success: function(data) {
                     // Generate HTML table with the predefined headers
-                    var tableHtml = '<table class="table">';
+                    var tableHtml = '<table class="table table-bordered">';
                     
                     // Use predefined headers
                     tableHtml += '<thead><tr>';
