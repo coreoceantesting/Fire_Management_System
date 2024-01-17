@@ -159,7 +159,7 @@
                                                         data-id="{{ $list->slip_id }}"
                                                         data-pdf-file-name="{{ $list->pdf_name }}"
                                                 >
-                                                    <i data-feather="file-text"></i>
+                                                    <i data-feather="download"></i>
                                                 </button>
 
                                                 {{-- <button class="edit-element btn btn-secondary px-2 py-1" title="Download PDF" data-id="{{ $list->slip_id }}"><i data-feather="file-text"></i></button> --}}

@@ -160,18 +160,18 @@
                     </div>
                     <!-- end col-->
 
-                    <div class="col-md-6" style="display: none">
+                    <div class="col-md-6">
                         <div class="card card-animate">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <p class="fw-medium text-muted mb-0">
-                                            Bounce Rate
+                                            Action Taken
                                         </p>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="33.48">0</span>%
+                                            <span class="counter-value" data-target="0">0</span>
                                         </h2>
-                                        <p class="mb-0 text-muted">
+                                        <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0">
                                                 <i class="ri-arrow-up-line align-middle"></i>
                                                 7.05 %
