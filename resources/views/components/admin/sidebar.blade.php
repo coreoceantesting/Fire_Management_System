@@ -97,6 +97,11 @@
                             <li class="nav-item">
                                 <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">Total Slip</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">New Generated Slip</a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>

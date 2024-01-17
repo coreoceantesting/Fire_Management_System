@@ -92,6 +92,22 @@ class GenerateSlipsController extends Controller
         return view('generateslips.slipslist', compact('slip_list'));
     }
 
+    public function new_generated_slip()
+    {
+        $slip_list = DB::table('slips')->latest()->get();
+        return view('generateslips.new_generated_slip', compact('slip_list'));
+    }
+
+    public function view_generated_slip($slipId)
+    {
+        // Fetch slip details based on $slipId
+        $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
+
+        // Return a view or JSON response with slip details
+        return response()->json(['slip_data' => $slip]);
+    }
+
+
     
 
 }

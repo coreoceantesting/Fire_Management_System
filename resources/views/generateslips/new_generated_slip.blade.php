@@ -109,11 +109,11 @@
                         <div class="row align-items-center">
                             <div class="col-sm-3">
                                 <div class="btn-group">
-                                    <button id="addToTable" class="btn btn-primary">Generate Slip <i class="fa fa-plus"></i></button>
-                                    <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
+                                    {{-- <button id="addToTable" class="btn btn-primary">Generate Slip <i class="fa fa-plus"></i></button> --}}
+                                    {{-- <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button> --}}
                                 </div>
                             </div>
-                            <form action="{{ route('filter') }}" method="GET" class="col-sm-9">
+                            {{-- <form action="{{ route('filter') }}" method="GET" class="col-sm-9">
                                 @csrf
                                 <div class="row align-items-center">
                                     <div class="col-sm-3 form-group">
@@ -129,7 +129,7 @@
                                         <a class="btn btn-success" href="{{ route('slips_list') }}">Clear</a>
                                     </div>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                     
@@ -154,16 +154,16 @@
                                             <td>{{ $list->slip_date }}</td>
                                             <td>{{ $list->slip_status }}</td>
                                             <td>
-                                                <button class="download-pdf btn btn-secondary px-2 py-1"
+                                                {{-- <button class="download-pdf btn btn-secondary px-2 py-1"
                                                         title="Download PDF"
                                                         data-id="{{ $list->slip_id }}"
                                                         data-pdf-file-name="{{ $list->pdf_name }}"
                                                 >
                                                     <i data-feather="download"></i>
-                                                </button>
+                                                </button> --}}
 
-                                                {{-- <button class="edit-element btn btn-secondary px-2 py-1" title="Download PDF" data-id="{{ $list->slip_id }}"><i data-feather="file-text"></i></button> --}}
-                                                {{-- <button class="btn btn-danger rem-element px-2 py-1" title="Delete Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="trash-2"></i> </button> --}}
+                                                <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button> 
+                                                <button class="btn btn-danger action-element px-2 py-1" title="Take Action" data-id="{{ $list->slip_id }}">Take Action</button> 
                                             </td>
                                         </tr>
                                     @endforeach
@@ -175,13 +175,34 @@
             </div>
         </div>
 
+        {{-- Generated Slip View model --}}
+        <div class="modal fade" id="viewSlipModal" tabindex="-1" role="dialog" aria-labelledby="viewSlipModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewSlipModalLabel">View Slip Details</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Slip details will be displayed here -->
+                        <div id="slipDetails"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
 
 </x-admin.layout>
 
 {{-- Current Date & Time --}}
-
 <script>
     const now = new Date();
     const year = now.getFullYear();
@@ -377,4 +398,60 @@
         });
     });
 </script>
+
+{{-- View Generated Slip  --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for "View Slip" button click
+        $('.view-element').on('click', function() {
+            var slipId = $(this).data('id');
+
+            // Fetch slip details from the JSON endpoint
+            $.ajax({
+                url: '/view-slip/' + slipId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Generate HTML table with the predefined headers
+                    var tableHtml = '<table class="table">';
+                    
+                    // Use predefined headers
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Slip Date (स्लिप तारीख)</th>';
+                    tableHtml += '<th scope="col">Caller Name (कॉलरचे नाव)</th>';
+                    tableHtml += '<th scope="col">Caller Mobile Number (कॉलर मोबाईल नंबर)</th>';
+                    tableHtml += '<th scope="col">Incident Location (घटनेचे ठिकाण)</th>';
+                    tableHtml += '<th scope="col">LandMark (लँडमार्क)</th>';
+                    tableHtml += '<th scope="col">Incident Reason (घटनेचे कारण)</th>';
+                    tableHtml += '<th scope="col">Slip Status (स्लिप स्थिती)</th>';
+                    tableHtml += '</tr></thead>';
+
+                    // Create table body
+                    tableHtml += '<tbody>';
+                    tableHtml += '<tr>';
+                    tableHtml += '<th scope="row">' + data.slip_data.slip_date + '</th>';
+                    tableHtml += '<td>' + data.slip_data.caller_name + '</td>';
+                    tableHtml += '<td>' + data.slip_data.caller_mobile_no + '</td>';
+                    tableHtml += '<td>' + data.slip_data.incident_location_address + '</td>';
+                    tableHtml += '<td>' + data.slip_data.land_mark + '</td>';
+                    tableHtml += '<td>' + data.slip_data.incident_reason + '</td>';
+                    tableHtml += '<td>' + data.slip_data.slip_status + '</td>';
+                    tableHtml += '</tr>';
+                    tableHtml += '</tbody></table>';
+
+                    // Display table in the modal
+                    $('#slipDetails').html(tableHtml);
+                    
+                    // Show the modal
+                    $('#viewSlipModal').modal('show');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+
 

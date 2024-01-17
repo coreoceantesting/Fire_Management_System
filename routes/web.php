@@ -73,6 +73,10 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/download-slip-pdf/{slip_id}', [App\Http\Controllers\GenerateSlipsController::class, 'downloadSlipPdf'])->name('download-slip-pdf');
     Route::get('/filter', [App\Http\Controllers\GenerateSlipsController::class, 'filter'])->name('filter');
 
+    // new generated slips
+    Route::get('new-generated-slips', [App\Http\Controllers\GenerateSlipsController::class, 'new_generated_slip'])->name('new_generated_slip');
+    Route::get('/view-slip/{slipId}', [App\Http\Controllers\GenerateSlipsController::class, 'view_generated_slip'])->name('view_generated_slip');
+
 });
 
 
