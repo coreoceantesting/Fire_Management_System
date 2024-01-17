@@ -67,6 +67,12 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::put('users/{user}/assign-role', [App\Http\Controllers\Admin\UserController::class, 'assignRole' ])->name('users.assign-role');
     Route::resource('roles', App\Http\Controllers\Admin\RoleController::class );
 
+    // Generate Slips 
+    Route::get('slips-list', [App\Http\Controllers\GenerateSlipsController::class, 'index'])->name('slips_list');
+    Route::post('store-slip', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip'])->name('store_slip');
+    Route::get('/download-slip-pdf/{slip_id}', [App\Http\Controllers\GenerateSlipsController::class, 'downloadSlipPdf'])->name('download-slip-pdf');
+    Route::get('/filter', [App\Http\Controllers\GenerateSlipsController::class, 'filter'])->name('filter');
+
 });
 
 
