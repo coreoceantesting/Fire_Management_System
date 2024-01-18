@@ -113,13 +113,13 @@
                         </header>
                         <div class="card-body py-2">
                             <div class="form-group row">
-                                <div class="col-md-3">
-                                    <label for="call_time" class="control-label">Call Date & Time :</label>
+                                <div class="col-md-5">
+                                    <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) :</label>
                                     <input class="form-control" type="datetime-local" name="call_time" required>
                                 </div>
                                 
-                                <div class="col-md-3">
-                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time:</label>
+                                <div class="col-md-5">
+                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_time" required>
                                 </div>
                             </div>
@@ -127,10 +127,10 @@
                             <!-- Worker Details Section -->
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">
-                                    <label for="worker_name[]" class="control-label">Worker Name:</label>
+                                    <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव):</label>
                                     <input class="form-control" type="text" name="worker_name[]" required>
                     
-                                    <label for="worker_designation[]" class="control-label">Worker Designation:</label>
+                                    <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम):</label>
                                     <select class="form-control" name="worker_designation[]" required>
                                         <!-- Populate dropdown options from master data -->
                                         <option value="">--Select Designation--</option>
