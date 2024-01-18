@@ -95,7 +95,7 @@ class GenerateSlipsController extends Controller
 
     public function new_generated_slip()
     {
-        $slip_list = DB::table('slips')->where('slip_status','pending')->latest()->get();
+        $slip_list = DB::table('slips')->where('slip_status','Pending')->latest()->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
         return view('generateslips.new_generated_slip', compact('slip_list','designation_list'));
     }
@@ -135,7 +135,7 @@ class GenerateSlipsController extends Controller
         }
         
         DB::table('slips')->where('slip_id',$request->input('slip_id'))->update([
-            'slip_status' => 'slip_action_form',
+            'slip_status' => 'Action Form Submitted',
         ]);
 
         return response()->json(['success'=> 'Action Form Submitted successfully!']);

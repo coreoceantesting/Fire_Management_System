@@ -79,6 +79,14 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     // Take Action Form
     Route::post('store-slip-action-form', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip_action_form'])->name('store_slip_action_form');
 
+    // occurance book
+    Route::get('action-taken-slips-list', [App\Http\Controllers\OccuranceBookController::class, 'action_taken_slips_list'])->name('action_taken_slips_list');
+    Route::get('/view-action-taken-slip/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'view_action_taken_slip'])->name('view_action_taken_slip');
+    Route::post('store-additional-help', [App\Http\Controllers\OccuranceBookController::class, 'store_additional'])->name('store_additional');
+    Route::post('store-occurance-book', [App\Http\Controllers\OccuranceBookController::class, 'store_occurance_book'])->name('store_occurance_book');
+
+
+    
 });
 
 

@@ -67,7 +67,7 @@
                 @canany(['users.view', 'roles.view'])
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i class="ri-layout-3-line"></i>
+                        <i class="ri-user-settings-line"></i>
                         <span data-key="t-layouts">User Management</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
@@ -89,7 +89,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i class="ri-layout-3-line"></i>
+                        <i class="ri-list-check"></i>
                         <span data-key="t-layouts">Slips</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
@@ -102,6 +102,20 @@
                                 <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">New Generated Slip</a>
                             </li>
 
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i class="ri-book-line"></i>
+                        <span data-key="t-layouts">Occurance Book</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
