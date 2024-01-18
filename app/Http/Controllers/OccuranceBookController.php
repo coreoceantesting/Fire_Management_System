@@ -36,13 +36,24 @@ class OccuranceBookController extends Controller
             ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
             ->where('on_field_worker_details.slip_action_form_id', $slipActionFormData->slip_action_form_id)
             ->get();
-        // dd($workerDetails);
+
+        $additionalHelpDetails = DB::table('additional_help_details')
+            ->select('additional_help_details.inform_call_time','additional_help_details.vehicle_departure_time', 'additional_help_details.vehicle_arrival_time', 'additional_help_details.vehicle_return_time', 'additional_help_details.no_of_fireman','vehicle_details.vehicle_number','fire_stations.name')
+            ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
+            ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
+            ->where('additional_help_details.slip_id', $slipId)
+            ->get();
+
+        $occuranceBookDetails = DB::table('occurance_book')->select('occurance_book_date','occurance_book_description', 'occurance_book_remark')->where('slip_id', $slipId)->first();
+        // dd($additionalHelpDetails);
 
         // Return a view or JSON response with slip details and additional data
         return response()->json([
             'slip_data' => $slip,
             'slip_action_form_data' => $slipActionFormData,
             'worker_details' => $workerDetails,
+            'additional_help_details' => $additionalHelpDetails,
+            'occurance_book_details' => $occuranceBookDetails
         ]);
     }
 

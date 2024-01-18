@@ -601,6 +601,51 @@
                     });
                     tableHtml += '</tbody></table>';
 
+                    // Table 4: Additional Help Details
+                    tableHtml += '<br><h3 class="text-center"> Additional Help Details (अतिरिक्त मदत तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Fire Station Name (फायर स्टेशनचे नाव)</th>';
+                    tableHtml += '<th scope="col">Vehicle Number (वाहन क्रमांक)</th>';
+                    tableHtml += '<th scope="col">No Of Fireman (फायरमनची संख्या)</th>';
+                    tableHtml += '<th scope="col">Inform Call DateTime (कॉलची तारीख वेळ)</th>';
+                    tableHtml += '<th scope="col">Vehicle Departure DateTime (वाहन सुटण्याची तारीख वेळ)</th>';
+                    tableHtml += '<th scope="col">Vehicle Arrival DateTime (वाहनाच्या आगमनाची तारीख वेळ)</th>';
+                    tableHtml += '<th scope="col">Vehicle Return DateTime (वाहन परतीची तारीख वेळ)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    // Loop through worker details
+                    data.additional_help_details.forEach(function(help) {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + help.name + '</td>';
+                        tableHtml += '<td>' + help.vehicle_number + '</td>';
+                        tableHtml += '<td>' + help.no_of_fireman + '</td>';
+                        tableHtml += '<td>' + help.inform_call_time + '</td>';
+                        tableHtml += '<td>' + help.vehicle_departure_time + '</td>';
+                        tableHtml += '<td>' + help.vehicle_arrival_time + '</td>';
+                        tableHtml += '<td>' + help.vehicle_return_time + '</td>';
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</tbody></table>';
+
+                    // Table 5: Occurance Book Details
+                    tableHtml += '<br><h3 class="text-center"> Occurance Book Details (घटना पुस्तक तपशील) </h3><br>';
+                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Occurance Book Date (घटना पुस्तक तारीख)</th>';
+                    tableHtml += '<th scope="col">Occurance Book Description (घटना पुस्तक वर्णन)</th>';
+                    tableHtml += '<th scope="col">Occurance Book Remark (घटना पुस्तक टिप्पणी)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+
+                    tableHtml += '<tr>';
+                    tableHtml += '<td>' + data.occurance_book_details.occurance_book_date + '</td>';
+                    tableHtml += '<td>' + data.occurance_book_details.occurance_book_description + '</td>';
+                    tableHtml += '<td>' + data.occurance_book_details.occurance_book_remark + '</td>';
+                    tableHtml += '</tr>';
+
+                    tableHtml += '</tbody></table>';
+
                     // Display table in the modal
                     $('#slipDetails').html(tableHtml);
                     
