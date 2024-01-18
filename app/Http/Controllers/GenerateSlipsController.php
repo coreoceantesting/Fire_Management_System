@@ -16,7 +16,8 @@ class GenerateSlipsController extends Controller
     public function index()
     {
         $slip_list = DB::table('slips')->latest()->get();
-        return view('generateslips.slipslist', compact('slip_list'));
+        $designation_list = DB::table('designations')->where('is_deleted','0')->get();
+        return view('generateslips.slipslist', compact('slip_list','designation_list'));
     }
 
     public function store_slip(GenerateSlipsRequest $request)
@@ -94,8 +95,9 @@ class GenerateSlipsController extends Controller
 
     public function new_generated_slip()
     {
-        $slip_list = DB::table('slips')->latest()->get();
-        return view('generateslips.new_generated_slip', compact('slip_list'));
+        $slip_list = DB::table('slips')->where('slip_status','pending')->latest()->get();
+        $designation_list = DB::table('designations')->where('is_deleted','0')->get();
+        return view('generateslips.new_generated_slip', compact('slip_list','designation_list'));
     }
 
     public function view_generated_slip($slipId)
@@ -105,6 +107,38 @@ class GenerateSlipsController extends Controller
 
         // Return a view or JSON response with slip details
         return response()->json(['slip_data' => $slip]);
+    }
+
+    // store slip action form
+    public function store_slip_action_form(Request $request)
+    {
+        // Validate the request data
+
+        // Store data in slip_action_forms table
+        $slipActionForm = DB::table('slip_action_form')->insertGetId([
+            'slip_id' => $request->input('slip_id'),
+            'call_time' => $request->input('call_time'),
+            'vehicle_departure_time' => $request->input('vehicle_departure_time'),
+            'created_by' => Auth::user()->id,
+            'created_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        // Store worker details in on_field_worker_details table
+        foreach ($request->input('worker_name') as $key => $workerName) {
+            DB::table('on_field_worker_details')->insert([
+                'slip_action_form_id' => $slipActionForm,
+                'worker_name' => $workerName,
+                'worker_designation' => $request->input('worker_designation')[$key],
+                'created_by' => Auth::user()->id,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+        }
+        
+        DB::table('slips')->where('slip_id',$request->input('slip_id'))->update([
+            'slip_status' => 'slip_action_form',
+        ]);
+
+        return response()->json(['success'=> 'Action Form Submitted successfully!']);
     }
 
 

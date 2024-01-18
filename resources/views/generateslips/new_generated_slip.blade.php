@@ -101,6 +101,69 @@
             </div>
         </div>
 
+        {{-- Take Action Form --}}
+        <div class="row" id="takeActionForm" style="display: none">
+            <div class="col">
+                <form class="form-horizontal form-bordered" action="{{ route('store_slip_action_form') }}" id="slipactionform" method="POST">
+                    @csrf
+                    <input type="hidden" name="slip_id" id="slip_id" value="">
+                    <section class="card">
+                        <header class="card-header">
+                            <h4 class="card-title">Take Action</h4>
+                        </header>
+                        <div class="card-body py-2">
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label for="call_time" class="control-label">Call Date & Time :</label>
+                                    <input class="form-control" type="datetime-local" name="call_time" required>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time:</label>
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_time" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Worker Details Section -->
+                            <div class="form-group row" id="worker-details-container">
+                                <div class="col-md-3 worker-details">
+                                    <label for="worker_name[]" class="control-label">Worker Name:</label>
+                                    <input class="form-control" type="text" name="worker_name[]" required>
+                    
+                                    <label for="worker_designation[]" class="control-label">Worker Designation:</label>
+                                    <select class="form-control" name="worker_designation[]" required>
+                                        <!-- Populate dropdown options from master data -->
+                                        <option value="">--Select Designation--</option>
+                                        @foreach ($designation_list as $list)
+                                            <option value="{{ $list->designation_id }}">{{ $list->designation_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-warning" id="addWorkerDetails">Add Worker</button>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-warning" id="removeWorkerDetails">Remove Worker</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                            <a class="btn btn-success" href="{{ route('new_generated_slip') }}">Cancel</a>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+        
+        
+        
+        
+
+
         {{-- Listing Table --}}
         <div class="row">
             <div class="col-lg-12">
@@ -450,6 +513,64 @@
                 }
             });
         });
+    });
+</script>
+
+{{-- Take Action Form --}}
+<script>
+    // JavaScript to handle "Take Action" button click
+    $(document).ready(function() {
+        $('.action-element').on('click', function() {
+            // Display the form
+            var slip_id = $(this).data('id');
+            $('#slip_id').val(slip_id);
+            $('#takeActionForm').show();
+        });
+
+        var workerDetailsTemplate = $('#worker-details-container .worker-details').clone();
+
+        $('#addWorkerDetails').on('click', function() {
+            var newWorkerDetails = workerDetailsTemplate.clone();
+            $('#worker-details-container').append(newWorkerDetails);
+        });
+
+        $('#removeWorkerDetails').on('click', function() {
+            $('#worker-details-container .worker-details:last').remove();
+        });
+
+
+        // submitting form
+        $('#slipactionform').submit(function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Serialize the form data
+            var formData = $(this).serialize();
+
+            // Make an AJAX request
+            $.ajax({
+                url: $(this).attr('action'), // Get the form action attribute
+                type: 'POST',
+                data: formData,
+                success: function(data) {
+                    
+                    if (!data.error2)
+                    swal("Successful!", data.success, "success")
+                        .then((action) => {
+                            window.location.href = '{{ route('new_generated_slip') }}';
+                        });
+                else
+                    swal("Error!", data.error2, "error");
+
+
+                },
+                error: function(error) {
+                    // Handle error response
+                    console.log(error);
+                }
+            });
+        });
+
     });
 </script>
 

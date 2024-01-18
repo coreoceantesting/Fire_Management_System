@@ -76,6 +76,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     // new generated slips
     Route::get('new-generated-slips', [App\Http\Controllers\GenerateSlipsController::class, 'new_generated_slip'])->name('new_generated_slip');
     Route::get('/view-slip/{slipId}', [App\Http\Controllers\GenerateSlipsController::class, 'view_generated_slip'])->name('view_generated_slip');
+    // Take Action Form
+    Route::post('store-slip-action-form', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip_action_form'])->name('store_slip_action_form');
 
 });
 
