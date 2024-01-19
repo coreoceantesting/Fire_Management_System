@@ -51,7 +51,8 @@ class GenerateSlipsController extends Controller
             $pdfFilePath = public_path('slips/' . $pdfFileName);
 
             $pdfView = \View::make('generateslips.slip_pdf', [
-                'slip_date' => $formattedDatetime,
+                'slip_date' => date('Y-m-d', strtotime($input['datetime'])),
+                'slip_time' => date('H-i-s', strtotime($input['datetime'])),
                 'caller_name' => $input['caller_name'],
                 'caller_mobile_no' => $input['caller_mobile_no'],
                 'incident_location_address' => $input['incident_location'],
