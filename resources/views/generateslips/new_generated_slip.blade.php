@@ -113,17 +113,63 @@
                         </header>
                         <div class="card-body py-2">
                             <div class="form-group row">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) :</label>
                                     <input class="form-control" type="datetime-local" name="call_time" required>
                                 </div>
-                                
-                                <div class="col-md-5">
+
+                                <div class="col-md-4">
+                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार):</label>
+                                    <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" required>
+                                        <option value="">--Select Type Of Vehicle--</option>
+                                        @foreach($vehicle_list as $list)
+                                            <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर):</label>
+                                    <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" required>
+                                        <option value="">--Select Number Of Vehicle--</option>
+                                        @foreach($vehicle_list as $list)
+                                            <option value="{{ $list->vehicle_number }}">{{ $list->vehicle_number }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
                                     <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_time" required>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ):</label>
+                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_time" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ):</label>
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ):</label>
+                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_at_center_time" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
+                                    <input class="form-control" type="text" name="total_distance" placeholder="Total Distance In KM" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
+                                    <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours" required>
+                                </div>
+
                             </div>
-                            
+                            <hr>
                             <!-- Worker Details Section -->
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">

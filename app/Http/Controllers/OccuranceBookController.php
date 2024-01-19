@@ -35,7 +35,7 @@ class OccuranceBookController extends Controller
         $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
         
         // Fetch additional data from slip_action_form
-        $slipActionFormData = DB::table('slip_action_form')->select('slip_action_form_id','call_time', 'vehicle_departure_time')->where('slip_id', $slipId)->first();
+        $slipActionFormData = DB::table('slip_action_form')->select('*')->where('slip_id', $slipId)->first();
 
         // Fetch worker details from on_field_worker_details with designation name
         $workerDetails = DB::table('on_field_worker_details')

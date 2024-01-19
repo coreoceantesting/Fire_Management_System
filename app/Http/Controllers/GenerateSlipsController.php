@@ -98,7 +98,8 @@ class GenerateSlipsController extends Controller
     {
         $slip_list = DB::table('slips')->where('slip_status','Pending')->latest()->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        return view('generateslips.new_generated_slip', compact('slip_list','designation_list'));
+        $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
+        return view('generateslips.new_generated_slip', compact('slip_list','designation_list','vehicle_list'));
     }
 
     public function view_generated_slip($slipId)
@@ -119,6 +120,14 @@ class GenerateSlipsController extends Controller
         $slipActionForm = DB::table('slip_action_form')->insertGetId([
             'slip_id' => $request->input('slip_id'),
             'call_time' => $request->input('call_time'),
+            'center_name' => "पनवेल",
+            'type_of_vehicle' => $request->input('type_of_vehicle'),
+            'number_of_vehicle' => $request->input('number_of_vehicle'),
+            'vehicle_arrival_time' => $request->input('vehicle_arrival_time'),
+            'vehicle_departure_from_scene_time' => $request->input('vehicle_departure_from_scene_time'),
+            'vehicle_arrival_at_center_time' => $request->input('vehicle_arrival_at_center_time'),
+            'total_distance' => $request->input('total_distance'),
+            'pumping_hours' => $request->input('pumping_hours'),
             'vehicle_departure_time' => $request->input('vehicle_departure_time'),
             'created_by' => Auth::user()->id,
             'created_at' => date('Y-m-d H:i:s'),

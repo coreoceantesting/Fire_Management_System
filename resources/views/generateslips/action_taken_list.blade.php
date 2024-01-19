@@ -572,14 +572,30 @@
                     tableHtml += '<thead><tr>';
                     // ... (headers here)
                     tableHtml += '<th scope="col">Call Date & Time (कॉल तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Name of the Centre (केंद्राचे नाव)</th>';
+                    tableHtml += '<th scope="col">Type of vehicle (वाहनाचा प्रकार)</th>';
+                    tableHtml += '<th scope="col">Vehicle No (वाहनाचा नंबर)</th>';
                     tableHtml += '<th scope="col">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Arrival Time (पोहचल्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Time of departure from the scene (घटनास्तळावरुन निघाल्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ)</th>';
+                    tableHtml += '<th scope="col">Total Distance In KM (एकूण अतंर)</th>';
+                    tableHtml += '<th scope="col">Pumping hours (पंपिंग तास)</th>';
                     // ... (remaining headers here)
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // ... (slip_action_form_data here)
                     tableHtml += '<tr>';
                     tableHtml += '<td>' + data.slip_action_form_data.call_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.center_name + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.type_of_vehicle + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.number_of_vehicle + '</td>';
                     tableHtml += '<td>' + data.slip_action_form_data.vehicle_departure_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_arrival_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_departure_from_scene_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_arrival_at_center_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.total_distance + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.pumping_hours + '</td>';
                     // ... (remaining data here)
                     tableHtml += '</tr>';
                     tableHtml += '</tbody></table>';
