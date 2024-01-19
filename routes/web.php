@@ -85,6 +85,9 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('store-additional-help', [App\Http\Controllers\OccuranceBookController::class, 'store_additional'])->name('store_additional');
     Route::post('store-occurance-book', [App\Http\Controllers\OccuranceBookController::class, 'store_occurance_book'])->name('store_occurance_book');
 
+    // list for vardi ahaval
+    Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list'); 
+    Route::get('/get-slip-details/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'slip_details'])->name('slip_details');
 
     
 });

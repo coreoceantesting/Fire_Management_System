@@ -15,7 +15,14 @@ class OccuranceBookController extends Controller
 {
     public function action_taken_slips_list()
     {
-        $slip_list = DB::table('slips')->where('slip_status','!=','pending')->latest()->get();
+        $slip_list = DB::table('slips')
+        ->where('slip_status', '!=', 'pending')
+        ->where(function ($query) {
+            $query->where('is_occurance_book_submitted', '0')
+                ->orWhere('is_additional_form_submitted', '0');
+        })
+        ->latest()
+        ->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
         $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->get();
         $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
@@ -118,6 +125,35 @@ class OccuranceBookController extends Controller
         return response()->json(['success'=> 'Occurance Book Submitted successfully!']);
     }
 
+    // vardi ahawal List
+    
+    public function vardi_ahaval_list()
+    {
+        $slip_list = DB::table('slips')->where('is_occurance_book_submitted','1')->latest()->get();
+        $designation_list = DB::table('designations')->where('is_deleted','0')->get();
+        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->get();
+        $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
+        return view('generateslips.list_for_vardi_ahaval', compact('slip_list','designation_list','fire_station_list','vehicle_list'));
+    }
+
+    public function slip_details($slipId)
+    {
+        // Fetch slip details based on $slipId
+        // $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
+        $slip_details = DB::table('slips')
+        ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time')
+        ->join('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
+        ->where('slips.slip_id', $slipId)
+        ->first();
+
+        $response = [
+            'result' => 1,
+            'slip_data' => $slip_details,
+        ];
+
+        // Return a view or JSON response with slip details
+        return $response;
+    }
 
 
 

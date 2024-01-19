@@ -116,6 +116,10 @@
                             <li class="nav-item">
                                 <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('vardi_ahaval_list') }}" class="nav-link" data-key="t-horizontal">Vardi Ahaval</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
