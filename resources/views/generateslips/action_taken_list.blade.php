@@ -130,6 +130,16 @@
                                             <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या):</label>
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
                                         </div>
+
+                                        <div class="col-md-4">
+                                            <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार):</label>
+                                            <select class="form-control" name="type_of_vehicle[]" required>
+                                                <option value="">--Select Vehicle Type--</option>
+                                                @foreach ($vehicle_list as $list)
+                                                    <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                         
                                         <div class="col-md-4">
                                             <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक):</label>
@@ -160,6 +170,22 @@
                                             <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
+
+                                        <div class="col-md-4">                                            
+                                            <label for="vehicle_return_to_center_datetime[]" class="control-label">Vehicle Return To Center Date & Time (वाहन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
+                                            <input class="form-control" type="datetime-local" name="vehicle_return_to_center_datetime[]" required>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
+                                            <input class="form-control" type="text" name="total_distance" placeholder="Total Distance In KM" required>
+                                        </div>
+        
+                                        <div class="col-md-4">
+                                            <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
+                                            <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours" required>
+                                        </div>
+                                        
                                     </div>
                                     <br>
                                     <hr>

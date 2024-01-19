@@ -80,13 +80,18 @@ class OccuranceBookController extends Controller
         foreach ($request->input('fire_station') as $key => $fireStation) {
             DB::table('additional_help_details')->insert([
                 'slip_id' => $request->input('slip_id'),
+                'center_name' => "पनवेल",
                 'fire_station_name' => $fireStation,
                 'no_of_fireman' => $request->input('no_of_fireman')[$key],
                 'vehicle_number' => $request->input('vehicle_no')[$key],
+                'type_of_vehicle' => $request->input('type_of_vehicle')[$key],
                 'inform_call_time' => $request->input('inform_call_time')[$key],
                 'vehicle_departure_time' => $request->input('departure_vehicle_datetime')[$key],
                 'vehicle_arrival_time' => $request->input('vehicle_arrival_datetime')[$key],
                 'vehicle_return_time' => $request->input('vehicle_return_to_firestation_datetime')[$key],
+                'vehicle_return_to_center_time' => $request->input('vehicle_return_to_center_datetime')[$key],
+                'total_distance' => $request->input('total_distance')[$key],
+                'pumping_hours' => $request->input('pumping_hours')[$key],
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
