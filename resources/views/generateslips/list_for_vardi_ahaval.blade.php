@@ -125,7 +125,7 @@
         {{-- vardi ahaval Form --}}
         <div class="row" id="editContainer" style="display:none;">
             <div class="col">
-                <form class="form-horizontal form-bordered" method="post" id="editForm">
+                <form class="form-horizontal form-bordered" action="{{ route('store_vardi_ahaval') }}" method="POST" id="editForm">
                     @csrf
                     <input type="hidden" id="edit_model_id_new" name="edit_model_id_new" value="">
                     <section class="card">
@@ -415,7 +415,9 @@
                                             <td>{{ $list->slip_status }}</td>
                                             <td>
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button>
+                                                @if($list->is_vardi_ahaval_submitted == '0')
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Create Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="edit"></i> Report (वर्दी अहवाल)</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -770,7 +772,7 @@
                 if (!data.error)
                 {
                     console.log(data);
-                    $("#editForm input[name='edit_model_id_new']").val(data.slip_data.caller_name);
+                    $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
                     $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
                     $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
                     $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
@@ -786,6 +788,49 @@
                 alert("Some thing went wrong");
             },
         });
+    });
+</script>
+
+{{-- store vardi ahaval --}}
+<script>
+    $(document).ready(function() {
+        // submitting form
+        $('#editForm').submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Serialize the form data
+                var formData = $(this).serialize();
+                // alert(formData);
+
+                // Make an AJAX request
+                $.ajax({
+                    url: $(this).attr('action'), // Get the form action attribute
+                    type: 'POST',
+                    data: formData,
+                    success: function(data) {
+                        
+                        if (!data.error2)
+                        {
+                            swal("Successful!", data.success, "success")
+                                .then((action) => {
+                                    window.location.href = '{{ route('vardi_ahaval_list') }}';
+                                });
+                        }
+                        else
+                        {
+                            
+                            swal("Error!", data.error2, "error");
+                        }
+
+
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        console.log(error);
+                    }
+                });
+            });
     });
 </script>
 

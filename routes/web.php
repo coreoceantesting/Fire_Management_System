@@ -88,6 +88,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     // list for vardi ahaval
     Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list'); 
     Route::get('/get-slip-details/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'slip_details'])->name('slip_details');
+    Route::post('/store-vardi-ahval', [App\Http\Controllers\OccuranceBookController::class, 'store_vardi_ahaval'])->name('store_vardi_ahaval');
 
     
 });

@@ -171,6 +171,92 @@ class OccuranceBookController extends Controller
         return $response;
     }
 
+    public function store_vardi_ahaval(Request $request)
+    {
+        $request->validate([
+            'vardi_name' => 'required',
+            'vardi_contact_no' => 'required',
+            'vardi_place' => 'required',
+            'owner_name' => 'required',
+            'vaparkarta_name' => 'required',
+            'incident_time' => 'required',
+            'first_vehicle_departing_date_time' => 'required',
+            'time_of_arrival_at_the_scene' => 'required',
+            'distance' => 'required',
+            'property_description' => 'required',
+            'type_of_fire' => 'required',
+            'limit_of_fire' => 'required',
+            'possible_cause_of_fire' => 'required',
+            'description_of_damage' => 'required',
+            'property_damage' => 'required',
+            'area_damage' => 'required',
+            'space_loss' => 'required',
+            'property_loss' => 'required',
+            'officer_name_present_at_last_moment' => 'required',
+            'date_of_departure_from_scene' => 'required',
+            'time_of_departure_from_scene' => 'required',
+            'total_time' => 'required',
+            'total_hour' => 'required',
+            'male_one' => 'required',
+            'woman_one' => 'required',
+            'male_two' => 'required',
+            'woman_two' => 'required',
+            'male_three' => 'required',
+            'woman_three' => 'required',
+            'deceased_male' => 'required',
+            'deceased_woman' => 'required',
+            'wounded_male' => 'required',
+            'wounded_woman' => 'required',
+        ]);
+    
+        // Store data in the database
+            DB::table('vardi_ahaval_details')->insert([
+                'slip_id' => $request->input('edit_model_id_new'),
+                'vardi_name' => $request->input('vardi_name'),
+                'vardi_contact_no' => $request->input('vardi_contact_no'),
+                'vardi_place' => $request->input('vardi_place'),
+                'owner_name' => $request->input('owner_name'),
+                'vaparkarta_name' => $request->input('vaparkarta_name'),
+                'incident_time' => $request->input('incident_time'),
+                'first_vehicle_departing_date_time' => $request->input('first_vehicle_departing_date_time'),
+                'time_of_arrival_at_the_scene' => $request->input('time_of_arrival_at_the_scene'),
+                'distance' => $request->input('distance'),
+                'property_description' => $request->input('property_description'),
+                'type_of_fire' => $request->input('type_of_fire'),
+                'limit_of_fire' => $request->input('limit_of_fire'),
+                'possible_cause_of_fire' => $request->input('possible_cause_of_fire'),
+                'description_of_damage' => $request->input('description_of_damage'),
+                'property_damage' => $request->input('property_damage'),
+                'area_damage' => $request->input('area_damage'),
+                'space_loss' => $request->input('space_loss'),
+                'property_loss' => $request->input('property_loss'),
+                'officer_name_present_at_last_moment' => $request->input('officer_name_present_at_last_moment'),
+                'date_of_departure_from_scene' => $request->input('date_of_departure_from_scene'),
+                'time_of_departure_from_scene' => $request->input('time_of_departure_from_scene'),
+                'total_time' => $request->input('total_time'),
+                'total_hour' => $request->input('total_hour'),
+                'male_one' => $request->input('male_one'),
+                'woman_one' => $request->input('woman_one'),
+                'male_two' => $request->input('male_two'),
+                'woman_two' => $request->input('woman_two'),
+                'male_three' => $request->input('male_three'),
+                'woman_three' => $request->input('woman_three'),
+                'deceased_male' => $request->input('deceased_male'),
+                'deceased_woman' => $request->input('deceased_woman'),
+                'wounded_male' => $request->input('wounded_male'),
+                'wounded_woman' => $request->input('wounded_woman'),
+                'created_by' => Auth::user()->id,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+        
+        DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
+            'is_vardi_ahaval_submitted' => '1',
+            'slip_status' => 'Vardi Ahval Submitted',
+        ]);
+
+        return response()->json(['success'=> 'Vardi Ahawal Submitted successfully!']);
+    }
+
 
 
 }
