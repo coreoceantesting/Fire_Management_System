@@ -177,13 +177,13 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
-                                            <input class="form-control" type="text" name="total_distance" placeholder="Total Distance In KM" required>
+                                            <label for="total_distance[]" class="control-label">Total Distance In KM (एकूण अतंर):</label>
+                                            <input class="form-control" type="text" name="total_distance[]" placeholder="Total Distance In KM" required>
                                         </div>
         
                                         <div class="col-md-4">
-                                            <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
-                                            <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours" required>
+                                            <label for="pumping_hours[]" class="control-label">Pumping hours (पंपिंग तास):</label>
+                                            <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours[]" required>
                                         </div>
                                         
                                     </div>
@@ -649,24 +649,32 @@
                         tableHtml += '<table class="table table-bordered">';
                         tableHtml += '<thead><tr>';
                         tableHtml += '<th scope="col">Fire Station Name (फायर स्टेशनचे नाव)</th>';
+                        tableHtml += '<th scope="col">Type Of Vehicle (वाहन प्रकार)</th>';
                         tableHtml += '<th scope="col">Vehicle Number (वाहन क्रमांक)</th>';
                         tableHtml += '<th scope="col">No Of Fireman (फायरमनची संख्या)</th>';
                         tableHtml += '<th scope="col">Inform Call DateTime (कॉलची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Departure DateTime (वाहन सुटण्याची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Arrival DateTime (वाहनाच्या आगमनाची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Return DateTime (वाहन परतीची तारीख वेळ)</th>';
+                        tableHtml += '<th scope="col">Time to return to the center (केंद्रावर परतण्याची वेळ)</th>';
+                        tableHtml += '<th scope="col">Total K.M (एकूण कि.मी)</th>';
+                        tableHtml += '<th scope="col">Pumping Hours (पंपिंग तास)</th>';
                         tableHtml += '</tr></thead>';
                         tableHtml += '<tbody>';
                         // Loop through worker details
                         data.additional_help_details.forEach(function(help) {
                             tableHtml += '<tr>';
                             tableHtml += '<td>' + help.name + '</td>';
+                            tableHtml += '<td>' + help.type_of_vehicle + '</td>';
                             tableHtml += '<td>' + help.vehicle_number + '</td>';
                             tableHtml += '<td>' + help.no_of_fireman + '</td>';
                             tableHtml += '<td>' + help.inform_call_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_departure_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_arrival_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_return_time + '</td>';
+                            tableHtml += '<td>' + help.vehicle_return_to_center_time + '</td>';
+                            tableHtml += '<td>' + help.total_distance + '</td>';
+                            tableHtml += '<td>' + help.pumping_hours + '</td>';
                             tableHtml += '</tr>';
                         });
                         tableHtml += '</tbody></table>';

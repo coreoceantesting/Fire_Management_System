@@ -45,7 +45,18 @@ class OccuranceBookController extends Controller
             ->get();
 
         $additionalHelpDetails = DB::table('additional_help_details')
-            ->select('additional_help_details.inform_call_time','additional_help_details.vehicle_departure_time', 'additional_help_details.vehicle_arrival_time', 'additional_help_details.vehicle_return_time', 'additional_help_details.no_of_fireman','vehicle_details.vehicle_number','fire_stations.name')
+            ->select(
+                'additional_help_details.inform_call_time',
+                'additional_help_details.vehicle_departure_time',
+                'additional_help_details.vehicle_arrival_time', 
+                'additional_help_details.vehicle_return_time', 
+                'additional_help_details.no_of_fireman',
+                'additional_help_details.type_of_vehicle',
+                'additional_help_details.vehicle_return_to_center_time',
+                'additional_help_details.total_distance',
+                'additional_help_details.pumping_hours',
+                'vehicle_details.vehicle_number',
+                'fire_stations.name',)
             ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
             ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
             ->where('additional_help_details.slip_id', $slipId)

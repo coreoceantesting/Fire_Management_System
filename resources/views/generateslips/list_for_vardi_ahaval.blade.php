@@ -528,14 +528,30 @@
                     tableHtml += '<thead><tr>';
                     // ... (headers here)
                     tableHtml += '<th scope="col">Call Date & Time (कॉल तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Name of the Centre (केंद्राचे नाव)</th>';
+                    tableHtml += '<th scope="col">Type of vehicle (वाहनाचा प्रकार)</th>';
+                    tableHtml += '<th scope="col">Vehicle No (वाहनाचा नंबर)</th>';
                     tableHtml += '<th scope="col">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Arrival Time (पोहचल्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Time of departure from the scene (घटनास्तळावरुन निघाल्याची तारीख आणि वेळ)</th>';
+                    tableHtml += '<th scope="col">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ)</th>';
+                    tableHtml += '<th scope="col">Total Distance In KM (एकूण अतंर)</th>';
+                    tableHtml += '<th scope="col">Pumping hours (पंपिंग तास)</th>';
                     // ... (remaining headers here)
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // ... (slip_action_form_data here)
                     tableHtml += '<tr>';
                     tableHtml += '<td>' + data.slip_action_form_data.call_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.center_name + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.type_of_vehicle + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.number_of_vehicle + '</td>';
                     tableHtml += '<td>' + data.slip_action_form_data.vehicle_departure_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_arrival_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_departure_from_scene_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.vehicle_arrival_at_center_time + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.total_distance + '</td>';
+                    tableHtml += '<td>' + data.slip_action_form_data.pumping_hours + '</td>';
                     // ... (remaining data here)
                     tableHtml += '</tr>';
                     tableHtml += '</tbody></table>';
@@ -563,24 +579,32 @@
                         tableHtml += '<table class="table table-bordered">';
                         tableHtml += '<thead><tr>';
                         tableHtml += '<th scope="col">Fire Station Name (फायर स्टेशनचे नाव)</th>';
+                        tableHtml += '<th scope="col">Type Of Vehicle (वाहन प्रकार)</th>';
                         tableHtml += '<th scope="col">Vehicle Number (वाहन क्रमांक)</th>';
                         tableHtml += '<th scope="col">No Of Fireman (फायरमनची संख्या)</th>';
                         tableHtml += '<th scope="col">Inform Call DateTime (कॉलची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Departure DateTime (वाहन सुटण्याची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Arrival DateTime (वाहनाच्या आगमनाची तारीख वेळ)</th>';
                         tableHtml += '<th scope="col">Vehicle Return DateTime (वाहन परतीची तारीख वेळ)</th>';
+                        tableHtml += '<th scope="col">Time to return to the center (केंद्रावर परतण्याची वेळ)</th>';
+                        tableHtml += '<th scope="col">Total K.M (एकूण कि.मी)</th>';
+                        tableHtml += '<th scope="col">Pumping Hours (पंपिंग तास)</th>';
                         tableHtml += '</tr></thead>';
                         tableHtml += '<tbody>';
                         // Loop through worker details
                         data.additional_help_details.forEach(function(help) {
                             tableHtml += '<tr>';
                             tableHtml += '<td>' + help.name + '</td>';
+                            tableHtml += '<td>' + help.type_of_vehicle + '</td>';
                             tableHtml += '<td>' + help.vehicle_number + '</td>';
                             tableHtml += '<td>' + help.no_of_fireman + '</td>';
                             tableHtml += '<td>' + help.inform_call_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_departure_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_arrival_time + '</td>';
                             tableHtml += '<td>' + help.vehicle_return_time + '</td>';
+                            tableHtml += '<td>' + help.vehicle_return_to_center_time + '</td>';
+                            tableHtml += '<td>' + help.total_distance + '</td>';
+                            tableHtml += '<td>' + help.pumping_hours + '</td>';
                             tableHtml += '</tr>';
                         });
                         tableHtml += '</tbody></table>';
