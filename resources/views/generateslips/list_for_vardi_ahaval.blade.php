@@ -419,7 +419,13 @@
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Create Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="edit"></i> Report (वर्दी अहवाल)</button>
                                                 @endif
                                                 @if($list->is_vardi_ahaval_submitted == '1')
-                                                <a href="{{ route('vardi_ahaval_pdf',$list->slip_id) }}" class="pdf-element btn btn-sm btn-secondary px-2 py-1" title="Download Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="download"></i></a>
+                                                <button class="download-pdf btn btn-secondary px-2 py-1"
+                                                        title="Download PDF"
+                                                        data-id="{{ $list->slip_id }}"
+                                                        data-pdf-file-name="{{ $list->vardi_ahaval_pdf_name }}"
+                                                >
+                                                    <i data-feather="download"></i>
+                                                </button>
                                                 @endif
                                             </td>
                                         </tr>
@@ -478,7 +484,7 @@
         $("#buttons-datatables").on("click", ".download-pdf", function(e) {
             e.preventDefault();
             var pdfFileName = $(this).data("pdf-file-name");
-            var pdfUrl = "{{ url('/slips/') }}/" + pdfFileName;
+            var pdfUrl = "{{ url('/vardi_ahaval/') }}/" + pdfFileName;
 
             // Open the PDF in a new tab/window
             window.open(pdfUrl, '_blank');
@@ -817,6 +823,7 @@
                         {
                             swal("Successful!", data.success, "success")
                                 .then((action) => {
+                                    // window.location.href = data.pdf_url;
                                     window.location.href = '{{ route('vardi_ahaval_list') }}';
                                 });
                         }
@@ -834,6 +841,33 @@
                     }
                 });
             });
+    });
+</script>
+
+{{-- vardi ahval pdf --}}
+<script>
+    $(document).ready(function() {
+        $('.pdf-element').on('click', function() {
+            var slipId = $(this).data('id');
+
+            // Make an Ajax request to generate the PDF
+            $.ajax({
+                url: '/generate-vardi-ahaval-pdf/' + slipId,
+                method: 'GET',
+                success: function(response) {
+                    // If the PDF is generated successfully, show a confirmation
+                    console.log('PDF generated successfully');
+                    if (confirm('PDF generated successfully. Do you want to open it?')) {
+                        // Open the PDF in a new tab or window
+                        window.open(response.pdfUrl, '_blank');
+                    }
+                },
+                error: function(error) {
+                    console.error('Error generating PDF', error);
+                    alert('Error generating PDF. Please try again.');
+                }
+            });
+        });
     });
 </script>
 

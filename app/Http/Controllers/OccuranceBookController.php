@@ -173,43 +173,43 @@ class OccuranceBookController extends Controller
 
     public function store_vardi_ahaval(Request $request)
     {
-        $request->validate([
-            'vardi_name' => 'required',
-            'vardi_contact_no' => 'required',
-            'vardi_place' => 'required',
-            'owner_name' => 'required',
-            'vaparkarta_name' => 'required',
-            'incident_time' => 'required',
-            'first_vehicle_departing_date_time' => 'required',
-            'time_of_arrival_at_the_scene' => 'required',
-            'distance' => 'required',
-            'property_description' => 'required',
-            'type_of_fire' => 'required',
-            'limit_of_fire' => 'required',
-            'possible_cause_of_fire' => 'required',
-            'description_of_damage' => 'required',
-            'property_damage' => 'required',
-            'area_damage' => 'required',
-            'space_loss' => 'required',
-            'property_loss' => 'required',
-            'officer_name_present_at_last_moment' => 'required',
-            'date_of_departure_from_scene' => 'required',
-            'time_of_departure_from_scene' => 'required',
-            'total_time' => 'required',
-            'total_hour' => 'required',
-            'male_one' => 'required',
-            'woman_one' => 'required',
-            'male_two' => 'required',
-            'woman_two' => 'required',
-            'male_three' => 'required',
-            'woman_three' => 'required',
-            'deceased_male' => 'required',
-            'deceased_woman' => 'required',
-            'wounded_male' => 'required',
-            'wounded_woman' => 'required',
-        ]);
+            $request->validate([
+                'vardi_name' => 'required',
+                'vardi_contact_no' => 'required',
+                'vardi_place' => 'required',
+                'owner_name' => 'required',
+                'vaparkarta_name' => 'required',
+                'incident_time' => 'required',
+                'first_vehicle_departing_date_time' => 'required',
+                'time_of_arrival_at_the_scene' => 'required',
+                'distance' => 'required',
+                'property_description' => 'required',
+                'type_of_fire' => 'required',
+                'limit_of_fire' => 'required',
+                'possible_cause_of_fire' => 'required',
+                'description_of_damage' => 'required',
+                'property_damage' => 'required',
+                'area_damage' => 'required',
+                'space_loss' => 'required',
+                'property_loss' => 'required',
+                'officer_name_present_at_last_moment' => 'required',
+                'date_of_departure_from_scene' => 'required',
+                'time_of_departure_from_scene' => 'required',
+                'total_time' => 'required',
+                'total_hour' => 'required',
+                'male_one' => 'required',
+                'woman_one' => 'required',
+                'male_two' => 'required',
+                'woman_two' => 'required',
+                'male_three' => 'required',
+                'woman_three' => 'required',
+                'deceased_male' => 'required',
+                'deceased_woman' => 'required',
+                'wounded_male' => 'required',
+                'wounded_woman' => 'required',
+            ]);
     
-        // Store data in the database
+            // Store data in the database
             DB::table('vardi_ahaval_details')->insert([
                 'slip_id' => $request->input('edit_model_id_new'),
                 'vardi_name' => $request->input('vardi_name'),
@@ -249,17 +249,83 @@ class OccuranceBookController extends Controller
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
         
-        DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
-            'is_vardi_ahaval_submitted' => '1',
-            'slip_status' => 'Vardi Ahval Submitted',
-        ]);
+            DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
+                'is_vardi_ahaval_submitted' => '1',
+                'slip_status' => 'Vardi Ahval Submitted',
+            ]);
 
-        return response()->json(['success'=> 'Vardi Ahawal Submitted successfully!']);
+            // Create mPDF instance
+            $pdf = new Mpdf();
+
+            // Save the generated PDF to a temporary file
+            $formattedDatetime = date('Y-m-d_H_i_s');
+            $pdfFileName = 'vardi_ahaval_' . $formattedDatetime . '.pdf';
+            $pdfFilePath = public_path('vardi_ahaval/' . $pdfFileName);
+
+            // Update 'slips' table with the PDF file name
+            DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->update([
+                'vardi_ahaval_pdf_name' => $pdfFileName,
+            ]);
+
+            // Retrieve data from the database (if needed for PDF content)
+            $slipData = DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->first();
+            $vardiAhavalData = DB::table('vardi_ahaval_details')->where('slip_id', $request->input('edit_model_id_new'))->first();
+            $actionTakenData = DB::table('slip_action_form')->where('slip_id', $request->input('edit_model_id_new'))->first();
+            $additionalHelpDetails = DB::table('additional_help_details')
+            ->select(
+                'additional_help_details.inform_call_time',
+                'additional_help_details.vehicle_departure_time',
+                'additional_help_details.vehicle_arrival_time', 
+                'additional_help_details.vehicle_return_time', 
+                'additional_help_details.no_of_fireman',
+                'additional_help_details.center_name',
+                'additional_help_details.type_of_vehicle',
+                'additional_help_details.vehicle_return_to_center_time',
+                'additional_help_details.total_distance',
+                'additional_help_details.pumping_hours',
+                'vehicle_details.vehicle_number',
+                'fire_stations.name',)
+            ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
+            ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
+            ->where('additional_help_details.slip_id', $request->input('edit_model_id_new'))
+            ->get();
+            $workers_Details = DB::table('on_field_worker_details')
+            ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+            ->where('on_field_worker_details.slip_action_form_id',$actionTakenData->slip_action_form_id)
+            ->get();
+
+            // Render the PDF view (adjust the view path based on your project structure)
+            $pdfview = view('generateslips.vardi_ahaval_pdf', compact('slipData','vardiAhavalData','actionTakenData','additionalHelpDetails','workers_Details'));
+            
+            $pdf->WriteHTML($pdfview->render());
+
+            // Output the PDF to the file
+            $pdf->Output($pdfFilePath, 'F');
+
+            return response()->json(['success' => 'Vardi Ahawal Submitted successfully!']);
     }
 
     public function vardi_ahaval_pdf($slip_id)
     {
-        return view('generateslips.vardi_ahaval_pdf') ;
+        // Fetch data related to the slip
+        $slipData = DB::table('slips')->where('slip_id', $slip_id)->first();
+
+        // Create mPDF instance
+        $mpdf = new Mpdf();
+
+        // Use mPDF to generate the PDF from the view
+        $pdf = view('generateslips.vardi_ahaval_pdf', compact('slipData'))->render();
+
+        // Save the generated PDF to a temporary file
+        $formattedDatetime = date('Y-m-d_H_i_s', strtotime($slipData->slip_date));
+        $pdfFileName = $slipData->caller_name . '_' . $formattedDatetime . '.pdf';
+        $pdfFilePath = public_path('vardi_ahaval/' . $pdfFileName);
+
+        // Write PDF content to the file
+        file_put_contents($pdfFilePath, $pdf);
+
+        // Return the response with the PDF file path
+        return response()->json(['pdfUrl' => $pdfFilePath]);
     }
 
 

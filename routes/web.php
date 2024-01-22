@@ -89,7 +89,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list'); 
     Route::get('/get-slip-details/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'slip_details'])->name('slip_details');
     Route::post('/store-vardi-ahval', [App\Http\Controllers\OccuranceBookController::class, 'store_vardi_ahaval'])->name('store_vardi_ahaval');
-    Route::get('/download-vardi-ahawal-pdf/{slip_id}', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_pdf'])->name('vardi_ahaval_pdf');
+    Route::get('/generate-vardi-ahaval-pdf/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_pdf'])->name('generate.vardi.ahaval.pdf');
 
     
 });

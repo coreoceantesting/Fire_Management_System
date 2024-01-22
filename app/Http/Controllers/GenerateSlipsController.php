@@ -28,8 +28,8 @@ class GenerateSlipsController extends Controller
 
             $input = $request->validated();
 
-            $formattedDatetime = date('Y-m-d_H-i-s', strtotime($input['datetime']));
-            $pdfFileName = $input['caller_name'] .'_'. $formattedDatetime. '.pdf';
+                $formattedDatetime = date('Y-m-d_H-i-s', strtotime($input['datetime']));
+                $pdfFileName = $input['caller_name'] .'_'. $formattedDatetime. '.pdf';
 
             $data['slip_date'] = $input['datetime'];
             $data['caller_name'] = $input['caller_name'];
