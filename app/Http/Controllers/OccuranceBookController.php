@@ -257,6 +257,11 @@ class OccuranceBookController extends Controller
         return response()->json(['success'=> 'Vardi Ahawal Submitted successfully!']);
     }
 
+    public function vardi_ahaval_pdf($slip_id)
+    {
+        return view('generateslips.vardi_ahaval_pdf') ;
+    }
+
 
 
 }

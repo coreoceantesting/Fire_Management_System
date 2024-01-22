@@ -418,6 +418,9 @@
                                                 @if($list->is_vardi_ahaval_submitted == '0')
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Create Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="edit"></i> Report (वर्दी अहवाल)</button>
                                                 @endif
+                                                @if($list->is_vardi_ahaval_submitted == '1')
+                                                <a href="{{ route('vardi_ahaval_pdf',$list->slip_id) }}" class="pdf-element btn btn-sm btn-secondary px-2 py-1" title="Download Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="download"></i></a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
