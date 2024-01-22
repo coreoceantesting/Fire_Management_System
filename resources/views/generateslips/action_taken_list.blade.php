@@ -308,14 +308,19 @@
                                                 >
                                                     <i data-feather="download"></i>
                                                 </button> --}}
-
+                                                @can('actionpermissions.view_generate_slip')
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button>
+                                                @endcan
+                                                @can('actionpermissions.additional_help')
                                                 @if($list->is_additional_form_submitted == '0') 
                                                 <button class="btn btn-danger action-element px-2 py-1" title="Additional Help" data-id="{{ $list->slip_id }}">Additional Help</button>
                                                 @endif
+                                                @endcan
+                                                @can('actionpermissions.occurance_book')
                                                 @if($list->is_occurance_book_submitted == '0')
                                                 <button class="btn btn-info occurance-book-element px-2 py-1" title="Occurance Book" data-id="{{ $list->slip_id }}">Occurance Book</button> 
                                                 @endif
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

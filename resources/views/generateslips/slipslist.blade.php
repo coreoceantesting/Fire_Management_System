@@ -109,7 +109,9 @@
                         <div class="row align-items-center">
                             <div class="col-sm-3">
                                 <div class="btn-group">
+                                    @can('actionpermissions.generate_slip')
                                     <button id="addToTable" class="btn btn-primary">Generate Slip <i class="fa fa-plus"></i></button>
+                                    @endcan
                                     <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
                                 </div>
                             </div>
@@ -154,6 +156,7 @@
                                             <td>{{ $list->slip_date }}</td>
                                             <td>{{ $list->slip_status }}</td>
                                             <td>
+                                                @can('actionpermissions.download_generate_slip')
                                                 <button class="download-pdf btn btn-secondary px-2 py-1"
                                                         title="Download PDF"
                                                         data-id="{{ $list->slip_id }}"
@@ -161,6 +164,7 @@
                                                 >
                                                     <i data-feather="download"></i>
                                                 </button>
+                                                @endcan
 
                                                 {{-- <button class="edit-element btn btn-secondary px-2 py-1" title="Download PDF" data-id="{{ $list->slip_id }}"><i data-feather="file-text"></i></button> --}}
                                                 {{-- <button class="btn btn-danger rem-element px-2 py-1" title="Delete Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="trash-2"></i> </button> --}}

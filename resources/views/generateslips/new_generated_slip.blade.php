@@ -270,9 +270,12 @@
                                                 >
                                                     <i data-feather="download"></i>
                                                 </button> --}}
-
+                                                @can('actionpermissions.view_generate_slip')
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button> 
+                                                @endcan
+                                                @can('actionpermissions.take_action')
                                                 <button class="btn btn-danger action-element px-2 py-1" title="Take Action" data-id="{{ $list->slip_id }}">Take Action</button> 
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

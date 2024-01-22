@@ -414,10 +414,15 @@
                                             <td>{{ $list->slip_date }}</td>
                                             <td>{{ $list->slip_status }}</td>
                                             <td>
+                                                @can('actionpermissions.view_generate_slip')
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button>
+                                                @endcan
+                                                @can('actionpermissions.create_vardi_book')
                                                 @if($list->is_vardi_ahaval_submitted == '0')
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Create Vardi Ahaval" data-id="{{ $list->slip_id }}"><i data-feather="edit"></i> Report (वर्दी अहवाल)</button>
                                                 @endif
+                                                @endcan
+                                                @can('actionpermissions.download_vardi_ahaval')
                                                 @if($list->is_vardi_ahaval_submitted == '1')
                                                 <button class="download-pdf btn btn-secondary px-2 py-1"
                                                         title="Download PDF"
@@ -427,6 +432,7 @@
                                                     <i data-feather="download"></i>
                                                 </button>
                                                 @endif
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
