@@ -63,7 +63,7 @@
                                             Today's Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="{{$todaysSlipCount}}">{{$todaysSlipCount}}</span>
+                                            <span class="counter-value text-primary" data-target="{{$todaysSlipCount}}">{{$todaysSlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0"><i class="ri-arrow-up-line align-middle"></i>
@@ -97,7 +97,7 @@
                                             Montly Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="{{$monthlySlipCount}}">{{$monthlySlipCount}}</span>
+                                            <span class="counter-value text-primary" data-target="{{$monthlySlipCount}}">{{$monthlySlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
@@ -134,7 +134,7 @@
                                             Yearly Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="{{$yearlySlipCount}}">{{$yearlySlipCount}}</span>
+                                            <span class="counter-value text-primary" data-target="{{$yearlySlipCount}}">{{$yearlySlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
@@ -169,7 +169,7 @@
                                             Action Taken
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="{{$actionTakenSlipCount}}">{{$actionTakenSlipCount}}</span>
+                                            <span class="counter-value text-primary" data-target="{{$actionTakenSlipCount}}">{{$actionTakenSlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0">

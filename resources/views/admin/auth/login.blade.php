@@ -28,7 +28,8 @@
                         <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
                             <div class="row g-0">
                                 <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4 auth-one-bg h-100">
+                                    <img src="{{ asset('admin/images/login-page-banner.jpg') }}" alt="" width="100%" height="100%">
+                                    <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
@@ -61,10 +62,11 @@
                                 </div>
 
                                 <div class="col-lg-6">
-                                    <div class="p-lg-5 p-4">
-                                        <div>
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p class="text-muted">Sign in to continue to {{ config('app.name') }}.</p>
+                                    <div class="p-lg-4 p-4">
+                                        <div class="text-center">
+                                            <img  src="{{ asset('admin/images/login-logo.png') }}" height="50%" width="50%" alt="">
+                                            <h5 class="text-primary text-center pt-3">Welcome To Login !</h5>
+                                            {{-- <p class="text-muted text-center">Sign in to continue to {{ config('app.name') }}.</p> --}}
                                         </div>
 
                                         <div class="mt-4">
@@ -76,7 +78,7 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
+                                                    <div class="float-end d-none">
                                                         <a href="auth-pass-reset-cover.html" class="text-muted">Forgot password?</a>
                                                     </div>
                                                     <label class="form-label" for="password-input">Password</label>
@@ -98,7 +100,7 @@
                                             </form>
                                         </div>
 
-                                        <div class="mt-5 text-center">
+                                        <div class="mt-5 text-center d-none">
                                             <p class="mb-0">Don't have an account ? <a href="auth-signup-cover.html" class="fw-semibold text-primary text-decoration-underline"> Signup</a> </p>
                                         </div>
                                     </div>
@@ -120,7 +122,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand
+                                </script> Laravel. Crafted with <i class="mdi mdi-heart text-danger"></i>
                             </p>
                         </div>
                     </div>
