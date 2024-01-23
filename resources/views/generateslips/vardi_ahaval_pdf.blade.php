@@ -60,11 +60,35 @@
         .rescuetable {
             display: flex;
             justify-content: space-between;
-        }
+            margin-top: 20px;
+          }
 
-        .rescuetable table {
+          .rescuetable .col-md-4 {
             width: 30%;
+          }
+
+          .rescuetable table {
+            width: 100%;
+            border-collapse: collapse;
             margin-bottom: 1rem;
+          }
+
+          .rescuetable table th,
+          .rescuetable table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid black;
+          }
+
+          .rescuetable caption {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+          }
+
+        .vardi th, .vardi td {
+            padding: 10px;
+            text-align: left;
+            border: 0px solid black!important;
         }
     </style>
 </head>
@@ -90,7 +114,7 @@
         <hr>
         <h4 class="text-center">१. वर्दी</h4>
 
-        <table>
+        <table class="vardi">
             <tr>
                 <th>वर्दी देणाऱ्याचे नाव</th>
                 <td>:- {{$vardiAhavalData->vardi_name}}</td>
@@ -132,7 +156,7 @@
         <hr>
         <h4 class="text-center">२. वर्दीची सविस्तर माहिती</h4>
 
-        <table>
+        <table class="vardi">
             <tr>
                 <th>आग लागलेल्या ठिकाणच्या मालमत्तेचे  वर्णन</th>
                 <td>:- {{$vardiAhavalData->property_description}}</td>
@@ -197,7 +221,7 @@
         <h4 class="text-center">३.आगीमधून विमोचन व वचवलेल्या व्यक्ती</h4>
 
         <div class="row rescuetable">
-            <div class="col-md-4">
+            <div class="col-md-6">
                <table>
                 <caption class="text-center"><b>अग्निशमन विभागा व्यतिरिक्त केलेले विमोचन कार्य</b></caption>
                     <tr>
@@ -210,7 +234,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                <table>
                 <caption class="text-center"><b>अग्निशमन विभागाने बचाव वाहनाचा वापर न करता केलेले विमोचन कार्य</b></caption>
                     <tr>
@@ -223,7 +247,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                <table>
                 <caption class="text-center"><b>अग्निशमन विभागाने बचाव वाहनाचा वापर केलेले विमोचन कार्य</b></caption>
                     <tr>
