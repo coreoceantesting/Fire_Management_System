@@ -256,10 +256,10 @@ class OccuranceBookController extends Controller
 
             // Create mPDF instance
             $pdf = new Mpdf();
-
+            $slipData = DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->first();
             // Save the generated PDF to a temporary file
             $formattedDatetime = date('Y-m-d_H_i_s');
-            $pdfFileName = 'vardi_ahaval_' . $formattedDatetime . '.pdf';
+            $pdfFileName = $slipData->caller_name.'_'. $formattedDatetime . '.pdf';
             $pdfFilePath = public_path('vardi_ahaval/' . $pdfFileName);
 
             // Update 'slips' table with the PDF file name
