@@ -39,7 +39,7 @@
                     </a>
                 </li>
 
-
+                @can(['masters.allmasters'])
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-layout-3-line"></i>
@@ -62,6 +62,7 @@
                         </ul>
                     </div>
                 </li>
+                @endcan
 
 
                 @canany(['users.view', 'roles.view'])
@@ -117,12 +118,20 @@
                                 <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List</a>
                             </li>
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ route('vardi_ahaval_list') }}" class="nav-link" data-key="t-horizontal">Vardi Ahaval</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>
+                @canany(['actionpermissions.create_vardi_book', 'actionpermissions.download_vardi_ahaval'])
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('vardi_ahaval_list') }}" >
+                        <i class="ri-file-chart-line"></i>
+                        <span data-key="t-vardiAhaval">Vardi Ahaval</span>
+                    </a>
+                </li>
+                @endcan
 
             </ul>
         </div>

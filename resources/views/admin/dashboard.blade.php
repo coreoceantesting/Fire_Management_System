@@ -59,11 +59,11 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="#" class="fw-medium text-muted mb-0">
+                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
                                             Today's Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="0">0</span>
+                                            <span class="counter-value" data-target="{{$todaysSlipCount}}">{{$todaysSlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0"><i class="ri-arrow-up-line align-middle"></i>
@@ -93,11 +93,11 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="#" class="fw-medium text-muted mb-0">
+                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
                                             Montly Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="0">0</span>
+                                            <span class="counter-value" data-target="{{$monthlySlipCount}}">{{$monthlySlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
@@ -130,11 +130,11 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="#" class="fw-medium text-muted mb-0">
+                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
                                             Yearly Slip
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="0">0</span>
+                                            <span class="counter-value" data-target="{{$yearlySlipCount}}">{{$yearlySlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-danger mb-0">
@@ -165,11 +165,11 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <p class="fw-medium text-muted mb-0">
+                                        <a href="{{route('action_taken_slips_list')}}" class="fw-medium text-muted mb-0">
                                             Action Taken
-                                        </p>
+                                        </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
-                                            <span class="counter-value" data-target="0">0</span>
+                                            <span class="counter-value" data-target="{{$actionTakenSlipCount}}">{{$actionTakenSlipCount}}</span>
                                         </h2>
                                         <p class="mb-0 text-muted" style="display: none">
                                             <span class="badge bg-light text-success mb-0">

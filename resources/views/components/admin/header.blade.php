@@ -6,19 +6,19 @@
                 <div class="navbar-brand-box horizontal-logo">
                     <a href="{{ route('home') }}" class="logo logo-dark">
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/images/logo-sm.png') }}" alt="" height="22" />
+                            <img src="{{ asset('admin/images/logo-pmc.png') }}" alt="" height="22" />
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/images/logo-dark.png') }}" alt="" height="17" />
+                            <img src="{{ asset('admin/images/logo-pmc.png') }}" alt="" height="45" />
                         </span>
                     </a>
 
                     <a href="{{ route('home') }}" class="logo logo-light">
                         <span class="logo-sm">
-                            <img src="{{ asset('admin/images/logo-sm.png') }}" alt="" height="22" />
+                            <img src="{{ asset('admin/images/logo-pmc.png') }}" alt="" height="22" />
                         </span>
                         <span class="logo-lg">
-                            <img src="{{ asset('admin/images/logo-light.png') }}" alt="" height="17" />
+                            <img src="{{ asset('admin/images/logo-pmc.png') }}" alt="" height="45" />
                         </span>
                     </a>
                 </div>
@@ -181,9 +181,9 @@
                         <h6 class="dropdown-header">
                             Welcome {{ ucfirst(auth()->user()->name) }}!
                         </h6>
-                        <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
+                        {{-- <a class="dropdown-item" href="pages-profile.html"><i class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i>
                             <span class="align-middle">Profile</span>
-                        </a>
+                        </a> --}}
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i>
                             <span class="align-middle" data-key="t-logout">Logout</span>
