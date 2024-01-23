@@ -877,5 +877,45 @@
     });
 </script>
 
+{{-- time calculation --}}
+<script>
+    // Get the input elements
+    var firstVehicleDeparting = document.getElementById('first_vehicle_departing_date_time');
+    var timeOfDeparture = document.getElementById('time_of_departure_from_scene');
+    var totalTimeInput = document.getElementById('total_time');
+    var totalHourInput = document.getElementById('total_hour');
+
+    // Attach an event listener to detect changes in the input fields
+    firstVehicleDeparting.addEventListener('change', updateTotalTime);
+    timeOfDeparture.addEventListener('change', updateTotalTime);
+
+    function updateTotalTime() {
+        // Get the values from the input fields
+        var startTime = new Date(firstVehicleDeparting.value);
+        var endTime = new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
+
+        var dateObject = new Date(startTime);
+        var dateObjectTwo = new Date(endTime);
+
+        // Get the time in HH:mm:ss format
+        var timeone = dateObject.toLocaleTimeString('en-US', { hour12: false });
+        var timetwo = dateObjectTwo.toLocaleTimeString('en-US', { hour12: false });
+
+        // Calculate the time difference
+        var timeDiff = endTime - startTime;
+        var hours = Math.floor(timeDiff / 3600000); // 1 hour = 3600000 milliseconds
+
+        // Display the values in the total time and total hour input fields
+        totalTimeInput.value = timeone + ' To ' + timetwo ;
+        totalHourInput.value = formatTimeDifference(timeDiff);
+    }
+
+    function formatTimeDifference(timeDiff) {
+        // Format the time difference in HH:mm format
+        var hours = Math.floor(timeDiff / 3600000);
+        var minutes = Math.floor((timeDiff % 3600000) / 60000);
+        return hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+    }
+</script>
 
 
