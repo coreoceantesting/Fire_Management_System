@@ -99,11 +99,15 @@
                             </div>
                         </div>
                     </div>
+                    @php
+                        $serialNumber = 1;
+                    @endphp
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="buttons-datatables" class="table table-bordered nowrap align-middle" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No</th>
                                         <th>Name</th>
                                         <th>Initial</th>
                                         <th>Action</th>
@@ -112,6 +116,7 @@
                                 <tbody>
                                     @foreach ($vehicle_list as $list)
                                         <tr>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->vehicle_number }}</td>
                                             <td>{{ $list->vehicle_type }}</td>
                                             <td>

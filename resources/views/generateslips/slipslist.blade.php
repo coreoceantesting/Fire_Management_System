@@ -135,12 +135,15 @@
                         </div>
                     </div>
                     
-                    
+                    @php
+                        $serialNumber = 1;
+                    @endphp
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="buttons-datatables" class="table table-bordered nowrap align-middle" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>Sr.No</th>
                                         <th>Caller Name</th>
                                         <th>Caller Mobile Number</th>
                                         <th>Date</th>
@@ -151,6 +154,7 @@
                                 <tbody>
                                     @foreach ($slip_list as $list)
                                         <tr>
+                                            <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->caller_name }}</td>
                                             <td>{{ $list->caller_mobile_no }}</td>
                                             <td>{{ $list->slip_date }}</td>
