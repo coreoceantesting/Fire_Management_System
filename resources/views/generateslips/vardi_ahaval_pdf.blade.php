@@ -101,13 +101,13 @@
 
         <div class="row">
             <div class="col-md-6">
-                <p style="float: left;">विभाग :- अग्निशमन केंद्र पनवेल</p>
+                <p style="text-align: left;">विभाग :- अग्निशमन केंद्र पनवेल</p>
             </div>
             <div class="col-md-6">
-                <p style="float: right;">वर्दीची तारीख : {{ date('Y-m-d', strtotime($slipData->slip_date)) }}</p>
+                <p style="text-align: right;">वर्दीची तारीख : {{ date('Y-m-d', strtotime($slipData->slip_date)) }}</p>
             </div>   
             <div class="col-md-6">
-                <p style="float: left;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{$vardiAhavalData->officer_name_present_at_last_moment}}</p>
+                <p style="text-align: left;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{$vardiAhavalData->officer_name_present_at_last_moment}}</p>
             </div>         
         </div>
 
@@ -372,9 +372,9 @@
             </div>            
         </div>
 
-        <p>अशाप्रकारे विझविली :- {{$actionTakenData->number_of_vehicle}} , @foreach($additionalHelpDetails as $no) {{ $no->vehicle_number }}, @endforeach या  वाहनाच्या होजरीलच्या सहाय्याने आग पूर्णपणे  विझवली .</p>
-        <p>सदर घटनांची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक ४९ मध्ये पुष्ठ क्र . १९६ वर घेतलेली आहे . </p>
-        <p>सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर अड्वयझरी कॉउंसिल  यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
+        <p style="text-align: left">अशाप्रकारे विझविली :- {{$actionTakenData->number_of_vehicle}} , @foreach($additionalHelpDetails as $no) {{ $no->vehicle_number }}, @endforeach या  वाहनाच्या होजरीलच्या सहाय्याने आग पूर्णपणे  विझवली .</p>
+        <p style="text-align: left">सदर घटनांची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक ४९ मध्ये पुष्ठ क्र . १९६ वर घेतलेली आहे . </p>
+        <p style="text-align: left">सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर अड्वयझरी कॉउंसिल  यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
         <ul style="list-style-type:none; text-align:right">
             <li>उप अग्निशमन अधिकारी</li>
             <li>पनवेल महानगरपालिका</li>
