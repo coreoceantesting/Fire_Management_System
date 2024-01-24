@@ -117,7 +117,7 @@
                                 <div class="additional-help">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label for="fire_station[]" class="control-label">Fire Station Name (फायर स्टेशनचे नाव):</label>
+                                            <label for="fire_station[]" class="control-label">Fire Station Name (फायर स्टेशनचे नाव) <span class="text-danger">*</span></label>:</label>
                                             <select class="form-control" name="fire_station[]" required>
                                                 <option value="">--Select Fire Station--</option>
                                                 @foreach ($fire_station_list as $list)
@@ -127,12 +127,12 @@
                                         </div>
                                         
                                         <div class="col-md-4">
-                                            <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या):</label>
+                                            <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार):</label>
+                                            <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>:</label>
                                             <select class="form-control" name="type_of_vehicle[]" required>
                                                 <option value="">--Select Vehicle Type--</option>
                                                 @foreach ($vehicle_list as $list)
@@ -142,7 +142,7 @@
                                         </div>
                                         
                                         <div class="col-md-4">
-                                            <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक):</label>
+                                            <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक) <span class="text-danger">*</span></label>:</label>
                                             <select class="form-control" name="vehicle_no[]" required>
                                                 <option value="">--Select Vehicle Number--</option>
                                                 @foreach ($vehicle_list as $list)
@@ -152,37 +152,37 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="inform_call_datetime[]" class="control-label">Inform Call Date & Time (कॉलची तारीख आणि वेळ):</label>
+                                            <label for="inform_call_datetime[]" class="control-label">Inform Call Date & Time (कॉलची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="datetime-local" name="inform_call_time[]" required>
                                         </div>
     
                                         <div class="col-md-4">
-                                            <label for="departure_vehicle_datetime[]" class="control-label">Departure Vehicle Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
+                                            <label for="departure_vehicle_datetime[]" class="control-label">Departure Vehicle Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="datetime-local" name="departure_vehicle_datetime[]" required>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन येण्याची तारीख आणि वेळ):</label>
+                                            <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन येण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_arrival_datetime[]" required>
                                         </div>
     
                                         <div class="col-md-4">                                            
-                                            <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
+                                            <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
 
                                         <div class="col-md-4">                                            
-                                            <label for="vehicle_return_to_center_datetime[]" class="control-label">Vehicle Return To Center Date & Time (वाहन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
+                                            <label for="vehicle_return_to_center_datetime[]" class="control-label">Vehicle Return To Center Date & Time (वाहन केंद्रावर परतण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_center_datetime[]" required>
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="total_distance[]" class="control-label">Total Distance In KM (एकूण अतंर):</label>
+                                            <label for="total_distance[]" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="text" name="total_distance[]" placeholder="Total Distance In KM" required>
                                         </div>
         
                                         <div class="col-md-4">
-                                            <label for="pumping_hours[]" class="control-label">Pumping hours (पंपिंग तास):</label>
+                                            <label for="pumping_hours[]" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span></label>:</label>
                                             <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours[]" required>
                                         </div>
                                         

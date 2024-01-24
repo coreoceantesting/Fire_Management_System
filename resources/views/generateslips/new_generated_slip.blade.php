@@ -114,12 +114,12 @@
                         <div class="card-body py-2">
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) :</label>
+                                    <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="datetime-local" name="call_time" required>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार):</label>
+                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>:</label>
                                     <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" required>
                                         <option value="">--Select Type Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -129,7 +129,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर):</label>
+                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>:</label>
                                     <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" required>
                                         <option value="">--Select Number Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -139,32 +139,32 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
+                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_time" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ):</label>
+                                    <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_arrival_time" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ):</label>
+                                    <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ):</label>
+                                    <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_arrival_at_center_time" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
+                                    <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="text" name="total_distance" placeholder="Total Distance In KM" required>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
+                                    <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours" required>
                                 </div>
 
@@ -173,10 +173,10 @@
                             <!-- Worker Details Section -->
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">
-                                    <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव):</label>
+                                    <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव) <span class="text-danger">*</span></label>:</label>
                                     <input class="form-control" type="text" name="worker_name[]" required>
                     
-                                    <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम):</label>
+                                    <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम) <span class="text-danger">*</span></label>:</label>
                                     <select class="form-control" name="worker_designation[]" required>
                                         <!-- Populate dropdown options from master data -->
                                         <option value="">--Select Designation--</option>
