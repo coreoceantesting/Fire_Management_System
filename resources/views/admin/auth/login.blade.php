@@ -4,11 +4,11 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>{{ config('app.name') }} | Sign In</title>
+    <title>Panvel-FMS | Sign In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
-    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('admin/images/Panvel_Municipal_Corporation.ico') }}">
     <script src="{{ asset('admin/js/layout.js') }}"></script>
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
@@ -28,7 +28,7 @@
                         <div class="card overflow-hidden card-bg-fill border-0 card-border-effect-none">
                             <div class="row g-0">
                                 <div class="col-lg-6">
-                                    <img src="{{ asset('admin/images/login-page-banner.jpg') }}" alt="" width="100%" height="100%">
+                                    <img src="{{ asset('admin/images/fms-banner.jpg') }}" alt="" width="100%" height="100%">
                                     <div class="p-lg-5 p-4 auth-one-bg h-100 d-none">
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
@@ -75,6 +75,7 @@
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Username (वापरकर्तानाव)</label>
                                                     <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    <span class="text-danger error-text username_err"></span>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -86,6 +87,7 @@
                                                         <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="password" name="password" >
                                                         <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                                     </div>
+                                                    <span class="text-danger error-text password_err"></span>
                                                 </div>
 
                                                 <div class="form-check d-none">
