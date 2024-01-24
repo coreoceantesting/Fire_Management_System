@@ -98,6 +98,7 @@
                                         <th>Sr.No</th>
                                         <th>Name</th>
                                         <th>Initial</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -107,9 +108,20 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->name }}</td>
                                             <td>{{ $list->initial }}</td>
+                                            @if($list->fire_station_is_active == '0')
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            @else
+                                            <td><span class="badge bg-danger">InActive</span></td>
+                                            @endif
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="edit"></i></button>
-                                                <button class="btn btn-danger rem-element px-2 py-1" title="Delete Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="toggle-left"></i> </button>
+                                                <button class="btn btn-danger rem-element px-2 py-1" title="Delete Fire Station" data-id="{{ $list->fire_station_id }}"><i data-feather="trash-2"></i> </button>
+                                                @if($list->fire_station_is_active == '0')
+                                                <button class="btn btn-warning inactive-element px-2 py-1" title="Inactive Fire Station" data-id="{{ $list->fire_station_id }}"><i class="ri-inbox-archive-line"></i> </button>
+                                                @endif
+                                                @if($list->fire_station_is_active == '1')
+                                                <button class="btn btn-success active-element px-2 py-1" title="Active Fire Station" data-id="{{ $list->fire_station_id }}"><i class="ri-inbox-unarchive-line"></i> </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -252,7 +264,7 @@
     $("#buttons-datatables").on("click", ".rem-element", function(e) {
         e.preventDefault();
         swal({
-            title: "Are you sure to inactive this fire Station?",
+            title: "Are you sure to delete this fire Station?",
             // text: "Make sure if you have filled Vendor details before proceeding further",
             icon: "info",
             buttons: ["Cancel", "Confirm"]
@@ -263,6 +275,100 @@
             {
                 var model_id = $(this).attr("data-id");
                 var url = "{{ route('firestations.destroy', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_method': "DELETE",
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        if (!data.error && !data.error2) {
+                            swal("Success!", data.success, "success")
+                                .then((action) => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            if (data.error) {
+                                swal("Error!", data.error, "error");
+                            } else {
+                                swal("Error!", data.error2, "error");
+                            }
+                        }
+                    },
+                    error: function(error, jqXHR, textStatus, errorThrown) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- active fire station --}}
+<script>
+    $("#buttons-datatables").on("click", ".active-element", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to active this fire Station?",
+            // text: "Make sure if you have filled Vendor details before proceeding further",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((justTransfer) =>
+        {
+            if (justTransfer)
+            {
+                var model_id = $(this).attr("data-id");
+                var url = "{{ route('firestations.active', ":model_id") }}";
+
+                $.ajax({
+                    url: url.replace(':model_id', model_id),
+                    type: 'POST',
+                    data: {
+                        '_method': "DELETE",
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        if (!data.error && !data.error2) {
+                            swal("Success!", data.success, "success")
+                                .then((action) => {
+                                    window.location.reload();
+                                });
+                        } else {
+                            if (data.error) {
+                                swal("Error!", data.error, "error");
+                            } else {
+                                swal("Error!", data.error2, "error");
+                            }
+                        }
+                    },
+                    error: function(error, jqXHR, textStatus, errorThrown) {
+                        swal("Error!", "Something went wrong", "error");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+{{-- Inactive fire station --}}
+<script>
+    $("#buttons-datatables").on("click", ".inactive-element", function(e) {
+        e.preventDefault();
+        swal({
+            title: "Are you sure to inactive this fire Station?",
+            // text: "Make sure if you have filled Vendor details before proceeding further",
+            icon: "info",
+            buttons: ["Cancel", "Confirm"]
+        })
+        .then((justTransfer) =>
+        {
+            if (justTransfer)
+            {
+                var model_id = $(this).attr("data-id");
+                var url = "{{ route('firestations.inactive', ":model_id") }}";
 
                 $.ajax({
                     url: url.replace(':model_id', model_id),

@@ -18,7 +18,7 @@ class FireStationController extends Controller
      */
     public function index()
     {
-        $fire_stations_list = FireStation::where('fire_station_is_active','0')->latest()->get();
+        $fire_stations_list = FireStation::where('is_deleted','0')->latest()->get();
 
         return view('admin.masters.fire_stations')->with(['fire_stations_list'=> $fire_stations_list]);
     }
@@ -112,13 +112,43 @@ class FireStationController extends Controller
         try
         {
             DB::beginTransaction();
-            $firestation->update(['fire_station_is_active' => '1']);
+            $firestation->update(['is_deleted' => '1']);
             DB::commit();
             return response()->json(['success'=> 'Fire station deleted successfully!']);
         }
         catch(\Exception $e)
         {
             return $this->respondWithAjax($e, 'deleting', 'Fire Station');
+        }
+    }
+
+    public function inactive(FireStation $firestation)
+    {
+        try
+        {
+            DB::beginTransaction();
+            $firestation->update(['fire_station_is_active' => '1']);
+            DB::commit();
+            return response()->json(['success'=> 'Fire station InActive successfully!']);
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'inactive', 'Fire Station');
+        }
+    }
+
+    public function active(FireStation $firestation)
+    {
+        try
+        {
+            DB::beginTransaction();
+            $firestation->update(['fire_station_is_active' => '0']);
+            DB::commit();
+            return response()->json(['success'=> 'Fire station Active successfully!']);
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'active', 'Fire Station');
         }
     }
 }

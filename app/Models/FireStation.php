@@ -9,5 +9,5 @@ class FireStation extends BaseModel
 {
     use HasFactory;
     protected $primaryKey = 'fire_station_id';
-    protected $fillable = ['name', 'initial','fire_station_is_active'];
+    protected $fillable = ['name', 'initial','fire_station_is_active','is_deleted'];
 }

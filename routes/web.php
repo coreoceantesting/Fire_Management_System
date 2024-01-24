@@ -52,6 +52,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     // Masters
     Route::resource('wards', App\Http\Controllers\Admin\Masters\WardController::class );
     Route::resource('firestations', App\Http\Controllers\Admin\Masters\FireStationController::class );
+    Route::delete('/firestations/{firestation}/inactive', [App\Http\Controllers\Admin\Masters\FireStationController::class, 'inactive'])->name('firestations.inactive');
+    Route::delete('/firestations/{firestation}/active', [App\Http\Controllers\Admin\Masters\FireStationController::class, 'active'])->name('firestations.active');
     Route::resource('vehicle_details', App\Http\Controllers\Admin\Masters\VehicleDetailsController::class );
     Route::resource('designations', App\Http\Controllers\Admin\Masters\DesignationsController::class );
     Route::resource('driver_details', App\Http\Controllers\Admin\Masters\DriversDetailsController::class );

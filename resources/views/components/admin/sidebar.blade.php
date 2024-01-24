@@ -96,11 +96,11 @@
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">Total Slip</a>
+                                <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">New Generate Slip</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">New Generated Slip</a>
+                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">Generated Slip List</a>
                             </li>
 
                         </ul>
