@@ -24,7 +24,7 @@ class OccuranceBookController extends Controller
         ->latest()
         ->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->get();
+        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->where('is_deleted','0')->get();
         $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
         return view('generateslips.action_taken_list', compact('slip_list','designation_list','fire_station_list','vehicle_list'));
     }
@@ -147,7 +147,7 @@ class OccuranceBookController extends Controller
     {
         $slip_list = DB::table('slips')->where('is_occurance_book_submitted','1')->latest()->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->get();
+        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->where('is_deleted','0')->get();
         $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
         return view('generateslips.list_for_vardi_ahaval', compact('slip_list','designation_list','fire_station_list','vehicle_list'));
     }

@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $users = User::whereNot('id', Auth::user()->id)->latest()->get();
         $roles = Role::orderBy('id', 'DESC')->whereNot('name', 'like', '%super%')->get();
-        $fire_stations = FireStation::where('fire_station_is_active','0')->latest()->get();
+        $fire_stations = FireStation::where('fire_station_is_active','0')->where('is_deleted','0')->latest()->get();
 
         return view('admin.users')->with(['users'=> $users, 'roles'=> $roles, 'fire_stations' => $fire_stations]);
     }
