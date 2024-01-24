@@ -124,7 +124,7 @@
                             <p class="mb-0">&copy;
                                 <script>
                                     document.write(new Date().getFullYear())
-                                </script> Laravel. Crafted with <i class="mdi mdi-heart text-danger"></i>
+                                </script> Panvel. Crafted with <i class="mdi mdi-heart text-danger"></i>
                             </p>
                         </div>
                     </div>
