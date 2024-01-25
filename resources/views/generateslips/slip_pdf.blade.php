@@ -1,37 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $caller_name }}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
             font-family: 'freeserif', 'normal';
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        table {
-            width: 100%;
+        .container {
+            margin: 3rem;
+        }
+
+        .card {
+            border: 1px solid #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background-color: #fff;
+            text-align: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #000;
+        }
+
+        .card-body table {
+            width: 98%;
             border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid black;
+            /*margin-bottom: 20px;*/
+            margin: 10px;
         }
 
         th, td {
+/*            border: 1px solid #000;*/
             padding: 10px;
             text-align: left;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-3">
+    <div class="container">
 
         <div class="card">
-            <div class="card-header text-center">
-               <b><h3>Slip (स्लिप)</h3></b>
+            <div class="card-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Panvel_Municipal_Corporation.png" alt="logo" width="150" height="100">
+               <h4>पनवेल महानगरपालिका अग्निशमन सेवा</h4> 
+                <h5>Slip (स्लिप)</h5>
             </div>
             <div class="card-body">
                 <table>
@@ -64,7 +83,5 @@
         </div>
 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

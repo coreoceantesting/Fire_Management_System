@@ -899,6 +899,12 @@
         var startTime = new Date(firstVehicleDeparting.value);
         var endTime = new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
 
+        // Check if end date is earlier than start date (yesterday's start date and today's end date)
+        if (endTime < startTime) {
+            // Adjust the end date to tomorrow
+            endTime.setDate(endTime.getDate() + 1);
+        }
+
         var dateObject = new Date(startTime);
         var dateObjectTwo = new Date(endTime);
 
@@ -911,7 +917,7 @@
         var hours = Math.floor(timeDiff / 3600000); // 1 hour = 3600000 milliseconds
 
         // Display the values in the total time and total hour input fields
-        totalTimeInput.value = timeone + ' To ' + timetwo ;
+        totalTimeInput.value = timeone + ' To ' + timetwo;
         totalHourInput.value = formatTimeDifference(timeDiff);
     }
 
@@ -922,5 +928,6 @@
         return hours + ':' + (minutes < 10 ? '0' : '') + minutes;
     }
 </script>
+
 
 
