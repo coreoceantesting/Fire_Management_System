@@ -184,15 +184,15 @@
             }
         });
 
-        function resetErrors() {
-            var form = document.getElementById('addForm');
-            var data = new FormData(form);
-            for (var [key, value] of data) {
-                $('.' + key + '_err').text('');
-                $('#' + key).removeClass('is-invalid');
-                $('#' + key).addClass('is-valid');
-            }
-        }
+        // function resetErrors() {
+        //     var form = document.getElementById('addForm');
+        //     var data = new FormData(form);
+        //     for (var [key, value] of data) {
+        //         $('.' + key + '_err').text('');
+        //         $('#' + key).removeClass('is-invalid');
+        //         $('#' + key).addClass('is-valid');
+        //     }
+        // }
 
         function printErrMsg(msg) {
             $.each(msg, function(key, value) {
