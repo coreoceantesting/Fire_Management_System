@@ -110,9 +110,9 @@
                             <div class="col-sm-3">
                                 <div class="btn-group">
                                     @can('actionpermissions.generate_slip')
-                                    <button id="addToTable" class="btn btn-primary">Generate Slip <i class="fa fa-plus"></i></button>
+                                    <button id="addToTable" class="btn btn-primary" style="margin-right: 3px; border-radius:inherit">Generate Slip <i class="fa fa-plus"></i></button>
                                     @endcan
-                                    <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
+                                    <button id="btnCancel" class="btn btn-danger" style="border-radius: inherit" style="display:none;">Cancel</button>
                                 </div>
                             </div>
                             <form action="{{ route('filter') }}" method="GET" class="col-sm-9">
