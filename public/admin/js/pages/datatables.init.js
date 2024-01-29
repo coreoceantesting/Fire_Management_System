@@ -29,7 +29,7 @@ function initializeTables() {
             paging: !0,
             // pagingType: "full_numbers",
             dom: "Blfrtip",
-            buttons: ["copy", "csv", "excel", "print", "pdf"],
+            buttons: ["copy", "excel", "print"],
         }),
         new DataTable("#ajax-datatables", {
             ajax: "assets/json/datatable.json",
