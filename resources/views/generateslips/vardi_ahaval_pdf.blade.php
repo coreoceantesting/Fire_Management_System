@@ -103,7 +103,7 @@
         <p><img class="logo" src="{{ public_path('/admin/images/Panvel_Municipal_Corporation.png') }}" height="80" width="80" alt="Left Logo"></p>
         <h5>परिशिष्ट - " ग "</h5>
         <p>( ३ व ३ (ब) )</p>
-        <p><b>पनवेल महानगरपालिका अग्निशमन सेवा</b></p>
+        <h3 style="text-align:center;"><b>पनवेल महानगरपालिका अग्निशमन सेवा</h3>
         <p><b>आगीच्या वर्दीचा अहवाल</b></p>
 
         <div class="row">
