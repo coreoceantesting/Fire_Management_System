@@ -545,7 +545,7 @@
                     tableHtml += '</tbody></table>';
 
                     // Table 2: Slip Action Form Details
-                    tableHtml += '<br><h3 class="text-center"> Slip Action Form Details (स्लिप अॅक्शन फॉर्म तपशील) </h3><br>';
+                    tableHtml += '<br><h3 class="text-center"> Slip Action Form Details (स्लिप अँक्शन फॉर्म तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     // ... (headers here)
