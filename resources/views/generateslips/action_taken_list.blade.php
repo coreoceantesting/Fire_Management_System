@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Generate Slip</x-slot>
-    <x-slot name="heading">Generate Slip</x-slot>
+    <x-slot name="title">Taken Action List</x-slot>
+    <x-slot name="heading">Taken Action List</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
