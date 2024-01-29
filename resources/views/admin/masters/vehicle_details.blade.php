@@ -14,11 +14,18 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vehicle_type" name="vehicle_type" type="text" placeholder="Enter Vehicle Type Name">
+                                    <span class="text-danger error-text vehicle_type_err"></span>
+                                </div>
+                                
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_number">Vehicle Number <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="role"> Select Vehicle Type <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_type" name="vehicle_type">
                                         <option value="">--Select Vehicle Type--</option>
@@ -28,7 +35,7 @@
                                         <option value="Ladder truck">Ladder truck</option>
                                     </select>
                                     <span class="text-danger error-text vehicle_type_err"></span>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
@@ -57,12 +64,20 @@
 
                             <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
                             <div class="mb-3 row">
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vehicle_type" name="vehicle_type" type="text" placeholder="Enter Vehicle Type Name">
+                                    <span class="text-danger error-text vehicle_type_err"></span>
+                                </div>
+
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_number">Vehicle Number <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_type"> Select Vehicle Type <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_type" name="vehicle_type">
                                         <option value="">--Select Vehicle Type--</option>
@@ -72,7 +87,7 @@
                                         <option value="Ladder truck">Ladder truck</option>
                                     </select>
                                     <span class="text-danger error-text vehicle_type_err"></span>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
@@ -109,7 +124,7 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Name</th>
-                                        <th>Initial</th>
+                                        <th>Vehicle Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -198,7 +213,7 @@
                 {
                     $("#editForm input[name='edit_model_id']").val(data.vehicle.vehicle_id);
                     $("#editForm input[name='vehicle_number']").val(data.vehicle.vehicle_number);
-                    $("#editForm select[name='vehicle_type']").val(data.vehicle.vehicle_type);
+                    $("#editForm input[name='vehicle_type']").val(data.vehicle.vehicle_type);
                 }
                 else
                 {
