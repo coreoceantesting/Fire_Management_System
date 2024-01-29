@@ -13,7 +13,7 @@
         }
 
         .container {
-            margin: 3rem;
+            margin: 1rem;
         }
 
         .card {
@@ -40,6 +40,7 @@
 /*            border: 1px solid #000;*/
             padding: 10px;
             text-align: left;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -48,9 +49,9 @@
 
         <div class="card">
             <div class="card-header">
-                <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Panvel_Municipal_Corporation.png" alt="logo" width="150" height="100">
-               <h4>पनवेल महानगरपालिका अग्निशमन सेवा</h4> 
-                <h5>Slip (स्लिप)</h5>
+                <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Panvel_Municipal_Corporation.png" alt="logo" width="130" height="100">
+               <h1>पनवेल महानगरपालिका अग्निशमन सेवा</h1> 
+                <h2>Details slip(तपशील स्लिप)</h2>
             </div>
             <div class="card-body">
                 <table>
