@@ -115,7 +115,7 @@
                             <div class="form-group row">
                                 <div class="col-md-4">
                                     <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" name="call_time" required>
+                                    <input class="form-control" type="datetime-local" id="call_time" name="call_time" required>
                                 </div>
 
                                 <div class="col-md-4">
@@ -577,6 +577,24 @@
             // Display the form
             var slip_id = $(this).data('id');
             $('#slip_id').val(slip_id);
+
+            $.ajax({
+                url: '/view-slip/' + slip_id,
+                type: 'GET',
+                success: function(data) {
+                    // Update your UI with the fetched data
+                    // For example, assuming you have a field in your form with id 'slip_name'
+                    $('#call_time').val(data.slip_data.slip_date);
+
+                    // Show the form
+                    $('#takeActionForm').show();
+                },
+                error: function(error) {
+                    // Handle error response
+                    console.log(error);
+                }
+            });
+
             $('#takeActionForm').show();
         });
 
