@@ -133,7 +133,7 @@
 
                                         <div class="col-md-4">
                                             <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span>:</label>
-                                            <select class="form-control" name="type_of_vehicle[]" required>
+                                            <select class="form-control type-of-vehicle" name="type_of_vehicle[]" required>
                                                 <option value="">--Select Vehicle Type--</option>
                                                 @foreach ($vehicle_list as $list)
                                                     <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
@@ -141,13 +141,20 @@
                                             </select>
                                         </div>
                                         
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक) <span class="text-danger">*</span>:</label>
                                             <select class="form-control" name="vehicle_no[]" required>
                                                 <option value="">--Select Vehicle Number--</option>
                                                 @foreach ($vehicle_list as $list)
                                                     <option value="{{ $list->vehicle_id }}">{{ $list->vehicle_number }}</option>
                                                 @endforeach
+                                            </select>
+                                        </div> --}}
+
+                                        <div class="col-md-4">
+                                            <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक) <span class="text-danger">*</span>:</label>
+                                            <select class="form-control vehicle-no" name="vehicle_no[]" required>
+                                                <option value="">--Select Vehicle Number--</option>
                                             </select>
                                         </div>
 
@@ -740,9 +747,32 @@
 
         var additionalHelpTemplate = $('#additional-help-container .additional-help').clone();
 
+        // fetch vehicle no from vehicle type
+        function setupDynamicBehavior(container) {
+            container.find('.type-of-vehicle').on('change', function() {
+                var selectedType = $(this).val();
+                var vehicleNumberDropdown = $(this).closest('.additional-help').find('.vehicle-no');
+
+                // Clear existing options
+                vehicleNumberDropdown.empty();
+
+                // Add default option
+                // vehicleNumberDropdown.append('<option value="">--Select Vehicle Number--</option>');
+
+                // Filter and add options based on the selected Type Of Vehicle
+                @foreach($vehicle_list as $list)
+                    if ("{{ $list->vehicle_type }}" === selectedType) {
+                        vehicleNumberDropdown.append('<option value="{{ $list->vehicle_id }}">{{ $list->vehicle_number }}</option>');
+                    }
+                @endforeach
+            });
+        }
+
         $('#addMore').on('click', function() {
             var newAdditionalHelp = additionalHelpTemplate.clone();
             $('#additional-help-container').append(newAdditionalHelp);
+            // fetch vehicle no from vehicle type
+            setupDynamicBehavior(newAdditionalHelp);
         });
 
         $('#remove').on('click', function() {
@@ -828,6 +858,30 @@
             });
         });
 
+    });
+</script>
+
+{{-- as per vehicle type select automatically vehicle number --}}
+<script>
+    $(document).ready(function() {
+        // On change of Type Of Vehicle dropdown
+        $('.type-of-vehicle').on('change', function() {
+            var selectedType = $(this).val();
+            var vehicleNumberDropdown = $(this).closest('.additional-help').find('.vehicle-no');
+
+            // Clear existing options
+            vehicleNumberDropdown.empty();
+
+            // Add default option
+            // vehicleNumberDropdown.append('<option value="">--Select Number Of Vehicle--</option>');
+
+            // Filter and add options based on the selected Type Of Vehicle
+            @foreach($vehicle_list as $list)
+                if ("{{ $list->vehicle_type }}" === selectedType) {
+                    vehicleNumberDropdown.append('<option value="{{ $list->vehicle_id }}">{{ $list->vehicle_number }}</option>');
+                }
+            @endforeach
+        });
     });
 </script>
 
