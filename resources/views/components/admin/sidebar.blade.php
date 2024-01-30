@@ -48,16 +48,16 @@
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('firestations.index') }}" class="nav-link" data-key="t-horizontal">Fire Stations</a>
+                                <a href="{{ route('firestations.index') }}" class="nav-link" data-key="t-horizontal">Fire Stations(अग्निशमन केंद्रे)</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('vehicle_details.index') }}" class="nav-link" data-key="t-horizontal">Vehicle Detalis</a>
+                                <a href="{{ route('vehicle_details.index') }}" class="nav-link" data-key="t-horizontal">Vehicle Detalis(वाहन तपशील)</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('designations.index') }}" class="nav-link" data-key="t-horizontal">Designations</a>
+                                <a href="{{ route('designations.index') }}" class="nav-link" data-key="t-horizontal">Designations(पदनाम)</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('driver_details.index') }}" class="nav-link" data-key="t-horizontal">Driver Details</a>
+                                <a href="{{ route('driver_details.index') }}" class="nav-link" data-key="t-horizontal">Driver Details(ड्रायव्हर तपशील)</a>
                             </li>
                         </ul>
                     </div>
@@ -75,12 +75,12 @@
                         <ul class="nav nav-sm flex-column">
                             @can('users.view')
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link" data-key="t-horizontal">Users</a>
+                                    <a href="{{ route('users.index') }}" class="nav-link" data-key="t-horizontal">Users(वापरकर्ते)</a>
                                 </li>
                             @endcan
                             @can('roles.view')
                                 <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}" class="nav-link" data-key="t-horizontal">Roles</a>
+                                    <a href="{{ route('roles.index') }}" class="nav-link" data-key="t-horizontal">Roles(भूमिका)</a>
                                 </li>
                             @endcan
                         </ul>
@@ -96,11 +96,11 @@
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">New Generate Slip</a>
+                                <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">New Generate Slip(नवीन निर्माण स्लिप)</a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">Generated Slip List</a>
+                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">Generated Slip List(व्युत्पन्न स्लिप लिस्ट)</a>
                             </li>
 
                         </ul>
@@ -115,7 +115,7 @@
                     <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List</a>
+                                <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List(केलेल्या कारवाईची यादी)</a>
                             </li>
 
                             {{-- <li class="nav-item">
