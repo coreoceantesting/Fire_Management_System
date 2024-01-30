@@ -59,7 +59,7 @@
                             <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-muted mb-0">
                                             Today's Slips (आजच्या स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -93,7 +93,7 @@
                             <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-muted mb-0">
                                             Montly Slips (मासिक स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -130,7 +130,7 @@
                             <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-muted mb-0">
                                             Yearly Slips (वार्षिक स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -165,7 +165,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="{{route('action_taken_slips_list')}}" class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-muted mb-0">
                                             Action Taken Slips(कारवाई केलेल्या स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -200,7 +200,7 @@
                             <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a href="{{route('vardi_ahaval_list')}}" class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-muted mb-0">
                                             Vardi Ahaval(वरदी अहवाल)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -347,23 +347,23 @@
         $(document).ready(function() {
 
             $('#todaySlipsCard').on('click', function() {
-                window.location.href = "{{ route('slips_list') }}";
+                window.location.href = "{{ route('todays_list') }}";
             });
 
             $('#monthlySlipsCard').on('click', function() {
-                window.location.href = "{{ route('slips_list') }}";
+                window.location.href = "{{ route('monthly_list') }}";
             });
 
             $('#yearlySlipsCard').on('click', function() {
-                window.location.href = "{{ route('slips_list') }}";
+                window.location.href = "{{ route('yearly_list') }}";
             });
 
             $('#actiontakenSlipsCard').on('click', function() {
-                window.location.href = "{{ route('slips_list') }}";
+                window.location.href = "{{ route('action_taken_list') }}";
             });
 
             $('#vardiahavalSlipsCard').on('click', function() {
-                window.location.href = "{{ route('slips_list') }}";
+                window.location.href = "{{ route('vardi_ahaval_list') }}";
             });
 
         });

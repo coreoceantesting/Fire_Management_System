@@ -93,6 +93,12 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('/store-vardi-ahval', [App\Http\Controllers\OccuranceBookController::class, 'store_vardi_ahaval'])->name('store_vardi_ahaval');
     Route::get('/generate-vardi-ahaval-pdf/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_pdf'])->name('generate.vardi.ahaval.pdf');
 
+    // All Listing Count
+    Route::get('todays-slips', [App\Http\Controllers\ReportController::class, 'todays_list'])->name('todays_list');
+    Route::get('monthly-slips', [App\Http\Controllers\ReportController::class, 'monthly_list'])->name('monthly_list');
+    Route::get('yearly-slips', [App\Http\Controllers\ReportController::class, 'yearly_list'])->name('yearly_list');
+    Route::get('action-taken-slips', [App\Http\Controllers\ReportController::class, 'action_taken_list'])->name('action_taken_list');
+
     
 });
 
