@@ -55,8 +55,8 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card card-animate">
-                            <div class="card-body">
+                        <div class="card card-animate" id="todaySlipsCard">
+                            <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
@@ -74,7 +74,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-sm flex-shrink-0 d-none">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
                                                 <i data-feather="award" class="text-info"></i>
                                             </span>
@@ -89,8 +89,8 @@
                     <!-- end col-->
 
                     <div class="col-md-6">
-                        <div class="card card-animate">
-                            <div class="card-body">
+                        <div class="card card-animate" id="monthlySlipsCard">
+                            <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
@@ -109,7 +109,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-sm flex-shrink-0 d-none">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
                                                 <i data-feather="box" class="text-info"></i>
                                             </span>
@@ -126,8 +126,8 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="card card-animate">
-                            <div class="card-body">
+                        <div class="card card-animate" id="yearlySlipsCard">
+                            <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
@@ -146,7 +146,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-sm flex-shrink-0 d-none">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
                                                 <i data-feather="list" class="text-info"></i>
                                             </span>
@@ -161,7 +161,7 @@
                     <!-- end col-->
 
                     <div class="col-md-6">
-                        <div class="card card-animate">
+                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: lavender">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -181,7 +181,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-sm flex-shrink-0 d-none">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
                                                 <i data-feather="external-link" class="text-info"></i>
                                             </span>
@@ -196,8 +196,8 @@
                     <!-- end col-->
 
                     <div class="col-md-6">
-                        <div class="card card-animate">
-                            <div class="card-body">
+                        <div class="card card-animate" id="vardiahavalSlipsCard">
+                            <div class="card-body" style="background-color: lavender">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('vardi_ahaval_list')}}" class="fw-medium text-muted mb-0">
@@ -216,7 +216,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <div class="avatar-sm flex-shrink-0">
+                                        <div class="avatar-sm flex-shrink-0 d-none">
                                             <span class="avatar-title bg-info-subtle rounded-circle fs-2">
                                                 <i data-feather="file-text" class="text-info"></i>
                                             </span>
@@ -340,8 +340,34 @@
     </div>
 
 
+    
 
     @push('scripts')
+    <script>
+        $(document).ready(function() {
+
+            $('#todaySlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
+            });
+
+            $('#monthlySlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
+            });
+
+            $('#yearlySlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
+            });
+
+            $('#actiontakenSlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
+            });
+
+            $('#vardiahavalSlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
+            });
+
+        });
+    </script>
     @endpush
 
 </x-admin.layout>
