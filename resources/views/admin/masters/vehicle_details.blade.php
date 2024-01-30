@@ -14,13 +14,13 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name(वाहनाच्या प्रकाराचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_type" name="vehicle_type" type="text" placeholder="Enter Vehicle Type Name">
                                     <span class="text-danger error-text vehicle_type_err"></span>
                                 </div>
                                 
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_number">Vehicle Number <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_number">Vehicle Number(वाहन क्रमांक) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>
@@ -66,13 +66,13 @@
                             <div class="mb-3 row">
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_type">Vehicle Type Name(वाहनाच्या प्रकाराचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_type" name="vehicle_type" type="text" placeholder="Enter Vehicle Type Name">
                                     <span class="text-danger error-text vehicle_type_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_number">Vehicle Number <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_number">Vehicle Number(वाहन क्रमांक) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>

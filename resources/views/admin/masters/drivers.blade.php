@@ -14,12 +14,12 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_name">Driver Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_name">Driver Name(चालकाचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_name" name="driver_name" type="text" placeholder="Enter Driver Name">
                                     <span class="text-danger error-text driver_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_id"> Select Vehicle <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_id"> Select Vehicle(वाहन निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_id" name="vehicle_id">
                                         <option value="">--Select Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -29,12 +29,12 @@
                                     <span class="text-danger error-text vehicle_id_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_mob_no">Driver Mobile No <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_mob_no">Driver Mobile No(चालकाचा मोबाईल क्र) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_mob_no" name="driver_mob_no" type="text" placeholder="Enter Driver Mobile Number">
                                     <span class="text-danger error-text driver_mob_no_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_gender"> Select Gender <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_gender"> Select Gender(लिंग निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="driver_gender" name="driver_gender">
                                         <option value="">--Select Gender--</option>
                                         <option value="Male">Male</option>
@@ -43,7 +43,7 @@
                                     <span class="text-danger error-text driver_gender_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_job_status"> Select Job Status <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_job_status"> Select Job Status(नोकरीची स्थिती निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="driver_job_status" name="driver_job_status">
                                         <option value="">--Select Job Status--</option>
                                         <option value="Permanent">Permanent</option>
@@ -80,12 +80,12 @@
                             <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_name">Driver Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_name">Driver Name(चालकाचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_name" name="driver_name" type="text" placeholder="Enter Driver Name">
                                     <span class="text-danger error-text driver_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vehicle_id"> Select Vehicle <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vehicle_id"> Select Vehicle(वाहन निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_id" name="vehicle_id">
                                         <option value="">--Select Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -95,12 +95,12 @@
                                     <span class="text-danger error-text vehicle_id_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_mob_no">Driver Mobile No <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_mob_no">Driver Mobile No(चालकाचा मोबाईल क्र) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_mob_no" name="driver_mob_no" type="text" placeholder="Enter Driver Mobile Number">
                                     <span class="text-danger error-text driver_mob_no_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_gender"> Select Gender <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_gender"> Select Gender(लिंग निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="driver_gender" name="driver_gender">
                                         <option value="">--Select Gender--</option>
                                         <option value="Male">Male</option>
@@ -109,7 +109,7 @@
                                     <span class="text-danger error-text driver_gender_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="driver_job_status"> Select Job Status <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="driver_job_status"> Select Job Status(नोकरीची स्थिती निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="driver_job_status" name="driver_job_status">
                                         <option value="">--Select Job Status--</option>
                                         <option value="Permanent">Permanent</option>

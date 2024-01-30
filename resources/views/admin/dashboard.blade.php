@@ -60,7 +60,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
-                                            Today's Slip
+                                            Today's Slips (आजच्या स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$todaysSlipCount}}">{{$todaysSlipCount}}</span>
@@ -94,7 +94,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
-                                            Montly Slip
+                                            Montly Slips (मासिक स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$monthlySlipCount}}">{{$monthlySlipCount}}</span>
@@ -131,7 +131,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('slips_list')}}" class="fw-medium text-muted mb-0">
-                                            Yearly Slip
+                                            Yearly Slips (वार्षिक स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$yearlySlipCount}}">{{$yearlySlipCount}}</span>
@@ -166,7 +166,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a href="{{route('action_taken_slips_list')}}" class="fw-medium text-muted mb-0">
-                                            Action Taken
+                                            Action Taken Slips(कारवाई केलेल्या स्लिप्स)
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$actionTakenSlipCount}}">{{$actionTakenSlipCount}}</span>
@@ -194,6 +194,42 @@
                         <!-- end card-->
                     </div>
                     <!-- end col-->
+
+                    <div class="col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <a href="{{route('vardi_ahaval_list')}}" class="fw-medium text-muted mb-0">
+                                            Vardi Ahaval(वरदी अहवाल)
+                                        </a>
+                                        <h2 class="mt-4 ff-secondary fw-semibold">
+                                            <span class="counter-value text-primary" data-target="{{$vardiAhavalSlipCount}}">{{$vardiAhavalSlipCount}}</span>
+                                        </h2>
+                                        <p class="mb-0 text-muted" style="display: none">
+                                            <span class="badge bg-light text-success mb-0">
+                                                <i class="ri-arrow-up-line align-middle"></i>
+                                                7.05 %
+                                            </span>
+                                            vs. previous
+                                            month
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-info-subtle rounded-circle fs-2">
+                                                <i data-feather="file-text" class="text-info"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card-->
+                    </div>
+                    <!-- end col-->
+
                 </div>
             </div>
         </div>

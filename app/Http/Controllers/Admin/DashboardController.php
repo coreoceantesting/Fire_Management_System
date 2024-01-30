@@ -23,7 +23,8 @@ class DashboardController extends Controller
         $actionTakenSlipCount = DB::table('slips')
         ->where('slip_status', "Action Form Submitted")
         ->count();
-        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount'));
+        $vardiAhavalSlipCount = DB::table('slips')->where('is_occurance_book_submitted','1')->count();
+        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount','vardiAhavalSlipCount'));
     }
 
     public function changeThemeMode()

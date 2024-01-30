@@ -14,12 +14,12 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="name">Fire Station Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="name">Fire Station Name(फायर स्टेशनचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="name" name="name" type="text" placeholder="Enter Fire Station Name">
                                     <span class="text-danger error-text name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="initial">Fire Station Initial <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="initial">Fire Station Initial(फायर स्टेशन प्रारंभिक) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="initial" name="initial" type="text" placeholder="Enter Fire Station Initial">
                                     <span class="text-danger error-text initial_err"></span>
                                 </div>
@@ -52,12 +52,12 @@
                             <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="name">Fire Station Name <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="name">Fire Station Name(फायर स्टेशनचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="name" name="name" type="text" placeholder="Enter Fire Station Name">
                                     <span class="text-danger error-text name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="initial">Fire Station Initial <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="initial">Fire Station Initial(फायर स्टेशन प्रारंभिक) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="initial" name="initial" type="text" placeholder="Enter Fire Station Initial">
                                     <span class="text-danger error-text initial_err"></span>
                                 </div>

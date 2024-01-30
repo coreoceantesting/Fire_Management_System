@@ -19,26 +19,26 @@
                         <div class="mb-3 row">
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="name">User Name <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="name">User Name(वापरकर्ता नाव) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="name" name="name" type="text" placeholder="Enter User Name">
                                 <span class="text-danger error-text name_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="email">User Email <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="email">User Email(वापरकर्ता ईमेल) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="email" name="email" type="email" placeholder="Enter User Email">
                                 <span class="text-danger error-text email_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="mobile">User Mobile <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="mobile">User Mobile(वापरकर्ता मोबाइल) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="mobile" name="mobile" type="number" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                                     placeholder="Enter User Mobile">
                                 <span class="text-danger error-text mobile_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="gender">Select Gender <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="gender">Select Gender(लिंग निवडा) <span class="text-danger">*</span></label>
                                 <select class="form-control" id="gender" name="gender">
                                     <option value="">--Select Gender--</option>
                                     <option value="Male">Male</option>
@@ -48,13 +48,13 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="dob">User Date Of Birth <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="dob">User Date Of Birth(वापरकर्ता जन्मतारीख) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="dob" name="dob" type="date" placeholder="Enter Date of birth">
                                 <span class="text-danger error-text dob_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="fire_station_id">Select Fire Station <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="fire_station_id">Select Fire Station(फायर स्टेशन निवडा) <span class="text-danger">*</span></label>
                                 <select class="form-control" id="fire_station_id" name="fire_station_id">
                                     <option value="">--Select Fire Station--</option>
                                     @foreach ($fire_stations as $list)
@@ -65,7 +65,7 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="role">Select User Type / Role <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="role">Select User Type / Role(वापरकर्ता प्रकार / भूमिका निवडा) <span class="text-danger">*</span></label>
                                 <select class="js-example-basic-single col-sm-12" id="role" name="role">
                                     <option value="">--Select Role--</option>
                                     @foreach ($roles as $role)
@@ -76,13 +76,13 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="password">Password <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="password">Password(पासवर्ड) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="password" name="password" type="password" placeholder="********">
                                 <span class="text-danger error-text password_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="confirm_password">Confirm Password(पासवर्डची पुष्टी करा)<span class="text-danger">*</span></label>
                                 <input class="form-control" id="confirm_password" name="confirm_password" type="password" placeholder="********">
                                 <span class="text-danger error-text confirm_password_err"></span>
                             </div>
@@ -116,26 +116,26 @@
                         <div class="mb-3 row">
 
                             <div class="col-md-4">
-                                <label class="col-form-label" for="name">User Name <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="name">User Name(वापरकर्ता नाव) <span class="text-danger">*</span></label>
                                 <input class="form-control" name="name" type="text" placeholder="Enter User Name">
                                 <span class="text-danger error-text name_err"></span>
                             </div>
 
                             <div class="col-md-4">
-                                <label class="col-form-label" for="email">User Email <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="email">User Email(वापरकर्ता ईमेल) <span class="text-danger">*</span></label>
                                 <input class="form-control" name="email" type="email" placeholder="Enter User Email">
                                 <span class="text-danger error-text email_err"></span>
                             </div>
 
                             <div class="col-md-4">
-                                <label class="col-form-label" for="mobile">User Mobile <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="mobile">User Mobile(वापरकर्ता मोबाइल) <span class="text-danger">*</span></label>
                                 <input class="form-control" name="mobile" type="number" min="0" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"
                                     placeholder="Enter User Mobile">
                                 <span class="text-danger error-text mobile_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="gender">Select Gender <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="gender">Select Gender(लिंग निवडा) <span class="text-danger">*</span></label>
                                 <select class="form-control" id="gender" name="gender">
                                     <option value="">--Select Gender--</option>
                                     <option value="Male">Male</option>
@@ -145,13 +145,13 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="dob">User Date Of Birth <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="dob">User Date Of Birth(वापरकर्ता जन्मतारीख) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="dob" name="dob" type="date" placeholder="Enter Date of birth">
                                 <span class="text-danger error-text dob_err"></span>
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label" for="fire_station_id">Select Fire Station <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="fire_station_id">Select Fire Station(फायर स्टेशन निवडा) <span class="text-danger">*</span></label>
                                 <select class="form-control" id="fire_station_id" name="fire_station_id">
                                     <option value="">--Select Fire Station--</option>
                                     @foreach ($fire_stations as $list)
@@ -162,7 +162,7 @@
                             </div>
 
                             <div class="col-md-4 mt-3">
-                                <label class="col-form-label">Select User Type / Role <span class="text-danger">*</span></label>
+                                <label class="col-form-label">Select User Type / Role(वापरकर्ता प्रकार / भूमिका निवडा) <span class="text-danger">*</span></label>
                                 <select class="js-example-basic-single col-sm-12" name="role">
                                     <option value="">--Select Role--</option>
                                     @foreach ($roles as $role)
