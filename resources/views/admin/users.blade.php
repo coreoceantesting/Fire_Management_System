@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Users</x-slot>
-    <x-slot name="heading">Users</x-slot>
+    <x-slot name="heading">Users (वापरकर्ता)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
@@ -11,7 +11,7 @@
                 <form class="theme-form" name="addForm" id="addForm">
                     @csrf
                     <div class="card-header pb-0">
-                        <h4>Create User</h4>
+                        <h4>Create User (वापरकर्ता तयार करा)</h4>
                     </div>
                     <div class="card-body pt-0">
 
@@ -106,7 +106,7 @@
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h4 class="card-title">Edit User</h4>
+                        <h4 class="card-title">Edit User (वापरकर्ता संपादित करा)</h4>
                     </header>
 
                     <div class="card-body py-2">

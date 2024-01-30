@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Vehicle Details</x-slot>
-    <x-slot name="heading">Vehicle Details</x-slot>
+    <x-slot name="heading">Vehicle Details (वाहन तपशील)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

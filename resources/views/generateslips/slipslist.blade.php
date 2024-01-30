@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Generate Slip</x-slot>
-    <x-slot name="heading">Generate Slip</x-slot>
+    <x-slot name="heading">Generate Slip (स्लिप जनरेट करा)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

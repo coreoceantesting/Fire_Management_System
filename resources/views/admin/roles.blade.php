@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Roles</x-slot>
-    <x-slot name="heading">Roles</x-slot>
+    <x-slot name="heading">Roles (भूमिका)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
@@ -11,7 +11,7 @@
                 <form class="theme-form" name="addForm" id="addForm">
                     @csrf
                     <header class="card-header pb-0">
-                        <h4 class="card-title">Add Role</h4>
+                        <h4 class="card-title">Add Role (भूमिका जोडा)</h4>
                     </header>
                     <div class="card-body pt-0">
 
@@ -70,7 +70,7 @@
                 @csrf
                 <section class="card">
                     <header class="card-header">
-                        <h4 class="card-title">Edit Role</h4>
+                        <h4 class="card-title">Edit Role (भूमिका संपादित करा)</h4>
                     </header>
 
                     <div class="card-body py-2">

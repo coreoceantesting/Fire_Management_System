@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Taken Action List</x-slot>
-    <x-slot name="heading">Taken Action List</x-slot>
+    <x-slot name="heading">Taken Action List (केलेल्या कारवाईची यादी)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
@@ -109,7 +109,7 @@
                     <input type="hidden" name="slip_id" id="slip_id" value="">
                     <section class="card">
                         <header class="card-header">
-                            <h4 class="card-title">Additional Help</h4>
+                            <h4 class="card-title">Additional Help (अतिरिक्त मदत)</h4>
                         </header>
                         <div class="card-body py-2">
                             <!--Additinal Help Section -->

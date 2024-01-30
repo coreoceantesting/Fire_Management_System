@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Fire Stations</x-slot>
-    <x-slot name="heading">Fire Stations</x-slot>
+    <x-slot name="heading">Fire Stations (फायर स्टेशन)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

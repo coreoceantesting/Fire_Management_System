@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Generated Slip List</x-slot>
-    <x-slot name="heading">Generated Slip List</x-slot>
+    <x-slot name="heading">Generated Slip List (निर्माण झालेली स्लिप यादी)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

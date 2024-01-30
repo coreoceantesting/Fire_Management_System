@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Designations</x-slot>
-    <x-slot name="heading">Designations</x-slot>
+    <x-slot name="heading">Designations (पदनाम)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

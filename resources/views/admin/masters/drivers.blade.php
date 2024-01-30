@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Driver Details</x-slot>
-    <x-slot name="heading">Driver Details</x-slot>
+    <x-slot name="heading">Driver Details (ड्रायव्हर तपशील)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 

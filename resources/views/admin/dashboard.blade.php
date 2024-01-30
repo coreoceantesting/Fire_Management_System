@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Dashboard</x-slot>
-    <x-slot name="heading">Dashboard</x-slot>
+    <x-slot name="heading">Dashboard (डॅशबोर्ड) </x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
     <div class="row">
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="px-3">
-                                            <img src="assets/images/user-illustarator-2.png" class="img-fluid" alt="" />
+                                            <img src="" class="img-fluid" alt="" />
                                         </div>
                                     </div>
                                 </div>
