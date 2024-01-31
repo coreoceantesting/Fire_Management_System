@@ -26,7 +26,7 @@
                                             <option value="">---Select Status---</option>
                                             <option value="Pending" @if(request('status') == 'Pending') selected @endif>Pending</option>
                                             <option value="Action Form Submitted" @if(request('status') == 'Action Form Submitted') selected @endif>Action Form Submitted</option>
-                                            <option value="Occurrence Book Submitted" @if(request('status') == 'Occurrence Book Submitted') selected @endif>Occurrence Book Submitted</option>
+                                            <option value="Occurance Book Submitted" @if(request('status') == 'Occurance Book Submitted') selected @endif>Occurance Book Submitted</option>
                                             <option value="Vardi Ahval Submitted" @if(request('status') == 'Vardi Ahval Submitted') selected @endif>Vardi Ahval Submitted</option>
                                             <option value="Additional Help Submitted" @if(request('status') == 'Additional Help Submitted') selected @endif>Additional Help Submitted</option>
                                         </select>
