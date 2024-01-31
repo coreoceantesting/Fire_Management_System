@@ -115,18 +115,29 @@
                                     <button id="btnCancel" class="btn btn-danger" style="border-radius: inherit;display:none;">Cancel</button>
                                 </div>
                             </div>
-                            <form action="{{ route('filter') }}" method="GET" class="col-sm-9">
+                            <form action="{{ route('filter') }}" method="GET" class="row">
                                 @csrf
-                                <div class="row align-items-center">
-                                    <div class="col-sm-3 form-group">
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
                                         <label for="start-date">Start Date</label>
                                         <input required type="date" class="form-control" name="start_date" id="start-date" @if(request()->has('start_date')) value="{{ request('start_date') }}" @endif>
                                     </div>
-                                    <div class="col-sm-3 form-group">
+                                    <div class="col-md-3 form-group">
                                         <label for="end-date">End Date</label>
                                         <input required type="date" class="form-control" name="end_date" id="end-date" @if(request()->has('end_date')) value="{{ request('end_date') }}" @endif>
                                     </div>
-                                    <div class="col-sm-3" style="margin-top: 26px;">
+                                    <div class="col-md-3">
+                                        <label for="status" class="control-label">Status</label>
+                                        <select class="form-control" name="status">
+                                            <option value="">---Select Status---</option>
+                                            <option value="Pending" @if(request('status') == 'Pending') selected @endif>Pending</option>
+                                            <option value="Action Form Submitted" @if(request('status') == 'Action Form Submitted') selected @endif>Action Form Submitted</option>
+                                            <option value="Occurrence Book Submitted" @if(request('status') == 'Occurrence Book Submitted') selected @endif>Occurrence Book Submitted</option>
+                                            <option value="Vardi Ahval Submitted" @if(request('status') == 'Vardi Ahval Submitted') selected @endif>Vardi Ahval Submitted</option>
+                                            <option value="Additional Help Submitted" @if(request('status') == 'Additional Help Submitted') selected @endif>Additional Help Submitted</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3" style="margin-top: 43px;">
                                         <button type="submit" id="apply-filter" class="btn btn-primary">Apply Filter</button>
                                         <a class="btn btn-success" href="{{ route('slips_list') }}">Clear</a>
                                     </div>

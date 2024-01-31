@@ -73,7 +73,6 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('slips-list', [App\Http\Controllers\GenerateSlipsController::class, 'index'])->name('slips_list');
     Route::post('store-slip', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip'])->name('store_slip');
     Route::get('/download-slip-pdf/{slip_id}', [App\Http\Controllers\GenerateSlipsController::class, 'downloadSlipPdf'])->name('download-slip-pdf');
-    Route::get('/filter', [App\Http\Controllers\GenerateSlipsController::class, 'filter'])->name('filter');
 
     // new generated slips
     Route::get('new-generated-slips', [App\Http\Controllers\GenerateSlipsController::class, 'new_generated_slip'])->name('new_generated_slip');
@@ -98,6 +97,10 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('monthly-slips', [App\Http\Controllers\ReportController::class, 'monthly_list'])->name('monthly_list');
     Route::get('yearly-slips', [App\Http\Controllers\ReportController::class, 'yearly_list'])->name('yearly_list');
     Route::get('action-taken-slips', [App\Http\Controllers\ReportController::class, 'action_taken_list'])->name('action_taken_list');
+
+    // filters 
+    Route::get('/filter', [App\Http\Controllers\FiltersController::class, 'filter'])->name('filter');
+    Route::get('/new-generated-slips-filter', [App\Http\Controllers\FiltersController::class, 'new_generated_filter'])->name('new_generated_filter');
 
     
 });

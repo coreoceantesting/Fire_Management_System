@@ -76,24 +76,7 @@ class GenerateSlipsController extends Controller
             return $this->respondWithAjax($e, 'creating', 'Slip');
         }
     }
-
-    public function filter(Request $request)
-    {
-        // Your filtering logic here
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
-
-        $start_datetime = $start_date . ' 00:00:00';
-        $end_datetime = $end_date . ' 23:59:59';
-
-        $slip_list = DB::table('slips')
-            ->whereBetween('slip_date', [$start_datetime, $end_datetime])
-            ->latest()
-            ->get();
-
-        return view('generateslips.slipslist', compact('slip_list'));
-    }
-
+    
     public function new_generated_slip()
     {
         $slip_list = DB::table('slips')->where('slip_status','Pending')->latest()->get();
