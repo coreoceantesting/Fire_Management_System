@@ -118,7 +118,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="fire_station[]" class="control-label">Fire Station Name (फायर स्टेशनचे नाव) <span class="text-danger">*</span>:</label>
-                                            <select class="form-control" name="fire_station[]" required>
+                                            <select class="form-control fire-station" name="fire_station[]" required>
                                                 <option value="">--Select Fire Station--</option>
                                                 @foreach ($fire_station_list as $list)
                                                     <option value="{{ $list->fire_station_id }}">{{ $list->name }}</option>
@@ -131,13 +131,20 @@
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        {{-- <div class="col-md-4">
                                             <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span>:</label>
                                             <select class="form-control type-of-vehicle" name="type_of_vehicle[]" required>
                                                 <option value="">--Select Vehicle Type--</option>
                                                 @foreach ($vehicle_list as $list)
                                                     <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
                                                 @endforeach
+                                            </select>
+                                        </div> --}}
+
+                                        <div class="col-md-4">
+                                            <label for="type_of_vehicle[]" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span>:</label>
+                                            <select class="form-control type-of-vehicle" name="type_of_vehicle[]" required>
+                                                <option value="">--Select Vehicle Type--</option>
                                             </select>
                                         </div>
                                         
@@ -768,11 +775,33 @@
             });
         }
 
+        // fetch vehicle type from fire station
+        function changeVehicleType(container) {
+            container.find('.fire-station').on('change', function() {
+                var selectedFireStation = $(this).val();
+                var vehicleTypeDropdown = $(this).closest('.additional-help').find('.type-of-vehicle');
+
+                // Clear existing options
+                vehicleTypeDropdown.empty();
+
+                // Add default option
+                vehicleTypeDropdown.append('<option value="">--Select Vehicle Type--</option>');
+
+                // Filter and add options based on the selected Type Of Vehicle
+                @foreach($vehicle_list as $list)
+                    if ("{{ $list->fire_station_id }}" === selectedFireStation) {
+                        vehicleTypeDropdown.append('<option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>');
+                    }
+                @endforeach
+            });
+        }
+
         $('#addMore').on('click', function() {
             var newAdditionalHelp = additionalHelpTemplate.clone();
             $('#additional-help-container').append(newAdditionalHelp);
             // fetch vehicle no from vehicle type
             setupDynamicBehavior(newAdditionalHelp);
+            changeVehicleType(newAdditionalHelp);
         });
 
         $('#remove').on('click', function() {
@@ -864,6 +893,26 @@
 {{-- as per vehicle type select automatically vehicle number --}}
 <script>
     $(document).ready(function() {
+
+        // on change of fire station
+        $('.fire-station').on('change', function() {
+            var selectedFireStation = $(this).val();
+            var vehicleTypeDropdown = $(this).closest('.additional-help').find('.type-of-vehicle');
+
+            // Clear existing options
+            vehicleTypeDropdown.empty();
+
+            // Add default option
+            vehicleTypeDropdown.append('<option value="">--Select Vehicle Type--</option>');
+
+            // Filter and add options based on the selected Type Of Vehicle
+            @foreach($vehicle_list as $list)
+                if ("{{ $list->fire_station_id }}" === selectedFireStation) {
+                    vehicleTypeDropdown.append('<option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>');
+                }
+            @endforeach
+        });
+
         // On change of Type Of Vehicle dropdown
         $('.type-of-vehicle').on('change', function() {
             var selectedType = $(this).val();
