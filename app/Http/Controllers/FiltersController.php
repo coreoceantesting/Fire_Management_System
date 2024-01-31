@@ -90,6 +90,8 @@ class FiltersController extends Controller
 
         if ($status == '0') {
             $slipQuery->where('is_vardi_ahaval_submitted','0');
+        }else{
+            $slipQuery->where('is_vardi_ahaval_submitted','1');
         }
 
         $slip_list = $slipQuery->where('is_occurance_book_submitted','1')->latest()->get();

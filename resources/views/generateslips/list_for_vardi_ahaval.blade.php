@@ -403,6 +403,7 @@
                                         <label for="status" class="control-label">Status</label>
                                         <select class="form-control" name="status">
                                             <option value="">---Select Status---</option>
+                                            <option value="1" @if(request('status') == '1') selected @endif>Vardi Ahaval Submitted</option>
                                             <option value="0" @if(request('status') == '0') selected @endif>Vardi Ahaval Not Submitted</option>
                                         </select>
                                     </div>
