@@ -222,7 +222,12 @@
                 if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
-                            window.location.href = data.pdf_url;
+                            if (action) {
+                                // Open the URL in a new tab
+                                window.open(data.pdf_url, '_blank');
+                                document.getElementById('addForm').reset();
+                            }
+                            // window.location.href = data.pdf_url;
                             // window.location.href = '{{ route('slips_list') }}';
                         });
                 else
