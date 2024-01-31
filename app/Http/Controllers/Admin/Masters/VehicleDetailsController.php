@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Masters\StoreVehicleDetailsRequest;
 use App\Http\Requests\Admin\Masters\UpdateVehicleDetailsRequest;
 use App\Models\VehicleDetail;
+use App\Models\FireStation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,13 @@ class VehicleDetailsController extends Controller
      */
     public function index()
     {
-        $vehicle_list = VehicleDetail::where('is_deleted','0')->latest()->get();
+        $vehicle_list = VehicleDetail::where('vehicle_details.is_deleted','0')
+        ->join('fire_stations', 'vehicle_details.fire_station_id', '=', 'fire_stations.fire_station_id')
+        ->latest()
+        ->get(['fire_stations.name','vehicle_details.*']);
+        $fire_station_list = FireStation::where('is_deleted','0')->where('fire_station_is_active','0')->latest()->get();
 
-        return view('admin.masters.vehicle_details')->with(['vehicle_list'=> $vehicle_list]);
+        return view('admin.masters.vehicle_details')->with(['vehicle_list'=> $vehicle_list,'fire_station_list' => $fire_station_list]);
     }
 
     /**
@@ -91,6 +96,7 @@ class VehicleDetailsController extends Controller
             $input = $request->validated();
             $input['vehicle_number'] = $input['vehicle_number'];
             $input['vehicle_type'] = $input['vehicle_type'];
+            $input['fire_station_id'] = $input['fire_station_id'];
             $input['updated_by'] = Auth::user()->id;
             $input['updated_at'] = date('Y-m-d H:i:s');
             $vehicle_detail->update( Arr::only( $input, VehicleDetail::getFillables() ) );

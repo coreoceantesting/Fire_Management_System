@@ -24,6 +24,17 @@
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label for="fire_station_id" class="col-form-label">Fire Station Name (फायर स्टेशनचे नाव) <span class="text-danger">*</span>:</label>
+                                    <select class="form-control" name="fire_station_id">
+                                        <option value="">--Select Fire Station--</option>
+                                        @foreach ($fire_station_list as $list)
+                                            <option value="{{ $list->fire_station_id }}">{{ $list->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_id_err"></span>
+                                </div>
                                 
                                 {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="role"> Select Vehicle Type <span class="text-danger">*</span></label>
@@ -76,6 +87,17 @@
                                     <input class="form-control" id="vehicle_number" name="vehicle_number" type="text" placeholder="Enter Vehicle Number">
                                     <span class="text-danger error-text vehicle_number_err"></span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label for="fire_station_id" class="col-form-label">Fire Station Name (फायर स्टेशनचे नाव) <span class="text-danger">*</span>:</label>
+                                    <select class="form-control" name="fire_station_id" id="fire_station_id">
+                                        <option value="">--Select Fire Station--</option>
+                                        @foreach ($fire_station_list as $list)
+                                            <option value="{{ $list->fire_station_id }}">{{ $list->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_id_err"></span>
+                                </div>
                                 
                                 {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_type"> Select Vehicle Type <span class="text-danger">*</span></label>
@@ -100,7 +122,7 @@
             </div>
         </div>
 
-
+        {{-- listing --}}
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -125,6 +147,7 @@
                                         <th>Sr.No</th>
                                         <th>Name</th>
                                         <th>Vehicle Name</th>
+                                        <th>Fire Station Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -134,6 +157,7 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->vehicle_number }}</td>
                                             <td>{{ $list->vehicle_type }}</td>
+                                            <td>{{ $list->name }}</td>
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="edit"></i></button>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Delete Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="trash-2"></i> </button>
@@ -214,6 +238,7 @@
                     $("#editForm input[name='edit_model_id']").val(data.vehicle.vehicle_id);
                     $("#editForm input[name='vehicle_number']").val(data.vehicle.vehicle_number);
                     $("#editForm input[name='vehicle_type']").val(data.vehicle.vehicle_type);
+                    $("#editForm select[name='fire_station_id']").val(data.vehicle.fire_station_id);
                 }
                 else
                 {

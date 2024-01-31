@@ -24,6 +24,20 @@ class StoreVehicleDetailsRequest extends FormRequest
         return [
             'vehicle_number' => 'required',
             'vehicle_type' => 'required',
+            'fire_station_id' =>'required',
+        ];
+    }
+
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'fire_station_id.required' => 'The fire station is required.',
         ];
     }
 }
