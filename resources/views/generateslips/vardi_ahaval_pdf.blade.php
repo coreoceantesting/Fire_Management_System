@@ -313,7 +313,7 @@
                           <th scope="col">वाहन क्रमांक</th>
                           <th scope="col">वाहन सुटण्याची तारीख वेळ</th>
                           <th scope="col">वाहनाच्या आगमनाची तारीख वेळ</th>
-                          <th scope="col">वाहन परतीची तारीख वेळ</th>
+                          <th scope="col">पोहचण्याची तारीख वेळ</th>
                           <th scope="col">केंद्रावर परतण्याची वेळ</th>
                           <th scope="col">एकूण कि.मी</th>
                           <th scope="col">पंपिंग तास</th>
