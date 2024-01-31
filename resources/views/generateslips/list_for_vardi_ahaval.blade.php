@@ -388,10 +388,30 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <div class="col-sm-3">
-                                <div class="btn-group">
+                            <form action="{{ route('vardi_ahaval_filter') }}" method="GET" class="row">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label for="start-date">Start Date</label>
+                                        <input required type="date" class="form-control" name="start_date" id="start-date" @if(request()->has('start_date')) value="{{ request('start_date') }}" @endif>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <label for="end-date">End Date</label>
+                                        <input required type="date" class="form-control" name="end_date" id="end-date" @if(request()->has('end_date')) value="{{ request('end_date') }}" @endif>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="status" class="control-label">Status</label>
+                                        <select class="form-control" name="status">
+                                            <option value="">---Select Status---</option>
+                                            <option value="0" @if(request('status') == '0') selected @endif>Vardi Ahaval Not Submitted</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3" style="margin-top: 43px;">
+                                        <button type="submit" id="apply-filter" class="btn btn-primary">Apply Filter</button>
+                                        <a class="btn btn-success" href="{{ route('vardi_ahaval_list') }}">Clear</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     @php
