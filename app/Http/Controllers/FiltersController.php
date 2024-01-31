@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class FiltersController extends Controller
 {
@@ -100,6 +101,48 @@ class FiltersController extends Controller
         $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
 
         return view('generateslips.list_for_vardi_ahaval', compact('slip_list','designation_list','vehicle_list','fire_station_list'));
+    }
+
+    public function yearly_slips_filter(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $status = $request->input('status');
+
+        $start_datetime = $start_date . ' 00:00:00';
+        $end_datetime = $end_date . ' 23:59:59';
+
+        $slipQuery = DB::table('slips')
+            ->whereBetween('slip_date', [$start_datetime, $end_datetime]);
+
+        if ($status) {
+            $slipQuery->where('slip_status', $status);
+        }
+
+        $yearlySlipList = $slipQuery->whereYear('created_at', now()->year)->latest()->get();
+
+        return view('slipslists.yearlyList', compact('yearlySlipList'));
+    }
+
+    public function action_taken_report_filter(Request $request)
+    {
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $status = $request->input('status');
+
+        $start_datetime = $start_date . ' 00:00:00';
+        $end_datetime = $end_date . ' 23:59:59';
+
+        $slipQuery = DB::table('slips')
+            ->whereBetween('slip_date', [$start_datetime, $end_datetime]);
+
+        if ($status) {
+            $slipQuery->where('slip_status', $status);
+        }
+
+        $actionTakenSlipList = $slipQuery->where('slip_status', "Action Form Submitted")->latest()->get();
+
+        return view('slipslists.actionTakenList', compact('actionTakenSlipList'));
     }
 
 }

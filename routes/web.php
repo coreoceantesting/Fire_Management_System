@@ -103,6 +103,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/new-generated-slips-filter', [App\Http\Controllers\FiltersController::class, 'new_generated_filter'])->name('new_generated_filter');
     Route::get('/action-taken-slips-filter', [App\Http\Controllers\FiltersController::class, 'action_taken_slips_filter'])->name('action_taken_slips_filter');
     Route::get('/vardi-ahaval-filter', [App\Http\Controllers\FiltersController::class, 'vardi_ahaval_filter'])->name('vardi_ahaval_filter');
+    Route::get('/yearly-slips-filter', [App\Http\Controllers\FiltersController::class, 'yearly_slips_filter'])->name('yearly_slips_filter');
+    Route::get('/action-taken-report-filter', [App\Http\Controllers\FiltersController::class, 'action_taken_report_filter'])->name('action_taken_report_filter');
 
     
 });
