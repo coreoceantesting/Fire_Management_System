@@ -41,11 +41,11 @@
 
                 @can(['masters.allmasters'])
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutsone" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-layout-3-line"></i>
                         <span data-key="t-layouts">Masters</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayoutone">
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('firestations.index') }}" class="nav-link" data-key="t-horizontal">Fire Stations(अग्निशमन केंद्रे)</a>
@@ -67,11 +67,11 @@
 
                 @canany(['users.view', 'roles.view'])
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutstwo" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-user-settings-line"></i>
                         <span data-key="t-layouts">User Master</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayouttwo">
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             @can('users.view')
                                 <li class="nav-item">
@@ -89,11 +89,11 @@
                 @endcan
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutsthree" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-list-check"></i>
                         <span data-key="t-layouts">Slips</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayoutthree">
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('slips_list') }}" class="nav-link" data-key="t-horizontal">New Generate Slip(नवीन निर्माण स्लिप)</a>
@@ -108,11 +108,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutsfour" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-book-line"></i>
                         <span data-key="t-layouts">Occurance Book</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayoutfour">
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('action_taken_slips_list') }}" class="nav-link" data-key="t-horizontal">Taken Action List(केलेल्या कारवाईची यादी)</a>
@@ -134,11 +134,15 @@
                 @endcan
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarLayoutsfive" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                    
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarLayouts" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i class="ri-file-excel-2-line"></i>
                         <span data-key="t-layouts">Reports</span>
                     </a>
-                    <div class="collapse menu-dropdown" id="sidebarLayoutfive">
+                    <div class="collapse menu-dropdown" id="sidebarLayouts">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a href="{{ route('todays_list') }}" class="nav-link" data-key="t-horizontal">Today's Slips (आजच्या स्लिप्स)</a>
