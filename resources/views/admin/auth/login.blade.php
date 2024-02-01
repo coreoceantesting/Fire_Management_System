@@ -74,7 +74,7 @@
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="username" class="form-label">Email (ई-मेल)</label>
-                                                    <input type="email" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    <input type="email" class="form-control" name="username" id="username" placeholder="Enter email">
                                                     <span class="text-danger error-text username_err"></span>
                                                 </div>
 
