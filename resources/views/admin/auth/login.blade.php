@@ -73,8 +73,8 @@
                                             <form id="loginForm">
                                                 @csrf
                                                 <div class="mb-3">
-                                                    <label for="username" class="form-label">Username (वापरकर्तानाव)</label>
-                                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    <label for="username" class="form-label">Email (ई-मेल)</label>
+                                                    <input type="email" class="form-control" name="username" id="username" placeholder="Enter username">
                                                     <span class="text-danger error-text username_err"></span>
                                                 </div>
 
