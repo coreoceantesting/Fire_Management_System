@@ -95,7 +95,7 @@ class DriversDetailsController extends Controller
             $input['driver_mob_no'] = $input['driver_mob_no'];
             $input['driver_gender'] = $input['driver_gender'];
             $input['driver_job_status'] = $input['driver_job_status'];
-            $input['vehicle_id'] = $input['vehicle_id'];
+            // $input['vehicle_id'] = $input['vehicle_id'];
             $input['updated_by'] = Auth::user()->id;
             $input['updated_at'] = date('Y-m-d H:i:s');
             $driver_detail->update( Arr::only( $input, DriverDetail::getFillables() ) );

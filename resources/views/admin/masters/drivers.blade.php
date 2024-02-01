@@ -18,7 +18,7 @@
                                     <input class="form-control" id="driver_name" name="driver_name" type="text" placeholder="Enter Driver Name">
                                     <span class="text-danger error-text driver_name_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_id"> Select Vehicle(वाहन निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_id" name="vehicle_id">
                                         <option value="">--Select Vehicle--</option>
@@ -27,7 +27,7 @@
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text vehicle_id_err"></span>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="driver_mob_no">Driver Mobile No(चालकाचा मोबाईल क्र) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_mob_no" name="driver_mob_no" type="text" placeholder="Enter Driver Mobile Number">
@@ -84,7 +84,7 @@
                                     <input class="form-control" id="driver_name" name="driver_name" type="text" placeholder="Enter Driver Name">
                                     <span class="text-danger error-text driver_name_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="vehicle_id"> Select Vehicle(वाहन निवडा) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="vehicle_id" name="vehicle_id">
                                         <option value="">--Select Vehicle--</option>
@@ -93,7 +93,7 @@
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text vehicle_id_err"></span>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="driver_mob_no">Driver Mobile No(चालकाचा मोबाईल क्र) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="driver_mob_no" name="driver_mob_no" type="text" placeholder="Enter Driver Mobile Number">
@@ -244,7 +244,7 @@
                 {
                     $("#editForm input[name='edit_model_id']").val(data.driver_detail.driver_id);
                     $("#editForm input[name='driver_name']").val(data.driver_detail.driver_name);
-                    $("#editForm select[name='vehicle_id']").val(data.driver_detail.vehicle_id);
+                    // $("#editForm select[name='vehicle_id']").val(data.driver_detail.vehicle_id);
                     $("#editForm select[name='driver_gender']").val(data.driver_detail.driver_gender);
                     $("#editForm select[name='driver_job_status']").val(data.driver_detail.driver_job_status);
                     $("#editForm input[name='driver_mob_no']").val(data.driver_detail.driver_mob_no);
