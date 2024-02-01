@@ -115,17 +115,19 @@
                             <div class="form-group row">
                                 <div class="col-md-4">
                                     <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" id="call_time" name="call_time" required>
+                                    <input class="form-control" type="datetime-local" id="call_time" name="call_time">
+                                    <span class="text-danger error-text call_time_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>:</label>
-                                    <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" required>
+                                    <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" >
                                         <option value="">--Select Type Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
                                             <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
                                         @endforeach
                                     </select>
+                                    <span class="text-danger error-text type_of_vehicle_err"></span>
                                 </div>
 
                                 {{-- <div class="col-md-4">
@@ -140,39 +142,46 @@
 
                                 <div class="col-md-4">
                                     <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" required>
+                                    <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" >
                                         <option value="">--Select Number Of Vehicle--</option>
                                     </select>
+                                    <span class="text-danger error-text number_of_vehicle_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_departure_time" required>
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_time" id="vehicle_departure_time" >
+                                    <span class="text-danger error-text vehicle_departure_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_time" required>
+                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_time" id="vehicle_arrival_time">
+                                    <span class="text-danger error-text vehicle_arrival_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" required>
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" id="vehicle_departure_from_scene_time">
+                                    <span class="text-danger error-text vehicle_departure_from_scene_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_at_center_time" required>
+                                    <input class="form-control" type="datetime-local" id="vehicle_arrival_at_center_time" name="vehicle_arrival_at_center_time">
+                                    <span class="text-danger error-text vehicle_arrival_at_center_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="text" name="total_distance" placeholder="Total Distance In KM" required>
+                                    <input class="form-control" type="text" name="total_distance" id="total_distance" placeholder="Total Distance In KM">
+                                    <span class="text-danger error-text total_distance_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours" required>
+                                    <input class="form-control" type="text" placeholder="Enter Pumping hours" id="pumping_hours" name="pumping_hours" >
+                                    <span class="text-danger error-text pumping_hours_err"></span>
                                 </div>
 
                             </div>
@@ -181,16 +190,18 @@
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">
                                     <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="text" name="worker_name[]" required>
+                                    <input class="form-control" type="text" id="worker_name[]" name="worker_name[]" required>
+                                    <span class="text-danger error-text worker_name_err"></span>
                     
                                     <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम) <span class="text-danger">*</span></label>:</label>
-                                    <select class="form-control" name="worker_designation[]" required>
+                                    <select class="form-control" id="worker_designation[]" name="worker_designation[]" required>
                                         <!-- Populate dropdown options from master data -->
                                         <option value="">--Select Designation--</option>
                                         @foreach ($designation_list as $list)
                                             <option value="{{ $list->designation_id }}">{{ $list->designation_name }}</option>
                                         @endforeach
                                     </select>
+                                    <span class="text-danger error-text worker_designation_err"></span>
                                 </div>
                             </div>
                             <br>
@@ -616,6 +627,9 @@
             // Prevent the default form submission
             event.preventDefault();
 
+            // Reset previous errors
+            resetErrors();
+
             // Serialize the form data
             var formData = $(this).serialize();
 
@@ -625,16 +639,22 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
-                    if (!data.error2)
-                    swal("Successful!", data.success, "success")
-                        .then((action) => {
-                            window.location.href = '{{ route('new_generated_slip') }}';
-                        });
-                else
-                    swal("Error!", data.error2, "error");
-
-
+                    if (!data.error2) {
+                        if (data.errors) {
+                            // Display validation errors
+                            $.each(data.errors, function(field, messages) {
+                                $('.' + field + '_err').text(messages); // Display all messages if there are multiple
+                                $("[name='"+field+"']").addClass('is-invalid');
+                            });
+                        } else if (data.success) {
+                            swal("Successful!", data.success, "success")
+                                .then((action) => {
+                                    window.location.href = '{{ route('new_generated_slip') }}';
+                                });
+                        }
+                    } else {
+                        swal("Error!", data.error2, "error");
+                    }
                 },
                 error: function(error) {
                     // Handle error response

@@ -9,6 +9,7 @@ use App\Http\Requests\GenerateSlipsRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Mpdf\Mpdf;
 
 class GenerateSlipsController extends Controller
@@ -97,41 +98,59 @@ class GenerateSlipsController extends Controller
     // store slip action form
     public function store_slip_action_form(Request $request)
     {
-        // Validate the request data
-
-        // Store data in slip_action_forms table
-        $slipActionForm = DB::table('slip_action_form')->insertGetId([
-            'slip_id' => $request->input('slip_id'),
-            'call_time' => $request->input('call_time'),
-            'center_name' => "पनवेल",
-            'type_of_vehicle' => $request->input('type_of_vehicle'),
-            'number_of_vehicle' => $request->input('number_of_vehicle'),
-            'vehicle_arrival_time' => $request->input('vehicle_arrival_time'),
-            'vehicle_departure_from_scene_time' => $request->input('vehicle_departure_from_scene_time'),
-            'vehicle_arrival_at_center_time' => $request->input('vehicle_arrival_at_center_time'),
-            'total_distance' => $request->input('total_distance'),
-            'pumping_hours' => $request->input('pumping_hours'),
-            'vehicle_departure_time' => $request->input('vehicle_departure_time'),
-            'created_by' => Auth::user()->id,
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
-
-        // Store worker details in on_field_worker_details table
-        foreach ($request->input('worker_name') as $key => $workerName) {
-            DB::table('on_field_worker_details')->insert([
-                'slip_action_form_id' => $slipActionForm,
-                'worker_name' => $workerName,
-                'worker_designation' => $request->input('worker_designation')[$key],
-                'created_by' => Auth::user()->id,
-                'created_at' => date('Y-m-d H:i:s'),
+        try {
+            // Validate the request data
+            $request->validate([
+                'call_time' => 'required',
+                'type_of_vehicle' => 'required',
+                'number_of_vehicle' => 'required',
+                'vehicle_arrival_time' => 'required',
+                'vehicle_departure_from_scene_time' => 'required',
+                'vehicle_arrival_at_center_time' => 'required',
+                'total_distance' => 'required',
+                'pumping_hours' => 'required',
+                'vehicle_departure_time' => 'required',
+                'worker_name.*' => 'required',
+                'worker_designation.*' => 'required',
             ]);
-        }
-        
-        DB::table('slips')->where('slip_id',$request->input('slip_id'))->update([
-            'slip_status' => 'Action Form Submitted',
-        ]);
 
-        return response()->json(['success'=> 'Action Form Submitted successfully!']);
+            // Store data in slip_action_forms table
+            $slipActionForm = DB::table('slip_action_form')->insertGetId([
+                'slip_id' => $request->input('slip_id'),
+                'call_time' => $request->input('call_time'),
+                'center_name' => "पनवेल",
+                'type_of_vehicle' => $request->input('type_of_vehicle'),
+                'number_of_vehicle' => $request->input('number_of_vehicle'),
+                'vehicle_arrival_time' => $request->input('vehicle_arrival_time'),
+                'vehicle_departure_from_scene_time' => $request->input('vehicle_departure_from_scene_time'),
+                'vehicle_arrival_at_center_time' => $request->input('vehicle_arrival_at_center_time'),
+                'total_distance' => $request->input('total_distance'),
+                'pumping_hours' => $request->input('pumping_hours'),
+                'vehicle_departure_time' => $request->input('vehicle_departure_time'),
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+            ]);
+
+            // Store worker details in on_field_worker_details table
+            foreach ($request->input('worker_name') as $key => $workerName) {
+                DB::table('on_field_worker_details')->insert([
+                    'slip_action_form_id' => $slipActionForm,
+                    'worker_name' => $workerName,
+                    'worker_designation' => $request->input('worker_designation')[$key],
+                    'created_by' => Auth::user()->id,
+                    'created_at' => now(),
+                ]);
+            }
+            
+            DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
+                'slip_status' => 'Action Form Submitted',
+            ]);
+
+            return response()->json(['success' => 'Action Form Submitted successfully!']);
+        } catch (ValidationException $e) {
+            // If validation fails, return validation errors
+            return response()->json(['errors' => $e->errors()]);
+        }
     }
 
 
