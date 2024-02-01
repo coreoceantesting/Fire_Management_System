@@ -201,7 +201,7 @@
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            <b>Vardi Ahaval(वरदी अहवाल)</b>
+                                            <b>Vardi Ahaval(वर्दी अहवाल)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$vardiAhavalSlipCount}}">{{$vardiAhavalSlipCount}}</span>

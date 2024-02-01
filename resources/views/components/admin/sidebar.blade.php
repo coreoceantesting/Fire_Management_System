@@ -161,7 +161,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('vardi_ahaval_list') }}" class="nav-link" data-key="t-horizontal">Vardi Ahaval(वरदी अहवाल)</a>
+                                <a href="{{ route('vardi_ahaval_list') }}" class="nav-link" data-key="t-horizontal">Vardi Ahaval(वर्दी अहवाल)</a>
                             </li>
 
                         </ul>
