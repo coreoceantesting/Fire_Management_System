@@ -176,12 +176,12 @@
                                         </div>
 
                                         <div class="col-md-4">
-                                            <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन येण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
+                                            <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_arrival_datetime[]" required>
                                         </div>
     
                                         <div class="col-md-4">                                            
-                                            <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ)<span class="text-danger">*</span>:</label>
+                                            <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ)<span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
 
@@ -241,7 +241,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="description">Description<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="description" name="description" type="text" placeholder="Enter Description" required>
+                                    {{-- <input class="form-control" id="description" name="description" type="text" placeholder="Enter Description" required> --}}
+                                    <textarea class="form-control" name="description" id="description" cols="30" rows="5" placeholder="Enter Description" required></textarea>
                                     <span class="text-danger error-text description_err"></span>
                                 </div>
                                 <div class="col-md-4">

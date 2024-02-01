@@ -1,6 +1,6 @@
 <x-admin.layout>
     <x-slot name="title">Vardi Ahaval List</x-slot>
-    <x-slot name="heading">Vardi Ahaval List (वर्दी अव्हाल यादी)</x-slot>
+    <x-slot name="heading">Vardi Ahaval List (वर्दी अहवाल यादी)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
         {{-- Additional Help Form --}}

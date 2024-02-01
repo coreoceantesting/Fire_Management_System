@@ -4,7 +4,7 @@
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
     <div class="row">
-        <div class="col-xxl-5">
+        <div class="col-xxl-12">
             <div class="d-flex flex-column h-100">
                 <div class="row h-100">
                     <div class="col-12">
@@ -56,11 +56,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card card-animate" id="todaySlipsCard">
-                            <div class="card-body" style="background-color: lavender">
+                            <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            Today's Slips (आजच्या स्लिप्स)
+                                            <b>Today's Slips (आजच्या स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$todaysSlipCount}}">{{$todaysSlipCount}}</span>
@@ -90,11 +90,11 @@
 
                     <div class="col-md-6">
                         <div class="card card-animate" id="monthlySlipsCard">
-                            <div class="card-body" style="background-color: lavender">
+                            <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            Montly Slips (मासिक स्लिप्स)
+                                           <b> Montly Slips (मासिक स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$monthlySlipCount}}">{{$monthlySlipCount}}</span>
@@ -127,11 +127,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card card-animate" id="yearlySlipsCard">
-                            <div class="card-body" style="background-color: lavender">
+                            <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            Yearly Slips (वार्षिक स्लिप्स)
+                                            <b>Yearly Slips (वार्षिक स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$yearlySlipCount}}">{{$yearlySlipCount}}</span>
@@ -161,12 +161,12 @@
                     <!-- end col-->
 
                     <div class="col-md-6">
-                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: lavender">
+                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: skyblue">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            Action Taken Slips(कारवाई केलेल्या स्लिप्स)
+                                            <b>Action Taken Slips(कारवाई केलेल्या स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$actionTakenSlipCount}}">{{$actionTakenSlipCount}}</span>
@@ -197,11 +197,11 @@
 
                     <div class="col-md-6">
                         <div class="card card-animate" id="vardiahavalSlipsCard">
-                            <div class="card-body" style="background-color: lavender">
+                            <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
-                                            Vardi Ahaval(वरदी अहवाल)
+                                            <b>Vardi Ahaval(वरदी अहवाल)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
                                             <span class="counter-value text-primary" data-target="{{$vardiAhavalSlipCount}}">{{$vardiAhavalSlipCount}}</span>
@@ -234,7 +234,7 @@
             </div>
         </div>
 
-        <div class="col-xxl-7">
+        <div class="col-xxl-12">
             <div class="row h-100">
                 <div class="col-xl-6">
                     <div class="card card-height-100" style="display: none">
