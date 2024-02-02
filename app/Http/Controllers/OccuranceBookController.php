@@ -9,6 +9,7 @@ use App\Http\Requests\GenerateSlipsRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Mpdf\Mpdf;
 
 class OccuranceBookController extends Controller
@@ -173,6 +174,8 @@ class OccuranceBookController extends Controller
 
     public function store_vardi_ahaval(Request $request)
     {
+        try 
+        {
             $request->validate([
                 'vardi_name' => 'required',
                 'vardi_contact_no' => 'required',
@@ -303,6 +306,10 @@ class OccuranceBookController extends Controller
             $pdf->Output($pdfFilePath, 'F');
 
             return response()->json(['success' => 'Vardi Ahawal Submitted successfully!']);
+
+        }catch(ValidationException $e){
+            return response()->json(['errors' => $e->errors()]);
+        }
     }
 
     public function vardi_ahaval_pdf($slip_id)

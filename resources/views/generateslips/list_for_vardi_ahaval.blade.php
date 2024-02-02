@@ -149,37 +149,37 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_place">Vardi Location ( वर्दीचे ठिकाण ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_place" name="vardi_place" type="text" placeholder="Enter Vardi Location" required>
+                                    <input class="form-control" id="vardi_place" name="vardi_place" type="text" placeholder="Enter Vardi Location">
                                     <span class="text-danger error-text vardi_place_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="owner_name">Owner's Name ( मालकाचे नाव ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="owner_name" name="owner_name" type="text" placeholder="Enter Owner's Name" required>
-                                    <span class="text-danger error-text vardi_place_err"></span>
+                                    <input class="form-control" id="owner_name" name="owner_name" type="text" placeholder="Enter Owner's Name">
+                                    <span class="text-danger error-text owner_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vaparkarta_name">Name Of Vaparkarta ( वापर करणाऱयांचे नाव  ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name" required>
+                                    <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name">
                                     <span class="text-danger error-text vaparkarta_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="incident_time">Incident Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="incident_time" name="incident_time" type="datetime-local" required>
+                                    <input class="form-control" id="incident_time" name="incident_time" type="datetime-local">
                                     <span class="text-danger error-text incident_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="first_vehicle_departing_date_time">Timing Of The First Vehicle Departing On Verdi ( वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ   ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="first_vehicle_departing_date_time" name="first_vehicle_departing_date_time" type="datetime-local" required>
+                                    <input class="form-control" id="first_vehicle_departing_date_time" name="first_vehicle_departing_date_time" type="datetime-local">
                                     <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="time_of_arrival_at_the_scene">Time Of Arrival At The Scene ( घटनास्थळी पोह्चल्याची वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="datetime-local" required>
+                                    <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="datetime-local">
                                     <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="time_of_arrival_at_the_scene">Distance Of Incident Site From Fire Station ( अग्निशमन केंद्रापासून घटनास्तळाचे अंतर ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="distance" name="distance" type="number" placeholder="Distance Of Incident Site From Fire Station In KM" required>
+                                    <input class="form-control" id="distance" name="distance" type="number" placeholder="Distance Of Incident Site From Fire Station In KM">
                                     <span class="text-danger error-text distance_err"></span>
                                 </div>
                             </div>
@@ -197,12 +197,12 @@
                             <div class="mb-3 row">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="property_description">Property Description Of The Fire Location (आग लागलेल्या ठिकाणच्या मालमतेचे वर्णन ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location" required>
+                                    <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location">
                                     <span class="text-danger error-text property_description_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="type_of_fire">Type of fire ( आगीचा प्रकार ) <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="type_of_fire" id="type_of_fire" required>
+                                    <select class="form-control" name="type_of_fire" id="type_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
                                         <option value="Low">Low</option>
                                         <option value="Medium">Medium</option>
@@ -212,64 +212,64 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="limit_of_fire">Limit of fire ( आगीची मर्यदा ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire" required>
+                                    <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire">
                                     <span class="text-danger error-text limit_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="possible_cause_of_fire">Possible Cause Of Fire ( आगीचं शक्य कारण ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire" required>
+                                    <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire">
                                     <span class="text-danger error-text possible_cause_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="description_of_damage">Description Of Damage ( नुकसानीचे वर्णन ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage" required>
+                                    <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage">
                                     <span class="text-danger error-text description_of_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="property_damage">Estimated Property Damage ( अंदाजित मालमत्तेचे नुकसान ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="property_damage" name="property_damage" type="text" placeholder="Enter Estimated property damage" required>
+                                    <input class="form-control" id="property_damage" name="property_damage" type="text" placeholder="Enter Estimated property damage">
                                     <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                     <span class="text-danger error-text property_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="area_damage">Estimated Surrounding Area Damage ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="area_damage" name="area_damage" type="text" placeholder="Enter Estimated property damage" required>
+                                    <input class="form-control" id="area_damage" name="area_damage" type="text" placeholder="Enter Estimated property damage">
                                     <span class="text-danger error-text area_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss" required>
+                                    <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss">
                                     <span class="text-danger error-text space_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="property_loss">Estimated loss of property ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property" required>
+                                    <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property">
                                     <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                     <span class="text-danger error-text property_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( अखेरच्या क्षणी घटनास्तळी असलेल्या अधिकारीचें नाव ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Name of the officer present at the scene at the last moment" required>
+                                    <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Name of the officer present at the scene at the last moment">
                                     <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="date_of_departure_from_scene">Date of departure from the scene ( घटनास्तळावरून निघाल्याची तारीख ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="date_of_departure_from_scene" name="date_of_departure_from_scene" type="date" placeholder="Enter Date of departure from the scene" required>
+                                    <input class="form-control" id="date_of_departure_from_scene" name="date_of_departure_from_scene" type="date" placeholder="Enter Date of departure from the scene">
                                     <span class="text-danger error-text date_of_departure_from_scene_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="time_of_departure_from_scene">Time to leave the scene ( घटनास्तळावरून निघाल्याची वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="time_of_departure_from_scene" name="time_of_departure_from_scene" type="time" placeholder="Time to leave the scene" required>
+                                    <input class="form-control" id="time_of_departure_from_scene" name="time_of_departure_from_scene" type="time" placeholder="Time to leave the scene">
                                     <span class="text-danger error-text time_of_departure_from_scene_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="total_time">Total Time ( एकुण वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_time" name="total_time" type="text" placeholder="Enter Total Time" required>
+                                    <input class="form-control" id="total_time" name="total_time" type="text" placeholder="Enter Total Time">
                                     <span class="text-danger error-text total_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="total_hour">Total Hours ( एकुण तास ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_hour" name="total_hour" type="text" placeholder="Enter Total Hour" required>
+                                    <input class="form-control" id="total_hour" name="total_hour" type="text" placeholder="Enter Total Hour">
                                     <span class="text-danger error-text total_hour_err"></span>
                                 </div>
                             </div>
@@ -289,12 +289,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_one">Male Number(पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_one" name="male_one" type="text" placeholder="Enter Male Numbers" required>
+                                    <input class="form-control" id="male_one" name="male_one" type="text" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_one_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_one">Woman Number(स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_one" name="woman_one" type="text" placeholder="Enter Woman Numbers" required>
+                                    <input class="form-control" id="woman_one" name="woman_one" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_one_err"></span>
                                 </div>
                             </div>
@@ -304,12 +304,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_two">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_two" name="male_two" type="text" placeholder="Enter Male Numbers" required>
+                                    <input class="form-control" id="male_two" name="male_two" type="text" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_two_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_two">Woman Number (स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_two" name="woman_two" type="text" placeholder="Enter Woman Numbers" required>
+                                    <input class="form-control" id="woman_two" name="woman_two" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_two_err"></span>
                                 </div>
                             </div>
@@ -319,12 +319,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_three">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_three" name="male_three" type="text" placeholder="Enter Male Numbers" required>
+                                    <input class="form-control" id="male_three" name="male_three" type="text" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_three_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_three">Woman Number (स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_three" name="woman_three" type="text" placeholder="Enter Woman Numbers" required>
+                                    <input class="form-control" id="woman_three" name="woman_three" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_three_err"></span>
                                 </div>
                             </div>
@@ -344,12 +344,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="deceased_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="deceased_male" name="deceased_male" type="text" placeholder="Enter Deceased Male Numbers" required>
+                                    <input class="form-control" id="deceased_male" name="deceased_male" type="text" placeholder="Enter Deceased Male Numbers">
                                     <span class="text-danger error-text deceased_male_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="deceased_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="deceased_woman" name="deceased_woman" type="text" placeholder="Enter Woman Numbers" required>
+                                    <input class="form-control" id="deceased_woman" name="deceased_woman" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text deceased_woman_err"></span>
                                 </div>
                             </div>
@@ -359,12 +359,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="wounded_male" name="wounded_male" type="text" placeholder="Enter Male Numbers" required>
+                                    <input class="form-control" id="wounded_male" name="wounded_male" type="text" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text wounded_male_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="wounded_woman" name="wounded_woman" type="text" placeholder="Enter Woman Numbers" required>
+                                    <input class="form-control" id="wounded_woman" name="wounded_woman" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text wounded_woman_err"></span>
                                 </div>
                             </div>
@@ -850,22 +850,22 @@
                     type: 'POST',
                     data: formData,
                     success: function(data) {
-                        
-                        if (!data.error2)
-                        {
-                            swal("Successful!", data.success, "success")
-                                .then((action) => {
-                                    // window.location.href = data.pdf_url;
-                                    window.location.href = '{{ route('vardi_ahaval_list') }}';
+                        if (!data.error2) {
+                            if (data.errors) {
+                                // Display validation errors
+                                $.each(data.errors, function(field, messages) {
+                                    $('.' + field + '_err').text(messages); // Display all messages if there are multiple
+                                    $("[name='"+field+"']").addClass('is-invalid');
                                 });
-                        }
-                        else
-                        {
-                            
+                            } else if (data.success) {
+                                swal("Successful!", data.success, "success")
+                                    .then((action) => {
+                                        window.location.href = '{{ route('vardi_ahaval_list') }}';
+                                    });
+                            }
+                        } else {
                             swal("Error!", data.error2, "error");
                         }
-
-
                     },
                     error: function(error) {
                         // Handle error response
