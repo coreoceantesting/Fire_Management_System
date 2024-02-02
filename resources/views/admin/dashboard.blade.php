@@ -54,9 +54,44 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-4">
+                        <div class="card card-animate" id="totalSlipsCard">
+                            <div class="card-body" style="background-color: lemonchiffon">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <a class="fw-medium text-muted mb-0">
+                                            <b>Total Slips (एकूण स्लिप्स)</b>
+                                        </a>
+                                        <h2 class="mt-4 ff-secondary fw-semibold">
+                                            <span class="counter-value text-primary" data-target="{{$totalSlipCount}}">{{$totalSlipCount}}</span>
+                                        </h2>
+                                        <p class="mb-0 text-muted" style="display: none">
+                                            <span class="badge bg-light text-success mb-0"><i class="ri-arrow-up-line align-middle"></i>
+                                                16.24 %
+                                            </span>
+                                            vs. previous
+                                            month
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <div class="avatar-sm flex-shrink-0 d-none">
+                                            <span class="avatar-title bg-info-subtle rounded-circle fs-2">
+                                                <i data-feather="award" class="text-info"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card-->
+                    </div>
+                    <!-- end col-->
+
+                    <div class="col-md-4">
                         <div class="card card-animate" id="todaySlipsCard">
-                            <div class="card-body" style="background-color: skyblue">
+                            <div class="card-body" style="background-color: lemonchiffon">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -88,9 +123,9 @@
                     </div>
                     <!-- end col-->
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-animate" id="monthlySlipsCard">
-                            <div class="card-body" style="background-color: skyblue">
+                            <div class="card-body" style="background-color: lemonchiffon">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -122,12 +157,10 @@
                         <!-- end card-->
                     </div>
                     <!-- end col-->
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-animate" id="yearlySlipsCard">
-                            <div class="card-body" style="background-color: skyblue">
+                            <div class="card-body" style="background-color: lemonchiffon">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -160,8 +193,8 @@
                     </div>
                     <!-- end col-->
 
-                    <div class="col-md-6">
-                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: skyblue">
+                    <div class="col-md-4">
+                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: lemonchiffon">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -195,9 +228,9 @@
                     </div>
                     <!-- end col-->
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-animate" id="vardiahavalSlipsCard">
-                            <div class="card-body" style="background-color: skyblue">
+                            <div class="card-body" style="background-color: lemonchiffon">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -237,64 +270,53 @@
         <div class="col-xxl-12">
             <div class="row h-100">
                 <div class="col-xl-6">
-                    <div class="card card-height-100" style="display: none">
+                    <div class="card card-height-100" style="display: block">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">
-                                Live Users By Country
+                                Today's List
                             </h4>
                             <div class="flex-shrink-0">
-                                <button type="button" class="btn btn-soft-primary btn-sm">
-                                    Export Report
-                                </button>
+                                <a href="{{route('todays_list')}}" class="btn btn-soft-primary btn-sm">
+                                    View All
+                                </a>
                             </div>
                         </div>
                         <!-- end card header -->
 
                         <!-- card body -->
                         <div class="card-body">
-                            <div id="users-by-country" data-colors='["--vz-light"]' class="text-center" style="height: 252px"></div>
+                            @php
+                                $serialNumber = 1;
+                            @endphp
+                            <div id="users-by-country" data-colors='["--vz-light"]' class="text-center d-none" style="height: 252px"></div>
 
-                            <div class="table-responsive table-card mt-3">
-                                <table class="table table-borderless table-sm table-centered align-middle table-nowrap mb-1">
-                                    <thead class="text-muted border-dashed border border-start-0 border-end-0 bg-light-subtle">
+                            <div class="table-responsive">
+                                <table id="todaysList" class="table table-bordered nowrap align-middle" style="width:100%">
+                                    <thead>
                                         <tr>
-                                            <th>
-                                                Duration
-                                                (Secs)
-                                            </th>
-                                            <th style="
-                                                    width: 30%;
-                                                ">
-                                                Sessions
-                                            </th>
-                                            <th style="
-                                                    width: 30%;
-                                                ">
-                                                Views
-                                            </th>
+                                            <th>Sr.No</th>
+                                            <th>Caller Name</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="border-0">
-                                        <tr>
-                                            <td>0-30</td>
-                                            <td>2,250</td>
-                                            <td>4,250</td>
-                                        </tr>
-                                        <tr>
-                                            <td>31-60</td>
-                                            <td>1,501</td>
-                                            <td>2,050</td>
-                                        </tr>
-                                        <tr>
-                                            <td>61-120</td>
-                                            <td>750</td>
-                                            <td>1,600</td>
-                                        </tr>
-                                        <tr>
-                                            <td>121-240</td>
-                                            <td>540</td>
-                                            <td>1,040</td>
-                                        </tr>
+                                    <tbody>
+                                        @foreach ($todaysSlipList as $list)
+                                            <tr>
+                                                <td>{{ $serialNumber++ }}</td>
+                                                <td>{{ $list->caller_name }}</td>
+                                                <td>{{ $list->slip_date }}</td>
+                                                <td>
+                                                    <button class="download-pdf btn btn-secondary px-2 py-1"
+                                                            title="Download PDF"
+                                                            data-id="{{ $list->slip_id }}"
+                                                            data-pdf-file-name="{{ $list->pdf_name }}"
+                                                    >
+                                                        <i data-feather="download"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -366,6 +388,22 @@
                 window.location.href = "{{ route('vardi_ahaval_list') }}";
             });
 
+            $('#todaysList').dataTable({searching: false, paging: false, info: false});
+
+        });
+    </script>
+
+    {{-- for pdf --}}
+    <script>
+        $(document).ready(function() {
+            $("#buttons-datatables").on("click", ".download-pdf", function(e) {
+                e.preventDefault();
+                var pdfFileName = $(this).data("pdf-file-name");
+                var pdfUrl = "{{ url('/slips/') }}/" + pdfFileName;
+
+                // Open the PDF in a new tab/window
+                window.open(pdfUrl, '_blank');
+            });
         });
     </script>
     @endpush

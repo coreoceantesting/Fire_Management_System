@@ -13,6 +13,12 @@ class DashboardController extends Controller
     public function index()
     {
         $todaysSlipCount =DB::table('slips')->whereDate('created_at', now())->count();
+        $todaysSlipList =DB::table('slips')
+        ->select('slip_date','caller_name','pdf_name','slip_id')
+        ->whereDate('created_at', now())
+        ->latest()
+        ->take(5)
+        ->get();
         $monthlySlipCount = DB::table('slips')
         ->whereYear('created_at', now()->year)
         ->whereMonth('created_at', now()->month)
@@ -24,7 +30,8 @@ class DashboardController extends Controller
         ->where('slip_status', "Action Form Submitted")
         ->count();
         $vardiAhavalSlipCount = DB::table('slips')->where('is_occurance_book_submitted','1')->count();
-        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount','vardiAhavalSlipCount'));
+        $totalSlipCount = DB::table('slips')->count();
+        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount','vardiAhavalSlipCount','totalSlipCount','todaysSlipList'));
     }
 
     public function changeThemeMode()
