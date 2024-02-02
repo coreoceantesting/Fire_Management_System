@@ -91,7 +91,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="todaySlipsCard">
-                            <div class="card-body" style="background-color: whitesmoke">
+                            <div class="card-body" style="background-color: deepskyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -160,7 +160,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="yearlySlipsCard">
-                            <div class="card-body" style="background-color: mintcream">
+                            <div class="card-body" style="background-color: deepskyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
