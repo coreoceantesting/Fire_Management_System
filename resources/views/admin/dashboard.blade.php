@@ -57,7 +57,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="totalSlipsCard">
-                            <div class="card-body" style="background-color: lemonchiffon">
+                            <div class="card-body" style="background-color: papayawhip">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -91,7 +91,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="todaySlipsCard">
-                            <div class="card-body" style="background-color: lemonchiffon">
+                            <div class="card-body" style="background-color: whitesmoke">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -125,7 +125,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="monthlySlipsCard">
-                            <div class="card-body" style="background-color: lemonchiffon">
+                            <div class="card-body" style="background-color: mistyrose">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -160,7 +160,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="yearlySlipsCard">
-                            <div class="card-body" style="background-color: lemonchiffon">
+                            <div class="card-body" style="background-color: mintcream">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -230,7 +230,7 @@
 
                     <div class="col-md-4">
                         <div class="card card-animate" id="vardiahavalSlipsCard">
-                            <div class="card-body" style="background-color: lemonchiffon">
+                            <div class="card-body" style="background-color: paleturquoise">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -271,7 +271,7 @@
             <div class="row h-100">
                 <div class="col-xl-6">
                     <div class="card card-height-100" style="display: block">
-                        <div class="card-header align-items-center d-flex">
+                        <div class="card-header bg-light align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">
                                 Today's List
                             </h4>
@@ -328,12 +328,12 @@
                 <!-- end col -->
 
                 <div class="col-xl-6">
-                    <div class="card card-height-100" style="display: none">
-                        <div class="card-header align-items-center d-flex">
+                    <div class="card card-height-100" style="display: block">
+                        <div class="card-header bg-light align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">
-                                Sessions by Countries
+                                Analysis
                             </h4>
-                            <div>
+                            <div class="d-none">
                                 <button type="button" class="btn btn-soft-secondary btn-sm">
                                     ALL
                                 </button>
@@ -347,7 +347,29 @@
                         </div>
                         <div class="card-body p-0">
                             <div>
-                                <div id="countries_charts" data-colors='["--vz-info", "--vz-info", "--vz-info", "--vz-info", "--vz-danger", "--vz-info", "--vz-info", "--vz-info", "--vz-info", "--vz-info"]' class="apex-charts" dir="ltr">
+                                @php
+                                    $total = $totalSlipCount + $actionTakenSlipCount + $vardiAhavalSlipCount;
+                                    $totalPercentage = $total > 0 ? 100 : 0;
+                                    $totalPercentage = min($totalPercentage, 100); // Ensure the total percentage does not exceed 100
+                                @endphp
+                        
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label for="test" style="margin-left: 10px;">Total Slips (एकूण स्लिप्स)</label>
+                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label for="test" style="margin-left: 10px;">Action Taken Slips(कारवाई केलेल्या स्लिप्स)</label>
+                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label for="test" style="margin-left: 10px;">Vardi Ahaval(वर्दी अहवाल)</label>
+                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -386,6 +408,10 @@
 
             $('#vardiahavalSlipsCard').on('click', function() {
                 window.location.href = "{{ route('vardi_ahaval_list') }}";
+            });
+
+            $('#totalSlipsCard').on('click', function() {
+                window.location.href = "{{ route('slips_list') }}";
             });
 
             $('#todaysList').dataTable({searching: false, paging: false, info: false});
