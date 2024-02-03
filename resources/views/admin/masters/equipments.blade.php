@@ -117,10 +117,10 @@
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Equipment" data-id="{{ $list->equipment_id }}"><i data-feather="edit"></i></button>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Delete Equipment" data-id="{{ $list->equipment_id }}"><i data-feather="trash-2"></i> </button>
                                                 @if($list->equipment_is_active == '1')
-                                                <button class="btn btn-warning inactive-element px-2 py-1" title="Inactive Fire Station" data-id="{{ $list->equipment_id }}"><i class="ri-inbox-archive-line"></i> </button>
+                                                <button class="btn btn-warning inactive-element px-2 py-1" title="Inactive Equipment" data-id="{{ $list->equipment_id }}"><i class="ri-inbox-archive-line"></i> </button>
                                                 @endif
                                                 @if($list->equipment_is_active == '0')
-                                                <button class="btn btn-success active-element px-2 py-1" title="Active Fire Station" data-id="{{ $list->equipment_id }}"><i class="ri-inbox-unarchive-line"></i> </button>
+                                                <button class="btn btn-success active-element px-2 py-1" title="Active Equipment" data-id="{{ $list->equipment_id }}"><i class="ri-inbox-unarchive-line"></i> </button>
                                                 @endif
                                             </td>
                                         </tr>
