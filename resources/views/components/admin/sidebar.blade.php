@@ -59,6 +59,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('driver_details.index') }}" class="nav-link" data-key="t-horizontal">Driver Details(ड्रायव्हर तपशील)</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('equipments.index') }}" class="nav-link" data-key="t-horizontal">Equipment(उपकरणे)</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
