@@ -181,6 +181,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('add_stock') }}" class="nav-link" data-key="t-horizontal">Add In Stock (स्टॉक जोडा)</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('supply_stock') }}" class="nav-link" data-key="t-horizontal">Supply Equipment (उपकरणे पुरवठा)</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

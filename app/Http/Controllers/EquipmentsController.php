@@ -159,7 +159,6 @@ class EquipmentsController extends Controller
         ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
         ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
         ->get();
-        // dd($equipment_list);
         return view('equipment_management.addStock',compact('equipment_list'));
     }
 
@@ -208,6 +207,61 @@ class EquipmentsController extends Controller
 
         return response()->json([
             'equipment_stock_list' => $equipment_stock_list,
+        ]);
+    }
+
+    public function supply_stock()
+    {
+        $equipment_list = Equipment::leftJoin('supply_equipment', 'equipment.equipment_id', '=', 'supply_equipment.equipment_id')
+        ->select('equipment.equipment_id', 'equipment.equipment_name', DB::raw('SUM(supply_equipment.supply_equipment_quantity) as total_supply_stock'))
+        ->where('equipment.is_deleted', '0')
+        ->where('equipment.equipment_is_active', '1')
+        ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
+        ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
+        ->get();
+        return view('equipment_management.supplyStock',compact('equipment_list'));
+    }
+
+    public function store_supply_stock(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'equipment_name' => 'required',
+                'date' => 'required',
+                'quantity' => 'required',
+                'unit' => 'required',
+                'remark' => 'required',
+            ]);
+
+            // Store data in equipment_supply_stock table
+            DB::table('supply_equipment')->insert([
+                'equipment_id' => $request->input('equipment_name'),
+                'supply_equipment_date' => $request->input('date'),
+                'supply_equipment_quantity' => $request->input('quantity'),
+                'supply_equipment_unit' => $request->input('unit'),
+                'supply_equipment_remark' => $request->input('remark'),
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+            ]);
+
+            return response()->json(['success' => 'Stock Supplyed successfully!']);
+        } catch (ValidationException $e) {
+            // If validation fails, return validation errors
+            return response()->json(['errors' => $e->errors()]);
+        }
+    }
+
+    public function view_supply_stock_list($equipmentId)
+    {
+        $equipment_supply_stock_list = DB::table('supply_equipment')
+                ->select('equipment.equipment_name', 'supply_equipment.supply_equipment_date', 'supply_equipment.supply_equipment_quantity', 'supply_equipment.supply_equipment_unit', 'supply_equipment.supply_equipment_remark')
+                ->join('equipment', 'supply_equipment.equipment_id', '=', 'equipment.equipment_id')
+                ->where('supply_equipment.equipment_id', $equipmentId)
+                ->get();
+
+        return response()->json([
+            'equipment_supply_stock_list' => $equipment_supply_stock_list,
         ]);
     }
 

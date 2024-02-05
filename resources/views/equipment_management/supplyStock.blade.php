@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Add In Stock</x-slot>
-    <x-slot name="heading">Add In Stock (स्टॉक जोडा)</x-slot>
+    <x-slot name="title">Supply Equipment</x-slot>
+    <x-slot name="heading">Supply Equipment (उपकरणे पुरवठा)</x-slot>
 
 
         <!-- Add Form -->
@@ -23,11 +23,6 @@
                                     <span class="text-danger error-text equipment_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="date">Date(तारीख) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="date" name="date" value="{{now()->toDateString()}}" type="date" placeholder="Enter Date">
-                                    <span class="text-danger error-text date_err"></span>
-                                </div>
-                                <div class="col-md-4">
                                     <label class="col-form-label" for="quantity">quantity(प्रमाण) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Enter Quantity">
                                     <span class="text-danger error-text quantity_err"></span>
@@ -42,9 +37,14 @@
                                     <span class="text-danger error-text unit_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="work_order">Work Order(कामाचे आदेश) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="work_order" name="work_order" type="file" placeholder="Upload Work Order">
-                                    <span class="text-danger error-text work_order_err"></span>
+                                    <label class="col-form-label" for="remark">Remark(शेरा) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="remark" name="remark" type="text" placeholder="Enter Remark">
+                                    <span class="text-danger error-text remark_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="date">Date(तारीख) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="date" name="date" value="{{now()->toDateString()}}" type="date" placeholder="Enter Date">
+                                    <span class="text-danger error-text date_err"></span>
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="">
-                                    <button id="addToTable" class="btn btn-primary">Add Stock <i class="fa fa-plus"></i></button>
+                                    <button id="addToTable" class="btn btn-primary">Supply Stock <i class="fa fa-plus"></i></button>
                                     <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
-                                        <th>Total Stock</th>
+                                        <th>Total Supplyed Stock</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -91,7 +91,7 @@
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->equipment_name }}</td>
-                                            <td>{{ $list->total_stock ?: '0' }}</td>
+                                            <td>{{ $list->total_supply_stock ?: '0' }}</td>
                                             <td>
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->equipment_id }}"><i data-feather="info"></i></button>
                                             </td>
@@ -109,7 +109,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="viewStockModalLabel">View Stock Details</h5>
+                        <h5 class="modal-title" id="viewStockModalLabel">View Supply Stock Details</h5>
                         <button type="button" class="close btn btn-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -139,7 +139,7 @@
 
         var formdata = new FormData(this);
         $.ajax({
-            url: '{{ route('store_stock') }}',
+            url: '{{ route('store_supply_stock') }}',
             type: 'POST',
             data: formdata,
             contentType: false,
@@ -157,7 +157,7 @@
                         } else if (data.success) {
                             swal("Successful!", data.success, "success")
                                 .then((action) => {
-                                    window.location.href = '{{ route('add_stock') }}';
+                                    window.location.href = '{{ route('supply_stock') }}';
                                 });
                         }
                     } else {
@@ -189,41 +189,34 @@
 
             // Fetch slip details from the JSON endpoint
             $.ajax({
-                url: '/view-stock-list/' + equipmentId,
+                url: '/view-supply-stock-list/' + equipmentId,
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
                     // Generate HTML table with the predefined headers
                     var tableHtml = '';
-                    if (data.equipment_stock_list && data.equipment_stock_list.length > 0) {
-                    tableHtml += '<br><h3 class="text-center"> Stock List (स्टॉक यादी) </h3><br>';
+                    if (data.equipment_supply_stock_list && data.equipment_supply_stock_list.length > 0) {
+                    tableHtml += '<br><h3 class="text-center">Supplyed Stock List (पुरवलेली स्टॉक यादी) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Equipment Name (उपकरणाचे नाव)</th>';
                     tableHtml += '<th scope="col">Date (तारीख)</th>';
                     tableHtml += '<th scope="col">Quantity / Unit (प्रमाण / युनिट)</th>';
-                    tableHtml += '<th scope="col">Work Order (कामाचे आदेश)</th>';
+                    tableHtml += '<th scope="col">Remark (शेरा)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through stock detail
-                    data.equipment_stock_list.forEach(function(list) {
+                    data.equipment_supply_stock_list.forEach(function(list) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + list.equipment_name + '</td>';
-                        tableHtml += '<td>' + list.date + '</td>';
-                        tableHtml += '<td>' + list.quantity + ' / ' + list.unit + '</td>';
-                        tableHtml += '<td>';
-                        if (list.work_order) {
-                            // If work order exists, create a link or display the file name
-                            tableHtml += '<a href="/storage/' + list.work_order + '" target="_blank">View Work Order</a>';
-                        } else {
-                            tableHtml += 'NA';
-                        }
-                        tableHtml += '</td>';
+                        tableHtml += '<td>' + list.supply_equipment_date + '</td>';
+                        tableHtml += '<td>' + list.supply_equipment_quantity + ' / ' + list.supply_equipment_unit + '</td>';
+                        tableHtml += '<td>' + list.supply_equipment_remark + '</td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';
                 }else{
-                    tableHtml += '<h3 class="text-center">No Stocks Added</h3>';
+                    tableHtml += '<h3 class="text-center">No Stocks Supplyed</h3>';
                 }
 
                     // Display table in the modal
