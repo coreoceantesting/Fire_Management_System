@@ -109,6 +109,11 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/yearly-slips-filter', [App\Http\Controllers\FiltersController::class, 'yearly_slips_filter'])->name('yearly_slips_filter');
     Route::get('/action-taken-report-filter', [App\Http\Controllers\FiltersController::class, 'action_taken_report_filter'])->name('action_taken_report_filter');
 
+    // Equipment Management
+    Route::get('add-in-stock', [App\Http\Controllers\EquipmentsController::class, 'add_stock'])->name('add_stock');
+    Route::post('store-stock', [App\Http\Controllers\EquipmentsController::class, 'store_stock'])->name('store_stock');
+    Route::get('/view-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_stock_list'])->name('view_stock_list');
+
     
 });
 

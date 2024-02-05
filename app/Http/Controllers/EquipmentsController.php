@@ -9,6 +9,7 @@ use App\Models\Equipment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class EquipmentsController extends Controller
 {
@@ -145,6 +146,61 @@ class EquipmentsController extends Controller
         {
             return $this->respondWithAjax($e, 'active', 'Equipment');
         }
+    }
+
+    // stock Management
+    public function add_stock()
+    {
+        $equipment_list = Equipment::where('is_deleted','0')->where('equipment_is_active','1')->latest()->get();
+        return view('equipment_management.addStock',compact('equipment_list'));
+    }
+
+    public function store_stock(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'equipment_name' => 'required',
+                'date' => 'required',
+                'quantity' => 'required',
+                'unit' => 'required',
+                'work_order' => 'file|mimes:pdf,doc,docx',
+            ]);
+
+            if ($request->hasFile('work_order')) {
+                $file = $request->file('work_order');
+                $path = $file->store('work_orders', 'public'); // Save the file to the 'storage/app/public/work_orders' directory
+            }
+
+            // Store data in equipment_stock table
+            DB::table('equipment_stock')->insert([
+                'equipment_id' => $request->input('equipment_name'),
+                'date' => $request->input('date'),
+                'quantity' => $request->input('quantity'),
+                'unit' => $request->input('unit'),
+                'work_order' => isset($path) ? $path : null,
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+            ]);
+
+            return response()->json(['success' => 'Stock Added successfully!']);
+        } catch (ValidationException $e) {
+            // If validation fails, return validation errors
+            return response()->json(['errors' => $e->errors()]);
+        }
+    }
+
+    public function view_stock_list($equipmentId)
+    {
+        $equipment_stock_list = DB::table('equipment_stock')
+                ->select('equipment.equipment_name', 'equipment_stock.date', 'equipment_stock.quantity', 'equipment_stock.unit', 'equipment_stock.work_order')
+                ->join('equipment', 'equipment_stock.equipment_id', '=', 'equipment.equipment_id')
+                ->where('equipment_stock.equipment_id', $equipmentId)
+                ->get();
+
+        return response()->json([
+            'equipment_stock_list' => $equipment_stock_list,
+        ]);
     }
 
 }

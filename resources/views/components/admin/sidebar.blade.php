@@ -171,6 +171,20 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#menu6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i class="ri-stock-fill"></i>
+                        <span data-key="t-layouts">Equipment Management </span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="menu6">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('add_stock') }}" class="nav-link" data-key="t-horizontal">Add In Stock (स्टॉक जोडा)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
