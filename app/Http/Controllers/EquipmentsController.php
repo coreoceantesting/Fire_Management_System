@@ -151,7 +151,15 @@ class EquipmentsController extends Controller
     // stock Management
     public function add_stock()
     {
-        $equipment_list = Equipment::where('is_deleted','0')->where('equipment_is_active','1')->latest()->get();
+        // $equipment_list = Equipment::where('is_deleted','0')->where('equipment_is_active','1')->latest()->get();
+        $equipment_list = Equipment::leftJoin('equipment_stock', 'equipment.equipment_id', '=', 'equipment_stock.equipment_id')
+        ->select('equipment.equipment_id', 'equipment.equipment_name', DB::raw('SUM(equipment_stock.quantity) as total_stock'))
+        ->where('equipment.is_deleted', '0')
+        ->where('equipment.equipment_is_active', '1')
+        ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
+        ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
+        ->get();
+        // dd($equipment_list);
         return view('equipment_management.addStock',compact('equipment_list'));
     }
 
