@@ -320,4 +320,18 @@ class EquipmentsController extends Controller
         ]);
     }
 
+    public function get_available_quantity($equipmentId)
+    {
+        $available_quantity = DB::table('equipment_stock')->where('equipment_id', $equipmentId)->sum('quantity');
+
+        if ($available_quantity) {
+            // Return the available quantity as JSON
+            return response()->json(['available_quantity' => $available_quantity]);
+        } else {
+            // Handle the case when equipment is not found
+            return response()->json(['available_quantity' => '0']);
+        }
+    }
+ 
+
 }

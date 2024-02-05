@@ -122,6 +122,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('store-expire-stock', [App\Http\Controllers\EquipmentsController::class, 'store_expire_stock'])->name('store_expire_stock');
     Route::get('/view-expire-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_expire_stock_list'])->name('view_expire_stock_list');
 
+    Route::get('/get-available-quantity/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'get_available_quantity'])->name('get_available_quantity');
+
     
 });
 
