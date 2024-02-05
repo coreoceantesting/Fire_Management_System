@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Supply Equipment</x-slot>
-    <x-slot name="heading">Supply Equipment (उपकरणे पुरवठा)</x-slot>
+    <x-slot name="title">Expired Equipment</x-slot>
+    <x-slot name="heading">Expired Equipment (कालबाह्य उपकरणे)</x-slot>
 
 
         <!-- Add Form -->
