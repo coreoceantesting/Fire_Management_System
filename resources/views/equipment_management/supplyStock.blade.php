@@ -31,7 +31,7 @@
                                     <label class="col-form-label" for="unit"> Select Unit(युनिट) <span class="text-danger">*</span></label>
                                     <select class="form-control" id="unit" name="unit">
                                         <option value="">--Select Unit--</option>
-                                        <option value="unit">Unit</option>
+                                        <option value="nos">Nos</option>
                                         <option value="kg">KG</option>
                                     </select>
                                     <span class="text-danger error-text unit_err"></span>

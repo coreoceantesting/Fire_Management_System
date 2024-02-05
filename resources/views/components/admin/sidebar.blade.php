@@ -184,6 +184,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('supply_stock') }}" class="nav-link" data-key="t-horizontal">Supply Equipment (उपकरणे पुरवठा)</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('expire_stock') }}" class="nav-link" data-key="t-horizontal">Expire Equipment (कालबाह्य उपकरणे)</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

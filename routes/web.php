@@ -113,9 +113,14 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('add-in-stock', [App\Http\Controllers\EquipmentsController::class, 'add_stock'])->name('add_stock');
     Route::post('store-stock', [App\Http\Controllers\EquipmentsController::class, 'store_stock'])->name('store_stock');
     Route::get('/view-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_stock_list'])->name('view_stock_list');
+
     Route::get('supply-stock', [App\Http\Controllers\EquipmentsController::class, 'supply_stock'])->name('supply_stock');
     Route::post('store-supply-stock', [App\Http\Controllers\EquipmentsController::class, 'store_supply_stock'])->name('store_supply_stock');
     Route::get('/view-supply-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_supply_stock_list'])->name('view_supply_stock_list');
+
+    Route::get('expire-stock', [App\Http\Controllers\EquipmentsController::class, 'expire_stock'])->name('expire_stock');
+    Route::post('store-expire-stock', [App\Http\Controllers\EquipmentsController::class, 'store_expire_stock'])->name('store_expire_stock');
+    Route::get('/view-expire-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_expire_stock_list'])->name('view_expire_stock_list');
 
     
 });

@@ -265,4 +265,59 @@ class EquipmentsController extends Controller
         ]);
     }
 
+    public function expire_stock()
+    {
+        $equipment_list = Equipment::leftJoin('expire_equipment', 'equipment.equipment_id', '=', 'expire_equipment.equipment_id')
+        ->select('equipment.equipment_id', 'equipment.equipment_name', DB::raw('SUM(expire_equipment.expire_equipment_quantity) as total_expire_stock'))
+        ->where('equipment.is_deleted', '0')
+        ->where('equipment.equipment_is_active', '1')
+        ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
+        ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
+        ->get();
+        return view('equipment_management.expireStock',compact('equipment_list'));
+    }
+
+    public function store_expire_stock(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'equipment_name' => 'required',
+                'date' => 'required',
+                'quantity' => 'required',
+                'unit' => 'required',
+                'remark' => 'required',
+            ]);
+
+            // Store data in equipment_expire_stock table
+            DB::table('expire_equipment')->insert([
+                'equipment_id' => $request->input('equipment_name'),
+                'expire_equipment_date' => $request->input('date'),
+                'expire_equipment_quantity' => $request->input('quantity'),
+                'expire_equipment_unit' => $request->input('unit'),
+                'expire_equipment_remark' => $request->input('remark'),
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+            ]);
+
+            return response()->json(['success' => 'Expired Stock successfully!']);
+        } catch (ValidationException $e) {
+            // If validation fails, return validation errors
+            return response()->json(['errors' => $e->errors()]);
+        }
+    }
+
+    public function view_expire_stock_list($equipmentId)
+    {
+        $equipment_expire_stock_list = DB::table('expire_equipment')
+                ->select('equipment.equipment_name', 'expire_equipment.expire_equipment_quantity', 'expire_equipment.expire_equipment_unit', 'expire_equipment.expire_equipment_remark', 'expire_equipment.expire_equipment_date')
+                ->join('equipment', 'expire_equipment.equipment_id', '=', 'equipment.equipment_id')
+                ->where('expire_equipment.equipment_id', $equipmentId)
+                ->get();
+
+        return response()->json([
+            'equipment_expire_stock_list' => $equipment_expire_stock_list,
+        ]);
+    }
+
 }
