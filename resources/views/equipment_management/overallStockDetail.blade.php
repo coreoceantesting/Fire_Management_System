@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">OverAll Stocks Details</x-slot>
-    <x-slot name="heading">OverAll Stocks Details (एकूण स्टॉक तपशील)</x-slot>
+    <x-slot name="title">OverAll Equipments Stocks Details</x-slot>
+    <x-slot name="heading">OverAll Equipments Stocks Details (एकूण उपकरणे साठा तपशील)</x-slot>
 
 
         {{-- listing --}}
