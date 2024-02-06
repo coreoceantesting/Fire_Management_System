@@ -93,7 +93,7 @@
                                             <td>{{ $list->equipment_name }}</td>
                                             <td>{{ $list->total_stock ?: '0' }}</td>
                                             <td>
-                                                <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->equipment_id }}"><i data-feather="info"></i></button>
+                                                <button class="view-element btn btn-secondary px-2 py-1" title="View List" data-id="{{ $list->equipment_id }}"><i data-feather="list"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
