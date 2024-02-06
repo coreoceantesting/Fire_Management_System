@@ -321,8 +321,10 @@
             // Check if the entered quantity is greater than the available quantity
             if (quantity > availableQuantity) {
                 $('.quantity_err').text('Entered quantity exceeds the available supplied quantity');
+                $('#addSubmit').prop('disabled', true);
             } else {
                 $('.quantity_err').text('');
+                $('#addSubmit').prop('disabled', false);
             }
         });
     });
