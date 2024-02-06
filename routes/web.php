@@ -123,6 +123,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/view-expire-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_expire_stock_list'])->name('view_expire_stock_list');
 
     Route::get('/get-available-quantity/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'get_available_quantity'])->name('get_available_quantity');
+    Route::get('/get-supplied-quantity/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'get_supplied_quantity'])->name('get_supplied_quantity');
 
     Route::get('/overall-stock-detail', [App\Http\Controllers\EquipmentsController::class, 'overall_stock_detail'])->name('overall_stock_detail');
     

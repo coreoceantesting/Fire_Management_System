@@ -23,6 +23,11 @@
                                     <span class="text-danger error-text equipment_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="available_quantity">Available Supplied Quantity(उपलब्ध पुरवठा केलेले प्रमाण) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="available_quantity" name="available_quantity" type="number" readonly>
+                                    <span class="text-danger error-text available_quantity_err"></span>
+                                </div>
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="quantity">quantity(प्रमाण) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Enter Quantity">
                                     <span class="text-danger error-text quantity_err"></span>
@@ -275,6 +280,48 @@
                         swal("Error!", "Something went wrong", "error");
                     },
                 });
+            }
+        });
+    });
+</script>
+
+{{-- get available supplied stock --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for equipment name change
+        $('#equipment_name').on('change', function() {
+            var equipmentId = $(this).val();
+
+            // Make an AJAX request to fetch the available quantity based on the selected equipment
+            $.ajax({
+                url: '/get-supplied-quantity/' + equipmentId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Update the available quantity input field
+                    $('#available_quantity').val(data.available_supplied_quantity);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+{{-- validation for available quntity --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for keyup on the quantity input field
+        $('#quantity').on('keyup', function() {
+            var quantity = parseInt($(this).val());
+            var availableQuantity = parseInt($('#available_quantity').val());
+
+            // Check if the entered quantity is greater than the available quantity
+            if (quantity > availableQuantity) {
+                $('.quantity_err').text('Entered quantity exceeds the available supplied quantity');
+            } else {
+                $('.quantity_err').text('');
             }
         });
     });
