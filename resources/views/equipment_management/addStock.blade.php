@@ -42,7 +42,7 @@
                                     <span class="text-danger error-text unit_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="work_order">Work Order(कामाचे आदेश) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="work_order">Work Order(कामाचे आदेश)</label>
                                     <input class="form-control" id="work_order" name="work_order" type="file" placeholder="Upload Work Order">
                                     <span class="text-danger error-text work_order_err"></span>
                                 </div>
