@@ -46,6 +46,7 @@
                                             <td>{{ $list->total_supply_quantity - $list->total_expire_quantity ?: '0' }}</td>
                                         </tr>
                                     @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

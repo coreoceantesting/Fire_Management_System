@@ -3,60 +3,14 @@
     <x-slot name="heading">Dashboard (डॅशबोर्ड) </x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
+
+    {{-- new dashboard --}}
     <div class="row">
-        <div class="col-xxl-12">
+        <div class="col-xl-6">
             <div class="d-flex flex-column h-100">
-                <div class="row h-100">
-                    <div class="col-12">
-                        <div class="card" style="display: none">
-                            <div class="card-body p-0">
-                                <div class="alert alert-warning border-0 rounded-0 m-0 d-flex align-items-center" role="alert">
-                                    <i data-feather="alert-triangle" class="text-warning me-2 icon-sm"></i>
-                                    <div class="flex-grow-1 text-truncate">
-                                        Your free trial
-                                        expired in
-                                        <b>17</b> days.
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <a href="pages-pricing.html" class="text-reset text-decoration-underline"><b>Upgrade</b></a>
-                                    </div>
-                                </div>
-
-                                <div class="row align-items-end">
-                                    <div class="col-sm-8">
-                                        <div class="p-3">
-                                            <p class="fs-16 lh-base">
-                                                Upgrade your
-                                                plan from a
-                                                <span class="fw-semibold">Free
-                                                    trial</span>, to
-                                                ‘Premium
-                                                Plan’
-                                                <i class="mdi mdi-arrow-right"></i>
-                                            </p>
-                                            <div class="mt-3">
-                                                <a href="pages-pricing.html" class="btn btn-success">Upgrade
-                                                    Account!</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="px-3">
-                                            <img src="" class="img-fluid" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end card-body-->
-                        </div>
-                    </div>
-                    <!-- end col-->
-                </div>
-
                 <div class="row">
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="totalSlipsCard">
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card card-animate" id="totalSlipsCardNew">
                             <div class="card-body" style="background-color: papayawhip">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -86,11 +40,10 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="todaySlipsCard">
+                    </div><!--end col-->
+                    <div class="col-xl-6 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate" id="todaySlipsCardNew">
                             <div class="card-body" style="background-color: deepskyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -120,11 +73,10 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="monthlySlipsCard">
+                    </div><!-- end col -->
+                    <div class="col-xl-6 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate" id="monthlySlipsCardNew">
                             <div class="card-body" style="background-color: mistyrose">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -155,12 +107,11 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="yearlySlipsCard">
-                            <div class="card-body" style="background-color: deepskyblue">
+                    </div><!-- end col -->
+                    <div class="col-xl-6 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate" id="yearlySlipsCardNew">
+                            <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <a class="fw-medium text-muted mb-0">
@@ -190,11 +141,10 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="actiontakenSlipsCard" style="background-color: lemonchiffon">
+                    </div><!-- end col -->
+                    <div class="col-xl-6 col-md-6">
+                        {{-- card --}}
+                        <div class="card card-animate" id="actiontakenSlipsNew" style="background-color: lemonchiffon">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -225,11 +175,10 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                    <div class="col-md-4">
-                        <div class="card card-animate" id="vardiahavalSlipsCard">
+                    </div><!--end col-->
+                    <div class="col-xl-6 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate" id="vardiahavalSlipsCardNew">
                             <div class="card-body" style="background-color: paleturquoise">
                                 <div class="d-flex justify-content-between">
                                     <div>
@@ -260,161 +209,199 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card-->
-                    </div>
-                    <!-- end col-->
-
-                </div>
+                    </div><!-- end col -->
+                </div><!--end row-->
             </div>
-        </div>
+        </div><!--end col-->
 
-        <div class="col-xxl-12">
-            <div class="row h-100">
-                <div class="col-xl-6">
-                    <div class="card card-height-100" style="display: block">
-                        <div class="card-header bg-light align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">
-                                Today's List
-                            </h4>
-                            <div class="flex-shrink-0">
-                                <a href="{{route('todays_list')}}" class="btn btn-soft-primary btn-sm">
-                                    View All
-                                </a>
-                            </div>
-                        </div>
-                        <!-- end card header -->
-
-                        <!-- card body -->
-                        <div class="card-body">
-                            @php
-                                $serialNumber = 1;
-                            @endphp
-                            <div id="users-by-country" data-colors='["--vz-light"]' class="text-center d-none" style="height: 252px"></div>
-
-                            <div class="table-responsive">
-                                <table id="todaysList" class="table table-bordered nowrap align-middle" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Caller Name</th>
-                                            <th>Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($todaysSlipList as $list)
-                                            <tr>
-                                                <td>{{ $serialNumber++ }}</td>
-                                                <td>{{ $list->caller_name }}</td>
-                                                <td>{{ $list->slip_date }}</td>
-                                                <td>
-                                                    <button class="download-pdf btn btn-secondary px-2 py-1"
-                                                            title="Download PDF"
-                                                            data-id="{{ $list->slip_id }}"
-                                                            data-pdf-file-name="{{ $list->pdf_name }}"
-                                                    >
-                                                        <i data-feather="download"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- end card body -->
+        <div class="col-xl-6">
+            <div class="card card-height-100">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Today's List</h4>
+                    <div class="flex-shrink-0">
+                        <a href="{{route('todays_list')}}" class="btn btn-soft-primary btn-sm">
+                            View All
+                        </a>
                     </div>
-                    <!-- end card -->
-                </div>
-                <!-- end col -->
+                </div><!-- end card header -->
+                <!-- card body -->
+                <div class="card-body">
+                    @php
+                        $serialNumber = 1;
+                    @endphp
+                    <div id="users-by-country" data-colors='["--vz-light"]' class="text-center d-none" style="height: 252px"></div>
 
-                <div class="col-xl-6">
-                    <div class="card card-height-100" style="display: block">
-                        <div class="card-header bg-light align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">
-                                Analysis
-                            </h4>
-                            <div class="d-none">
-                                <button type="button" class="btn btn-soft-secondary btn-sm">
-                                    ALL
-                                </button>
-                                <button type="button" class="btn btn-soft-primary btn-sm">
-                                    1M
-                                </button>
-                                <button type="button" class="btn btn-soft-secondary btn-sm">
-                                    6M
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <div>
-                                @php
-                                    $total = $totalSlipCount + $actionTakenSlipCount + $vardiAhavalSlipCount;
-                                    $totalPercentage = $total > 0 ? 100 : 0;
-                                    $totalPercentage = min($totalPercentage, 100); // Ensure the total percentage does not exceed 100
-                                @endphp
-                        
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <label for="test" style="margin-left: 10px;">Total Slips (एकूण स्लिप्स)</label>
-                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <label for="test" style="margin-left: 10px;">Action Taken Slips(कारवाई केलेल्या स्लिप्स)</label>
-                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <label for="test" style="margin-left: 10px;">Vardi Ahaval(वर्दी अहवाल)</label>
-                                    <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end card body -->
+                    <div class="table-responsive">
+                        <table id="todaysListNew" class="table table-bordered nowrap align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Caller Name</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($todaysSlipList as $list)
+                                    <tr>
+                                        <td>{{ $serialNumber++ }}</td>
+                                        <td>{{ $list->caller_name }}</td>
+                                        <td>{{ $list->slip_date }}</td>
+                                        <td>
+                                            <button class="download-pdf btn btn-secondary px-2 py-1"
+                                                    title="Download PDF"
+                                                    data-id="{{ $list->slip_id }}"
+                                                    data-pdf-file-name="{{ $list->pdf_name }}"
+                                            >
+                                                <i data-feather="download"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- end card -->
                 </div>
-                <!-- end col-->
+                <!-- end card body -->
+            </div> <!-- .card-->
+        </div><!--end col-->
+
+        <div class="col-xl-6">
+            <div class="card card-height-100" style="display: block">
+                <div class="card-header bg-light align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">
+                        Equipments Stock Details
+                    </h4>
+                    <div>
+                        <a href="{{route('overall_stock_detail')}}" class="btn btn-soft-secondary btn-sm">
+                            View All
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @php
+                        $serialNumber = 1;
+                    @endphp
+                    <div id="users-by-country" data-colors='["--vz-light"]' class="text-center d-none" style="height: 252px"></div>
+
+                    <div class="table-responsive">
+                        <table id="stockDetailsNew" class="table table-bordered nowrap align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Equipment</th>
+                                    {{-- <th>Total Stock</th> --}}
+                                    <th>Remaining Stock</th>
+                                    <th>InProcess Stock</th>
+                                    <th>Expire Stock</th>
+                                    {{-- <th>Overall Supply Stock</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($equipment_list as $list)
+                                    <tr>
+                                        <td>{{ $serialNumber++ }}</td>
+                                        <td>{{ $list->equipment_name }}</td>
+                                        {{-- <td>{{ $list->total_stock ?: '0' }}</td> --}}
+                                        <td>{{ $list->total_stock - $list->total_supply_quantity ?: '0' }}</td>
+                                        <td>{{ $list->total_supply_quantity - $list->total_expire_quantity ?: '0' }}</td>
+                                        <td>{{ $list->total_expire_quantity ?: '0' }}</td>
+                                        {{-- <td>{{ $list->total_supply_quantity ?: '0' }}</td> --}}
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end card body -->
             </div>
-            <!-- end row-->
-        </div>
-    </div>
+            <!-- end card -->
+        </div><!--end col-->
+
+        <div class="col-xl-6">
+            <div class="card card-height-100" style="display: block">
+                <div class="card-header bg-light align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">
+                        Analysis
+                    </h4>
+                    <div class="d-none">
+                        <button type="button" class="btn btn-soft-secondary btn-sm">
+                            ALL
+                        </button>
+                        <button type="button" class="btn btn-soft-primary btn-sm">
+                            1M
+                        </button>
+                        <button type="button" class="btn btn-soft-secondary btn-sm">
+                            6M
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div>
+                        @php
+                            $total = $totalSlipCount + $actionTakenSlipCount + $vardiAhavalSlipCount;
+                            $totalPercentage = $total > 0 ? 100 : 0;
+                            $totalPercentage = min($totalPercentage, 100); // Ensure the total percentage does not exceed 100
+                        @endphp
+                
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="test" style="margin-left: 10px;">Total Slips (एकूण स्लिप्स)</label>
+                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="test" style="margin-left: 10px;">Action Taken Slips(कारवाई केलेल्या स्लिप्स)</label>
+                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="test" style="margin-left: 10px;">Vardi Ahaval(वर्दी अहवाल)</label>
+                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        </div><!--end col-->
 
 
-    
+
+    </div><!--end row-->
 
     @push('scripts')
     <script>
         $(document).ready(function() {
 
-            $('#todaySlipsCard').on('click', function() {
+            $('#todaySlipsCardNew').on('click', function() {
                 window.location.href = "{{ route('todays_list') }}";
             });
 
-            $('#monthlySlipsCard').on('click', function() {
+            $('#monthlySlipsCardNew').on('click', function() {
                 window.location.href = "{{ route('monthly_list') }}";
             });
 
-            $('#yearlySlipsCard').on('click', function() {
+            $('#yearlySlipsCardNew').on('click', function() {
                 window.location.href = "{{ route('yearly_list') }}";
             });
 
-            $('#actiontakenSlipsCard').on('click', function() {
+            $('#actiontakenSlipsNew').on('click', function() {
                 window.location.href = "{{ route('action_taken_list') }}";
             });
 
-            $('#vardiahavalSlipsCard').on('click', function() {
+            $('#vardiahavalSlipsCardNew').on('click', function() {
                 window.location.href = "{{ route('vardi_ahaval_list') }}";
             });
 
-            $('#totalSlipsCard').on('click', function() {
+            $('#totalSlipsCardNew').on('click', function() {
                 window.location.href = "{{ route('slips_list') }}";
             });
 
-            $('#todaysList').dataTable({searching: false, paging: false, info: false});
+            $('#todaysListNew,#stockDetailsNew').dataTable({searching: false, paging: false, info: false});
 
         });
     </script>
