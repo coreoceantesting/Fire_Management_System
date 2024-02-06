@@ -83,6 +83,7 @@
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
                                         <th>Total Stock</th>
+                                        <th>Available Stock</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -92,6 +93,7 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->equipment_name }}</td>
                                             <td>{{ $list->total_stock ?: '0' }}</td>
+                                            <td>{{ $list->total_stock - $list->total_supply_quantity ?: '0' }}</td>
                                             <td>
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View List" data-id="{{ $list->equipment_id }}"><i data-feather="list"></i></button>
                                             </td>

@@ -159,6 +159,30 @@ class EquipmentsController extends Controller
         ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
         ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
         ->get();
+
+        // Fetch total supply quantity
+        $totalSupplyQuantity = DB::table('equipment')
+            ->leftJoin('supply_equipment', 'equipment.equipment_id', '=', 'supply_equipment.equipment_id')
+            ->select('equipment.equipment_id', 'equipment.equipment_name', DB::raw('SUM(IFNULL(supply_equipment.supply_equipment_quantity, 0)) as total_supply_quantity'))
+            ->where('equipment.is_deleted', '0')
+            ->where('equipment.equipment_is_active', '1')
+            ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
+            ->orderByDesc('equipment.created_at')
+            ->get();
+
+        // Combine the results with the equipment list
+        $equipment_list = $equipment_list->map(function ($item) use ($totalSupplyQuantity) {
+            $supplyItem = $totalSupplyQuantity->where('equipment_id', $item->equipment_id)->first();
+
+            return (object) [
+                'equipment_id' => $item->equipment_id,
+                'equipment_name' => $item->equipment_name,
+                'total_stock' => $item->total_stock,
+                'total_supply_quantity' => $supplyItem ? $supplyItem->total_supply_quantity : 0,
+            ];
+        });
+
+        
         return view('equipment_management.addStock',compact('equipment_list'));
     }
 
