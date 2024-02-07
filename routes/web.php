@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 
 
-// Guest Users
+// Guest 
 Route::middleware(['guest','PreventBackHistory'])->group(function()
 {
     Route::get('login', [App\Http\Controllers\Admin\AuthController::class, 'showLogin'] )->name('login');
