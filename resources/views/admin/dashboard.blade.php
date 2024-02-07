@@ -347,19 +347,19 @@
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <label for="test" style="margin-left: 10px;">Total Slips (एकूण स्लिप्स)</label>
                             <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <label for="test" style="margin-left: 10px;">Action Taken Slips(कारवाई केलेल्या स्लिप्स)</label>
                             <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
+                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <label for="test" style="margin-left: 10px;">Vardi Ahaval(वर्दी अहवाल)</label>
                             <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
+                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
                             </div>
                         </div>
                     </div>
