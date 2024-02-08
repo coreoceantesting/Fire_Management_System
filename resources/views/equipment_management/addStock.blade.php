@@ -236,6 +236,11 @@
                     $('#stockTable').DataTable({
                         dom: '<"row"<"col-sm-4"l><"col-sm-4 text-left"f><"col-sm-4 mt-2"B>>rtip',
                         buttons: ["copy", "excel", "print"],
+                        initComplete: function () {
+                            $('.dt-buttons button').css('background-color', '#7758ae'); // Replace '#yourColor' with your desired background color
+                            $('.dt-buttons button').css('border-color', '#7758ae'); // Optional: Change border color if needed
+                            $('.dt-buttons button').css('color', '#fff'); // Optional: Change text color if needed
+                        },
                     });
                     
                     // Show the modal
