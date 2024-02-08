@@ -230,7 +230,7 @@
 
                     // Initialize DataTable on the table
                     $('#stockTable').DataTable({
-                        dom: "Blfrtip",
+                        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-left"f><"col-sm-4 mt-2"B>>rtip',
                         buttons: ["copy", "excel", "print"],
                     });
                     
