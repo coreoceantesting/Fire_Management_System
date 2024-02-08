@@ -200,7 +200,7 @@
                     var tableHtml = '';
                     if (data.equipment_stock_list && data.equipment_stock_list.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Stock List (स्टॉक यादी) </h3><br>';
-                    tableHtml += '<table class="table table-bordered">';
+                    tableHtml += '<table id="stockTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Equipment Name (उपकरणाचे नाव)</th>';
                     tableHtml += '<th scope="col">Date (तारीख)</th>';
@@ -231,6 +231,12 @@
 
                     // Display table in the modal
                     $('#StockDetails').html(tableHtml);
+
+                    // Initialize DataTable on the table
+                    $('#stockTable').DataTable({
+                        dom: "Blfrtip",
+                        buttons: ["copy", "excel", "print"],
+                    });
                     
                     // Show the modal
                     $('#viewStockModal').modal('show');
