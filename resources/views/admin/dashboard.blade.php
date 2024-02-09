@@ -215,9 +215,9 @@
         </div><!--end col-->
 
         <div class="col-xl-6">
-            <div class="card card-height-100">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Today's List</h4>
+            <div class="card border-primary card-height-100">
+                <div class="card-header bg-primary align-items-center d-flex">
+                    <h4 class="card-title text-white mb-0 flex-grow-1">Today's List</h4>
                     <div class="flex-shrink-0">
                         <a href="{{route('todays_list')}}" class="btn btn-soft-primary btn-sm">
                             View All
@@ -267,9 +267,9 @@
         </div><!--end col-->
 
         <div class="col-xl-6">
-            <div class="card card-height-100" style="display: block">
-                <div class="card-header bg-light align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">
+            <div class="card border-primary card-height-100" style="display: block">
+                <div class="card-header bg-primary align-items-center d-flex">
+                    <h4 class="card-title text-white mb-0 flex-grow-1">
                         Equipments Stock Details
                     </h4>
                     <div>
@@ -319,9 +319,9 @@
         </div><!--end col-->
 
         <div class="col-xl-6">
-            <div class="card card-height-100" style="display: block">
-                <div class="card-header bg-light align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">
+            <div class="card card-height-100 border-primary" style="display: block">
+                <div class="card-header bg-primary align-items-center d-flex">
+                    <h4 class="card-title text-white mb-0 flex-grow-1">
                         Analysis
                     </h4>
                     <div class="d-none">
