@@ -333,6 +333,9 @@
             if (quantity > availableQuantity) {
                 $('.quantity_err').text('Entered quantity exceeds the available supplied quantity');
                 $('#addSubmit').prop('disabled', true);
+            }else if(quantity < 0){
+                $('.quantity_err').text('Entered quantity must be greater than 0');
+                $('#addSubmit').prop('disabled', true);
             } else {
                 $('.quantity_err').text('');
                 $('#addSubmit').prop('disabled', false);

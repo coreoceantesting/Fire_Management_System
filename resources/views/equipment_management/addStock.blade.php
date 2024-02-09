@@ -300,3 +300,22 @@
         });
     });
 </script>
+
+{{-- validation for available quntity --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for keyup on the quantity input field
+        $('#quantity').on('keyup', function() {
+            var quantity = parseInt($(this).val());
+
+            // Check if the entered quantity is greater than the available quantity
+            if (quantity < 0) {
+                $('.quantity_err').text('Entered quantity must be greater than 0');
+                $('#addSubmit').prop('disabled', true);
+            } else {
+                $('.quantity_err').text('');
+                $('#addSubmit').prop('disabled', false);
+            }
+        });
+    });
+</script>
