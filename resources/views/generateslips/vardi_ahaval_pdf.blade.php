@@ -381,7 +381,7 @@
 
         <p style="text-align: left">अशाप्रकारे विझविली :- {{$actionTakenData->number_of_vehicle}} , @foreach($additionalHelpDetails as $no) {{ $no->vehicle_number }}, @endforeach या  वाहनाच्या होजरीलच्या सहाय्याने आग पूर्णपणे  विझवली .</p>
         <p style="text-align: left">सदर घटनांची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक ४९ मध्ये पुष्ठ क्र . १९६ वर घेतलेली आहे . </p>
-        <p style="text-align: left">सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर अड्वयझरी कॉउंसिल  यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
+        <p style="text-align: left">सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर एडवाइजरी काउंसिल यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
         <ul style="list-style-type:none; text-align:right; padding-top:8rem;">
             <li>उप अग्निशमन अधिकारी</li>
             <li>पनवेल महानगरपालिका</li>
