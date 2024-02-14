@@ -64,7 +64,7 @@ class DriversDetailsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified 
+     * Show the form for editing the specified resource.
      */
     public function edit(DriverDetail $driver_detail)
     {
