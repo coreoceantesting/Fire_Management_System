@@ -114,6 +114,12 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('store-stock', [App\Http\Controllers\EquipmentsController::class, 'store_stock'])->name('store_stock');
     Route::get('/view-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_stock_list'])->name('view_stock_list');
 
+    // vehicle history 
+    Route::get('add-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'add_vechicle_details'])->name('add_vechicle_details');
+    Route::post('store-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'store_vechicle_details'])->name('store_vechicle_details');
+    Route::get('/view-vehicle-detail/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_vehicle_detail'])->name('view_vehicle_detail');
+
+
     Route::get('supply-stock', [App\Http\Controllers\EquipmentsController::class, 'supply_stock'])->name('supply_stock');
     Route::post('store-supply-stock', [App\Http\Controllers\EquipmentsController::class, 'store_supply_stock'])->name('store_supply_stock');
     Route::get('/view-supply-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_supply_stock_list'])->name('view_supply_stock_list');

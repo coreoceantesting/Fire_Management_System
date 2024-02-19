@@ -194,6 +194,21 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#menu6" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i class="ri-taxi-fill"></i>
+                        <span data-key="t-layouts">Vehicle History</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="menu6">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('add_vechicle_details') }}" class="nav-link" data-key="t-horizontal">Vehicle Details (वाहन तपशील)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
             </ul>
         </div>
     </div>
