@@ -273,7 +273,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.rc_no +'</td></tr>';
 
                     tableHtml += '<tr> <th> Uploaded RC File (आरसी फाइल) </th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.rc_upload +'</td></tr>';
+                    tableHtml += '<td><a href="storage/'+ data.vehicle_detail.rc_upload +'" target="_blank">View Document</a></td></tr>';
 
                     tableHtml += '<tr> <th> PUC Start Date (पीयूसी सुरू होण्याची तारीख) </th>';
                     tableHtml += '<td>'+ data.vehicle_detail.puc_start_date +'</td></tr>';
@@ -282,7 +282,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.puc_end_date +'</td></tr>';
 
                     tableHtml += '<tr> <th> Upload PUC (पीयूसी अपलोड) </th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.puc_upload +'</td></tr>';
+                    tableHtml += '<td><a href="storage/'+ data.vehicle_detail.puc_upload +'" target="_blank">View Document</a></td></tr>';
 
                     tableHtml += '<tr> <th> Insurance Start Date (विमा सुरू होण्याची तारीख) </th>';
                     tableHtml += '<td>'+ data.vehicle_detail.insurance_start_date +'</td></tr>';
@@ -291,7 +291,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.insurance_end_date +'</td></tr>';
 
                     tableHtml += '<tr> <th> Insurance Certificate (विमा प्रमाणपत्र) </th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.insurance_upload +'</td></tr>';
+                    tableHtml += '<td><a href="storage/'+ data.vehicle_detail.insurance_upload +'" target="_blank">View Document</a></td></tr>';
 
                     tableHtml += '<tr> <th> Vehicle Fitness Start Date (वाहन फिटनेस सुरू तारीख) </th>';
                     tableHtml += '<td>'+ data.vehicle_detail.vehicle_fitness_start_date +'</td></tr>';
@@ -300,7 +300,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.vehicle_fitness_end_date +'</td></tr>';
 
                     tableHtml += '<tr> <th> Vehicle Fitness certificate (वाहन फिटनेस प्रमाणपत्र)</th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.vehicle_fitness_upload +'</td></tr>';
+                    tableHtml += '<td><a href="storage/'+ data.vehicle_detail.vehicle_fitness_upload +'" target="_blank">View Document</a></td></tr>';
 
                     tableHtml += '</table>';
                 }else{
