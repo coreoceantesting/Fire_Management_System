@@ -118,6 +118,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('add-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'add_vechicle_details'])->name('add_vechicle_details');
     Route::post('store-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'store_vechicle_details'])->name('store_vechicle_details');
     Route::get('/view-vehicle-detail/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_vehicle_detail'])->name('view_vehicle_detail');
+    Route::post('update-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'update_vehicle_details'])->name('update_vehicle_details');
+    Route::delete('/retire-vehicle/{id}', [App\Http\Controllers\VehicleHistoryController::class, 'destroy'])->name('vehicle.destroy');
 
 
     Route::get('supply-stock', [App\Http\Controllers\EquipmentsController::class, 'supply_stock'])->name('supply_stock');
