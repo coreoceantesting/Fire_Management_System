@@ -335,6 +335,7 @@
                     <h4 class="card-title text-white mb-0 flex-grow-1">
                         Vehicle History
                     </h4>
+                    <b class="text-danger text-center" style="margin-right:53px;margin-top:5px;">लाल रंग : कागदपत्रांची मुदत लवकरच संपेल...!</b>
                     <div>
                         <a href="{{route('add_vechicle_details')}}" class="btn btn-soft-secondary btn-sm">
                             View All
