@@ -231,6 +231,45 @@
             </div>
         </div>
 
+        <!-- Add Action Details Form -->
+        <div class="row" id="actionDetailsContainer" style="display:none;">
+            <div class="col-sm-12">
+                <div class="card">
+                    <form class="theme-form" name="actionDetailForm" id="actionDetailForm" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="vehicleHistoryId" id="vehicleHistoryId" value="">
+                        <div class="card-body">
+                            <div class="mb-3 row">
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="date">Date(तारीख) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="date" name="date" type="date" placeholder="Enter Date">
+                                    <span class="text-danger error-text date_err"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="reason">Reason(कारण) <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="reason" id="reason" cols="30" rows="2"></textarea>
+                                    <span class="text-danger error-text reason_err"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="solution">Solution(उपाय) <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="solution" id="solution" cols="30" rows="2"></textarea>
+                                    <span class="text-danger error-text solution_err"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary" id="actionformSubmit">Submit</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
         {{-- listing --}}
         <div class="row">
@@ -280,7 +319,7 @@
                                             <td>
                                                 <button class="view-details btn btn-secondary px-2 py-1" title="View Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="eye"></i></button>
                                                 <button class="edit-details btn btn-primary px-2 py-1" title="Edit Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="edit"></i></button>
-                                                <button class="btn btn-warning action-element px-2 py-1" title="Take Action" data-id="{{ $list->vehicle_history_id }}"><i data-feather="book"></i></button>
+                                                <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="book"></i></button>
                                                 <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}"><i data-feather="list"></i></button>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}"><i data-feather="trash-2"></i></button>
                                             </td>
@@ -307,6 +346,26 @@
                     <div class="modal-body">
                         <!-- Vehicle Details will be displayed here -->
                         <div id="VehicleDetails"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Action Taken on vehicle List model --}}
+        <div class="modal fade" id="ActionTakenModal" tabindex="-1" role="dialog" aria-labelledby="ActionTakenModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ActionTakenModalLabel">View Action Details</h5>
+                        <button type="button" class="close btn btn-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="ActionTakenDetails"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -676,6 +735,147 @@
                     },
                 });
             }
+        });
+    });
+</script>
+
+
+{{-- open vehicle Action Details form--}}
+<script>
+    $(document).ready(function() {
+        $('.action-element').on('click', function() {
+            // Display the form
+            var vehicleHistoryId = $(this).data('id');
+            $('#vehicleHistoryId').val(vehicleHistoryId);
+
+            $.ajax({
+                url: '/view-vehicle-detail/' + vehicleHistoryId,
+                type: 'GET',
+                success: function(data) {
+                    // Show the form
+                    $('#actionDetailsContainer').show();
+                    $('#editContainer').hide();
+                    $('#addContainer').hide();
+                    $('#btnCancel').hide();
+                },
+                error: function(error) {
+                    // Handle error response
+                    console.log(error);
+                }
+            });
+
+            $('#actionDetailsContainer').show();
+        });
+    });
+</script>
+
+{{-- store vehicle action details form  --}}
+<script>
+    $("#actionDetailForm").submit(function(e) {
+        e.preventDefault();
+        $("#actionformSubmit").prop('disabled', true);
+
+        var formdata = new FormData(this);
+        $.ajax({
+            url: '{{ route('store_vechicle_action_details') }}',
+            type: 'POST',
+            data: formdata,
+            contentType: false,
+            processData: false,
+            success: function(data)
+            {
+                $("#actionformSubmit").prop('disabled', false);
+                if (!data.error2) {
+                        if (data.errors) {
+                            // Display validation errors
+                            $.each(data.errors, function(field, messages) {
+                                $('.' + field + '_err').text(messages); // Display all messages if there are multiple
+                                $("[name='"+field+"']").addClass('is-invalid');
+                            });
+                        } else if (data.success) {
+                            swal("Successful!", data.success, "success")
+                                .then((action) => {
+                                    window.location.href = '{{ route('add_vechicle_details') }}';
+                                });
+                        }
+                    } else {
+                        swal("Error!", data.error2, "error");
+                    }
+            },
+            statusCode: {
+                422: function(responseObject, textStatus, jqXHR) {
+                    $("#actionformSubmit").prop('disabled', false);
+                    resetErrors();
+                    printErrMsg(responseObject.responseJSON.errors);
+                },
+                500: function(responseObject, textStatus, errorThrown) {
+                    $("#actionformSubmit").prop('disabled', false);
+                    swal("Error occured!", "Something went wrong please try again", "error");
+                }
+            }
+        });
+
+    });
+</script>
+
+{{-- View action taken List on vehicle  --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for "View Slip" button click
+        $('.list-element').on('click', function() {
+            var vehicle_id = $(this).data('id');
+
+            // Fetch slip details from the JSON endpoint
+            $.ajax({
+                url: '/view-action-list/' + vehicle_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Generate HTML table with the predefined headers
+                    var tableHtml = '';
+                    if (data.vehicle_action_list && data.vehicle_action_list.length > 0) {
+                    tableHtml += '<br><h3 class="text-center"> Action Details (क्रिया तपशील) </h3><br>';
+                    tableHtml += '<table id="vehicleactionTable" class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">Date (तारीख)</th>';
+                    tableHtml += '<th scope="col">Reason (कारण)</th>';
+                    tableHtml += '<th scope="col">Solution (उपाय)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    // Loop through stock detail
+                    data.vehicle_action_list.forEach(function(list) {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + list.date + '</td>';
+                        tableHtml += '<td>' + list.reason + '</td>';
+                        tableHtml += '<td>' + list.solution + '</td>';
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</tbody></table>';
+                }else{
+                    tableHtml += '<h3 class="text-center">No Action Added</h3>';
+                }
+
+                    // Display table in the modal
+                    $('#ActionTakenDetails').html(tableHtml);
+
+                    // Initialize DataTable on the table
+                    $('#vehicleactionTable').DataTable({
+                        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-left"f><"col-sm-4 mt-2"B>>rtip',
+                        buttons: ["copy", "excel", "print"],
+                        initComplete: function () {
+                            $('.dt-buttons button').css('background-color', '#7758ae'); // Replace '#yourColor' with your desired background color
+                            $('.dt-buttons button').css('border-color', '#7758ae'); // Optional: Change border color if needed
+                            $('.dt-buttons button').css('color', '#fff'); // Optional: Change text color if needed
+                        },
+                    });
+                    
+                    // Show the modal
+                    $('#ActionTakenModal').modal('show');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
 </script>

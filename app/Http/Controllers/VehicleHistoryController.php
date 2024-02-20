@@ -198,4 +198,43 @@ class VehicleHistoryController extends Controller
         return view('vehicle_history.expireVehicleDetails',compact('vehicle_list'));
     }
 
+    public function store_vechicle_action_details(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'date' => 'required',
+                'reason' => 'required',
+                'solution' => 'required',
+            ]);
+
+
+            // Store data in vehicle_history table
+            DB::table('vehicle_action_details')->insert([
+                'vehicle_history_id' => $request->input('vehicleHistoryId'),
+                'date' => $request->input('date'),
+                'reason' => $request->input('reason'),
+                'solution' => $request->input('solution'),
+                'created_by' => Auth::user()->id,
+                'created_at' => now(),
+            ]);
+
+            return response()->json(['success' => 'Vehicle Action Details Added successfully!']);
+        } catch (ValidationException $e) {
+            // If validation fails, return validation errors
+            return response()->json(['errors' => $e->errors()]);
+        }
+    }
+
+    public function view_action_list($vehicleId)
+    {
+        $vehicle_action_list = DB::table('vehicle_action_details')
+                ->where('vehicle_history_id', $vehicleId)
+                ->get();
+
+        return response()->json([
+            'vehicle_action_list' => $vehicle_action_list,
+        ]);
+    }
+
 }
