@@ -661,7 +661,9 @@
             var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
             if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(5)').addClass('text-danger blink'); // Add class for styling
+                $(this).find('td:nth-child(5)').addClass('text-danger blink');
+                $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
             }
         });
 
@@ -673,7 +675,9 @@
             var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
             if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(6)').addClass('text-danger blink'); // Add class for styling
+                $(this).find('td:nth-child(6)').addClass('text-danger blink');
+                $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
             }
         });
 
@@ -685,7 +689,9 @@
             var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
             if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(7)').addClass('text-danger blink'); // Add class for styling
+                $(this).find('td:nth-child(7)').addClass('text-danger blink');
+                $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
             }
         });
 

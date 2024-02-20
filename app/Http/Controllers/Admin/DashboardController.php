@@ -32,6 +32,7 @@ class DashboardController extends Controller
         ->count();
         $vardiAhavalSlipCount = DB::table('slips')->where('is_occurance_book_submitted','1')->count();
         $totalSlipCount = DB::table('slips')->count();
+        $vehicle_history_details = DB::table('vehicle_history')->where('is_vehicle_expire','0')->latest()->take(5)->get();
 
         $equipment_list = DB::table('equipment')
         ->leftJoin('equipment_stock', 'equipment.equipment_id', '=', 'equipment_stock.equipment_id')
@@ -80,7 +81,7 @@ class DashboardController extends Controller
         });
 
 
-        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount','vardiAhavalSlipCount','totalSlipCount','todaysSlipList','equipment_list'));
+        return view('admin.dashboard', compact('todaysSlipCount', 'monthlySlipCount', 'yearlySlipCount', 'actionTakenSlipCount','vardiAhavalSlipCount','totalSlipCount','todaysSlipList','equipment_list','vehicle_history_details'));
     }
 
     public function changeThemeMode()

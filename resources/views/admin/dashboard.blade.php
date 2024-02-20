@@ -1,4 +1,15 @@
 <x-admin.layout>
+    <style>
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    
+        .blink {
+            animation: blink 1s infinite;
+        }
+    </style>
     <x-slot name="title">Dashboard</x-slot>
     <x-slot name="heading">Dashboard (डॅशबोर्ड) </x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
@@ -319,55 +330,55 @@
         </div><!--end col-->
 
         <div class="col-xl-6">
-            <div class="card card-height-100 border-primary" style="display: block">
+            <div class="card border-primary card-height-100" style="display: block">
                 <div class="card-header bg-primary align-items-center d-flex">
                     <h4 class="card-title text-white mb-0 flex-grow-1">
-                        Analysis
+                        Vehicle History
                     </h4>
-                    <div class="d-none">
-                        <button type="button" class="btn btn-soft-secondary btn-sm">
-                            ALL
-                        </button>
-                        <button type="button" class="btn btn-soft-primary btn-sm">
-                            1M
-                        </button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm">
-                            6M
-                        </button>
+                    <div>
+                        <a href="{{route('add_vechicle_details')}}" class="btn btn-soft-secondary btn-sm">
+                            View All
+                        </a>
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    <div>
-                        @php
-                            $total = $totalSlipCount + $actionTakenSlipCount + $vardiAhavalSlipCount;
-                            $totalPercentage = $total > 0 ? 100 : 0;
-                            $totalPercentage = min($totalPercentage, 100); // Ensure the total percentage does not exceed 100
-                        @endphp
-                
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <label for="test" style="margin-left: 10px;">Total Slips (एकूण स्लिप्स)</label>
-                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ $totalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $totalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $totalSlipCount }}%</div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <label for="test" style="margin-left: 10px;">Action Taken Slips(कारवाई केलेल्या स्लिप्स)</label>
-                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{ $actionTakenSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $actionTakenSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $actionTakenSlipCount }}%</div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <label for="test" style="margin-left: 10px;">Vardi Ahaval(वर्दी अहवाल)</label>
-                            <div class="progress w-50" style="height: 20px;margin-right: 5px;">
-                                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: {{ $vardiAhavalSlipCount / $total * $totalPercentage }}%" aria-valuenow="{{ $vardiAhavalSlipCount }}" aria-valuemin="0" aria-valuemax="{{ $totalPercentage }}">{{ $vardiAhavalSlipCount }}%</div>
-                            </div>
-                        </div>
+                <div class="card-body">
+                    @php
+                        $serialNumber = 1;
+                    @endphp
+                    <div id="users-by-country" data-colors='["--vz-light"]' class="text-center d-none" style="height: 252px"></div>
+
+                    <div class="table-responsive">
+                        <table id="vehicledetails" class="table table-bordered nowrap align-middle" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Vehicle Name</th>
+                                    <th>Vehicle Number</th>
+                                    <th>PUC Expire Date</th>
+                                    <th>Insurance Expire Date</th>
+                                    <th>Fitness Expire Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($vehicle_history_details as $list)
+                                    <tr>
+                                        <td>{{ $serialNumber++ }}</td>
+                                        <td>{{ $list->vehicle_name }}</td>
+                                        <td>{{ $list->vehicle_no }}</td>
+                                        <td>{{ $list->puc_end_date }}</td>
+                                        <td>{{ $list->insurance_end_date }}</td>
+                                        <td>{{ $list->vehicle_fitness_end_date }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- end card body -->
             </div>
             <!-- end card -->
         </div><!--end col-->
+
 
 
 
@@ -401,7 +412,7 @@
                 window.location.href = "{{ route('slips_list') }}";
             });
 
-            $('#todaysListNew,#stockDetailsNew').dataTable({searching: false, paging: false, info: false});
+            $('#todaysListNew,#stockDetailsNew,#vehicledetails').dataTable({searching: false, paging: false, info: false});
 
         });
     </script>
@@ -419,6 +430,60 @@
             });
         });
     </script>
+
+
+    {{-- blink date if documents expire within 10 days --}}
+    <script>
+        $(document).ready(function() {
+            var currentDate = new Date();
+
+            $('#vehicledetails tbody tr').each(function() {
+                var pucEndDate = new Date($(this).find('td:nth-child(4)').text()); // Adjust the index based on your table structure
+
+                // Calculate the difference in days
+                var timeDiff = pucEndDate.getTime() - currentDate.getTime();
+                var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (daysDiff <= 10 && daysDiff >= 0) {
+                    $(this).find('td:nth-child(4)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
+                }
+            });
+
+            $('#buttons-datatables tbody tr').each(function() {
+                var insuranceEndDate = new Date($(this).find('td:nth-child(5)').text()); // Adjust the index based on your table structure
+
+                // Calculate the difference in days
+                var timeDiff = insuranceEndDate.getTime() - currentDate.getTime();
+                var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (daysDiff <= 10 && daysDiff >= 0) {
+                    $(this).find('td:nth-child(5)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
+                }
+            });
+
+            $('#buttons-datatables tbody tr').each(function() {
+                var fitnessEndDate = new Date($(this).find('td:nth-child(6)').text()); // Adjust the index based on your table structure
+
+                // Calculate the difference in days
+                var timeDiff = fitnessEndDate.getTime() - currentDate.getTime();
+                var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (daysDiff <= 10 && daysDiff >= 0) {
+                    $(this).find('td:nth-child(6)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(2)').addClass('text-danger blink');
+                    $(this).find('td:nth-child(3)').addClass('text-danger blink'); // Add class for styling
+                }
+            });
+
+        });
+    </script>
+
+
+
     @endpush
 
 </x-admin.layout>

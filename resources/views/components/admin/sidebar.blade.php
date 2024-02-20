@@ -206,7 +206,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('expire_vechicle_list') }}" class="nav-link" data-key="t-horizontal">Expire Vehicle List (कालबाह्य झालेल्या वाहनांची यादी)</a>
+                                <a href="{{ route('expire_vechicle_list') }}" class="nav-link" data-key="t-horizontal">Expired Vehicle List (कालबाह्य झालेल्या वाहनांची यादी)</a>
                             </li>
                         </ul>
                     </div>
