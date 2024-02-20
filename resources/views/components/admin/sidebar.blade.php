@@ -204,6 +204,10 @@
                             <li class="nav-item">
                                 <a href="{{ route('add_vechicle_details') }}" class="nav-link" data-key="t-horizontal">Vehicle Details (वाहन तपशील)</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('expire_vechicle_list') }}" class="nav-link" data-key="t-horizontal">Expire Vehicle List (कालबाह्य झालेल्या वाहनांची यादी)</a>
+                            </li>
                         </ul>
                     </div>
                 </li>

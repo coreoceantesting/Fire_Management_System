@@ -192,4 +192,10 @@ class VehicleHistoryController extends Controller
         }
     }
 
+    public function expire_vechicle_list()
+    {
+        $vehicle_list = DB::table('vehicle_history')->where('is_vehicle_expire','1')->latest()->get();
+        return view('vehicle_history.expireVehicleDetails',compact('vehicle_list'));
+    }
+
 }
