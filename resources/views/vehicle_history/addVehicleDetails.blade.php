@@ -281,6 +281,7 @@
                                 <div class="">
                                     <button id="addToTable" class="btn btn-primary">Add Vehicle Detail <i class="fa fa-plus"></i></button>
                                     <button id="btnCancel" class="btn btn-danger" style="display:none;">Cancel</button>
+                                    <button id="btnCancelNew" class="btn btn-danger" style="display:none;">Cancel</button>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -318,10 +319,10 @@
                                             <td>{{ $list->vehicle_fitness_end_date }}</td>
                                             <td>
                                                 <button class="view-details btn btn-secondary px-2 py-1" title="View Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="eye"></i></button>
-                                                <button class="edit-details btn btn-primary px-2 py-1" title="Edit Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="edit"></i></button>
+                                                <button class="edit-details btn btn-primary px-2 py-1" title="Update Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="edit"></i></button>
                                                 <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="book"></i></button>
                                                 <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}"><i data-feather="list"></i></button>
-                                                <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}"><i data-feather="trash-2"></i></button>
+                                                <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}"><i class="fa fa-bus" aria-hidden="true"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -762,7 +763,7 @@
                     $('#actionDetailsContainer').show();
                     $('#editContainer').hide();
                     $('#addContainer').hide();
-                    $('#btnCancel').hide();
+                    $('#btnCancelNew').show();
                 },
                 error: function(error) {
                     // Handle error response
@@ -771,6 +772,11 @@
             });
 
             $('#actionDetailsContainer').show();
+        });
+
+        $('#btnCancelNew').on('click', function(){
+            $('#actionDetailsContainer').hide();
+            $('#btnCancelNew').hide();
         });
     });
 </script>
