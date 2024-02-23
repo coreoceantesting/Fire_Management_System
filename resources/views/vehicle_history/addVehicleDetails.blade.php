@@ -311,6 +311,7 @@
                                         <th>fitness Expire Date</th>
                                         <th>Action</th>
                                         <th>Menu</th>
+                                        <th>Retire</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -329,7 +330,9 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}">Action On Vehicle</button>
-                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Actions List</button>
+                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Actions List</button> 
+                                            </td>
+                                            <td>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}">Make Vehicle Retire</button>
                                             </td>
                                         </tr>
