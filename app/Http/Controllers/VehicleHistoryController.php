@@ -228,12 +228,15 @@ class VehicleHistoryController extends Controller
 
     public function view_action_list($vehicleId)
     {
+        $vehicle_detail = DB::table('vehicle_history')->where('vehicle_history_id',$vehicleId)->select('vehicle_no')->first();
         $vehicle_action_list = DB::table('vehicle_action_details')
                 ->where('vehicle_history_id', $vehicleId)
+                ->latest()
                 ->get();
 
         return response()->json([
             'vehicle_action_list' => $vehicle_action_list,
+            'vehicle_detail' => $vehicle_detail,
         ]);
     }
 

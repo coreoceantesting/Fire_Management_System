@@ -242,6 +242,11 @@
                             <div class="mb-3 row">
 
                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="vecNo">Vehicle Number <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vecNo" name="vecNo" type="text" value="" readonly>
+                                </div>
+
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="date">Date(तारीख) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="date" name="date" type="date" placeholder="Enter Date">
                                     <span class="text-danger error-text date_err"></span>
@@ -305,7 +310,7 @@
                                         <th>Insurance Expire Date</th>
                                         <th>fitness Expire Date</th>
                                         <th>Action</th>
-                                        <th>Menus</th>
+                                        <th>Menu</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -323,8 +328,8 @@
                                                 <button class="edit-details btn btn-primary px-2 py-1" title="Update Details" data-id="{{ $list->vehicle_history_id }}">Update Details</button>
                                             </td>
                                             <td>
-                                                <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}">Add Actions On Vehicle</button>
-                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Action List</button>
+                                                <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}">Action On Vehicle</button>
+                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Actions List</button>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}">Make Vehicle Retire</button>
                                             </td>
                                         </tr>
@@ -551,7 +556,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.company_name +'</td></tr>';
 
                     tableHtml += '<tr> <th> Vehicle Number (वाहन क्रमांक) </th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.vehicle_no +'</td></tr>';
+                    tableHtml += '<td><b>'+ data.vehicle_detail.vehicle_no +'</b></td></tr>';
 
                     tableHtml += '<tr> <th> RC Number (आरसी क्रमांक) </th>';
                     tableHtml += '<td>'+ data.vehicle_detail.rc_no +'</td></tr>';
@@ -762,7 +767,12 @@
                 url: '/view-vehicle-detail/' + vehicleHistoryId,
                 type: 'GET',
                 success: function(data) {
-                    // Show the form
+                    // Show the form vecNo
+                    if (data.vehicle_detail) {
+                        $('#vecNo').val(data.vehicle_detail.vehicle_no);
+                    }else{
+                        $('#vecNo').val();
+                    }
                     $('#actionDetailsContainer').show();
                     $('#editContainer').hide();
                     $('#addContainer').hide();
@@ -848,10 +858,13 @@
                 success: function(data) {
                     // Generate HTML table with the predefined headers
                     var tableHtml = '';
+                    var no = 1;
                     if (data.vehicle_action_list && data.vehicle_action_list.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Action Details (क्रिया तपशील) </h3><br>';
+                    tableHtml += '<br><h3 class="text-center"> Vehicle No :- ' + data.vehicle_detail.vehicle_no + '</h3><br>';
                     tableHtml += '<table id="vehicleactionTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
                     tableHtml += '<th scope="col">Date (तारीख)</th>';
                     tableHtml += '<th scope="col">Reason (कारण)</th>';
                     tableHtml += '<th scope="col">Solution (उपाय)</th>';
@@ -860,6 +873,7 @@
                     // Loop through stock detail
                     data.vehicle_action_list.forEach(function(list) {
                         tableHtml += '<tr>';
+                        tableHtml += '<td>' + no++ + '</td>';
                         tableHtml += '<td>' + list.date + '</td>';
                         tableHtml += '<td>' + list.reason + '</td>';
                         tableHtml += '<td>' + list.solution + '</td>';
