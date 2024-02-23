@@ -225,7 +225,7 @@
         </table>
 
         <hr>
-        <h4 class="text-center">३.आगीमधून विमोचन व वचवलेल्या व्यक्ती</h4>
+        <h4 class="text-center">३.आगीमधून विमोचन व वाचवलेल्या व्यक्ती</h4>
 
         <div class="row rescuetable">
             <div class="col-md-6">
