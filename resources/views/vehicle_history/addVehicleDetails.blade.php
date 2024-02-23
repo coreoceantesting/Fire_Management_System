@@ -305,6 +305,7 @@
                                         <th>Insurance Expire Date</th>
                                         <th>fitness Expire Date</th>
                                         <th>Action</th>
+                                        <th>Menus</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -318,11 +319,13 @@
                                             <td>{{ $list->insurance_end_date }}</td>
                                             <td>{{ $list->vehicle_fitness_end_date }}</td>
                                             <td>
-                                                <button class="view-details btn btn-secondary px-2 py-1" title="View Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="eye"></i></button>
-                                                <button class="edit-details btn btn-primary px-2 py-1" title="Update Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="edit"></i></button>
-                                                <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}"><i data-feather="book"></i></button>
-                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}"><i data-feather="list"></i></button>
-                                                <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}"><i class="fa fa-bus" aria-hidden="true"></i></button>
+                                                <button class="view-details btn btn-secondary px-2 py-1" title="View Details" data-id="{{ $list->vehicle_history_id }}">View</button>
+                                                <button class="edit-details btn btn-primary px-2 py-1" title="Update Details" data-id="{{ $list->vehicle_history_id }}">Update Details</button>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}">Add Actions On Vehicle</button>
+                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Action List</button>
+                                                <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}">Make Vehicle Retire</button>
                                             </td>
                                         </tr>
                                     @endforeach
