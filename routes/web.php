@@ -123,6 +123,8 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('expire-vehicle-history-list', [App\Http\Controllers\VehicleHistoryController::class, 'expire_vechicle_list'])->name('expire_vechicle_list');
     Route::post('store-vehicle-action-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'store_vechicle_action_details'])->name('store_vechicle_action_details');
     Route::get('/view-action-list/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_action_list'])->name('view_action_list');
+    Route::get('/old-document-list/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'old_doument_list'])->name('old_doument_list');
+
 
     Route::get('supply-stock', [App\Http\Controllers\EquipmentsController::class, 'supply_stock'])->name('supply_stock');
     Route::post('store-supply-stock', [App\Http\Controllers\EquipmentsController::class, 'store_supply_stock'])->name('store_supply_stock');

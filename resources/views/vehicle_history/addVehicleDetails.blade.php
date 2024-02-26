@@ -330,7 +330,8 @@
                                             </td>
                                             <td>
                                                 <button class="btn btn-warning action-element px-2 py-1" title="Add Action Details" data-id="{{ $list->vehicle_history_id }}">Action On Vehicle</button>
-                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Actions List</button> 
+                                                <button class="btn btn-info list-element px-2 py-1" title="View Action List" data-id="{{ $list->vehicle_history_id }}">Actions List</button>
+                                                <button class="btn btn-dark document-history-element px-2 py-1" title="View Old Documents" data-id="{{ $list->vehicle_history_id }}">Document History</button> 
                                             </td>
                                             <td>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Retire Vehicle" data-id="{{ $list->vehicle_history_id }}">Make Vehicle Retire</button>
@@ -378,6 +379,26 @@
                     </div>
                     <div class="modal-body">
                         <div id="ActionTakenDetails"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Old Documents History --}}
+        <div class="modal fade" id="oldDocumentHistoryModal" tabindex="-1" role="dialog" aria-labelledby="oldDocumentHistoryLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="oldDocumentHistoryLabel">View Document History</h5>
+                        <button type="button" class="close btn btn-secondary btn-sm" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="oldDocumentHistoryDetails"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -903,6 +924,113 @@
                     
                     // Show the modal
                     $('#ActionTakenModal').modal('show');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+{{-- View Document History List  --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for "View Slip" button click
+        $('.document-history-element').on('click', function() {
+            var vehicle_id = $(this).data('id');
+
+            // Fetch slip details from the JSON endpoint
+            $.ajax({
+                url: '/old-document-list/' + vehicle_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Generate HTML table with the predefined headers
+                    var tableHtml = '';
+                    var noone = 1;
+                    var notwo = 1;
+                    var nothree = 1;
+                    // puc documents
+                    if (data.old_puc_documents && data.old_puc_documents.length > 0) {
+                    tableHtml += '<br><h3 class="text-center"> Vehicle No :- ' + data.vehicle_detail.vehicle_no + '</h3><br>';
+                    tableHtml += '<br><h3 class="text-center"> Old PUC List (जुनी पीयूसी यादी) </h3><br>';
+                    tableHtml += '<table id="pucTable" class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    // Loop through old documents detail
+                    data.old_puc_documents.forEach(function(list) {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + noone++ + '</td>';
+                        tableHtml += '<td><a href="storage/'+ list.old_puc_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</tbody></table>';
+                }else{
+                    tableHtml += '<h3 class="text-center">No Old PUC Documents Found</h3>';
+                }
+
+                // insurance document
+                if (data.old_insurance_documents && data.old_insurance_documents.length > 0) {
+                    tableHtml += '<br><h3 class="text-center"> Old Insurance List (जुनी विमा यादी) </h3><br>';
+                    tableHtml += '<table id="inusranceTable" class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    // Loop through old documents detail
+                    data.old_insurance_documents.forEach(function(list) {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + notwo++ + '</td>';
+                        tableHtml += '<td><a href="storage/'+ list.old_insurance_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</tbody></table>';
+                }else{
+                    tableHtml += '<h3 class="text-center">No Old Insurance Documents Found</h3>';
+                }
+
+                // vehicle fitness documents
+                if (data.old_fitness_documents && data.old_fitness_documents.length > 0) {
+                    tableHtml += '<br><h3 class="text-center"> Old Vehicle Fitness Certificate List (जुने वाहन फिटनेस प्रमाणपत्र यादी) </h3><br>';
+                    tableHtml += '<table id="fitnessTable" class="table table-bordered">';
+                    tableHtml += '<thead><tr>';
+                    tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
+                    tableHtml += '</tr></thead>';
+                    tableHtml += '<tbody>';
+                    // Loop through old documents detail
+                    data.old_fitness_documents.forEach(function(list) {
+                        tableHtml += '<tr>';
+                        tableHtml += '<td>' + nothree++ + '</td>';
+                        tableHtml += '<td><a href="storage/'+ list.old_vehicle_fitness_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '</tr>';
+                    });
+                    tableHtml += '</tbody></table>';
+                }else{
+                    tableHtml += '<h3 class="text-center">No Old Fitness Documents Found</h3>';
+                }
+
+                    // Display table in the modal
+                    $('#oldDocumentHistoryDetails').html(tableHtml);
+
+                    // Initialize DataTable on the table
+                    $('#pucTable,#inusranceTable,#fitnessTable').DataTable({
+                        // dom: '<"row"<"col-sm-4"l><"col-sm-4 text-left"f><"col-sm-4 mt-2"B>>rtip',
+                        // buttons: ["copy", "excel", "print"],
+                        // initComplete: function () {
+                        //     $('.dt-buttons button').css('background-color', '#7758ae'); // Replace '#yourColor' with your desired background color
+                        //     $('.dt-buttons button').css('border-color', '#7758ae'); // Optional: Change border color if needed
+                        //     $('.dt-buttons button').css('color', '#fff'); // Optional: Change text color if needed
+                        // },
+                    });
+                    
+                    // Show the modal
+                    $('#oldDocumentHistoryModal').modal('show');
                 },
                 error: function(error) {
                     console.log(error);

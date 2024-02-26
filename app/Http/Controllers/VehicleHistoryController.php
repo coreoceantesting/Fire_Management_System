@@ -125,6 +125,41 @@ class VehicleHistoryController extends Controller
             if (!$vehicleDetails) {
                 return response()->json(['error' => 'Vehicle details not found.']);
             }
+
+            // Store document history if PUC, Insurance, or Fitness is updated
+
+            if($request->hasFile('puc_upload'))
+            {
+                // store document history
+                DB::table('vehicle_documents_history')->insert([
+                    'vehicle_history_id' => $id,
+                    'old_puc_upload' => $vehicleDetails->puc_upload,
+                    'updated_by' => Auth::user()->id,
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if($request->hasFile('insurance_upload'))
+            {
+                // store document history
+                DB::table('vehicle_documents_history')->insert([
+                    'vehicle_history_id' => $id,
+                    'old_insurance_upload' => $vehicleDetails->insurance_upload,
+                    'updated_by' => Auth::user()->id,
+                    'updated_at' => now(),
+                ]);
+            }
+
+            if($request->hasFile('vehicle_fitness_upload'))
+            {
+                // store document history
+                DB::table('vehicle_documents_history')->insert([
+                    'vehicle_history_id' => $id,
+                    'old_vehicle_fitness_upload' => $vehicleDetails->vehicle_fitness_upload,
+                    'updated_by' => Auth::user()->id,
+                    'updated_at' => now(),
+                ]);
+            }
     
             // Update the fields in the vehicle_history table
             DB::table('vehicle_history')->where('vehicle_history_id', $id)->update([
@@ -166,9 +201,9 @@ class VehicleHistoryController extends Controller
             $existingFilePath = DB::table('vehicle_history')->where('vehicle_history_id', $id)->value($fieldName);
 
             // If there is an existing file, delete it before updating the path
-            if ($existingFilePath) {
-                Storage::disk('public')->delete($existingFilePath);
-            }
+            // if ($existingFilePath) {
+            //     Storage::disk('public')->delete($existingFilePath);
+            // }
 
             // Update the file path in the vehicle_history table
             DB::table('vehicle_history')->where('vehicle_history_id', $id)->update([$fieldName => $filePath]);
@@ -236,6 +271,38 @@ class VehicleHistoryController extends Controller
 
         return response()->json([
             'vehicle_action_list' => $vehicle_action_list,
+            'vehicle_detail' => $vehicle_detail,
+        ]);
+    }
+
+    public function old_doument_list($vehicleId)
+    {
+        $old_puc_documents = DB::table('vehicle_documents_history')
+        ->where('vehicle_history_id',$vehicleId)
+        ->whereNotNull('old_puc_upload')
+        ->select('old_puc_upload')
+        ->orderBy('updated_at','desc')->get();
+
+        $old_insurance_documents = DB::table('vehicle_documents_history')
+        ->where('vehicle_history_id',$vehicleId)
+        ->whereNotNull('old_insurance_upload')
+        ->select('old_insurance_upload')
+        ->orderBy('updated_at','desc')->get();
+
+        $old_fitness_documents = DB::table('vehicle_documents_history')
+        ->where('vehicle_history_id',$vehicleId)
+        ->whereNotNull('old_vehicle_fitness_upload')
+        ->select('old_vehicle_fitness_upload')
+        ->orderBy('updated_at','desc')->get();
+
+        $vehicle_detail = DB::table('vehicle_history')
+        ->where('vehicle_history_id', $vehicleId)
+        ->first(['vehicle_no']);
+
+        return response()->json([
+            'old_puc_documents' => $old_puc_documents,
+            'old_insurance_documents' => $old_insurance_documents,
+            'old_fitness_documents' => $old_fitness_documents,
             'vehicle_detail' => $vehicle_detail,
         ]);
     }
