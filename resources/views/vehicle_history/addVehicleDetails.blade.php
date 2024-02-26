@@ -965,7 +965,7 @@
                     data.old_puc_documents.forEach(function(list) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + noone++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list.old_puc_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';
@@ -986,7 +986,7 @@
                     data.old_insurance_documents.forEach(function(list) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + notwo++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list.old_insurance_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';
@@ -1007,7 +1007,7 @@
                     data.old_fitness_documents.forEach(function(list) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + nothree++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list.old_vehicle_fitness_upload +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';

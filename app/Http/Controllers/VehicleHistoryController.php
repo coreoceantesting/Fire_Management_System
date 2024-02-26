@@ -277,28 +277,39 @@ class VehicleHistoryController extends Controller
 
     public function old_doument_list($vehicleId)
     {
-        $old_puc_documents = DB::table('vehicle_documents_history')
-        ->where('vehicle_history_id',$vehicleId)
-        ->whereNotNull('old_puc_upload')
-        ->select('old_puc_upload')
-        ->orderBy('updated_at','desc')->get();
-
-        $old_insurance_documents = DB::table('vehicle_documents_history')
-        ->where('vehicle_history_id',$vehicleId)
-        ->whereNotNull('old_insurance_upload')
-        ->select('old_insurance_upload')
-        ->orderBy('updated_at','desc')->get();
-
-        $old_fitness_documents = DB::table('vehicle_documents_history')
-        ->where('vehicle_history_id',$vehicleId)
-        ->whereNotNull('old_vehicle_fitness_upload')
-        ->select('old_vehicle_fitness_upload')
-        ->orderBy('updated_at','desc')->get();
+        $old_documents = DB::table('vehicle_documents_history')
+        ->where('vehicle_history_id', $vehicleId)
+        ->where(function ($query) {
+            $query->whereNotNull('old_puc_upload')
+                ->orWhereNotNull('old_insurance_upload')
+                ->orWhereNotNull('old_vehicle_fitness_upload');
+        })
+        ->select('old_puc_upload', 'old_insurance_upload', 'old_vehicle_fitness_upload', 'updated_at')
+        ->orderBy('updated_at', 'desc')
+        ->get();
 
         $vehicle_detail = DB::table('vehicle_history')
-        ->where('vehicle_history_id', $vehicleId)
-        ->first(['vehicle_no']);
+            ->where('vehicle_history_id', $vehicleId)
+            ->first(['vehicle_no']);
 
+        $old_puc_documents = [];
+        $old_insurance_documents = [];
+        $old_fitness_documents = [];
+
+        foreach ($old_documents as $document) {
+            if (!empty($document->old_puc_upload)) {
+                $old_puc_documents[] = $document->old_puc_upload;
+            }
+
+            if (!empty($document->old_insurance_upload)) {
+                $old_insurance_documents[] = $document->old_insurance_upload;
+            }
+
+            if (!empty($document->old_vehicle_fitness_upload)) {
+                $old_fitness_documents[] = $document->old_vehicle_fitness_upload;
+            }
+        }
+        
         return response()->json([
             'old_puc_documents' => $old_puc_documents,
             'old_insurance_documents' => $old_insurance_documents,
