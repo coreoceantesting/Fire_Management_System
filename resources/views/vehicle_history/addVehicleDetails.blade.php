@@ -10,8 +10,8 @@
             animation: blink 1s infinite;
         }
     </style>
-    <x-slot name="title">Add Vehicle Details</x-slot>
-    <x-slot name="heading">Add Vehicle Details (वाहनाचे तपशील जोडा)</x-slot>
+    <x-slot name="title">Note Vehicle Details</x-slot>
+    <x-slot name="heading">Note Vehicle Details (वाहनाचा तपशील नोंदवा)</x-slot>
 
 
         <!-- Add Form -->
