@@ -953,20 +953,24 @@
                     var notwo = 1;
                     var nothree = 1;
                     // puc documents
-                    if (data.old_puc_documents && data.old_puc_documents.length > 0) {
+                    if (data.old_puc_documents && data.old_puc_documents.document && Array.isArray(data.old_puc_documents.document) && data.old_puc_documents.document.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Vehicle No :- ' + data.vehicle_detail.vehicle_no + '</h3><br>';
                     tableHtml += '<br><h3 class="text-center"> Old PUC List (जुनी पीयूसी यादी) </h3><br>';
                     tableHtml += '<table id="pucTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Start Date (जुनी प्रारंभ तारीख)</th>';
+                    tableHtml += '<th scope="col">Old End Date(जुनी समाप्ती तारीख)</th>';
                     tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through old documents detail
-                    data.old_puc_documents.forEach(function(list) {
+                    data.old_puc_documents.document.forEach(function(doc, index) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + noone++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td>' + data.old_puc_documents.start_date[index] + '</td>';
+                        tableHtml += '<td>' + data.old_puc_documents.end_date[index] + '</td>';
+                        tableHtml += '<td><a href="storage/'+ doc +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';
@@ -975,19 +979,23 @@
                 }
 
                 // insurance document
-                if (data.old_insurance_documents && data.old_insurance_documents.length > 0) {
+                if (data.old_insurance_documents && data.old_insurance_documents.document && Array.isArray(data.old_insurance_documents.document) && data.old_insurance_documents.document.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Old Insurance List (जुनी विमा यादी) </h3><br>';
                     tableHtml += '<table id="inusranceTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Start Date (जुनी प्रारंभ तारीख)</th>';
+                    tableHtml += '<th scope="col">Old End Date(जुनी समाप्ती तारीख)</th>';
                     tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through old documents detail
-                    data.old_insurance_documents.forEach(function(list) {
+                    data.old_insurance_documents.document.forEach(function(doc, index) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + notwo++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td>' + data.old_insurance_documents.start_date[index] + '</td>';
+                        tableHtml += '<td>' + data.old_insurance_documents.end_date[index] + '</td>';
+                        tableHtml += '<td><a href="storage/'+ doc +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';
@@ -996,19 +1004,23 @@
                 }
 
                 // vehicle fitness documents
-                if (data.old_fitness_documents && data.old_fitness_documents.length > 0) {
+                if (data.old_fitness_documents && data.old_fitness_documents.document && Array.isArray(data.old_fitness_documents.document) && data.old_fitness_documents.document.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Old Vehicle Fitness Certificate List (जुने वाहन फिटनेस प्रमाणपत्र यादी) </h3><br>';
                     tableHtml += '<table id="fitnessTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
+                    tableHtml += '<th scope="col">Old Start Date (जुनी प्रारंभ तारीख)</th>';
+                    tableHtml += '<th scope="col">Old End Date(जुनी समाप्ती तारीख)</th>';
                     tableHtml += '<th scope="col">Old Documents (जुनी कागदपत्रे)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through old documents detail
-                    data.old_fitness_documents.forEach(function(list) {
+                    data.old_fitness_documents.document.forEach(function(doc, index) {
                         tableHtml += '<tr>';
                         tableHtml += '<td>' + nothree++ + '</td>';
-                        tableHtml += '<td><a href="storage/'+ list +'" target="_blank">View Document</a></td>';
+                        tableHtml += '<td>' + data.old_fitness_documents.start_date[index] + '</td>';
+                        tableHtml += '<td>' + data.old_fitness_documents.end_date[index] + '</td>';
+                        tableHtml += '<td><a href="storage/'+ doc +'" target="_blank">View Document</a></td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table>';

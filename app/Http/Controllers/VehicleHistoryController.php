@@ -134,6 +134,8 @@ class VehicleHistoryController extends Controller
                 DB::table('vehicle_documents_history')->insert([
                     'vehicle_history_id' => $id,
                     'old_puc_upload' => $vehicleDetails->puc_upload,
+                    'old_start_date' => $vehicleDetails->puc_start_date,
+                    'old_end_date' => $vehicleDetails->puc_end_date,
                     'updated_by' => Auth::user()->id,
                     'updated_at' => now(),
                 ]);
@@ -145,6 +147,8 @@ class VehicleHistoryController extends Controller
                 DB::table('vehicle_documents_history')->insert([
                     'vehicle_history_id' => $id,
                     'old_insurance_upload' => $vehicleDetails->insurance_upload,
+                    'old_start_date' => $vehicleDetails->insurance_start_date,
+                    'old_end_date' => $vehicleDetails->insurance_end_date,
                     'updated_by' => Auth::user()->id,
                     'updated_at' => now(),
                 ]);
@@ -156,6 +160,8 @@ class VehicleHistoryController extends Controller
                 DB::table('vehicle_documents_history')->insert([
                     'vehicle_history_id' => $id,
                     'old_vehicle_fitness_upload' => $vehicleDetails->vehicle_fitness_upload,
+                    'old_start_date' => $vehicleDetails->vehicle_fitness_start_date,
+                    'old_end_date' => $vehicleDetails->vehicle_fitness_end_date,
                     'updated_by' => Auth::user()->id,
                     'updated_at' => now(),
                 ]);
@@ -284,7 +290,7 @@ class VehicleHistoryController extends Controller
                 ->orWhereNotNull('old_insurance_upload')
                 ->orWhereNotNull('old_vehicle_fitness_upload');
         })
-        ->select('old_puc_upload', 'old_insurance_upload', 'old_vehicle_fitness_upload', 'updated_at')
+        ->select('old_puc_upload', 'old_insurance_upload', 'old_vehicle_fitness_upload', 'old_start_date', 'old_end_date',  'updated_at')
         ->orderBy('updated_at', 'desc')
         ->get();
 
@@ -298,18 +304,25 @@ class VehicleHistoryController extends Controller
 
         foreach ($old_documents as $document) {
             if (!empty($document->old_puc_upload)) {
-                $old_puc_documents[] = $document->old_puc_upload;
+                $old_puc_documents['document'][] = $document->old_puc_upload;
+                $old_puc_documents['start_date'][] = $document->old_start_date;
+                $old_puc_documents['end_date'][] = $document->old_end_date;
             }
 
             if (!empty($document->old_insurance_upload)) {
-                $old_insurance_documents[] = $document->old_insurance_upload;
+                $old_insurance_documents['document'][] = $document->old_insurance_upload;
+                $old_insurance_documents['start_date'][] = $document->old_start_date;
+                $old_insurance_documents['end_date'][] = $document->old_end_date;
             }
 
             if (!empty($document->old_vehicle_fitness_upload)) {
-                $old_fitness_documents[] = $document->old_vehicle_fitness_upload;
+                $old_fitness_documents['document'][] = $document->old_vehicle_fitness_upload;
+                $old_fitness_documents['start_date'][] = $document->old_start_date;
+                $old_fitness_documents['end_date'][] = $document->old_end_date;
             }
         }
         
+        // dd($old_puc_documents,$old_insurance_documents,$old_fitness_documents);
         return response()->json([
             'old_puc_documents' => $old_puc_documents,
             'old_insurance_documents' => $old_insurance_documents,
