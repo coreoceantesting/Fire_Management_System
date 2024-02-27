@@ -488,7 +488,7 @@
                     tableHtml += '<td>'+ data.vehicle_detail.company_name +'</td></tr>';
 
                     tableHtml += '<tr> <th> Vehicle Number (वाहन क्रमांक) </th>';
-                    tableHtml += '<td>'+ data.vehicle_detail.vehicle_no +'</td></tr>';
+                    tableHtml += '<td><b>'+ data.vehicle_detail.vehicle_no +'</b></td></tr>';
 
                     tableHtml += '<tr> <th> RC Number (आरसी क्रमांक) </th>';
                     tableHtml += '<td>'+ data.vehicle_detail.rc_no +'</td></tr>';
