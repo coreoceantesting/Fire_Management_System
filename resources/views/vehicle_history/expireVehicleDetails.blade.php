@@ -589,50 +589,6 @@
     });
 </script>
 
-{{-- blink date if documents expire within 10 days --}}
-<script>
-    $(document).ready(function() {
-        var currentDate = new Date();
-
-        $('#buttons-datatables tbody tr').each(function() {
-            var pucEndDate = new Date($(this).find('td:nth-child(5)').text()); // Adjust the index based on your table structure
-
-            // Calculate the difference in days
-            var timeDiff = pucEndDate.getTime() - currentDate.getTime();
-            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-            if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(5)').addClass('text-danger blink'); // Add class for styling
-            }
-        });
-
-        $('#buttons-datatables tbody tr').each(function() {
-            var insuranceEndDate = new Date($(this).find('td:nth-child(6)').text()); // Adjust the index based on your table structure
-
-            // Calculate the difference in days
-            var timeDiff = insuranceEndDate.getTime() - currentDate.getTime();
-            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-            if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(6)').addClass('text-danger blink'); // Add class for styling
-            }
-        });
-
-        $('#buttons-datatables tbody tr').each(function() {
-            var fitnessEndDate = new Date($(this).find('td:nth-child(7)').text()); // Adjust the index based on your table structure
-
-            // Calculate the difference in days
-            var timeDiff = fitnessEndDate.getTime() - currentDate.getTime();
-            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-            if (daysDiff <= 10 && daysDiff >= 0) {
-                $(this).find('td:nth-child(7)').addClass('text-danger blink'); // Add class for styling
-            }
-        });
-
-    });
-</script>
-
 {{-- retire vehicle --}}
 <script>
     $("#buttons-datatables").on("click", ".rem-element", function(e) {
