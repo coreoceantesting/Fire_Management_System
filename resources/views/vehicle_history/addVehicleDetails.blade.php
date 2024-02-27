@@ -886,6 +886,7 @@
                     if (data.vehicle_action_list && data.vehicle_action_list.length > 0) {
                     tableHtml += '<br><h3 class="text-center"> Action Details (क्रिया तपशील) </h3><br>';
                     tableHtml += '<br><h3 class="text-center"> Vehicle No :- ' + data.vehicle_detail.vehicle_no + '</h3><br>';
+                    tableHtml += '<div class="table-responsive">';
                     tableHtml += '<table id="vehicleactionTable" class="table table-bordered">';
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">SR.NO (क्र.)</th>';
@@ -903,7 +904,7 @@
                         tableHtml += '<td>' + list.solution + '</td>';
                         tableHtml += '</tr>';
                     });
-                    tableHtml += '</tbody></table>';
+                    tableHtml += '</tbody></table></div>';
                 }else{
                     tableHtml += '<h3 class="text-center">No Action Added</h3>';
                 }
