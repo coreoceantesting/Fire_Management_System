@@ -28,7 +28,7 @@
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
                                         <th>Total Stock</th>
-                                        <th>Overall Supply Stock</th>
+                                        <th>Overall Supplied Stock</th>
                                         <th>Overall Expire Stock</th>
                                         <th>Overall Remaining Stock</th>
                                         <th>Overall InProcess Stock</th>

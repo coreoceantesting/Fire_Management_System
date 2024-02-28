@@ -28,7 +28,7 @@
                                     <span class="text-danger error-text available_quantity_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="quantity">quantity(प्रमाण) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="quantity">Add Supply Quantity(पुरवठा प्रमाण जोडा) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Enter Quantity">
                                     <span class="text-danger error-text quantity_err"></span>
                                 </div>
@@ -87,7 +87,7 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
-                                        <th>Total Supplyed Stock</th>
+                                        <th>Total Supplied Stock</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
