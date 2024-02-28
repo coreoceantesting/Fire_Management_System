@@ -120,7 +120,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/view-vehicle-detail/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_vehicle_detail'])->name('view_vehicle_detail');
     Route::post('update-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'update_vehicle_details'])->name('update_vehicle_details');
     Route::delete('/retire-vehicle/{id}', [App\Http\Controllers\VehicleHistoryController::class, 'destroy'])->name('vehicle.destroy');
-    Route::get('expire-vehicle-history-list', [App\Http\Controllers\VehicleHistoryController::class, 'expire_vechicle_list'])->name('expire_vechicle_list');
+    Route::get('retired-vehicle-history-list', [App\Http\Controllers\VehicleHistoryController::class, 'expire_vechicle_list'])->name('expire_vechicle_list');
     Route::post('store-vehicle-action-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'store_vechicle_action_details'])->name('store_vechicle_action_details');
     Route::get('/view-action-list/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_action_list'])->name('view_action_list');
     Route::get('/old-document-list/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'old_doument_list'])->name('old_doument_list');
