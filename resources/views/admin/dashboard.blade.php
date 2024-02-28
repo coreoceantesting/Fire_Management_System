@@ -228,7 +228,7 @@
         <div class="col-xl-6">
             <div class="card border-primary card-height-100">
                 <div class="card-header bg-primary align-items-center d-flex">
-                    <h4 class="card-title text-white mb-0 flex-grow-1">Today's List</h4>
+                    <h4 class="card-title text-white mb-0 flex-grow-1">Today's List (आजची यादी)</h4>
                     <div class="flex-shrink-0">
                         <a href="{{route('todays_list')}}" class="btn btn-soft-primary btn-sm">
                             View All
@@ -281,7 +281,7 @@
             <div class="card border-primary card-height-100" style="display: block">
                 <div class="card-header bg-primary align-items-center d-flex">
                     <h4 class="card-title text-white mb-0 flex-grow-1">
-                        Equipments Stock Details
+                        Equipments Stock Details (उपकरणे स्टॉक तपशील)
                     </h4>
                     <div>
                         <a href="{{route('overall_stock_detail')}}" class="btn btn-soft-secondary btn-sm">
@@ -333,9 +333,8 @@
             <div class="card border-primary card-height-100" style="display: block">
                 <div class="card-header bg-primary align-items-center d-flex">
                     <h4 class="card-title text-white mb-0 flex-grow-1">
-                        Vehicle History
+                        Vehicle History (वाहन इतिहास)
                     </h4>
-                    <b class="text-danger text-center" style="margin-right:53px;margin-top:5px;">लाल रंग : कागदपत्रांची मुदत लवकरच संपेल...!</b>
                     <div>
                         <a href="{{route('add_vechicle_details')}}" class="btn btn-soft-secondary btn-sm">
                             View All
