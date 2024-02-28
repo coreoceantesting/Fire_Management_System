@@ -10,8 +10,8 @@
             animation: blink 1s infinite;
         }
     </style>
-    <x-slot name="title">Expire Vehicle Details</x-slot>
-    <x-slot name="heading">Expire Vehicle Details (कालबाह्य झालेल्या वाहनांची यादी)</x-slot>
+    <x-slot name="title">Retired Vehicle Details</x-slot>
+    <x-slot name="heading">Retired Vehicle Details (सेवानिवृत्त वाहन तपशील)</x-slot>
 
 
         <!-- Add Form -->
