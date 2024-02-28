@@ -28,10 +28,10 @@
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
                                         <th>Total Stock</th>
+                                        <th>Overall Available Stock</th>
                                         <th>Overall Supplied Stock</th>
-                                        <th>Overall Expire Stock</th>
-                                        <th>Overall Remaining Stock</th>
                                         <th>Overall InProcess Stock</th>
+                                        <th>Overall Expire Stock</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,10 +40,10 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->equipment_name }}</td>
                                             <td>{{ $list->total_stock ?: '0' }}</td>
-                                            <td>{{ $list->total_supply_quantity ?: '0' }}</td>
-                                            <td>{{ $list->total_expire_quantity ?: '0' }}</td>
                                             <td>{{ $list->total_stock - $list->total_supply_quantity ?: '0' }}</td>
+                                            <td>{{ $list->total_supply_quantity ?: '0' }}</td>
                                             <td>{{ $list->total_supply_quantity - $list->total_expire_quantity ?: '0' }}</td>
+                                            <td>{{ $list->total_expire_quantity ?: '0' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
