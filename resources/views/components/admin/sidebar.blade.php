@@ -103,7 +103,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">Generated Slip List(निर्माण झालेली स्लिप यादी)</a>
+                                <a href="{{ route('new_generated_slip') }}" class="nav-link" data-key="t-horizontal">List for action(कारवाईसाठीची यादी)</a>
                             </li>
 
                         </ul>
