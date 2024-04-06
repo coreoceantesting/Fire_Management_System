@@ -170,7 +170,15 @@
             </tr>
             <tr>
                 <th>आगीचा प्रकार</th>
-                <td>:- {{$vardiAhavalData->type_of_fire}}</td>
+                <td>:- 
+                    @if($vardiAhavalData->type_of_fire == "Low")
+                    कमी
+                    @elseif($vardiAhavalData->type_of_fire == "Medium")
+                    मध्यम
+                    @else
+                    उच्च
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>आगीची मर्यदा</th>
