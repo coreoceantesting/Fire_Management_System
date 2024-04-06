@@ -144,15 +144,15 @@
             </tr>
             <tr>
                 <th>वर्दीची वेळ</th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->incident_time))}} / {{date('H-i-s', strtotime($vardiAhavalData->incident_time))}}</td>
+                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->incident_time))}} / {{date('H:i:s', strtotime($vardiAhavalData->incident_time))}}</td>
             </tr>
             <tr>
                 <th>वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ</th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}} / {{date('H-i-s', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}}</td>
+                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}} / {{date('H:i;s', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}}</td>
             </tr>
             <tr>
                 <th>घटनास्तळी पोह्चल्याची वेळ </th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H-i-s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}</td>
+                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H:i:s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}</td>
             </tr>
             <tr>
                 <th>अग्निशमन केंद्रापासून घटनास्तळाचे अंतर</th>
