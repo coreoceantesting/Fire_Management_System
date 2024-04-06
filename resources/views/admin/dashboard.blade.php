@@ -25,7 +25,7 @@
                             <div class="card-body" style="background-color: papayawhip">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                             <b>Total Slips (एकूण स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -58,7 +58,7 @@
                             <div class="card-body" style="background-color: deepskyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                             <b>Today's Slips (आजच्या स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -91,7 +91,7 @@
                             <div class="card-body" style="background-color: mistyrose">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                            <b> Montly Slips (मासिक स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -125,7 +125,7 @@
                             <div class="card-body" style="background-color: skyblue">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                             <b>Yearly Slips (वार्षिक स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -159,7 +159,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                             <b>Action Taken Slips(कारवाई केलेल्या स्लिप्स)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
@@ -193,7 +193,7 @@
                             <div class="card-body" style="background-color: paleturquoise">
                                 <div class="d-flex justify-content-between">
                                     <div>
-                                        <a class="fw-medium text-muted mb-0">
+                                        <a class="fw-medium text-dark mb-0">
                                             <b>Vardi Ahaval(वर्दी अहवाल)</b>
                                         </a>
                                         <h2 class="mt-4 ff-secondary fw-semibold">
