@@ -158,7 +158,7 @@ class OccuranceBookController extends Controller
         // Fetch slip details based on $slipId
         // $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
         $slip_details = DB::table('slips')
-        ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time')
+        ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time', 'slip_action_form.vehicle_arrival_time', 'slip_action_form.vehicle_departure_from_scene_time', 'slip_action_form.vehicle_arrival_at_center_time')
         ->join('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
         ->where('slips.slip_id', $slipId)
         ->first();

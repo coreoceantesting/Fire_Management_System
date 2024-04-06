@@ -197,16 +197,17 @@
                             <div class="mb-3 row">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="property_description">Property Description Of The Fire Location (आग लागलेल्या ठिकाणच्या मालमतेचे वर्णन ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location">
+                                    {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
+                                    <textarea class="form-control" name="property_description" id="property_description" placeholder="Enter Property Description Of The Fire Location" cols="30" rows="3"></textarea>
                                     <span class="text-danger error-text property_description_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="type_of_fire">Type of fire ( आगीचा प्रकार ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="type_of_fire" id="type_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
-                                        <option value="Low">Low</option>
-                                        <option value="Medium">Medium</option>
-                                        <option value="High">High</option>
+                                        <option value="Low">Low(कमी)</option>
+                                        <option value="Medium">Medium(मध्यम)</option>
+                                        <option value="High">High(उच्च)</option>
                                     </select>
                                     <span class="text-danger error-text type_of_fire_err"></span>
                                 </div>
@@ -217,12 +218,14 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="possible_cause_of_fire">Possible Cause Of Fire ( आगीचं शक्य कारण ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire">
+                                    {{-- <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire"> --}}
+                                    <textarea class="form-control" name="possible_cause_of_fire" id="possible_cause_of_fire" placeholder="Enter Possible Cause Of Fire" cols="30" rows="3"></textarea>
                                     <span class="text-danger error-text possible_cause_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="description_of_damage">Description Of Damage ( नुकसानीचे वर्णन ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage">
+                                    {{-- <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage"> --}}
+                                    <textarea class="form-control" name="description_of_damage" id="description_of_damage" placeholder="Enter Description Of Damage" cols="30" rows="3"></textarea>
                                     <span class="text-danger error-text description_of_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
@@ -819,6 +822,10 @@
                     $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
                     $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
                     $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
+                    $("#editForm input[name='time_of_arrival_at_the_scene']").val(data.slip_data.vehicle_arrival_time);
+                    const dateTimeParts = data.slip_data.vehicle_departure_from_scene_time.split(' ');
+                    $("#editForm input[name='date_of_departure_from_scene']").val(dateTimeParts[0]);
+                    $("#editForm input[name='time_of_departure_from_scene']").val(dateTimeParts[1]);
                 }
                 else
                 {
