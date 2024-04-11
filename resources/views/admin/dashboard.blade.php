@@ -315,7 +315,7 @@
                                         <td>{{ $list->equipment_name }}</td>
                                         {{-- <td>{{ $list->total_stock ?: '0' }}</td> --}}
                                         <td>{{ $list->total_stock - $list->total_supply_quantity ?: '0' }}</td>
-                                        <td>{{ $list->total_supply_quantity - $list->total_expire_quantity ?: '0' }}</td>
+                                        <td>{{ $list->total_supply_quantity ?: '0' }}</td>
                                         <td>{{ $list->total_expire_quantity ?: '0' }}</td>
                                         {{-- <td>{{ $list->total_supply_quantity ?: '0' }}</td> --}}
                                     </tr>
