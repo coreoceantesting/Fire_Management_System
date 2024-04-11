@@ -310,6 +310,7 @@ class EquipmentsController extends Controller
                 'date' => 'required',
                 'quantity' => 'required',
                 'unit' => 'required',
+                'expired_from' =>'required',
                 'remark' => 'required',
             ]);
 
@@ -317,6 +318,7 @@ class EquipmentsController extends Controller
             DB::table('expire_equipment')->insert([
                 'equipment_id' => $request->input('equipment_name'),
                 'expire_equipment_date' => $request->input('date'),
+                'expired_from' => $request->input('expired_from'),
                 'expire_equipment_quantity' => $request->input('quantity'),
                 'expire_equipment_unit' => $request->input('unit'),
                 'expire_equipment_remark' => $request->input('remark'),
@@ -348,9 +350,10 @@ class EquipmentsController extends Controller
     {
         $total_stock = DB::table('equipment_stock')->where('equipment_id', $equipmentId)->sum('quantity');
         $total_supply = DB::table('supply_equipment')->where('equipment_id', $equipmentId)->sum('supply_equipment_quantity');
+        $total_expire = DB::table('expire_equipment')->where('equipment_id', $equipmentId)->where('expired_from','1')->sum('expire_equipment_quantity');
         if($total_supply)
         {
-            $available_quantity = $total_stock - $total_supply;
+            $available_quantity = $total_stock - $total_supply - $total_expire;
         }else{
             $available_quantity = $total_stock - 0;
         }
@@ -387,13 +390,20 @@ class EquipmentsController extends Controller
 
         // Fetch total expire quantity
         $totalExpireQuantity = DB::table('equipment')
-            ->leftJoin('expire_equipment', 'equipment.equipment_id', '=', 'expire_equipment.equipment_id')
-            ->select('equipment.equipment_id', 'equipment.equipment_name', DB::raw('SUM(IFNULL(expire_equipment.expire_equipment_quantity, 0)) as total_expire_quantity'))
-            ->where('equipment.is_deleted', '0')
-            ->where('equipment.equipment_is_active', '1')
-            ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
-            ->orderByDesc('equipment.created_at')
-            ->get();
+        ->leftJoin('expire_equipment', 'equipment.equipment_id', '=', 'expire_equipment.equipment_id')
+        ->select(
+            'equipment.equipment_id',
+            'equipment.equipment_name',
+            DB::raw('SUM(CASE WHEN expire_equipment.expired_from = 1 THEN IFNULL(expire_equipment.expire_equipment_quantity, 0) ELSE 0 END) as total_expire_quantity_1'),
+            DB::raw('SUM(CASE WHEN expire_equipment.expired_from = 2 THEN IFNULL(expire_equipment.expire_equipment_quantity, 0) ELSE 0 END) as total_expire_quantity_2')
+        )
+        ->where('equipment.is_deleted', '0')
+        ->where('equipment.equipment_is_active', '1')
+        ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
+        ->orderByDesc('equipment.created_at')
+        ->get();
+
+        // dd($totalExpireQuantity);
 
         // Combine the results with the equipment list
         $equipment_list = $equipment_list->map(function ($item) use ($totalSupplyQuantity, $totalExpireQuantity) {
@@ -405,7 +415,8 @@ class EquipmentsController extends Controller
                 'equipment_name' => $item->equipment_name,
                 'total_stock' => $item->total_stock,
                 'total_supply_quantity' => $supplyItem ? $supplyItem->total_supply_quantity : 0,
-                'total_expire_quantity' => $expireItem ? $expireItem->total_expire_quantity : 0,
+                'total_expire_quantity_1' => $expireItem ? $expireItem->total_expire_quantity_1 : 0,
+                'total_expire_quantity_2' => $expireItem ? $expireItem->total_expire_quantity_2 : 0,
             ];
         });
 
@@ -424,6 +435,35 @@ class EquipmentsController extends Controller
         }else{
             $available_supplied_quantity = $total_supply - 0;
         }
+
+        if ($available_supplied_quantity) {
+            // Return the available quantity as JSON
+            return response()->json(['available_supplied_quantity' => $available_supplied_quantity]);
+        } else {
+            // Handle the case when equipment is not found
+            return response()->json(['available_supplied_quantity' => '0']);
+        }
+    }
+
+    public function get_supplied_quantity_new(Request $request)
+    {
+        // $total_stock = DB::table('equipment_stock')->where('equipment_id', $equipmentId)->sum('quantity');
+        if($request->expiredFrom == '1')
+        {
+            $total_stock = DB::table('equipment_stock')->where('equipment_id', $request->equipmentId)->sum('quantity');
+            $total_supply = DB::table('supply_equipment')->where('equipment_id', $request->equipmentId)->sum('supply_equipment_quantity');
+            $available_supplied_quantity = $total_stock - $total_supply;
+        }else if($request->expiredFrom == '2') {
+            $total_supply = DB::table('supply_equipment')->where('equipment_id', $request->equipmentId)->sum('supply_equipment_quantity');
+            // $total_expire = DB::table('expire_equipment')->where('equipment_id', $request->equipmentId)->sum('expire_equipment_quantity');
+            $available_supplied_quantity = $total_supply;
+        }
+        // if($total_expire)
+        // {
+        //     $available_supplied_quantity = $total_supply - $total_expire;
+        // }else{
+        //     $available_supplied_quantity = $total_supply - 0;
+        // }
 
         if ($available_supplied_quantity) {
             // Return the available quantity as JSON

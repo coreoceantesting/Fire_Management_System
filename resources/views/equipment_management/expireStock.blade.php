@@ -23,6 +23,15 @@
                                     <span class="text-danger error-text equipment_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="expired_from"> Expired From Which Stock ( कोणत्या स्टॉकमधून कालबाह्य झाले ) <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="expired_from" name="expired_from">
+                                        <option value="">--Select Option--</option>
+                                        <option value="1">From Available Stocks</option>
+                                        <option value="2">From InProcess Stocks</option>
+                                    </select>
+                                    <span class="text-danger error-text expired_from_err"></span>
+                                </div>
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="available_quantity">Available Supplied Quantity(उपलब्ध पुरवठा केलेले प्रमाण) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="available_quantity" name="available_quantity" type="number" readonly>
                                     <span class="text-danger error-text available_quantity_err"></span>
@@ -298,7 +307,7 @@
 </script>
 
 {{-- get available supplied stock --}}
-<script>
+{{-- <script>
     $(document).ready(function() {
         // Event listener for equipment name change
         $('#equipment_name').on('change', function() {
@@ -308,6 +317,31 @@
             $.ajax({
                 url: '/get-supplied-quantity/' + equipmentId,
                 type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Update the available quantity input field
+                    $('#available_quantity').val(data.available_supplied_quantity);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script> --}}
+
+<script>
+    $(document).ready(function() {
+        // Event listener for equipment name change
+        $('#expired_from').on('change', function() {
+            var equipmentId = $('#equipment_name').val();
+            var expiredFrom = $(this).val();
+
+            // Make an AJAX request to fetch the available quantity based on the selected equipment
+            $.ajax({
+                url: '/get-supplied-quantity-new/',
+                type: 'GET',
+                data:{'equipmentId':equipmentId, 'expiredFrom':expiredFrom},
                 dataType: 'json',
                 success: function(data) {
                     // Update the available quantity input field

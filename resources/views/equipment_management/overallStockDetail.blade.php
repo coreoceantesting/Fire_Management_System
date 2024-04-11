@@ -28,10 +28,11 @@
                                         <th>Sr.No</th>
                                         <th>Equipment Name</th>
                                         <th>Total Stock</th>
-                                        <th>Overall Available Stock</th>
                                         <th>Overall Supplied Stock</th>
-                                        <th>Overall InProcess Stock</th>
-                                        <th>Overall Expire Stock</th>
+                                        <th class="text-primary">Overall Available Stock</th>
+                                        <th class="text-danger">Overall InProcess Stock</th>
+                                        <th class="text-primary">Expire From Available Stock</th>
+                                        <th class="text-danger">Expire From InProcess Stock</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,10 +41,11 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->equipment_name }}</td>
                                             <td>{{ $list->total_stock ?: '0' }}</td>
-                                            <td>{{ $list->total_stock - $list->total_supply_quantity ?: '0' }}</td>
                                             <td>{{ $list->total_supply_quantity ?: '0' }}</td>
-                                            <td>{{ $list->total_supply_quantity - $list->total_expire_quantity ?: '0' }}</td>
-                                            <td>{{ $list->total_expire_quantity ?: '0' }}</td>
+                                            <td>{{ ($list->total_stock - $list->total_supply_quantity) - $list->total_expire_quantity_1 ?: '0' }}</td>
+                                            <td>{{ $list->total_supply_quantity - $list->total_expire_quantity_2 ?: '0' }}</td>
+                                            <td>{{ $list->total_expire_quantity_1 ?: '0' }}</td>
+                                            <td>{{ $list->total_expire_quantity_2 ?: '0' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
