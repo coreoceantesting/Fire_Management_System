@@ -210,6 +210,8 @@ class OccuranceBookController extends Controller
                 'deceased_woman' => 'required',
                 'wounded_male' => 'required',
                 'wounded_woman' => 'required',
+                'book_no' => 'required',
+                'page_no' => 'required',
             ]);
     
             // Store data in the database
@@ -248,6 +250,8 @@ class OccuranceBookController extends Controller
                 'deceased_woman' => $request->input('deceased_woman'),
                 'wounded_male' => $request->input('wounded_male'),
                 'wounded_woman' => $request->input('wounded_woman'),
+                'book_no' => $request->input('book_no'),
+                'page_no' => $request->input('page_no'),
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);

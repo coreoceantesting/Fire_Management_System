@@ -120,14 +120,14 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>:</label>
-                                    <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" >
-                                        <option value="">--Select Type Of Vehicle--</option>
+                                    <label for="number_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>:</label>
+                                    <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" >
+                                        <option value="">--Select Number Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
-                                            <option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>
+                                            <option value="{{ $list->vehicle_number }}">{{ $list->vehicle_number }}</option>
                                         @endforeach
                                     </select>
-                                    <span class="text-danger error-text type_of_vehicle_err"></span>
+                                    <span class="text-danger error-text number_of_vehicle_err"></span>
                                 </div>
 
                                 {{-- <div class="col-md-4">
@@ -141,11 +141,11 @@
                                 </div> --}}
 
                                 <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" >
-                                        <option value="">--Select Number Of Vehicle--</option>
+                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" >
+                                        <option value="">--Select Type Of Vehicle--</option>
                                     </select>
-                                    <span class="text-danger error-text number_of_vehicle_err"></span>
+                                    <span class="text-danger error-text type_of_vehicle_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
@@ -670,9 +670,9 @@
 <script>
     $(document).ready(function() {
         // On change of Type Of Vehicle dropdown
-        $('#type_of_vehicle').on('change', function() {
+        $('#number_of_vehicle').on('change', function() {
             var selectedType = $(this).val();
-            var vehicleNumberDropdown = $('#number_of_vehicle');
+            var vehicleNumberDropdown = $('#type_of_vehicle');
 
             // Clear existing options
             vehicleNumberDropdown.empty();
@@ -682,8 +682,8 @@
 
             // Filter and add options based on the selected Type Of Vehicle
             @foreach($vehicle_list as $list)
-                if ("{{ $list->vehicle_type }}" === selectedType) {
-                    vehicleNumberDropdown.append('<option value="{{ $list->vehicle_number }}">{{ $list->vehicle_number }}</option>');
+                if ("{{ $list->vehicle_number }}" === selectedType) {
+                    vehicleNumberDropdown.append('<option value="{{ $list->vehicle_type }}">{{ $list->vehicle_type }}</option>');
                 }
             @endforeach
         });

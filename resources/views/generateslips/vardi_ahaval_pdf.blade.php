@@ -171,9 +171,9 @@
             <tr>
                 <th>आगीचा प्रकार</th>
                 <td>:- 
-                    @if($vardiAhavalData->type_of_fire == "Low")
+                    @if($vardiAhavalData->limit_of_fire == "Low")
                     कमी
-                    @elseif($vardiAhavalData->type_of_fire == "Medium")
+                    @elseif($vardiAhavalData->limit_of_fire == "Medium")
                     मध्यम
                     @else
                     उच्च
@@ -388,7 +388,7 @@
         </div>
 
         <p style="text-align: left">अशाप्रकारे विझविली :- {{$actionTakenData->number_of_vehicle}} , @foreach($additionalHelpDetails as $no) {{ $no->vehicle_number }}, @endforeach या  वाहनाच्या होजरीलच्या सहाय्याने आग पूर्णपणे  विझवली .</p>
-        <p style="text-align: left">सदर घटनेची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक ४९ मध्ये पुष्ठ क्र . १९६ वर घेतलेली आहे . </p>
+        <p style="text-align: left">सदर घटनेची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक {{$vardiAhavalData->book_no}} मध्ये पुष्ठ क्र . {{$vardiAhavalData->page_no}} वर घेतलेली आहे . </p>
         <p style="text-align: left">सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर एडवाइजरी काउंसिल यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
         <ul style="list-style-type:none; text-align:right; padding-top:8rem;">
             <li>प्र.अग्निशमन विभाग प्रमुख</li>

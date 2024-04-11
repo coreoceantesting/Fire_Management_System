@@ -205,15 +205,23 @@
                                     <label class="col-form-label" for="type_of_fire">Type of fire ( आगीचा प्रकार ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="type_of_fire" id="type_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
-                                        <option value="Low">Low(कमी)</option>
-                                        <option value="Medium">Medium(मध्यम)</option>
-                                        <option value="High">High(उच्च)</option>
+                                        <option value="A-solid">A-solid</option>
+                                        <option value="B-liquid">B-liquid</option>
+                                        <option value="C-gas">C-gas</option>
+                                        <option value="D-metal">D-metal</option>
+                                        <option value="E-Electrical">E-Electrical</option>
                                     </select>
                                     <span class="text-danger error-text type_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="limit_of_fire">Limit of fire ( आगीची मर्यदा ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire">
+                                    <select class="form-control" name="limit_of_fire" id="limit_of_fire">
+                                        <option value="">--Select Type Of Fire--</option>
+                                        <option value="Low">Low(कमी)</option>
+                                        <option value="Medium">Medium(मध्यम)</option>
+                                        <option value="High">High(उच्च)</option>
+                                    </select>
+                                    {{-- <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire"> --}}
                                     <span class="text-danger error-text limit_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
@@ -251,7 +259,7 @@
                                     <span class="text-danger error-text property_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( अखेरच्या क्षणी घटनास्तळी असलेल्या अधिकारीचें नाव ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( अखेरच्या क्षणी घटनास्थळी उपस्थित असलेल्या अधिकाऱ्यांचे नाव ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Name of the officer present at the scene at the last moment">
                                     <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                                 </div>
@@ -372,6 +380,20 @@
                                 </div>
                             </div>
 
+                        </div>
+
+                        <hr>
+                        <div class="mb-3 row">
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="book_no">Book No( घटना पुस्तक क्रं ) <span class="text-danger">*</span></label>
+                                <input class="form-control" id="book_no" name="book_no" type="text" placeholder="Enter Book No">
+                                <span class="text-danger error-text book_no_err"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="page_no">Page No( पृष्ठ क्रं ) <span class="text-danger">*</span></label>
+                                <input class="form-control" id="page_no" name="page_no" type="text" placeholder="Enter Page No">
+                                <span class="text-danger error-text page_no_err"></span>
+                            </div>
                         </div>
 
                         <div class="card-footer">
