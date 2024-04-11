@@ -190,11 +190,17 @@
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">
                                     <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="text" id="worker_name[]" name="worker_name[]" required>
+                                    <select class="form-control worker-name" id="worker_name[]" name="worker_name[]" required>
+                                        <!-- Populate dropdown options from master data -->
+                                        <option value="">--Select Worker Name--</option>
+                                        @foreach ($designation_list as $list)
+                                            <option value="{{ $list->worker_name }}" data-designation="{{ $list->designation_id }}">{{ $list->worker_name }}</option>
+                                        @endforeach
+                                    </select>
                                     <span class="text-danger error-text worker_name_err"></span>
-                    
+                            
                                     <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम) <span class="text-danger">*</span></label>:</label>
-                                    <select class="form-control" id="worker_designation[]" name="worker_designation[]" required>
+                                    <select class="form-control worker-designation" id="worker_designation[]" name="worker_designation[]" required>
                                         <!-- Populate dropdown options from master data -->
                                         <option value="">--Select Designation--</option>
                                         @foreach ($designation_list as $list)
@@ -690,5 +696,21 @@
     });
 </script>
 
+{{--On Change Worker Name Autoselect Designation --}}
+<script>
+    // Function to handle changes in worker name dropdown
+    function handleWorkerNameChange(event) {
+        const selectedOption = event.target.options[event.target.selectedIndex];
+        const designationSelect = event.target.closest('.worker-details').querySelector('.worker-designation');
+        designationSelect.value = selectedOption.getAttribute('data-designation');
+    }
+
+    // Listen for changes in worker name dropdowns using event delegation
+    document.addEventListener('change', function(event) {
+        if (event.target.classList.contains('worker-name')) {
+            handleWorkerNameChange(event);
+        }
+    });
+</script>
 
 

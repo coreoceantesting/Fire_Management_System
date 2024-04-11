@@ -54,7 +54,7 @@
                                 <a href="{{ route('vehicle_details.index') }}" class="nav-link" data-key="t-horizontal">Vehicle Detalis(वाहन तपशील)</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('designations.index') }}" class="nav-link" data-key="t-horizontal">Designations(पदनाम)</a>
+                                <a href="{{ route('designations.index') }}" class="nav-link" data-key="t-horizontal">Worker Details(कामगार तपशील)</a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('driver_details.index') }}" class="nav-link" data-key="t-horizontal">Driver Details(ड्रायव्हर तपशील)</a>

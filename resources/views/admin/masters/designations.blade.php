@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Designations</x-slot>
-    <x-slot name="heading">Designations (पदनाम)</x-slot>
+    <x-slot name="title">Worker Details</x-slot>
+    <x-slot name="heading">Worker Details (कामगार तपशील)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
@@ -14,12 +14,17 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="worker_name">Worker Name(कामगाराचे नाव) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="worker_name" name="worker_name" type="text" placeholder="Enter Worker Name">
+                                    <span class="text-danger error-text worker_name_err"></span>
+                                </div>
+                                <div class="col-md-4">
                                     <label class="col-form-label" for="designation_name">Designation Name(पदनाम नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="designation_name" name="designation_name" type="text" placeholder="Enter Designation Name">
                                     <span class="text-danger error-text designation_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="designation_initial">Designation Initial(पदनाम आरंभिक) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="designation_initial">Initial(आरंभिक) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="designation_initial" name="designation_initial" type="text" placeholder="Enter Designation Initial">
                                     <span class="text-danger error-text designation_initial_err"></span>
                                 </div>
@@ -51,6 +56,11 @@
 
                             <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
                             <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="worker_name">Worker Name(कामगाराचे नाव) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="worker_name" name="worker_name" type="text" placeholder="Enter Worker Name">
+                                    <span class="text-danger error-text worker_name_err"></span>
+                                </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="designation_name">Designation Name(पदनाम नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="designation_name" name="designation_name" type="text" placeholder="Enter Designation Name">
@@ -96,7 +106,8 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>Name</th>
+                                        <th>Worker Name</th>
+                                        <th>Designation</th>
                                         <th>Initial</th>
                                         <th>Action</th>
                                     </tr>
@@ -105,6 +116,7 @@
                                     @foreach ($designation_list as $list)
                                         <tr>
                                             <td>{{ $serialNumber++ }}</td>
+                                            <td>{{ $list->worker_name }}</td>
                                             <td>{{ $list->designation_name }}</td>
                                             <td>{{ $list->designation_initial }}</td>
                                             <td>

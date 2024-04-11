@@ -24,6 +24,7 @@ class StoreDesignationsRequest extends FormRequest
         return [
             'designation_name' => 'required',
             'designation_initial' => 'required',
+            'worker_name' => 'required',
         ];
     }
 }
