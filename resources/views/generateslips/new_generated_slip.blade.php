@@ -149,37 +149,37 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
+                                    <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_time" id="vehicle_departure_time" >
                                     <span class="text-danger error-text vehicle_departure_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
+                                    <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_arrival_time" id="vehicle_arrival_time">
                                     <span class="text-danger error-text vehicle_arrival_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
+                                    <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                     <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" id="vehicle_departure_from_scene_time">
                                     <span class="text-danger error-text vehicle_departure_from_scene_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ) <span class="text-danger">*</span></label>:</label>
+                                    <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ) <span class="text-danger">*</span>:</label>
                                     <input class="form-control" type="datetime-local" id="vehicle_arrival_at_center_time" name="vehicle_arrival_at_center_time">
                                     <span class="text-danger error-text vehicle_arrival_at_center_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span></label>:</label>
+                                    <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
                                     <input class="form-control" type="text" name="total_distance" id="total_distance" placeholder="Total Distance In KM">
                                     <span class="text-danger error-text total_distance_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
-                                    <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span></label>:</label>
+                                    <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
                                     <input class="form-control" type="text" placeholder="Enter Pumping hours" id="pumping_hours" name="pumping_hours" >
                                     <span class="text-danger error-text pumping_hours_err"></span>
                                 </div>
