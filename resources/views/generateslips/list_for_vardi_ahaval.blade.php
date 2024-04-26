@@ -214,7 +214,7 @@
                                     <span class="text-danger error-text type_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="limit_of_fire">Limit of fire ( आगीची मर्यदा ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="limit_of_fire">Limit of fire ( आगीची मर्यदा )</label>
                                     <select class="form-control" name="limit_of_fire" id="limit_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
                                         <option value="Low">Low(कमी)</option>
@@ -231,13 +231,13 @@
                                     <span class="text-danger error-text possible_cause_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="description_of_damage">Description Of Damage ( नुकसानीचे वर्णन ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="description_of_damage">Description Of Damage ( नुकसानीचे वर्णन )</label>
                                     {{-- <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage"> --}}
                                     <textarea class="form-control" name="description_of_damage" id="description_of_damage" placeholder="Enter Description Of Damage" cols="30" rows="3"></textarea>
                                     <span class="text-danger error-text description_of_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_damage">Estimated Property Damage ( अंदाजित मालमत्तेचे नुकसान ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="property_damage">Estimated Property Damage ( अंदाजित मालमत्तेचे नुकसान )</label>
                                     <input class="form-control" id="property_damage" name="property_damage" type="text" placeholder="Enter Estimated property damage">
                                     <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                     <span class="text-danger error-text property_damage_err"></span>
@@ -248,12 +248,12 @@
                                     <span class="text-danger error-text area_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित आजुबाजुचा परिसर नुकसान )</label>
                                     <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss">
                                     <span class="text-danger error-text space_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_loss">Estimated loss of property ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="property_loss">Estimated loss of property ( अंदाजित आजुबाजुचा परिसर नुकसान )</label>
                                     <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property">
                                     <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                     <span class="text-danger error-text property_loss_err"></span>
@@ -377,6 +377,21 @@
                                     <label class="col-form-label" for="wounded_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="wounded_woman" name="wounded_woman" type="text" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text wounded_woman_err"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <h4 class="card-title text-center">Casualty (मृत्यू)</h4>
+                                <hr>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="casualty_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="casualty_male" name="casualty_male" type="text" placeholder="Enter Male Numbers">
+                                    <span class="text-danger error-text casualty_male_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="casualty_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="casualty_woman" name="casualty_woman" type="text" placeholder="Enter Woman Numbers">
+                                    <span class="text-danger error-text casualty_woman_err"></span>
                                 </div>
                             </div>
 
