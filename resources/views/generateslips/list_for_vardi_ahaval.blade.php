@@ -852,17 +852,17 @@
                 editFormBehaviour();
                 if (!data.error)
                 {
-                    console.log(data);
-                    $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
-                    $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
-                    $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
-                    $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
-                    $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
-                    $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
-                    $("#editForm input[name='time_of_arrival_at_the_scene']").val(data.slip_data.vehicle_arrival_time);
-                    const dateTimeParts = data.slip_data.vehicle_departure_from_scene_time.split(' ');
-                    $("#editForm input[name='date_of_departure_from_scene']").val(dateTimeParts[0]);
-                    $("#editForm input[name='time_of_departure_from_scene']").val(dateTimeParts[1]);
+                    // console.log(data);
+                    // $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
+                    // $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
+                    // $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
+                    // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
+                    // $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
+                    // $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
+                    // $("#editForm input[name='time_of_arrival_at_the_scene']").val(data.slip_data.vehicle_arrival_time);
+                    // const dateTimeParts = data.slip_data.vehicle_departure_from_scene_time.split(' ');
+                    // $("#editForm input[name='date_of_departure_from_scene']").val(dateTimeParts[0]);
+                    // $("#editForm input[name='time_of_departure_from_scene']").val(dateTimeParts[1]);
                 }
                 else
                 {
