@@ -1,3 +1,8 @@
+<style>
+    .modal-backdrop {
+  z-index: 1;
+}
+</style>
 <header id="page-topbar">
     <div class="layout-width">
         <div class="navbar-header">
@@ -154,6 +159,34 @@
                 </div>
 
 
+                <div id="notification-bell" style="cursor: pointer;">
+                    <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
+                    <span id="notification-count" style="color:white;font-weight:bold"></span>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul id="notification-list" class="list-group">
+                                    <!-- Notifications will be dynamically added here -->
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+                                <a href="{{ route('slips_list') }}" class="btn btn-warning" data-dismiss="modal">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="ms-1 header-item d-none d-sm-flex">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
                         <i class="bx bx-fullscreen fs-22"></i>
@@ -257,6 +290,49 @@
 
             });
 
+        });
+    </script>
+
+    <script>
+        function fetchNotificationCount() {
+            $.ajax({
+                url: '/notifications/count',
+                method: 'GET',
+                success: function(data) {
+                    $('#notification-count').text(data.count);
+                }
+            });
+        }
+        
+        $(document).ready(function() {
+            fetchNotificationCount();
+            setInterval(fetchNotificationCount, 60000); // Update every minute
+        });
+    </script>
+
+    <script>
+        function fetchNotifications() {
+            $.ajax({
+                url: '/notifications',
+                method: 'GET',
+                success: function(data) {
+                    var notificationList = $('#notification-list');
+                    notificationList.empty();
+                    data.notifications.forEach(function(notification) {
+                        notificationList.append(
+                            '<li class="list-group-item">' +
+                                '<strong>' + notification.caller_name + '</strong><br>' +
+                                '<small>' + notification.slip_date + '</small>' +
+                            '</li>'
+                        );
+                    });
+                    $('#notificationModal').modal('show');
+                }
+            });
+        }
+        
+        $('#notification-bell').on('click', function() {
+            fetchNotifications();
         });
     </script>
 @endpush

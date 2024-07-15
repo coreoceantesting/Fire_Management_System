@@ -77,6 +77,10 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('store-slip', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip'])->name('store_slip');
     Route::get('/download-slip-pdf/{slip_id}', [App\Http\Controllers\GenerateSlipsController::class, 'downloadSlipPdf'])->name('download-slip-pdf');
 
+    // notification
+    Route::get('/notifications/count', [App\Http\Controllers\GenerateSlipsController::class, 'getCount'])->name('getCount');
+    Route::get('/notifications', [App\Http\Controllers\GenerateSlipsController::class, 'getNotifications'])->name('getNotifications');
+
     // new generated slips
     Route::get('new-generated-slips', [App\Http\Controllers\GenerateSlipsController::class, 'new_generated_slip'])->name('new_generated_slip');
     Route::get('/view-slip/{slipId}', [App\Http\Controllers\GenerateSlipsController::class, 'view_generated_slip'])->name('view_generated_slip');

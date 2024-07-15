@@ -43,7 +43,17 @@ class GenerateSlipsController extends Controller
             $data['created_at'] = date('Y-m-d H:i:s');
             // dd($data);
 
-            DB::table('slips')->insert($data);
+            $slipId = DB::table('slips')->insertGetId($data);
+
+            // Save notification
+            $notificationData = [
+                'user_id' => Auth::user()->id,
+                'slip_id' => $slipId,
+                'message' => 'A new slip has been generated',
+                'is_read' => 0,
+                'created_at' => date('Y-m-d H:i:s')
+            ];
+            DB::table('notifications')->insert($notificationData);
 
             
 
@@ -151,6 +161,26 @@ class GenerateSlipsController extends Controller
             // If validation fails, return validation errors
             return response()->json(['errors' => $e->errors()]);
         }
+    }
+
+    public function getCount()
+    {
+        $count = DB::table('notifications')
+                    ->where('is_read', 0)
+                    ->count();
+
+        return response()->json(['count' => $count]);
+    }
+
+    public function getNotifications()
+    {
+        $notifications = DB::table('notifications')
+                            ->join('slips', 'notifications.slip_id', '=', 'slips.slip_id')
+                            ->where('is_read', 0)
+                            ->orderBy('notifications.notification_id', 'desc')
+                            ->get(['notifications.*', 'slips.caller_name', 'slips.slip_date']);
+
+        return response()->json(['notifications' => $notifications]);
     }
 
 
