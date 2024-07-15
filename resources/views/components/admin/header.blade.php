@@ -158,11 +158,12 @@
                     </div>
                 </div>
 
-
-                <div id="notification-bell" style="cursor: pointer;">
-                    <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
-                    <span id="notification-count" style="color:white;font-weight:bold"></span>
-                </div>
+                @if ( auth()->user()->name === 'CFO' )
+                    <div id="notification-bell" style="cursor: pointer;">
+                        <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
+                        <span id="notification-count" style="color:white;font-weight:bold"></span>
+                    </div>
+                @endif
 
                 <!-- Modal -->
                 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
