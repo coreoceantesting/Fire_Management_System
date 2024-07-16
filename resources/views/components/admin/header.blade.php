@@ -18,6 +18,11 @@
     animation: shake 0.5s;
     animation-iteration-count: infinite;
 }
+
+.latest-notification {
+        background-color: #f0f0f0; /* Example highlight style */
+        font-weight: bold;
+    }
 </style>
 <header id="page-topbar">
     <div class="layout-width">
@@ -340,6 +345,7 @@
                 success: function(data) {
                     var notificationList = $('#notification-list');
                     notificationList.empty();
+                    var latestNotificationId = null;
                     data.notifications.forEach(function(notification) {
                         var listItem = $('<li class="list-group-item" style="cursor:pointer"></li>');
                         listItem.attr('data-notification-id', notification.notification_id); // Assuming notification has an 'id' field
@@ -349,6 +355,13 @@
                         );
 
                         notificationList.append(listItem);
+
+                        // Highlight the latest notification
+                        if (latestNotificationId === null || notification.id > latestNotificationId) {
+                            latestNotificationId = notification.id;
+                            listItem.addClass('latest-notification');
+                        }
+
                         // Click event handler for each notification
                         listItem.on('click', function() {
                             var notificationId = $(this).data('notification-id');
@@ -406,6 +419,8 @@
         
         $('#notification-bell').on('click', function() {
             fetchNotifications();
+            $('#notification-count').text('0');
+            $('.latest-notification').removeClass('latest-notification');
         });
     </script>
     <script>
