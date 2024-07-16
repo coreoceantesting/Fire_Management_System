@@ -853,7 +853,7 @@
                 if (!data.error)
                 {
                     // console.log(data);
-                    // $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
+                    $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
                     // $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
                     // $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
                     // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
