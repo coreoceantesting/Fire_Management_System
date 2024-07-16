@@ -139,12 +139,12 @@
                             <div class="mb-3 row">
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_name">Name of Vardi Issuer (वरदी देणेराचे नाव) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_name" name="vardi_name" type="text" placeholder="Enter Name of Vardi Issuer" readonly>
+                                    <input class="form-control" id="vardi_name" name="vardi_name" type="text" placeholder="Enter Name of Vardi Issuer">
                                     <span class="text-danger error-text vardi_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_contact_no">Vardi Issuer's No ( वर्दी जारीकर्ता क्र) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_contact_no" name="vardi_contact_no" type="text" placeholder="Enter Vardi Issuer's No" readonly>
+                                    <input class="form-control" id="vardi_contact_no" name="vardi_contact_no" type="text" placeholder="Enter Vardi Issuer's No">
                                     <span class="text-danger error-text vardi_contact_no_err"></span>
                                 </div>
                                 <div class="col-md-4">
