@@ -2,6 +2,18 @@
     .modal-backdrop {
   z-index: 1;
 }
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
 </style>
 <header id="page-topbar">
     <div class="layout-width">
@@ -301,6 +313,11 @@
                 method: 'GET',
                 success: function(data) {
                     $('#notification-count').text(data.count);
+                    if (data.count > 0) {
+                        $('#notification-bell').addClass('shake');
+                    } else {
+                        $('#notification-bell').removeClass('shake');
+                    }
                 }
             });
         }
