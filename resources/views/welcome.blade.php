@@ -212,7 +212,7 @@
                     font-weight: bold;
                     background-color: #5353c6;
                     color: white;
-                    padding: 10px;
+                    padding: 15px;
                     border-radius: 8px;
                     margin: 10px auto;
                     width: 80%;
@@ -238,7 +238,7 @@
 
                 @media (min-width: 1200px) {
                     .custom-header {
-                        width: 44%;
+                        width: 56%;
                     }
                 }
 
@@ -256,14 +256,14 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-12 mobile-view-bgcolor">
                         <div class="d-flex justify-content-center mt-3">
-                            <img class="d-md-block d-lg-block d-xl-block d-sm-none d-none" src="{{ asset('admin/images/PMC LOGO.png') }}" style="width: 230px;">
+                            <img class="d-md-block d-lg-block d-xl-block d-sm-none d-none" src="{{ asset('admin/images/PMC LOGO.png') }}" style="width: 200px;">
                         </div>
                         <br>
                         <br>
                         <h2 class="text-center custom-header">अग्निशमन विभाग</h2>
                         <br>
-                        <h5 class="text-center"><b>Fire Management System</b></h5>
-                        <h5 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h5>
+                        <h3 class="text-center"><b>Fire Management System</b></h3>
+                        <h3 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h3>
                         <div class="container custompadding">
                             <div class="parent">
                                 <a href="https://pmc-fire-management.creatorkart.com/login" target="blank" class="custom-btn btn-11"><b>Fire Management</b><br>(अग्निशमन व्यवस्थापन)<div class="dot"></div></a>
