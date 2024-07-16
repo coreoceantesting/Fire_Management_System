@@ -158,12 +158,12 @@
                     </div>
                 </div>
 
-                @if ( auth()->user()->name === 'CFO' )
+                {{-- @if ( auth()->user()->name === 'CFO' ) --}}
                     <div id="notification-bell" style="cursor: pointer;">
                         <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
                         <span id="notification-count" style="color:white;font-weight:bold"></span>
                     </div>
-                @endif
+                {{-- @endif --}}
 
                 <!-- Modal -->
                 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -171,7 +171,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="notificationModalLabel">Notifications</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" id="closeNotification" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -334,6 +334,11 @@
         
         $('#notification-bell').on('click', function() {
             fetchNotifications();
+        });
+    </script>
+    <script>
+        $('#closeNotification').on('click', function() {
+            $('#notificationModal').modal('hide');
         });
     </script>
 @endpush
