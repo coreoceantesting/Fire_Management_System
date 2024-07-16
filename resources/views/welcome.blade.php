@@ -207,6 +207,41 @@
                     81% { -webkit-transform: scale(4) rotate(45deg); opacity: 1; }
                     100% { -webkit-transform: scale(50) rotate(45deg); opacity: 0; }
                 }
+
+                .custom-header {
+                    font-weight: bold;
+                    background-color: #5353c6;
+                    color: white;
+                    padding: 10px;
+                    border-radius: 8px;
+                    margin: 10px auto;
+                    width: 80%;
+                }
+
+                @media (min-width: 576px) {
+                    .custom-header {
+                        width: 70%;
+                    }
+                }
+
+                @media (min-width: 768px) {
+                    .custom-header {
+                        width: 60%;
+                    }
+                }
+
+                @media (min-width: 992px) {
+                    .custom-header {
+                        width: 50%;
+                    }
+                }
+
+                @media (min-width: 1200px) {
+                    .custom-header {
+                        width: 44%;
+                    }
+                }
+
         </style>
     </head>
     <body>
@@ -225,7 +260,7 @@
                         </div>
                         <br>
                         <br>
-                        <h2 class="text-center" style="font-weight: bold;background-color:#5353c6;color:white;width:44%;margin-left:28%;padding:10px;border-radius:8px;height:9%">अग्निशमन विभाग</h2>
+                        <h2 class="text-center custom-header">अग्निशमन विभाग</h2>
                         <br>
                         <h5 class="text-center"><b>Fire Management System</b></h5>
                         <h5 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h5>
