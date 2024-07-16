@@ -227,7 +227,7 @@
                         <br>
                         <h2 class="text-center" style="font-weight: bold;background-color:#5353c6;color:white;width:44%;margin-left:28%;padding:10px;border-radius:8px;height:9%">अग्निशमन विभाग</h2>
                         <br>
-                        <h5 class="text-center"><b>Fire Department System</b></h5>
+                        <h5 class="text-center"><b>Fire Management System</b></h5>
                         <h5 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h5>
                         <div class="container custompadding">
                             <div class="parent">
