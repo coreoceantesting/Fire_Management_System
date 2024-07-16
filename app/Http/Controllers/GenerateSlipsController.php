@@ -176,8 +176,9 @@ class GenerateSlipsController extends Controller
     {
         $notifications = DB::table('notifications')
                             ->join('slips', 'notifications.slip_id', '=', 'slips.slip_id')
-                            ->where('is_read', 0)
+                            // ->where('is_read', 0)
                             ->orderBy('notifications.notification_id', 'desc')
+                            ->take(5)
                             ->get(['notifications.*', 'slips.caller_name', 'slips.slip_date']);
 
         return response()->json(['notifications' => $notifications]);
@@ -195,6 +196,14 @@ class GenerateSlipsController extends Controller
         DB::table('notifications')->where('notification_id', $id)->update(['is_read' => 1]);
 
         return response()->json(['message' => 'Notification marked as read.']);
+    }
+
+    public function markAllAsRead()
+    {
+        // Assuming 'is_read' is a boolean field in your notifications table
+        DB::table('notifications')->where('is_read', 0)->update(['is_read' => 1]);
+
+        return response()->json(['message' => 'All notifications marked as read.']);
     }
 
 

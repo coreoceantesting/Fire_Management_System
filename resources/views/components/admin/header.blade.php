@@ -158,12 +158,12 @@
                     </div>
                 </div>
 
-                @if ( auth()->user()->name === 'CFO' )
+                {{-- @if ( auth()->user()->name === 'CFO' ) --}}
                     <div id="notification-bell" style="cursor: pointer;">
                         <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
                         <span id="notification-count" style="color:white;font-weight:bold"></span>
                     </div>
-                @endif
+                {{-- @endif --}}
 
                 <!-- Modal -->
                 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -338,7 +338,29 @@
                     $('#notificationModal').modal('show');
                 }
             });
+
+            markAllNotificationsAsRead();
         }
+
+        function markAllNotificationsAsRead() {
+            $.ajax({
+                url: '/notifications/mark-all-as-read',
+                method: 'POST', // Assuming you use POST for updating
+                data: {
+                    _token: '{{ csrf_token() }}' // Laravel CSRF protection
+                },
+                success: function(response) {
+                    // Handle success if needed
+                    console.log('All notifications marked as read');
+                    fetchNotificationCount(); // Update notification count if needed
+                },
+                error: function(xhr, status, error) {
+                    // Handle error if needed
+                    console.error('Error marking all notifications as read:', error);
+                }
+            });
+        }
+
 
         function markNotificationAsRead(notificationId) {
             $.ajax({

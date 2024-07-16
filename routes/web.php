@@ -82,6 +82,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/notifications/count', [App\Http\Controllers\GenerateSlipsController::class, 'getCount'])->name('getCount');
     Route::get('/notifications', [App\Http\Controllers\GenerateSlipsController::class, 'getNotifications'])->name('getNotifications');
     Route::post('/notifications/{id}/mark-as-read', [App\Http\Controllers\GenerateSlipsController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::post('/notifications/mark-all-as-read', [App\Http\Controllers\GenerateSlipsController::class, 'markAllAsRead'])->name('notifications.allmarkAsRead');
 
 
     // new generated slips
