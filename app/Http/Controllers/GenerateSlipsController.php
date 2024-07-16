@@ -183,6 +183,20 @@ class GenerateSlipsController extends Controller
         return response()->json(['notifications' => $notifications]);
     }
 
+    public function markAsRead($id)
+    {
+        $notification = DB::table('notifications')->where('notification_id', $id)->first();
+
+        if (!$notification) {
+            return response()->json(['error' => 'Notification not found.'], 404);
+        }
+
+        // Assuming 'is_read' is a boolean field in your notifications table
+        DB::table('notifications')->where('notification_id', $id)->update(['is_read' => 1]);
+
+        return response()->json(['message' => 'Notification marked as read.']);
+    }
+
 
     
 

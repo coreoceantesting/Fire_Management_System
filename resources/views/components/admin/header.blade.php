@@ -158,12 +158,12 @@
                     </div>
                 </div>
 
-                @if ( auth()->user()->name === 'CFO' )
+                {{-- @if ( auth()->user()->name === 'CFO' ) --}}
                     <div id="notification-bell" style="cursor: pointer;">
                         <i class="fa fa-bell" style="font-size: 25px;color:gold"></i>
                         <span id="notification-count" style="color:white;font-weight:bold"></span>
                     </div>
-                @endif
+                {{-- @endif --}}
 
                 <!-- Modal -->
                 <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
@@ -320,14 +320,43 @@
                     var notificationList = $('#notification-list');
                     notificationList.empty();
                     data.notifications.forEach(function(notification) {
-                        notificationList.append(
-                            '<li class="list-group-item">' +
-                                '<strong>' + notification.caller_name + '</strong><br>' +
-                                '<small>' + notification.slip_date + '</small>' +
-                            '</li>'
+                        var listItem = $('<li class="list-group-item" style="cursor:pointer"></li>');
+                        listItem.attr('data-notification-id', notification.notification_id); // Assuming notification has an 'id' field
+                        listItem.html(
+                            '<strong>' + notification.caller_name + '</strong><br>' +
+                            '<small>' + notification.slip_date + '</small>'
                         );
+
+                        notificationList.append(listItem);
+                        // Click event handler for each notification
+                        listItem.on('click', function() {
+                            var notificationId = $(this).data('notification-id');
+                            markNotificationAsRead(notificationId);
+                        });
+
                     });
                     $('#notificationModal').modal('show');
+                }
+            });
+        }
+
+        function markNotificationAsRead(notificationId) {
+            $.ajax({
+                url: '/notifications/' + notificationId + '/mark-as-read',
+                method: 'POST', // Assuming you use POST for updating
+                data: {
+                    _token: '{{ csrf_token() }}' // Laravel CSRF protection
+                },
+                success: function(response) {
+                    // Handle success if needed
+                    console.log('Notification marked as read:', notificationId);
+                    fetchNotifications();
+                    fetchNotificationCount();
+                    // Optionally, close the modal or update UI
+                },
+                error: function(xhr, status, error) {
+                    // Handle error if needed
+                    console.error('Error marking notification as read:', error);
                 }
             });
         }
