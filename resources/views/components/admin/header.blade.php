@@ -357,8 +357,8 @@
                         notificationList.append(listItem);
 
                         // Highlight the latest notification
-                        if (latestNotificationId === null || notification.id > latestNotificationId) {
-                            latestNotificationId = notification.id;
+                        if (latestNotificationId === null || notification.notification_id > latestNotificationId) {
+                            latestNotificationId = notification.notification_id;
                             listItem.addClass('latest-notification');
                         }
 
