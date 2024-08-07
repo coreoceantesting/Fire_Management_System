@@ -147,6 +147,9 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/get-supplied-quantity-new', [App\Http\Controllers\EquipmentsController::class, 'get_supplied_quantity_new'])->name('get_supplied_quantity_new');
 
     Route::get('/overall-stock-detail', [App\Http\Controllers\EquipmentsController::class, 'overall_stock_detail'])->name('overall_stock_detail');
+
+    // get vehicle type
+    Route::get('/get-vehicle-quantity/{vehicle_no}', [App\Http\Controllers\EquipmentsController::class, 'get_vehicle_type'])->name('get_vehicle_type');
     
 });
 

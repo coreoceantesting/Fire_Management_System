@@ -27,6 +27,24 @@
                                     <input class="form-control" id="available_quantity" name="available_quantity" type="number" readonly>
                                     <span class="text-danger error-text available_quantity_err"></span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vehicle_no"> Vehicle Number(वाहन क्रमांक) <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="vehicle_no" name="vehicle_no">
+                                        <option value="">--Select Vehicle Number--</option>
+                                        @foreach($vehicle_list as $list)
+                                            <option value="{{$list->vehicle_id}}">{{$list->vehicle_number}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text vehicle_no_err"></span>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vehicle_type">Vehicle Type<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vehicle_type" name="vehicle_type" type="text" readonly>
+                                    <span class="text-danger error-text vehicle_type_err"></span>
+                                </div>
+
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="quantity">Add Supply Quantity(पुरवठा प्रमाण जोडा) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="quantity" name="quantity" type="number" placeholder="Enter Quantity">
@@ -208,6 +226,8 @@
                     tableHtml += '<th scope="col">Equipment Name (उपकरणाचे नाव)</th>';
                     tableHtml += '<th scope="col">Date (तारीख)</th>';
                     tableHtml += '<th scope="col">Quantity / Unit (प्रमाण / युनिट)</th>';
+                    tableHtml += '<th scope="col">Vehicle No (वाहन क्रमांक)</th>';
+                    tableHtml += '<th scope="col">Vehicle Type (वाहन प्रकार)</th>';
                     tableHtml += '<th scope="col">Remark (शेरा)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
@@ -217,6 +237,8 @@
                         tableHtml += '<td>' + list.equipment_name + '</td>';
                         tableHtml += '<td>' + list.supply_equipment_date + '</td>';
                         tableHtml += '<td>' + list.supply_equipment_quantity + ' / ' + list.supply_equipment_unit + '</td>';
+                        tableHtml += '<td>' + (list.vehicle_number ? list.vehicle_number : 'NA') + '</td>';
+                        tableHtml += '<td>' + (list.vehicle_type ? list.vehicle_type : 'NA') + '</td>';
                         tableHtml += '<td>' + list.supply_equipment_remark + '</td>';
                         tableHtml += '</tr>';
                     });
@@ -340,6 +362,31 @@
                     },
                 });
             }
+        });
+    });
+</script>
+
+
+{{-- get vehicle type --}}
+<script>
+    $(document).ready(function() {
+        // Event listener for equipment name change
+        $('#vehicle_no').on('change', function() {
+            var vehicle_no = $(this).val();
+
+            // Make an AJAX request to fetch the available quantity based on the selected equipment
+            $.ajax({
+                url: '/get-vehicle-quantity/' + vehicle_no,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Update the available quantity input field
+                    $('#vehicle_type').val(data.vehicle_type);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
 </script>

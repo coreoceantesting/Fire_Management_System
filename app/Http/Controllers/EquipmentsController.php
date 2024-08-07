@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Masters\StoreEquipmentRequest;
 use App\Http\Requests\Admin\Masters\UpdateEquipmentRequest;
 use App\Models\Equipment;
+use App\Models\VehicleDetail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -243,7 +244,10 @@ class EquipmentsController extends Controller
         ->groupBy('equipment.equipment_id', 'equipment.equipment_name')
         ->orderByDesc('equipment.created_at')  // Assuming you want to order by created_at in descending order
         ->get();
-        return view('equipment_management.supplyStock',compact('equipment_list'));
+
+        $vehicle_list = VehicleDetail::where('is_deleted','0')->latest()->get();
+
+        return view('equipment_management.supplyStock',compact('equipment_list', 'vehicle_list'));
     }
 
     public function store_supply_stock(Request $request)
@@ -256,6 +260,7 @@ class EquipmentsController extends Controller
                 'quantity' => 'required',
                 'unit' => 'required',
                 'remark' => 'required',
+                'vehicle_no' => 'required',
             ]);
 
             // Store data in equipment_supply_stock table
@@ -265,6 +270,7 @@ class EquipmentsController extends Controller
                 'supply_equipment_quantity' => $request->input('quantity'),
                 'supply_equipment_unit' => $request->input('unit'),
                 'supply_equipment_remark' => $request->input('remark'),
+                'vehicle_id' => $request->input('vehicle_no'),
                 'created_by' => Auth::user()->id,
                 'created_at' => now(),
             ]);
@@ -279,8 +285,9 @@ class EquipmentsController extends Controller
     public function view_supply_stock_list($equipmentId)
     {
         $equipment_supply_stock_list = DB::table('supply_equipment')
-                ->select('equipment.equipment_name', 'supply_equipment.supply_equipment_date', 'supply_equipment.supply_equipment_quantity', 'supply_equipment.supply_equipment_unit', 'supply_equipment.supply_equipment_remark')
+                ->select('equipment.equipment_name', 'supply_equipment.supply_equipment_date', 'supply_equipment.supply_equipment_quantity', 'supply_equipment.supply_equipment_unit', 'supply_equipment.supply_equipment_remark', 'vehicle_details.vehicle_number', 'vehicle_details.vehicle_type')
                 ->join('equipment', 'supply_equipment.equipment_id', '=', 'equipment.equipment_id')
+                ->leftjoin('vehicle_details', 'supply_equipment.vehicle_id', '=', 'vehicle_details.vehicle_id')
                 ->where('supply_equipment.equipment_id', $equipmentId)
                 ->get();
 
@@ -472,6 +479,20 @@ class EquipmentsController extends Controller
             // Handle the case when equipment is not found
             return response()->json(['available_supplied_quantity' => '0']);
         }
+    }
+
+    public function get_vehicle_type($vehicle_no)
+    {
+        $vehicle_type = VehicleDetail::find($vehicle_no);
+
+        if ($vehicle_type) {
+            // Return the available quantity as JSON
+            return response()->json(['vehicle_type' => $vehicle_type->vehicle_type]);
+        } else {
+            // Handle the case when equipment is not found
+            return response()->json(['vehicle_type' => '']);
+        }
+
     }
 
  
