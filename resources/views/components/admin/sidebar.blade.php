@@ -62,6 +62,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('equipments.index') }}" class="nav-link" data-key="t-horizontal">Equipment(उपकरणे)</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('firecauses.index') }}" class="nav-link" data-key="t-horizontal">Fire Causes(अग्नी कारणे)</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
