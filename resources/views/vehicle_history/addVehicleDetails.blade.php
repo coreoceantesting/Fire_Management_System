@@ -264,6 +264,12 @@
                                     <span class="text-danger error-text solution_err"></span>
                                 </div>
 
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="upload_file">Upload File(फाइल अपलोड करा) <span class="text-danger">*</span></label>
+                                    <input class="form-control" name="upload_file" id="upload_file" type="file">
+                                    <span class="text-danger error-text upload_file_err"></span>
+                                </div>
+
                             </div>
                         </div>
                         <div class="card-footer">
@@ -893,6 +899,7 @@
                     tableHtml += '<th scope="col">Date (तारीख)</th>';
                     tableHtml += '<th scope="col">Reason (कारण)</th>';
                     tableHtml += '<th scope="col">Solution (उपाय)</th>';
+                    tableHtml += '<th scope="col">Uploaded File (अपलोड केलेली फाइल)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through stock detail
@@ -902,6 +909,7 @@
                         tableHtml += '<td>' + list.date + '</td>';
                         tableHtml += '<td>' + list.reason + '</td>';
                         tableHtml += '<td>' + list.solution + '</td>';
+                        tableHtml += '<td>' + (list.uploaded_file ? '<a href="storage/' + list.uploaded_file + '" target="_blank">View Document</a>' : 'NA') + '</td>';
                         tableHtml += '</tr>';
                     });
                     tableHtml += '</tbody></table></div>';

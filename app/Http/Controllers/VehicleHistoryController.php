@@ -247,8 +247,13 @@ class VehicleHistoryController extends Controller
                 'date' => 'required',
                 'reason' => 'required',
                 'solution' => 'required',
+                'upload_file' => 'required|file|mimes:pdf,doc,docx',
             ]);
 
+            if ($request->hasFile('upload_file')) {
+                $uploaded_file = $request->file('upload_file');
+                $uploaded_file_path = $uploaded_file->store('vehicle_details/uploaded_file', 'public');
+            }
 
             // Store data in vehicle_history table
             DB::table('vehicle_action_details')->insert([
@@ -256,6 +261,7 @@ class VehicleHistoryController extends Controller
                 'date' => $request->input('date'),
                 'reason' => $request->input('reason'),
                 'solution' => $request->input('solution'),
+                'uploaded_file' => isset($uploaded_file_path) ? $uploaded_file_path : null,
                 'created_by' => Auth::user()->id,
                 'created_at' => now(),
             ]);
