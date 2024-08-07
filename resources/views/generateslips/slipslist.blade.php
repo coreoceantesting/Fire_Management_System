@@ -42,7 +42,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="incident_reason">Incident Reason (घटनेचे कारण) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="incident_reason" name="incident_reason" type="text" placeholder="Enter Incident Reason">
+                                    {{-- <input class="form-control" id="incident_reason" name="incident_reason" type="text" placeholder="Enter Incident Reason"> --}}
+                                    <select class="form-control" name="incident_reason" id="incident_reason">
+                                        <option value="">Select Incident Reason</option>
+                                        @foreach ($fire_cause_list as $list)
+                                            <option value="{{ $list->name }}">{{ $list->name }}</option>
+                                        @endforeach
+                                    </select>
                                     <span class="text-danger error-text incident_reason_err"></span>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DriverDetail;
 use App\Models\VehicleDetail;
+use App\Models\FireCause;
 use App\Http\Requests\GenerateSlipsRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
@@ -18,7 +19,8 @@ class GenerateSlipsController extends Controller
     {
         $slip_list = DB::table('slips')->latest()->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        return view('generateslips.slipslist', compact('slip_list','designation_list'));
+        $fire_cause_list = FireCause::where('is_deleted','0')->latest()->get();
+        return view('generateslips.slipslist', compact('slip_list','designation_list', 'fire_cause_list'));
     }
 
     public function store_slip(GenerateSlipsRequest $request)
@@ -42,6 +44,17 @@ class GenerateSlipsController extends Controller
             $data['created_by'] = Auth::user()->id;
             $data['created_at'] = date('Y-m-d H:i:s');
             // dd($data);
+
+            // Retrieve the last slip number and increment it
+            $lastSlip = DB::table('slips')->orderBy('slip_id', 'desc')->first();
+            if ($lastSlip) {
+                $lastSlipNumber = intval(substr($lastSlip->slip_unique_number, -2));
+            } else {
+                $lastSlipNumber = 0;
+            }
+            $newSlipNumber = str_pad($lastSlipNumber + 1, 2, '0', STR_PAD_LEFT);
+            $data['slip_unique_number'] = $newSlipNumber;
+
 
             $slipId = DB::table('slips')->insertGetId($data);
 
