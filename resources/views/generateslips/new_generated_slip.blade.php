@@ -189,20 +189,20 @@
                             <!-- Worker Details Section -->
                             <div class="form-group row" id="worker-details-container">
                                 <div class="col-md-3 worker-details">
-                                    <label for="worker_name[]" class="control-label">Worker Name (कर्मचारीच नाव) <span class="text-danger">*</span></label>:</label>
+                                    <label for="worker_name[]" class="control-label">Staff Name (कर्मचाऱ्यांचे नाव) <span class="text-danger">*</span></label>:</label>
                                     <select class="form-control worker-name" id="worker_name[]" name="worker_name[]" required>
                                         <!-- Populate dropdown options from master data -->
-                                        <option value="">--Select Worker Name--</option>
+                                        <option value="">--Select Staff Name--</option>
                                         @foreach ($designation_list as $list)
                                             <option value="{{ $list->worker_name }}" data-designation="{{ $list->designation_id }}">{{ $list->worker_name }}</option>
                                         @endforeach
                                     </select>
                                     <span class="text-danger error-text worker_name_err"></span>
                             
-                                    <label for="worker_designation[]" class="control-label">Worker Designation (कर्मचारीचं पदनाम) <span class="text-danger">*</span></label>:</label>
+                                    <label for="worker_designation[]" class="control-label">Staff Details (कर्मचाऱ्यांचे तपशील) <span class="text-danger">*</span></label>:</label>
                                     <select class="form-control worker-designation" id="worker_designation[]" name="worker_designation[]" required>
                                         <!-- Populate dropdown options from master data -->
-                                        <option value="">--Select Designation--</option>
+                                        <option value="">--Select Staff Details--</option>
                                         @foreach ($designation_list as $list)
                                             <option value="{{ $list->designation_id }}">{{ $list->designation_name }}</option>
                                         @endforeach
