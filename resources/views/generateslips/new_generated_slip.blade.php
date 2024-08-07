@@ -213,10 +213,10 @@
                             <br>
                             <div class="form-group row">
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-warning" id="addWorkerDetails">Add Worker</button>
+                                    <button type="button" class="btn btn-warning" id="addWorkerDetails">Add Staff</button>
                                 </div>
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-warning" id="removeWorkerDetails">Remove Worker</button>
+                                    <button type="button" class="btn btn-warning" id="removeWorkerDetails">Remove Staff</button>
                                 </div>
                             </div>
                         </div>

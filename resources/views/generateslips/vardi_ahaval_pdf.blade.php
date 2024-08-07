@@ -100,6 +100,7 @@
 </head>
 <body>
     <div class="container">
+        <p style="text-align:left">Sr.No :- {{ $slipData->slip_unique_number }}</p>
         <p><img class="logo" src="{{ public_path('/admin/images/Panvel_Municipal_Corporation.png') }}" height="80" width="80" alt="Left Logo"></p>
         <h5>परिशिष्ट - " ग "</h5>
         <p>( ३ व ३ (ब) )</p>
