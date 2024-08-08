@@ -11,6 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Mpdf\Mpdf;
+use Illuminate\Support\Facades\Storage;
 
 class OccuranceBookController extends Controller
 {
@@ -123,9 +124,10 @@ class OccuranceBookController extends Controller
             'datetime_new' => 'required',
             'description' => 'required',
             'remark' => 'required',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif',
         ]);
 
-        DB::table('occurance_book')->insert([
+        $occuranceBookId = DB::table('occurance_book')->insertGetId([
             'slip_id' => $request->input('slip_id_new'),
             'occurance_book_date' => $request->input('datetime_new'),
             'occurance_book_description' => $request->input('description'),
@@ -138,6 +140,21 @@ class OccuranceBookController extends Controller
             'is_occurance_book_submitted' => '1',
             'slip_status' => 'Occurance Book Submitted',
         ]);
+
+        // Handle photo uploads
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $filePath = $photo->store('occuranceBookImages', 'public'); // Store the photo in the 'photos' directory in 'public' disk
+
+                // Insert the photo data into the database
+                DB::table('occurance_book_photos')->insert([
+                    'occurance_book_id' => $occuranceBookId,
+                    'slip_id' => $request->input('slip_id_new'),
+                    'photo_path' => $filePath,
+                    'created_at' => now(),
+                ]);
+            }
+        }
 
         return response()->json(['success'=> 'Occurance Book Submitted successfully!']);
     }
@@ -344,6 +361,62 @@ class OccuranceBookController extends Controller
 
         // Return the response with the PDF file path
         return response()->json(['pdfUrl' => $pdfFilePath]);
+    }
+
+    public function edit_occurance_book($slip_id)
+    {
+        $occurance_book_details = DB::table('occurance_book')->where('slip_id', $slip_id)->first();
+        $occurance_book_images = DB::table('occurance_book_photos')->where('slip_id', $slip_id)->get(['photo_path', 'photo_id']);
+        return view('occurance_book.edit')->with(['occurance_book_details' => $occurance_book_details, 'occurance_book_images' => $occurance_book_images]);
+    } 
+    
+    public function update_occurance_book(Request $request, $id)
+    {
+        $request->validate([
+            'datetime_new' => 'required',
+            'description' => 'required',
+            'remark' => 'required',
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $occurance_book_id = DB::table('occurance_book')->where('slip_id', $id)->first();
+
+        // Update occurrence book details
+        DB::table('occurance_book')->where('slip_id', $id)->update([
+            'occurance_book_date' => $request->input('datetime_new'),
+            'occurance_book_description' => $request->input('description'),
+            'occurance_book_remark' => $request->input('remark'),
+            'updated_by' => Auth::user()->id,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        // Remove old photos if any
+        if ($request->has('remove_photos')) {
+            foreach ($request->remove_photos as $photoId) {
+                $photo = DB::table('occurance_book_photos')->where('photo_id', $photoId)->first();
+                if ($photo) {
+                    Storage::disk('public')->delete($photo->photo_path); // Delete photo from storage
+                    DB::table('occurance_book_photos')->where('photo_id', $photoId)->delete(); // Delete photo record from database
+                }
+            }
+        }
+
+        // Handle new photo uploads
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $filePath = $photo->store('occuranceBookImages', 'public'); // Store the photo in the 'occuranceBookImages' directory in 'public' disk
+
+                // Insert the new photo data into the database
+                DB::table('occurance_book_photos')->insert([
+                    'occurance_book_id' => $occurance_book_id->occurance_book_id,
+                    'slip_id' => $id,
+                    'photo_path' => $filePath,
+                    'created_at' => now(),
+                ]);
+            }
+        }
+
+        return response()->json(['success' => 'Occurrence Book updated successfully!']);
     }
 
 

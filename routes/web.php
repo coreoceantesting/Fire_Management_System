@@ -97,6 +97,9 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/view-action-taken-slip/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'view_action_taken_slip'])->name('view_action_taken_slip');
     Route::post('store-additional-help', [App\Http\Controllers\OccuranceBookController::class, 'store_additional'])->name('store_additional');
     Route::post('store-occurance-book', [App\Http\Controllers\OccuranceBookController::class, 'store_occurance_book'])->name('store_occurance_book');
+    Route::get('edit-occurance-book/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'edit_occurance_book'])->name('edit_occurance_book');
+    Route::put('update-occurance-book/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'update_occurance_book'])->name('update_occurance_book');
+
 
     // list for vardi ahaval
     Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list'); 

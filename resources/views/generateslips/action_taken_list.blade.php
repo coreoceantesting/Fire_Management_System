@@ -251,6 +251,17 @@
                                     <span class="text-danger error-text remark_err"></span>
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="photos">Upload Photo <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="photos" name="photos[]" type="file" accept="image/*" required multiple>
+                                    <span class="text-danger error-text photos_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-success mt-5" id="add-more-photos">Add More Photos</button>
+                                </div>
+                            </div>
+                            <div id="additional-photos"></div>
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary" id="occurancebookSubmit">Submit</button>
@@ -342,6 +353,11 @@
                                                 @if($list->is_occurance_book_submitted == '0')
                                                 <button class="btn btn-info occurance-book-element px-2 py-1" title="Occurance Book" data-id="{{ $list->slip_id }}">Occurance Book</button> 
                                                 @endif
+                                                @endcan
+                                                @can('edit.occurancebook')
+                                                    @if ($list->slip_status == "Occurance Book Submitted")
+                                                        <a href="{{ route('edit_occurance_book', $list->slip_id) }}" class="btn btn-info edit-occurance-book-element px-2 py-1" title="Edit Occurance Book">Edit Occurance Book</a>
+                                                    @endif
                                                 @endcan
                                             </td>
                                         </tr>
@@ -865,13 +881,16 @@
             event.preventDefault();
 
             // Serialize the form data
-            var formData = $(this).serialize();
+            var formData = new FormData(this);
+            console.log(formData);
 
             // Make an AJAX request
             $.ajax({
                 url: $(this).attr('action'), // Get the form action attribute
                 type: 'POST',
                 data: formData,
+                processData: false, // Required for FormData
+                contentType: false,
                 success: function(data) {
                     
                     if (!data.error2)
@@ -934,6 +953,30 @@
                     vehicleNumberDropdown.append('<option value="{{ $list->vehicle_id }}">{{ $list->vehicle_number }}</option>');
                 }
             @endforeach
+        });
+    });
+</script>
+
+{{-- add more photos --}}
+<script>
+    document.getElementById('add-more-photos').addEventListener('click', function() {
+        var additionalPhotosDiv = document.getElementById('additional-photos');
+        var newPhotoInput = document.createElement('div');
+        newPhotoInput.className = 'mb-3 row';
+        newPhotoInput.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="photos[]" type="file" accept="image/*" required>
+                <span class="text-danger error-text photos_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalPhotosDiv.appendChild(newPhotoInput);
+
+        // Add event listener to the remove button
+        newPhotoInput.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalPhotosDiv.removeChild(newPhotoInput);
         });
     });
 </script>
