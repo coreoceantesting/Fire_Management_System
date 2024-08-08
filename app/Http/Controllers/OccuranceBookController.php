@@ -214,6 +214,7 @@ class OccuranceBookController extends Controller
                 'casualty_woman' => 'required',
                 'book_no' => 'required',
                 'page_no' => 'required',
+                'is_in_panvel' => 'required',
             ]);
     
             // Store data in the database
@@ -256,6 +257,8 @@ class OccuranceBookController extends Controller
                 'casualty_woman' => $request->input('casualty_woman'),
                 'book_no' => $request->input('book_no'),
                 'page_no' => $request->input('page_no'),
+                'is_in_panvel' => $request->input('is_in_panvel'),
+                'address' => $request->input('address'),
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);

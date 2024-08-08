@@ -283,6 +283,23 @@
                                     <input class="form-control" id="total_hour" name="total_hour" type="text" placeholder="Enter Total Hour">
                                     <span class="text-danger error-text total_hour_err"></span>
                                 </div>
+                                <div class="col-md-4"></div>
+
+                                <div class="col-md-6">
+                                    <label class="col-form-label" for="is_in_panvel">Is Panvel within the municipal corporation limits? ( पनवेल महानगरपालिकेच्या हद्दीत आहे का ? ) <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="is_in_panvel" id="is_in_panvel">
+                                        <option value="">Select Option</option>
+                                        <option value="yes">Yes / होय</option>
+                                        <option value="No">No / नाही</option>
+                                    </select>
+                                    <span class="text-danger error-text is_in_panvel_err"></span>
+                                </div>
+
+                                <div class="col-md-6" id="addressDiv" style="display: none">
+                                    <label class="col-form-label" for="address">Address ( पत्ता ) <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="address" id="address" cols="30" rows="2"></textarea>
+                                    <span class="text-danger error-text address_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -992,6 +1009,17 @@
         var minutes = Math.floor((timeDiff % 3600000) / 60000);
         return hours + ':' + (minutes < 10 ? '0' : '') + minutes;
     }
+</script>
+
+<script>
+    document.getElementById('is_in_panvel').addEventListener('change', function() {
+        var addressDiv = document.getElementById('addressDiv');
+        if (this.value === 'No') {
+            addressDiv.style.display = 'block';
+        } else {
+            addressDiv.style.display = 'none';
+        }
+    });
 </script>
 
 
