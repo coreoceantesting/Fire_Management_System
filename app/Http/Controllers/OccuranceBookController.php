@@ -279,6 +279,138 @@ class OccuranceBookController extends Controller
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
+
+            // Store male and female names from the first set of fields
+            $maleNames = $request->input('male_name', []);
+            $femaleNames = $request->input('women_name', []);
+            
+            foreach ($maleNames as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '1',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNames as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '1',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the second set of fields
+            $maleNamestwo = $request->input('male_name_two', []);
+            $femaleNamestwo = $request->input('women_name_two', []);
+            
+            foreach ($maleNamestwo as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '2',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamestwo as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '2',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the third set of fields
+            $maleNamesthree = $request->input('male_name_three', []);
+            $femaleNamesthree = $request->input('women_name_three', []);
+            
+            foreach ($maleNamesthree as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '3',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesthree as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '3',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the fourth set of fields
+            $maleNamesfour = $request->input('male_name_four', []);
+            $femaleNamesfour = $request->input('women_name_four', []);
+            
+            foreach ($maleNamesfour as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '4',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesfour as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '4',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the five set of fields
+            $maleNamesfive = $request->input('male_name_five', []);
+            $femaleNamesfive = $request->input('women_name_five', []);
+            
+            foreach ($maleNamesfive as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '5',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesfive as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '5',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the six set of fields
+            $maleNamessix = $request->input('male_name_six', []);
+            $femaleNamessix = $request->input('women_name_six', []);
+            
+            foreach ($maleNamessix as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'male_name' => $name,
+                    'type' => '6',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamessix as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $request->input('edit_model_id_new'),
+                    'women_name' => $name,
+                    'type' => '6',
+                    'created_at' => now(),
+                ]);
+            }
         
             DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
                 'is_vardi_ahaval_submitted' => '1',

@@ -326,6 +326,22 @@
                                     <span class="text-danger error-text woman_one_err"></span>
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name" name="male_name[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name" name="women_name[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields"></div>
 
                             <div class="mb-3 row">
                                 <h4 class="card-title text-center">A Rescue Operation Performed By The Fire Department Without The Use Of A Rescue Vehicle (अग्निशमन विभागाने बचाव वाहनाचा वापर न करता केलेले विमोचन कार्य )</h4>
@@ -341,6 +357,22 @@
                                     <span class="text-danger error-text woman_two_err"></span>
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name_two">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name_two" name="male_name_two[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_two_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name_two">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name_two" name="women_name_two[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_two_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field-two">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields-two"></div>
 
                             <div class="mb-3 row">
                                 <h4 class="card-title text-center">A Rescue Vehicle Was Used By The Fire Department For Rescue Operations (अग्निशमन विभागाने बचाव वाहनाचा वापर केलेले विमोचन कार्य)</h4>
@@ -356,6 +388,22 @@
                                     <span class="text-danger error-text woman_three_err"></span>
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name_three">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name_three" name="male_name_three[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_three_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name_three">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name_three" name="women_name_three[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_three_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field-three">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields-three"></div>
 
                         </div>
 
@@ -383,6 +431,23 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name_four">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name_four" name="male_name_four[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_four_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name_four">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name_four" name="women_name_four[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_four_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field-four">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields-four"></div>
+
+                            <div class="mb-3 row">
                                 <h4 class="card-title text-center">Wounded (जखमी)</h4>
                                 <hr>
                                 <div class="col-md-4">
@@ -398,6 +463,23 @@
                             </div>
 
                             <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name_five">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name_five" name="male_name_five[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_five_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name_five">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name_five" name="women_name_five[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_five_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field-five">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields-five"></div>
+
+                            <div class="mb-3 row">
                                 <h4 class="card-title text-center">Casualty (मृत्यू)</h4>
                                 <hr>
                                 <div class="col-md-4">
@@ -411,6 +493,23 @@
                                     <span class="text-danger error-text casualty_woman_err"></span>
                                 </div>
                             </div>
+
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="male_name_six">Male Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="male_name_six" name="male_name_six[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text male_name_six_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="women_name_six">Women Name <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="women_name_six" name="women_name_six[]" placeholder="Enter Name" type="text" required multiple>
+                                    <span class="text-danger error-text women_name_six_err"></span>
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-success mt-5" id="add-field-six">Add</button>
+                                </div>
+                            </div>
+                            <div id="additional-fields-six"></div>
 
                         </div>
 
@@ -1019,6 +1118,164 @@
         } else {
             addressDiv.style.display = 'none';
         }
+    });
+</script>
+
+{{-- add more photos --}}
+<script>
+    document.getElementById('add-field').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name[]" type="text" placeholder="Enter Name" required>
+                <span class="text-danger error-text male_name_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name[]" type="text" placeholder="Enter Name" required>
+                <span class="text-danger error-text women_name_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
+    });
+
+    // two
+    document.getElementById('add-field-two').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields-two');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name_two[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text male_name_two_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name_two[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text women_name_two_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
+    });
+
+    // three
+    document.getElementById('add-field-three').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields-three');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name_three[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text male_name_three_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name_three[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text women_name_three_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
+    });
+
+    // four
+    document.getElementById('add-field-four').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields-four');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name_four[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text male_name_four_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name_four[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text women_name_four_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
+    });
+
+    // five
+    document.getElementById('add-field-five').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields-five');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name_five[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text male_name_five_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name_five[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text women_name_five_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
+    });
+
+    // six
+    document.getElementById('add-field-six').addEventListener('click', function() {
+        var additionalDiv = document.getElementById('additional-fields-six');
+        var newInputField = document.createElement('div');
+        newInputField.className = 'mb-3 row';
+        newInputField.innerHTML = `
+            <div class="col-md-4">
+                <input class="form-control" name="male_name_six[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text male_name_six_err"></span>
+            </div>
+            <div class="col-md-4">
+                <input class="form-control" name="women_name_six[]" placeholder="Enter Name" type="text" required>
+                <span class="text-danger error-text women_name_six_err"></span>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger remove-photo">Remove</button>
+            </div>
+        `;
+        additionalDiv.appendChild(newInputField);
+
+        // Add event listener to the remove button
+        newInputField.querySelector('.remove-photo').addEventListener('click', function() {
+            additionalDiv.removeChild(newInputField);
+        });
     });
 </script>
 
