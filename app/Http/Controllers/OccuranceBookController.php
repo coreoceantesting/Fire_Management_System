@@ -609,27 +609,31 @@ class OccuranceBookController extends Controller
             // Remove old records and insert updated records
             DB::table('male_rescuers_details')->where('slip_id', $id)->delete();
             DB::table('women_rescuers_details')->where('slip_id', $id)->delete();
-            
+
             // Store male and female names from the first set of fields
             $maleNames = $request->input('male_name', []);
             $femaleNames = $request->input('women_name', []);
             
             foreach ($maleNames as $name) {
-                DB::table('male_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'male_name' => $name,
-                    'type' => '1',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('male_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'male_name' => $name,
+                        'type' => '1',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             foreach ($femaleNames as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '1',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '1',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             // Store male and female names from the second set of fields
@@ -637,21 +641,25 @@ class OccuranceBookController extends Controller
             $femaleNamestwo = $request->input('women_name_two', []);
             
             foreach ($maleNamestwo as $name) {
-                DB::table('male_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'male_name' => $name,
-                    'type' => '2',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('male_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'male_name' => $name,
+                        'type' => '2',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             foreach ($femaleNamestwo as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '2',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '2',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             // Store male and female names from the third set of fields
@@ -668,12 +676,14 @@ class OccuranceBookController extends Controller
             }
 
             foreach ($femaleNamesthree as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '3',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '3',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             // Store male and female names from the fourth set of fields
@@ -681,21 +691,25 @@ class OccuranceBookController extends Controller
             $femaleNamesfour = $request->input('women_name_four', []);
             
             foreach ($maleNamesfour as $name) {
-                DB::table('male_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'male_name' => $name,
-                    'type' => '4',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('male_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'male_name' => $name,
+                        'type' => '4',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             foreach ($femaleNamesfour as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '4',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '4',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             // Store male and female names from the five set of fields
@@ -703,21 +717,25 @@ class OccuranceBookController extends Controller
             $femaleNamesfive = $request->input('women_name_five', []);
             
             foreach ($maleNamesfive as $name) {
-                DB::table('male_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'male_name' => $name,
-                    'type' => '5',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('male_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'male_name' => $name,
+                        'type' => '5',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             foreach ($femaleNamesfive as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '5',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '5',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             // Store male and female names from the six set of fields
@@ -725,21 +743,25 @@ class OccuranceBookController extends Controller
             $femaleNamessix = $request->input('women_name_six', []);
             
             foreach ($maleNamessix as $name) {
-                DB::table('male_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'male_name' => $name,
-                    'type' => '6',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('male_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'male_name' => $name,
+                        'type' => '6',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             foreach ($femaleNamessix as $name) {
-                DB::table('women_rescuers_details')->insert([
-                    'slip_id' => $id,
-                    'women_name' => $name,
-                    'type' => '6',
-                    'created_at' => now(),
-                ]);
+                if (!empty($name)) {
+                    DB::table('women_rescuers_details')->insert([
+                        'slip_id' => $id,
+                        'women_name' => $name,
+                        'type' => '6',
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             return response()->json(['success' => 'Vardi Ahawal Updated successfully!']);
