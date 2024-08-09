@@ -65,7 +65,8 @@ class OccuranceBookController extends Controller
             ->get();
 
         $occuranceBookDetails = DB::table('occurance_book')->select('occurance_book_date','occurance_book_description', 'occurance_book_remark')->where('slip_id', $slipId)->first();
-        // dd($additionalHelpDetails);
+        $occuranceBookPhotos = DB::table('occurance_book_photos')->select('photo_path')->where('slip_id', $slipId)->get();
+        // dd($occuranceBookPhotos);
 
         // Return a view or JSON response with slip details and additional data
         return response()->json([
@@ -73,7 +74,8 @@ class OccuranceBookController extends Controller
             'slip_action_form_data' => $slipActionFormData,
             'worker_details' => $workerDetails,
             'additional_help_details' => $additionalHelpDetails,
-            'occurance_book_details' => $occuranceBookDetails
+            'occurance_book_details' => $occuranceBookDetails,
+            'occuranceBookPhotos' => $occuranceBookPhotos
         ]);
     }
 

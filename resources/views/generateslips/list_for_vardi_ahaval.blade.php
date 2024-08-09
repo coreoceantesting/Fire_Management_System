@@ -839,6 +839,26 @@
                         tableHtml += '<p class="text-center">No Occurrence Book Details available</p>';
                     }
 
+                    // Table 6: Occurrence Book Files
+                    if (data.occuranceBookPhotos && data.occuranceBookPhotos.length > 0) {
+                        tableHtml += '<br><h3 class="text-center">Occurrence Book File Details (घटना पुस्तक फाइल तपशील)</h3><br>';
+                        tableHtml += '<table class="table table-bordered">';
+                        tableHtml += '<thead><tr>';
+                        tableHtml += '<th scope="col">Occurrence Book files (घटना पुस्तक फाइल्स)</th>';
+                        tableHtml += '</tr></thead>';
+                        tableHtml += '<tbody>';
+
+                        data.occuranceBookPhotos.forEach(photo => {
+                            tableHtml += '<tr>';
+                            tableHtml += '<td><a href="storage/' + photo.photo_path + '" target="_blank">View Document</a></td>';
+                            tableHtml += '</tr>';
+                        });
+
+                        tableHtml += '</tbody></table>';
+                    } else {
+                        tableHtml += '<p class="text-center">No Occurrence Book Files Details available</p>';
+                    }
+
                     // Display table in the modal
                     $('#slipDetails').html(tableHtml);
                     
