@@ -420,7 +420,7 @@
     {{-- for pdf --}}
     <script>
         $(document).ready(function() {
-            $("#buttons-datatables").on("click", ".download-pdf", function(e) {
+            $("#todaysListNew").on("click", ".download-pdf", function(e) {
                 e.preventDefault();
                 var pdfFileName = $(this).data("pdf-file-name");
                 var pdfUrl = "{{ url('/slips/') }}/" + pdfFileName;
