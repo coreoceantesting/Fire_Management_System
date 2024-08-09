@@ -417,53 +417,7 @@ class OccuranceBookController extends Controller
                 'slip_status' => 'Vardi Ahval Submitted',
             ]);
 
-            // Create mPDF instance
-            $pdf = new Mpdf();
-            $slipData = DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->first();
-            // Save the generated PDF to a temporary file
-            $formattedDatetime = date('Y-m-d_H_i_s');
-            $pdfFileName = $slipData->caller_name.'_'. $formattedDatetime . '.pdf';
-            $pdfFilePath = public_path('vardi_ahaval/' . $pdfFileName);
-
-            // Update 'slips' table with the PDF file name
-            DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->update([
-                'vardi_ahaval_pdf_name' => $pdfFileName,
-            ]);
-
-            // Retrieve data from the database (if needed for PDF content)
-            $slipData = DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->first();
-            $vardiAhavalData = DB::table('vardi_ahaval_details')->where('slip_id', $request->input('edit_model_id_new'))->first();
-            $actionTakenData = DB::table('slip_action_form')->where('slip_id', $request->input('edit_model_id_new'))->first();
-            $additionalHelpDetails = DB::table('additional_help_details')
-            ->select(
-                'additional_help_details.inform_call_time',
-                'additional_help_details.vehicle_departure_time',
-                'additional_help_details.vehicle_arrival_time', 
-                'additional_help_details.vehicle_return_time', 
-                'additional_help_details.no_of_fireman',
-                'additional_help_details.center_name',
-                'additional_help_details.type_of_vehicle',
-                'additional_help_details.vehicle_return_to_center_time',
-                'additional_help_details.total_distance',
-                'additional_help_details.pumping_hours',
-                'vehicle_details.vehicle_number',
-                'fire_stations.name',)
-            ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
-            ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
-            ->where('additional_help_details.slip_id', $request->input('edit_model_id_new'))
-            ->get();
-            $workers_Details = DB::table('on_field_worker_details')
-            ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
-            ->where('on_field_worker_details.slip_action_form_id',$actionTakenData->slip_action_form_id)
-            ->get();
-
-            // Render the PDF view (adjust the view path based on your project structure)
-            $pdfview = view('generateslips.vardi_ahaval_pdf', compact('slipData','vardiAhavalData','actionTakenData','additionalHelpDetails','workers_Details'));
-            
-            $pdf->WriteHTML($pdfview->render());
-
-            // Output the PDF to the file
-            $pdf->Output($pdfFilePath, 'F');
+            // pdf code
 
             return response()->json(['success' => 'Vardi Ahawal Submitted successfully!']);
 
@@ -549,6 +503,295 @@ class OccuranceBookController extends Controller
         }
 
         return response()->json(['success' => 'Occurrence Book updated successfully!']);
+    }
+
+    public function edit_vardi_ahaval(Request $request, $slip_id)
+    {
+        $vardi_details = DB::table('vardi_ahaval_details')->where('slip_id', $slip_id)->first();
+        $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
+        $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
+        return view('vardi_ahaval.edit')->with(['vardi_details' => $vardi_details, 
+                                                'male_rescue_details' => $male_rescue_details, 
+                                                'woman_rescue_details' => $woman_rescue_details]);
+
+    }
+
+    public function update_vardi_ahaval(Request $request, $id)
+    {
+        try 
+        {
+            $request->validate([
+                'vardi_name' => 'required',
+                'vardi_contact_no' => 'required',
+                'vardi_place' => 'required',
+                'owner_name' => 'required',
+                'vaparkarta_name' => 'required',
+                'incident_time' => 'required',
+                'first_vehicle_departing_date_time' => 'required',
+                'time_of_arrival_at_the_scene' => 'required',
+                'distance' => 'required',
+                'property_description' => 'required',
+                'type_of_fire' => 'required',
+                // 'limit_of_fire' => 'required',
+                'possible_cause_of_fire' => 'required',
+                // 'description_of_damage' => 'required',
+                // 'property_damage' => 'required',
+                'area_damage' => 'required',
+                // 'space_loss' => 'required',
+                // 'property_loss' => 'required',
+                'officer_name_present_at_last_moment' => 'required',
+                'date_of_departure_from_scene' => 'required',
+                'time_of_departure_from_scene' => 'required',
+                'total_time' => 'required',
+                'total_hour' => 'required',
+                'male_one' => 'required',
+                'woman_one' => 'required',
+                'male_two' => 'required',
+                'woman_two' => 'required',
+                'male_three' => 'required',
+                'woman_three' => 'required',
+                'deceased_male' => 'required',
+                'deceased_woman' => 'required',
+                'wounded_male' => 'required',
+                'wounded_woman' => 'required',
+                'casualty_male' => 'required',
+                'casualty_woman' => 'required',
+                'book_no' => 'required',
+                'page_no' => 'required',
+                'is_in_panvel' => 'required',
+            ]);
+    
+            // Store data in the database
+            DB::table('vardi_ahaval_details')->where('slip_id', $id)->update([
+                'vardi_name' => $request->input('vardi_name'),
+                'vardi_contact_no' => $request->input('vardi_contact_no'),
+                'vardi_place' => $request->input('vardi_place'),
+                'owner_name' => $request->input('owner_name'),
+                'vaparkarta_name' => $request->input('vaparkarta_name'),
+                'incident_time' => $request->input('incident_time'),
+                'first_vehicle_departing_date_time' => $request->input('first_vehicle_departing_date_time'),
+                'time_of_arrival_at_the_scene' => $request->input('time_of_arrival_at_the_scene'),
+                'distance' => $request->input('distance'),
+                'property_description' => $request->input('property_description'),
+                'type_of_fire' => $request->input('type_of_fire'),
+                'limit_of_fire' => $request->input('limit_of_fire'),
+                'possible_cause_of_fire' => $request->input('possible_cause_of_fire'),
+                'description_of_damage' => $request->input('description_of_damage'),
+                'property_damage' => $request->input('property_damage'),
+                'area_damage' => $request->input('area_damage'),
+                'space_loss' => $request->input('space_loss'),
+                'property_loss' => $request->input('property_loss'),
+                'officer_name_present_at_last_moment' => $request->input('officer_name_present_at_last_moment'),
+                'date_of_departure_from_scene' => $request->input('date_of_departure_from_scene'),
+                'time_of_departure_from_scene' => $request->input('time_of_departure_from_scene'),
+                'total_time' => $request->input('total_time'),
+                'total_hour' => $request->input('total_hour'),
+                'male_one' => $request->input('male_one'),
+                'woman_one' => $request->input('woman_one'),
+                'male_two' => $request->input('male_two'),
+                'woman_two' => $request->input('woman_two'),
+                'male_three' => $request->input('male_three'),
+                'woman_three' => $request->input('woman_three'),
+                'deceased_male' => $request->input('deceased_male'),
+                'deceased_woman' => $request->input('deceased_woman'),
+                'wounded_male' => $request->input('wounded_male'),
+                'wounded_woman' => $request->input('wounded_woman'),
+                'casualty_male' => $request->input('casualty_male'),
+                'casualty_woman' => $request->input('casualty_woman'),
+                'book_no' => $request->input('book_no'),
+                'page_no' => $request->input('page_no'),
+                'is_in_panvel' => $request->input('is_in_panvel'),
+                'address' => $request->input('address'),
+                'created_by' => Auth::user()->id,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+
+            // Remove old records and insert updated records
+            DB::table('male_rescuers_details')->where('slip_id', $id)->delete();
+            DB::table('women_rescuers_details')->where('slip_id', $id)->delete();
+            
+            // Store male and female names from the first set of fields
+            $maleNames = $request->input('male_name', []);
+            $femaleNames = $request->input('women_name', []);
+            
+            foreach ($maleNames as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '1',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNames as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '1',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the second set of fields
+            $maleNamestwo = $request->input('male_name_two', []);
+            $femaleNamestwo = $request->input('women_name_two', []);
+            
+            foreach ($maleNamestwo as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '2',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamestwo as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '2',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the third set of fields
+            $maleNamesthree = $request->input('male_name_three', []);
+            $femaleNamesthree = $request->input('women_name_three', []);
+            
+            foreach ($maleNamesthree as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '3',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesthree as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '3',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the fourth set of fields
+            $maleNamesfour = $request->input('male_name_four', []);
+            $femaleNamesfour = $request->input('women_name_four', []);
+            
+            foreach ($maleNamesfour as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '4',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesfour as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '4',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the five set of fields
+            $maleNamesfive = $request->input('male_name_five', []);
+            $femaleNamesfive = $request->input('women_name_five', []);
+            
+            foreach ($maleNamesfive as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '5',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamesfive as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '5',
+                    'created_at' => now(),
+                ]);
+            }
+
+            // Store male and female names from the six set of fields
+            $maleNamessix = $request->input('male_name_six', []);
+            $femaleNamessix = $request->input('women_name_six', []);
+            
+            foreach ($maleNamessix as $name) {
+                DB::table('male_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'male_name' => $name,
+                    'type' => '6',
+                    'created_at' => now(),
+                ]);
+            }
+
+            foreach ($femaleNamessix as $name) {
+                DB::table('women_rescuers_details')->insert([
+                    'slip_id' => $id,
+                    'women_name' => $name,
+                    'type' => '6',
+                    'created_at' => now(),
+                ]);
+            }
+
+            return response()->json(['success' => 'Vardi Ahawal Updated successfully!']);
+
+        }catch(ValidationException $e){
+            return response()->json(['errors' => $e->errors()]);
+        }
+    }
+
+    public function view_vardi_ahaval(Request $request, $id)
+    {
+        // Retrieve data from the database (if needed for PDF content)
+        $slipData = DB::table('slips')->where('slip_id', $id)->first();
+        $vardiAhavalData = DB::table('vardi_ahaval_details')->where('slip_id', $id)->first();
+        $actionTakenData = DB::table('slip_action_form')->where('slip_id', $id)->first();
+        $additionalHelpDetails = DB::table('additional_help_details')
+        ->select(
+            'additional_help_details.inform_call_time',
+            'additional_help_details.vehicle_departure_time',
+            'additional_help_details.vehicle_arrival_time', 
+            'additional_help_details.vehicle_return_time', 
+            'additional_help_details.no_of_fireman',
+            'additional_help_details.center_name',
+            'additional_help_details.type_of_vehicle',
+            'additional_help_details.vehicle_return_to_center_time',
+            'additional_help_details.total_distance',
+            'additional_help_details.pumping_hours',
+            'vehicle_details.vehicle_number',
+            'fire_stations.name',)
+        ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
+        ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
+        ->where('additional_help_details.slip_id', $id)
+        ->get();
+        $workers_Details = DB::table('on_field_worker_details')
+        ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+        ->where('on_field_worker_details.slip_action_form_id',$actionTakenData->slip_action_form_id)
+        ->get();
+        $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
+        $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
+
+        // Render the PDF view (adjust the view path based on your project structure)
+        $pdfview = view('generateslips.vardi_ahaval_pdf', compact('slipData', 'vardiAhavalData', 'actionTakenData', 'additionalHelpDetails', 'workers_Details', 'male_rescue_details', 'woman_rescue_details'));
+
+        // Create mPDF instance
+        $pdf = new Mpdf();
+        
+        // Write the view content to the PDF
+        $pdf->WriteHTML($pdfview->render());
+
+        // Output the PDF to the browser
+        return response($pdf->Output('vardi_ahaval.pdf', 'I'), 200)
+            ->header('Content-Type', 'application/pdf');
     }
 
 

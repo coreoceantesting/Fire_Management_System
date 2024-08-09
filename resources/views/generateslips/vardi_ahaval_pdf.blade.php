@@ -239,7 +239,7 @@
         <div class="row rescuetable">
             <div class="col-md-6">
                <table>
-                <caption class="text-center" style="padding:10px"><b>अग्निशमन विभागा व्यतिरिक्त केलेले विमोचन कार्य</b></caption>
+                    <caption class="text-center" style="padding:10px"><b>अग्निशमन विभागा व्यतिरिक्त केलेले विमोचन कार्य</b></caption>
                     <tr>
                         <th>पुरुष संख्या</th>
                         <th>स्त्री संख्या</th>
@@ -249,10 +249,38 @@
                         <td>{{$vardiAhavalData->woman_one}}</td>
                     </tr>
                 </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[1] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[1] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+                
             </div>
             <div class="col-md-6">
                <table>
-                <caption class="text-center"><b>अग्निशमन विभागाने बचाव वाहनाचा वापर न करता केलेले विमोचन कार्य</b></caption>
+                    <caption class="text-center"><b>अग्निशमन विभागाने बचाव वाहनाचा वापर न करता केलेले विमोचन कार्य</b></caption>
                     <tr>
                         <th>पुरुष संख्या</th>
                         <th>स्त्री संख्या</th>
@@ -262,6 +290,34 @@
                         <td>{{$vardiAhavalData->woman_two}}</td>
                     </tr>
                 </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[2] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[2] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+
             </div>
             <div class="col-md-6">
                <table>
@@ -275,6 +331,34 @@
                         <td>{{$vardiAhavalData->woman_three}}</td>
                     </tr>
                 </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[3] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[3] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+
             </div>
             
         </div>
@@ -294,6 +378,34 @@
                         <td>{{$vardiAhavalData->deceased_woman}}</td>
                     </tr>
                 </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[4] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[4] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+
             </div>
             <div class="col-md-6">
                <table>
@@ -307,6 +419,34 @@
                         <td>{{$vardiAhavalData->wounded_woman}}</td>
                     </tr>
                 </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[6] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[6] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+                
             </div>            
         </div>
 

@@ -606,13 +606,19 @@
                                                 @endcan
                                                 @can('actionpermissions.download_vardi_ahaval')
                                                 @if($list->is_vardi_ahaval_submitted == '1')
-                                                <button class="download-pdf btn btn-secondary px-2 py-1"
+                                                {{-- <button class="download-pdf btn btn-secondary px-2 py-1"
                                                         title="Download PDF"
                                                         data-id="{{ $list->slip_id }}"
                                                         data-pdf-file-name="{{ $list->vardi_ahaval_pdf_name }}"
                                                 >
                                                     <i data-feather="download"></i>
-                                                </button>
+                                                </button> --}}
+                                                <a href="{{ route('view_vardi_ahaval', $list->slip_id) }}" class=" btn btn-secondary px-2 py-1" target="blank"><i data-feather="download"></i></a>
+                                                @endif
+                                                @endcan
+                                                @can('edit.vardiahaval')
+                                                @if($list->is_vardi_ahaval_submitted == '1')
+                                                    <a href="{{ route('edit_vardi_ahaval', $list->slip_id) }}" class="btn btn-warning px-2 py-1">Edit Vardi Ahaval</a>
                                                 @endif
                                                 @endcan
                                             </td>
@@ -1121,7 +1127,7 @@
     });
 </script>
 
-{{-- add more photos --}}
+{{-- add more functionlity for rescures name --}}
 <script>
     document.getElementById('add-field').addEventListener('click', function() {
         var additionalDiv = document.getElementById('additional-fields');

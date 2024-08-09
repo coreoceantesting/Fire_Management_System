@@ -106,6 +106,10 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/get-slip-details/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'slip_details'])->name('slip_details');
     Route::post('/store-vardi-ahval', [App\Http\Controllers\OccuranceBookController::class, 'store_vardi_ahaval'])->name('store_vardi_ahaval');
     Route::get('/generate-vardi-ahaval-pdf/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_pdf'])->name('generate.vardi.ahaval.pdf');
+    Route::get('/edit-vardi-ahaval/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'edit_vardi_ahaval'])->name('edit_vardi_ahaval');
+    Route::put('update-vardi-ahaval/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'update_vardi_ahaval'])->name('update_vardi_ahaval');
+    Route::get('/view-vardi-ahaval-pdf/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'view_vardi_ahaval'])->name('view_vardi_ahaval');
+
 
     // All Listing Count
     Route::get('todays-slips', [App\Http\Controllers\ReportController::class, 'todays_list'])->name('todays_list');
