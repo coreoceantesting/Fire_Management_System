@@ -328,13 +328,13 @@
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name" name="male_name[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name">Male Name</label>
+                                    <input class="form-control" id="male_name" name="male_name[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name" name="women_name[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name">Women Name</label>
+                                    <input class="form-control" id="women_name" name="women_name[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -359,13 +359,13 @@
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name_two">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name_two" name="male_name_two[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name_two">Male Name</label>
+                                    <input class="form-control" id="male_name_two" name="male_name_two[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_two_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name_two">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name_two" name="women_name_two[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name_two">Women Name</label>
+                                    <input class="form-control" id="women_name_two" name="women_name_two[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_two_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -390,13 +390,13 @@
                             </div>
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name_three">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name_three" name="male_name_three[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name_three">Male Name</label>
+                                    <input class="form-control" id="male_name_three" name="male_name_three[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_three_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name_three">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name_three" name="women_name_three[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name_three">Women Name</label>
+                                    <input class="form-control" id="women_name_three" name="women_name_three[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_three_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -432,13 +432,13 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name_four">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name_four" name="male_name_four[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name_four">Male Name</label>
+                                    <input class="form-control" id="male_name_four" name="male_name_four[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_four_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name_four">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name_four" name="women_name_four[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name_four">Women Name</label>
+                                    <input class="form-control" id="women_name_four" name="women_name_four[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_four_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -464,13 +464,13 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name_five">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name_five" name="male_name_five[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name_five">Male Name</label>
+                                    <input class="form-control" id="male_name_five" name="male_name_five[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_five_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name_five">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name_five" name="women_name_five[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name_five">Women Name</label>
+                                    <input class="form-control" id="women_name_five" name="women_name_five[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_five_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -496,13 +496,13 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="male_name_six">Male Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_name_six" name="male_name_six[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="male_name_six">Male Name</label>
+                                    <input class="form-control" id="male_name_six" name="male_name_six[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_six_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="women_name_six">Women Name <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="women_name_six" name="women_name_six[]" placeholder="Enter Name" type="text" required multiple>
+                                    <label class="col-form-label" for="women_name_six">Women Name</label>
+                                    <input class="form-control" id="women_name_six" name="women_name_six[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_six_err"></span>
                                 </div>
                                 <div class="col-md-3">
@@ -620,6 +620,9 @@
                                                 @if($list->is_vardi_ahaval_submitted == '1')
                                                     <a href="{{ route('edit_vardi_ahaval', $list->slip_id) }}" class="btn btn-warning px-2 py-1">Edit Vardi Ahaval</a>
                                                 @endif
+                                                @endcan
+                                                @can('edit.occurancebook')
+                                                    <a href="{{ route('edit_occurance_book', $list->slip_id) }}" class="btn btn-info edit-occurance-book-element px-2 py-1" title="Edit Occurance Book">Edit Occurance Book</a>
                                                 @endcan
                                             </td>
                                         </tr>
@@ -1155,11 +1158,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name[]" type="text" placeholder="Enter Name" required>
+                <input class="form-control" name="male_name[]" type="text" placeholder="Enter Name">
                 <span class="text-danger error-text male_name_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name[]" type="text" placeholder="Enter Name" required>
+                <input class="form-control" name="women_name[]" type="text" placeholder="Enter Name">
                 <span class="text-danger error-text women_name_err"></span>
             </div>
             <div class="col-md-2">
@@ -1181,11 +1184,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name_two[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="male_name_two[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_two_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name_two[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="women_name_two[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_two_err"></span>
             </div>
             <div class="col-md-2">
@@ -1207,11 +1210,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name_three[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="male_name_three[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_three_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name_three[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="women_name_three[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_three_err"></span>
             </div>
             <div class="col-md-2">
@@ -1233,11 +1236,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name_four[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="male_name_four[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_four_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name_four[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="women_name_four[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_four_err"></span>
             </div>
             <div class="col-md-2">
@@ -1259,11 +1262,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name_five[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="male_name_five[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_five_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name_five[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="women_name_five[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_five_err"></span>
             </div>
             <div class="col-md-2">
@@ -1285,11 +1288,11 @@
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
             <div class="col-md-4">
-                <input class="form-control" name="male_name_six[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="male_name_six[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_six_err"></span>
             </div>
             <div class="col-md-4">
-                <input class="form-control" name="women_name_six[]" placeholder="Enter Name" type="text" required>
+                <input class="form-control" name="women_name_six[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_six_err"></span>
             </div>
             <div class="col-md-2">

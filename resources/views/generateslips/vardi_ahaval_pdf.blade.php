@@ -231,6 +231,26 @@
                 <th>एकुण तास</th>
                 <td>:- {{$vardiAhavalData->total_hour}}</td>
             </tr>
+            <tr>
+                <th>पनवेल महानगरपालिकेच्या हद्दीत आहे का ?</th>
+                <td>:- 
+                    @if($vardiAhavalData->is_in_panvel == "No")
+                        नाही 
+                    @else
+                        हो
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <th>हद्दीत नसल्यास पत्ता </th>
+                <td>:- 
+                    @if($vardiAhavalData->is_in_panvel == "No")
+                        {{$vardiAhavalData->address}}
+                    @else
+                        -
+                    @endif
+                </td>
+            </tr>
         </table>
 
         <hr>
