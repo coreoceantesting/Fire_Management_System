@@ -408,6 +408,8 @@
 
     const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
     document.getElementById('datetime_new').value = formattedDateTime;
+
+    $('#datetime_new').attr('min', formattedDateTime);
 </script>
 
 {{-- Add --}}
