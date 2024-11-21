@@ -143,7 +143,7 @@
                                     <span class="text-danger error-text vardi_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vardi_contact_no">Vardi Issuer's No ( वर्दी जारीकर्ता क्र) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vardi_contact_no">Vardi Issuer's Contact No ( वर्दी जारीकर्त्याचा संपर्क क्र) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vardi_contact_no" name="vardi_contact_no" type="text" placeholder="Enter Vardi Issuer's No">
                                     <span class="text-danger error-text vardi_contact_no_err"></span>
                                 </div>
@@ -1306,6 +1306,27 @@
             additionalDiv.removeChild(newInputField);
         });
     });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#vardi_contact_no').on('input', function () {
+            let mobile = $(this).val();
+
+            // Restrict input length to 10 digits
+            if (mobile.length > 10) {
+                $(this).val(mobile.substring(0, 10));
+            }
+
+            // Validate if input is exactly 10 digits
+            if (mobile.length === 10 && !/^\d{10}$/.test(mobile)) {
+                $('.vardi_contact_no_err').text('Invalid mobile number.');
+            } else {
+                $('.vardi_contact_no_err').text('');
+            }
+        });
+    });
+
 </script>
 
 
