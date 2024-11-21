@@ -192,12 +192,12 @@
 
                                         <div class="col-md-4">
                                             <label for="total_distance[]" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span>:</label>
-                                            <input class="form-control" type="text" name="total_distance[]" placeholder="Total Distance In KM" required>
+                                            <input class="form-control" type="number" name="total_distance[]" placeholder="Total Distance In KM" required>
                                         </div>
         
                                         <div class="col-md-4">
                                             <label for="pumping_hours[]" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span>:</label>
-                                            <input class="form-control" type="text" placeholder="Enter Pumping hours" name="pumping_hours[]" required>
+                                            <input class="form-control" type="number" placeholder="Enter Pumping hours" name="pumping_hours[]" required>
                                         </div>
                                         
                                     </div>

@@ -275,12 +275,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="total_time">Total Time ( एकुण वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_time" name="total_time" type="text" placeholder="Enter Total Time">
+                                    <input class="form-control" id="total_time" name="total_time" type="number" placeholder="Enter Total Time">
                                     <span class="text-danger error-text total_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="total_hour">Total Hours ( एकुण तास ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_hour" name="total_hour" type="text" placeholder="Enter Total Hour">
+                                    <input class="form-control" id="total_hour" name="total_hour" type="number" placeholder="Enter Total Hour">
                                     <span class="text-danger error-text total_hour_err"></span>
                                 </div>
                                 <div class="col-md-4"></div>
@@ -317,12 +317,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_one">Male Number(पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_one" name="male_one" type="text" placeholder="Enter Male Numbers">
+                                    <input class="form-control" id="male_one" name="male_one" type="number" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_one_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_one">Woman Number(स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_one" name="woman_one" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="woman_one" name="woman_one" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_one_err"></span>
                                 </div>
                             </div>
@@ -348,12 +348,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_two">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_two" name="male_two" type="text" placeholder="Enter Male Numbers">
+                                    <input class="form-control" id="male_two" name="male_two" type="number" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_two_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_two">Woman Number (स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_two" name="woman_two" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="woman_two" name="woman_two" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_two_err"></span>
                                 </div>
                             </div>
@@ -379,12 +379,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_three">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="male_three" name="male_three" type="text" placeholder="Enter Male Numbers">
+                                    <input class="form-control" id="male_three" name="male_three" type="number" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text male_three_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="woman_three">Woman Number (स्त्री संख्या) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="woman_three" name="woman_three" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="woman_three" name="woman_three" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text woman_three_err"></span>
                                 </div>
                             </div>
@@ -420,12 +420,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="deceased_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="deceased_male" name="deceased_male" type="text" placeholder="Enter Deceased Male Numbers">
+                                    <input class="form-control" id="deceased_male" name="deceased_male" type="number" placeholder="Enter Deceased Male Numbers">
                                     <span class="text-danger error-text deceased_male_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="deceased_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="deceased_woman" name="deceased_woman" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="deceased_woman" name="deceased_woman" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text deceased_woman_err"></span>
                                 </div>
                             </div>
@@ -452,12 +452,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="wounded_male" name="wounded_male" type="text" placeholder="Enter Male Numbers">
+                                    <input class="form-control" id="wounded_male" name="wounded_male" type="number" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text wounded_male_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="wounded_woman" name="wounded_woman" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="wounded_woman" name="wounded_woman" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text wounded_woman_err"></span>
                                 </div>
                             </div>
@@ -484,12 +484,12 @@
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="casualty_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="casualty_male" name="casualty_male" type="text" placeholder="Enter Male Numbers">
+                                    <input class="form-control" id="casualty_male" name="casualty_male" type="number" placeholder="Enter Male Numbers">
                                     <span class="text-danger error-text casualty_male_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="casualty_woman">Woman Number (स्त्री संख्या ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="casualty_woman" name="casualty_woman" type="text" placeholder="Enter Woman Numbers">
+                                    <input class="form-control" id="casualty_woman" name="casualty_woman" type="number" placeholder="Enter Woman Numbers">
                                     <span class="text-danger error-text casualty_woman_err"></span>
                                 </div>
                             </div>
@@ -517,12 +517,12 @@
                         <div class="mb-3 row">
                             <div class="col-md-4">
                                 <label class="col-form-label" for="book_no">Book No( घटना पुस्तक क्रं ) <span class="text-danger">*</span></label>
-                                <input class="form-control" id="book_no" name="book_no" type="text" placeholder="Enter Book No">
+                                <input class="form-control" id="book_no" name="book_no" type="number" placeholder="Enter Book No">
                                 <span class="text-danger error-text book_no_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="page_no">Page No( पृष्ठ क्रं ) <span class="text-danger">*</span></label>
-                                <input class="form-control" id="page_no" name="page_no" type="text" placeholder="Enter Page No">
+                                <input class="form-control" id="page_no" name="page_no" type="number" placeholder="Enter Page No">
                                 <span class="text-danger error-text page_no_err"></span>
                             </div>
                         </div>

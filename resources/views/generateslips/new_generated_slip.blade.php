@@ -174,13 +174,13 @@
 
                                 <div class="col-md-6">
                                     <label for="total_distance" class="control-label">Total Distance In KM (एकूण अतंर):</label>
-                                    <input class="form-control" type="text" name="total_distance" id="total_distance" placeholder="Total Distance In KM">
+                                    <input class="form-control" type="number" name="total_distance" id="total_distance" placeholder="Total Distance In KM">
                                     <span class="text-danger error-text total_distance_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="pumping_hours" class="control-label">Pumping hours (पंपिंग तास):</label>
-                                    <input class="form-control" type="text" placeholder="Enter Pumping hours" id="pumping_hours" name="pumping_hours" >
+                                    <input class="form-control" type="number" placeholder="Enter Pumping hours" id="pumping_hours" name="pumping_hours" >
                                     <span class="text-danger error-text pumping_hours_err"></span>
                                 </div>
 
