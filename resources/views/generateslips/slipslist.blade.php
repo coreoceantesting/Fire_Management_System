@@ -408,3 +408,22 @@
     });
 </script>
 
+{{-- mobile no validation --}}
+<script>
+    $(document).ready(function () {
+        $('#caller_mobile_no').on('input', function () {
+            let mobile = $(this).val();
+
+            if (mobile.length > 10) {
+                $(this).val(mobile.substring(0, 10));
+            }
+
+            if (mobile.length === 10 && !/^\d{10}$/.test(mobile)) {
+                $('.caller_mobile_no_err').text('Invalid mobile number.');
+            } else {
+                $('.caller_mobile_no_err').text('');
+            }
+        });
+    });
+</script>
+
