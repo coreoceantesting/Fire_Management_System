@@ -19,7 +19,7 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-4">
-                                <label class="col-form-label" for="vardi_name">Name of Vardi Issuer (वरदी देणेराचे नाव) <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="vardi_name">Name of Vardi Issuer (वरदी जारीकर्त्याचे नाव ) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_name" name="vardi_name" type="text" placeholder="Enter Name of Vardi Issuer" value="{{ $vardi_details->vardi_name }}">
                                 <span class="text-danger error-text vardi_name_err"></span>
                             </div>
@@ -39,7 +39,7 @@
                                 <span class="text-danger error-text owner_name_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="vaparkarta_name">Name Of Vaparkarta ( वापर करणाऱयांचे नाव  ) <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="vaparkarta_name">Name Of User ( वापरकर्त्याचे नाव  ) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name" value="{{ $vardi_details->vaparkarta_name }}">
                                 <span class="text-danger error-text vaparkarta_name_err"></span>
                             </div>
@@ -49,7 +49,7 @@
                                 <span class="text-danger error-text incident_time_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="first_vehicle_departing_date_time">Timing Of The First Vehicle Departing On Verdi ( वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ   ) <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="first_vehicle_departing_date_time">Timing Of The First Vehicle Departing On Verdi ( वर्दीवरून निघणाऱ्या पहिल्या वाहनाची वेळ  ) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="first_vehicle_departing_date_time" name="first_vehicle_departing_date_time" type="datetime-local" value="{{ $vardi_details->first_vehicle_departing_date_time }}">
                                 <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
                             </div>

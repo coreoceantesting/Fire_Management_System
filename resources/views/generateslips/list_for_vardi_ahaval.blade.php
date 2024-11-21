@@ -138,7 +138,7 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vardi_name">Name of Vardi Issuer (वरदी देणेराचे नाव) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vardi_name">Name of Vardi Issuer ( वरदी जारीकर्त्याचे नाव ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vardi_name" name="vardi_name" type="text" placeholder="Enter Name of Vardi Issuer">
                                     <span class="text-danger error-text vardi_name_err"></span>
                                 </div>
@@ -158,7 +158,7 @@
                                     <span class="text-danger error-text owner_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vaparkarta_name">Name Of Vaparkarta ( वापर करणाऱयांचे नाव  ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vaparkarta_name">Name Of User ( वापरकर्त्याचे नाव  ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name">
                                     <span class="text-danger error-text vaparkarta_name_err"></span>
                                 </div>
@@ -243,23 +243,23 @@
                                     <span class="text-danger error-text property_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="area_damage">Estimated Surrounding Area Damage ( अंदाजित आजुबाजुचा परिसर नुकसान ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="area_damage">Estimated Surrounding Area Damage ( अंदाजित आसपासच्या क्षेत्राचे नुकसान ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="area_damage" name="area_damage" type="text" placeholder="Enter Estimated property damage">
                                     <span class="text-danger error-text area_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित आजुबाजुचा परिसर नुकसान )</label>
+                                    <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित स्पेस लॉस )</label>
                                     <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss">
                                     <span class="text-danger error-text space_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_loss">Estimated loss of property ( अंदाजित आजुबाजुचा परिसर नुकसान )</label>
+                                    <label class="col-form-label" for="property_loss">Estimated loss of property ( मालमत्तेचे अंदाजे नुकसान  )</label>
                                     <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property">
                                     <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                     <span class="text-danger error-text property_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( अखेरच्या क्षणी घटनास्थळी उपस्थित असलेल्या अधिकाऱ्यांचे नाव ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( शेवटच्या क्षणी घटनास्थळी उपस्थित असलेल्या अधिकाऱ्यांचे नाव ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Name of the officer present at the scene at the last moment">
                                     <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                                 </div>
