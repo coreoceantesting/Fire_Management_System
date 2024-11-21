@@ -260,7 +260,7 @@
                         </div>
                         <br>
                         <br>
-                        <h2 class="text-center custom-header">अग्निशमन विभाग</h2>
+                        <h2 class="text-center custom-header">अग्निशमन विभाग 2</h2>
                         <br>
                         <h3 class="text-center"><b>Fire Management System</b></h3>
                         <h3 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h3>
