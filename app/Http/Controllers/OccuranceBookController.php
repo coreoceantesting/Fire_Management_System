@@ -196,11 +196,11 @@ class OccuranceBookController extends Controller
         try 
         {
             $request->validate([
-                'vardi_name' => 'required',
+                'vardi_name' => 'required|alpha',
                 'vardi_contact_no' => 'required',
                 'vardi_place' => 'required',
-                'owner_name' => 'required',
-                'vaparkarta_name' => 'required',
+                'owner_name' => 'required|alpha',
+                'vaparkarta_name' => 'required|alpha',
                 'incident_time' => 'required',
                 'first_vehicle_departing_date_time' => 'required',
                 'time_of_arrival_at_the_scene' => 'required',
@@ -214,7 +214,7 @@ class OccuranceBookController extends Controller
                 'area_damage' => 'required',
                 // 'space_loss' => 'required',
                 // 'property_loss' => 'required',
-                'officer_name_present_at_last_moment' => 'required',
+                'officer_name_present_at_last_moment' => 'required|alpha',
                 'date_of_departure_from_scene' => 'required',
                 'time_of_departure_from_scene' => 'required',
                 'total_time' => 'required',

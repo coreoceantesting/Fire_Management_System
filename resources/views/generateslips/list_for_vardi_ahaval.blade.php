@@ -286,7 +286,7 @@
                                 <div class="col-md-4"></div>
 
                                 <div class="col-md-6">
-                                    <label class="col-form-label" for="is_in_panvel">Is Panvel within the municipal corporation limits? ( पनवेल महानगरपालिकेच्या हद्दीत आहे का ? ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="is_in_panvel">Is it within the limits of Panvel Municipal Corporation? ( पनवेल महानगरपालिकेच्या हद्दीत आहे का ? ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="is_in_panvel" id="is_in_panvel">
                                         <option value="">Select Option</option>
                                         <option value="yes">Yes / होय</option>

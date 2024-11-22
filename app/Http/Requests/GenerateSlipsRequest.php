@@ -23,7 +23,7 @@ class GenerateSlipsRequest extends FormRequest
     {
         return [
             'datetime' => 'required',
-            'caller_name' => 'required',
+            'caller_name' => 'required|alpha',
             'caller_mobile_no' => 'required|min:10|max:10',
             'incident_location' => 'required',
             'landmark' => 'required',
