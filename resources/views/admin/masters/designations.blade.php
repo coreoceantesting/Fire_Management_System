@@ -1,6 +1,6 @@
 <x-admin.layout>
-    <x-slot name="title">Worker Details</x-slot>
-    <x-slot name="heading">Worker Details (कामगार तपशील)</x-slot>
+    <x-slot name="title">Staff Details</x-slot>
+    <x-slot name="heading">Staff Details (कर्मचारी तपशील)</x-slot>
     {{-- <x-slot name="subheading">Test</x-slot> --}}
 
 
@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="worker_name">Worker Name(कामगाराचे नाव) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="worker_name">Staff Name(कामगाराचे नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="worker_name" name="worker_name" type="text" placeholder="Enter Worker Name">
                                     <span class="text-danger error-text worker_name_err"></span>
                                 </div>
@@ -49,7 +49,7 @@
                     @csrf
                     <section class="card">
                         <header class="card-header">
-                            <h4 class="card-title">Edit Designation</h4>
+                            <h4 class="card-title">Edit Staff Details</h4>
                         </header>
 
                         <div class="card-body py-2">
@@ -57,7 +57,7 @@
                             <input type="hidden" id="edit_model_id" name="edit_model_id" value="">
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="worker_name">Worker Name(कामगाराचे नाव) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="worker_name">Staff Name(कर्मचारी नाव) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="worker_name" name="worker_name" type="text" placeholder="Enter Worker Name">
                                     <span class="text-danger error-text worker_name_err"></span>
                                 </div>
@@ -106,7 +106,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>Worker Name</th>
+                                        <th>Staff Name</th>
                                         <th>Designation</th>
                                         <th>Initial</th>
                                         <th>Action</th>
@@ -197,6 +197,7 @@
                 if (!data.error)
                 {
                     $("#editForm input[name='edit_model_id']").val(data.designation.designation_id);
+                    $("#editForm input[name='worker_name']").val(data.designation.worker_name);
                     $("#editForm input[name='designation_name']").val(data.designation.designation_name);
                     $("#editForm input[name='designation_initial']").val(data.designation.designation_initial);
                 }
