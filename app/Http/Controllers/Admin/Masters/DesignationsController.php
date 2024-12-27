@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\Masters\StoreDesignationsRequest;
 use App\Http\Requests\Admin\Masters\UpdateDesignationsRequest;
 use App\Models\Designation;
+use App\Models\FireStation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,14 @@ class DesignationsController extends Controller
      */
     public function index()
     {
-        $designation_list = Designation::where('is_deleted','0')->latest()->get();
+        $designation_list = Designation::where('designations.is_deleted','0')
+                            ->leftjoin('fire_stations', 'designations.fire_station', '=', 'fire_stations.fire_station_id')
+                            ->select('designations.*', 'fire_stations.name as fire_station_name')
+                            ->orderBy('designations.designation_id','desc')
+                            ->get();
+        $fire_stations = FireStation::where('is_deleted','0')->where('fire_station_is_active','0')->latest()->get();
 
-        return view('admin.masters.designations')->with(['designation_list'=> $designation_list]);
+        return view('admin.masters.designations')->with(['designation_list'=> $designation_list, 'fire_stations'=> $fire_stations]);
     }
 
     /**

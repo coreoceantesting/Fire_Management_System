@@ -25,6 +25,7 @@ class UpdateDesignationsRequest extends FormRequest
             'designation_name' => 'required',
             'designation_initial' => 'required',
             'worker_name' => 'required',
+            'fire_station' => 'required'
         ];
     }
 }

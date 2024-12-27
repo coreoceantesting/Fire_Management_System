@@ -28,6 +28,16 @@
                                     <input class="form-control" id="designation_initial" name="designation_initial" type="text" placeholder="Enter Designation Initial">
                                     <span class="text-danger error-text designation_initial_err"></span>
                                 </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="fire_station">Fire Station (अग्निशमन केंद्र)<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="fire_station" id="fire_station">
+                                        <option value="">Select Option</option>
+                                        @foreach ($fire_stations as $list)
+                                            <option value="{{$list->fire_station_id}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -71,6 +81,16 @@
                                     <input class="form-control" id="designation_initial" name="designation_initial" type="text" placeholder="Enter Designation Initial">
                                     <span class="text-danger error-text designation_initial_err"></span>
                                 </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="fire_station">Fire Station (अग्निशमन केंद्र)<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="fire_station" id="fire_station">
+                                        <option value="">Select Option</option>
+                                        @foreach ($fire_stations as $list)
+                                            <option value="{{$list->fire_station_id}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -108,6 +128,7 @@
                                         <th>Sr.No</th>
                                         <th>Staff Name</th>
                                         <th>Designation</th>
+                                        <th>Fire Station Name</th>
                                         <th>Initial</th>
                                         <th>Action</th>
                                     </tr>
@@ -118,6 +139,7 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->worker_name }}</td>
                                             <td>{{ $list->designation_name }}</td>
+                                            <td>{{ $list->fire_station_name ?? 'NA' }}</td>
                                             <td>{{ $list->designation_initial }}</td>
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Designation" data-id="{{ $list->designation_id }}"><i data-feather="edit"></i></button>
@@ -200,6 +222,7 @@
                     $("#editForm input[name='worker_name']").val(data.designation.worker_name);
                     $("#editForm input[name='designation_name']").val(data.designation.designation_name);
                     $("#editForm input[name='designation_initial']").val(data.designation.designation_initial);
+                    $("#editForm select[name='fire_station']").val(data.designation.fire_station);
                 }
                 else
                 {
