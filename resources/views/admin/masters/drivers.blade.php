@@ -51,6 +51,16 @@
                                     </select>
                                     <span class="text-danger error-text driver_job_status_err"></span>
                                 </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="fire_station">Fire Station (अग्निशमन केंद्र)<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="fire_station" id="fire_station">
+                                        <option value="">Select Option</option>
+                                        @foreach ($fire_stations as $list)
+                                            <option value="{{$list->fire_station_id}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -117,6 +127,16 @@
                                     </select>
                                     <span class="text-danger error-text driver_job_status_err"></span>
                                 </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="fire_station">Fire Station (अग्निशमन केंद्र)<span class="text-danger">*</span></label>
+                                    <select class="form-control" name="fire_station" id="fire_station">
+                                        <option value="">Select Option</option>
+                                        @foreach ($fire_stations as $list)
+                                            <option value="{{$list->fire_station_id}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -154,6 +174,7 @@
                                         <th>Sr.No</th>
                                         <th>Name</th>
                                         <th>Mobile Number</th>
+                                        <th>Fire Station Name</th>
                                         <th>Job Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -164,6 +185,7 @@
                                             <td>{{ $serialNumber++ }}</td>
                                             <td>{{ $list->driver_name }}</td>
                                             <td>{{ $list->driver_mob_no }}</td>
+                                            <td>{{ $list->fire_station_name ?? 'NA' }}</td>
                                             <td>{{ $list->driver_job_status }}</td>
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Vehicle Detail" data-id="{{ $list->driver_id }}"><i data-feather="edit"></i></button>
@@ -248,6 +270,7 @@
                     $("#editForm select[name='driver_gender']").val(data.driver_detail.driver_gender);
                     $("#editForm select[name='driver_job_status']").val(data.driver_detail.driver_job_status);
                     $("#editForm input[name='driver_mob_no']").val(data.driver_detail.driver_mob_no);
+                    $("#editForm select[name='fire_station']").val(data.driver_detail.fire_station);
                 }
                 else
                 {

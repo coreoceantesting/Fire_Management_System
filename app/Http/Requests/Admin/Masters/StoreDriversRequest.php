@@ -26,7 +26,7 @@ class StoreDriversRequest extends FormRequest
             'driver_mob_no' => 'required|min:10|max:10',
             'driver_gender' => 'required',
             'driver_job_status' => 'required',
-            // 'vehicle_id' => 'required',
+            'fire_station' => 'required',
         ];
     }
 }

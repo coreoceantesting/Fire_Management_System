@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Masters\StoreDriversRequest;
 use App\Http\Requests\Admin\Masters\UpdateDriversRequest;
 use App\Models\DriverDetail;
 use App\Models\VehicleDetail;
+use App\Models\FireStation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,16 @@ class DriversDetailsController extends Controller
      */
     public function index()
     {
-        $drivers_list = DriverDetail::where('is_deleted','0')->latest()->get();
+        $drivers_list = DriverDetail::where('driver_details.is_deleted','0')
+                            ->leftjoin('fire_stations', 'driver_details.fire_station', '=', 'fire_stations.fire_station_id')
+                            ->select('driver_details.*', 'fire_stations.name as fire_station_name')
+                            ->orderBy('driver_details.driver_id','desc')
+                            ->get();
+        // $drivers_list = DriverDetail::where('is_deleted','0')->latest()->get();
         $vehicle_list = VehicleDetail::where('is_deleted','0')->latest()->get();
+        $fire_stations = FireStation::where('is_deleted','0')->where('fire_station_is_active','0')->latest()->get();
 
-        return view('admin.masters.drivers')->with(['drivers_list'=> $drivers_list,'vehicle_list' => $vehicle_list]);
+        return view('admin.masters.drivers')->with(['drivers_list'=> $drivers_list,'vehicle_list' => $vehicle_list, 'fire_stations' => $fire_stations]);
     }
 
     /**
