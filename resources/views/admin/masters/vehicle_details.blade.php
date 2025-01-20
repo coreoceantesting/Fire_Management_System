@@ -161,6 +161,8 @@
                                             <td>
                                                 <button class="edit-element btn btn-secondary px-2 py-1" title="Edit Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="edit"></i></button>
                                                 <button class="btn btn-danger rem-element px-2 py-1" title="Delete Vehicle Detail" data-id="{{ $list->vehicle_id }}"><i data-feather="trash-2"></i> </button>
+                                                <a href="{{ route('get_equipment_list', $list->vehicle_id) }}" class="btn btn-warning px-2 py-1" title="View Equipments Details" data-id="{{ $list->vehicle_id }}">Equipment Details</a>
+                                                <a href="{{ route('add_equipment_list', $list->vehicle_id) }}" class="btn btn-success px-2 py-1" title="Add Equipments" data-id="{{ $list->vehicle_id }}">Add Equipments</a>
                                             </td>
                                         </tr>
                                     @endforeach

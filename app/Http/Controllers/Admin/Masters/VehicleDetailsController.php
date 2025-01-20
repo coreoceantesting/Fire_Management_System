@@ -127,4 +127,45 @@ class VehicleDetailsController extends Controller
             return $this->respondWithAjax($e, 'deleting', 'Vehicle Details');
         }
     }
+
+    public function add_equipment_list(Request $request, $id)
+    {
+        return view('admin.addEquipment')->with(['id' => $id]);
+    }
+
+    public function store_equipment_details(Request $request)
+    {
+
+        try
+        {
+            DB::beginTransaction();
+
+            foreach ($request->equipment_name as $key => $equipmentName) {
+                DB::table('equipment_details')->insert([
+                    'vehicle_details_id' => $request->vechicle_id,
+                    'position' => $request->position,
+                    'equipment_name' => $equipmentName,
+                    'quantity' => $request->quantity[$key],
+                    'created_by' => auth()->user()->id,
+                    'created_at' => now(),
+                ]);
+            }
+
+            DB::commit();
+            return response()->json(['success'=> 'Equipment Details Added successfully!']);
+        }
+        catch(\Exception $e)
+        {
+            return $this->respondWithAjax($e, 'adding', 'Equipment Details');
+        }
+    }
+
+    public function get_equipment_list(Request $request, $id)
+    {
+        $equipmentData  = DB::table('equipment_details')
+        ->where('vehicle_details_id', $id)
+        ->get()
+        ->groupBy('position');
+        return view('admin.viewEquipmentDetails')->with(['data' => $equipmentData]);
+    }
 }

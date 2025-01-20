@@ -158,6 +158,11 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
 
     // get vehicle type
     Route::get('/get-vehicle-quantity/{vehicle_no}', [App\Http\Controllers\EquipmentsController::class, 'get_vehicle_type'])->name('get_vehicle_type');
+
+    // add equipment details
+    Route::get('/add-equipment-details/{vehicle_no}', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'add_equipment_list'])->name('add_equipment_list');
+    Route::post('store-equipment-details', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'store_equipment_details'])->name('store_equipment_details');
+    Route::get('/get-equipment-details/{vehicle_no}', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'get_equipment_list'])->name('get_equipment_list');
     
 });
 
