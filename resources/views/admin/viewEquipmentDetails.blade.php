@@ -15,19 +15,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $position => $groupedData)
+                            @if (count($data) > 0 )
+                                @foreach ($data as $position => $groupedData)
+                                    <tr>
+                                        <td rowspan="{{ $groupedData->count() + 1 }}" class="text-center font-weight-bold">
+                                            {{ $position }}
+                                        </td>
+                                    </tr>
+                                    @foreach ($groupedData as $item)
+                                        <tr>
+                                            <td>{{ $item->equipment_name }}</td>
+                                            <td>{{ $item->quantity }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                            @else
                                 <tr>
-                                    <td rowspan="{{ $groupedData->count() + 1 }}" class="text-center font-weight-bold">
-                                        {{ $position }}
+                                    <td colspan="3" class="text-center font-weight-bold">
+                                        No Data Found
                                     </td>
                                 </tr>
-                                @foreach ($groupedData as $item)
-                                    <tr>
-                                        <td>{{ $item->equipment_name }}</td>
-                                        <td>{{ $item->quantity }}</td>
-                                    </tr>
-                                @endforeach
-                            @endforeach
+                            @endif
                         </tbody>
                     </table>                    
                 </div>
