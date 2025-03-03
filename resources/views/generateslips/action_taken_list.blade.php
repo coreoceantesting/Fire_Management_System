@@ -125,7 +125,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
@@ -147,7 +147,7 @@
                                                 <option value="">--Select Vehicle Type--</option>
                                             </select>
                                         </div>
-                                        
+
                                         {{-- <div class="col-md-4">
                                             <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक) <span class="text-danger">*</span>:</label>
                                             <select class="form-control" name="vehicle_no[]" required>
@@ -169,7 +169,7 @@
                                             <label for="inform_call_datetime[]" class="control-label">Inform Call Date & Time (कॉलची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="inform_call_time[]" required>
                                         </div>
-    
+
                                         <div class="col-md-4">
                                             <label for="departure_vehicle_datetime[]" class="control-label">Departure Vehicle Date & Time(वाहन सुटण्याची तारीख आणि वेळ)<span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="departure_vehicle_datetime[]" required>
@@ -179,13 +179,13 @@
                                             <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_arrival_datetime[]" required>
                                         </div>
-    
-                                        <div class="col-md-4">                                            
+
+                                        <div class="col-md-4">
                                             <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ)<span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
 
-                                        <div class="col-md-4">                                            
+                                        <div class="col-md-4">
                                             <label for="vehicle_return_to_center_datetime[]" class="control-label">Vehicle Return To Center Date & Time (वाहन केंद्रावर परतण्याची तारीख आणि वेळ)<span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_center_datetime[]" required>
                                         </div>
@@ -194,12 +194,12 @@
                                             <label for="total_distance[]" class="control-label">Total Distance In KM (एकूण अतंर) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="number" name="total_distance[]" placeholder="Total Distance In KM" required>
                                         </div>
-        
+
                                         <div class="col-md-4">
                                             <label for="pumping_hours[]" class="control-label">Pumping hours (पंपिंग तास) <span class="text-danger">*</span>:</label>
                                             <input class="form-control" type="number" placeholder="Enter Pumping hours" name="pumping_hours[]" required>
                                         </div>
-                                        
+
                                     </div>
                                     <br>
                                     <hr>
@@ -223,8 +223,8 @@
                 </form>
             </div>
         </div>
-        
-        
+
+
         {{-- Occurance Book  --}}
         <div class="row" id="occurance-book" style="display:none;">
             <div class="col-sm-12">
@@ -271,7 +271,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
         {{-- Listing Table --}}
@@ -308,7 +308,7 @@
                             </form>
                         </div>
                     </div>
-                    
+
                     @php
                         $serialNumber = 1;
                     @endphp
@@ -345,13 +345,13 @@
                                                 <button class="view-element btn btn-secondary px-2 py-1" title="View Slip" data-id="{{ $list->slip_id }}"><i data-feather="eye"></i></button>
                                                 @endcan
                                                 @can('actionpermissions.additional_help')
-                                                @if($list->is_additional_form_submitted == '0') 
+                                                @if($list->is_additional_form_submitted == '0')
                                                 <button class="btn btn-danger action-element px-2 py-1" title="Additional Help" data-id="{{ $list->slip_id }}">Additional Help</button>
                                                 @endif
                                                 @endcan
                                                 @can('actionpermissions.occurance_book')
                                                 @if($list->is_occurance_book_submitted == '0')
-                                                <button class="btn btn-info occurance-book-element px-2 py-1" title="Occurance Book" data-id="{{ $list->slip_id }}">Occurance Book</button> 
+                                                <button class="btn btn-info occurance-book-element px-2 py-1" title="Occurance Book" data-id="{{ $list->slip_id }}">Occurance Book</button>
                                                 @endif
                                                 @endcan
                                                 @can('edit.occurancebook')
@@ -612,7 +612,7 @@
                     // Generate HTML table with the predefined headers
                     var tableHtml = '<h3 class="text-center"> Slip Details (स्लिप तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
-                    
+
                     // Use predefined headers
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Slip Date (स्लिप तारीख)</th>';
@@ -675,8 +675,8 @@
                     tableHtml += '<br><h3 class="text-center"> Worker Details (कामगार तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
                     tableHtml += '<thead><tr>';
-                    tableHtml += '<th scope="col">Worker Name (कर्मचारीच नाव)</th>';
-                    tableHtml += '<th scope="col">Worker Designation (कर्मचारीचं पदनाम)</th>';
+                    tableHtml += '<th scope="col">Staff Name (कर्मचारीच नाव)</th>';
+                    tableHtml += '<th scope="col">Staff Designation (कर्मचारीचं पदनाम)</th>';
                     tableHtml += '</tr></thead>';
                     tableHtml += '<tbody>';
                     // Loop through worker details
@@ -771,7 +771,7 @@
 
                     // Display table in the modal
                     $('#slipDetails').html(tableHtml);
-                    
+
                     // Show the modal
                     $('#viewSlipModal').modal('show');
                 },
@@ -865,7 +865,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
@@ -914,7 +914,7 @@
                 processData: false, // Required for FormData
                 contentType: false,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
