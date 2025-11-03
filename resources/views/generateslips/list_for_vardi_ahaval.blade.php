@@ -27,12 +27,12 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या):</label>
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक):</label>
                                             <select class="form-control" name="vehicle_no[]" required>
@@ -47,7 +47,7 @@
                                             <label for="inform_call_datetime[]" class="control-label">Inform Call Date & Time (कॉलची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="inform_call_time[]" required>
                                         </div>
-    
+
                                         <div class="col-md-4">
                                             <label for="departure_vehicle_datetime[]" class="control-label">Departure Vehicle Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="departure_vehicle_datetime[]" required>
@@ -57,8 +57,8 @@
                                             <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन येण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_arrival_datetime[]" required>
                                         </div>
-    
-                                        <div class="col-md-4">                                            
+
+                                        <div class="col-md-4">
                                             <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
@@ -85,8 +85,8 @@
                 </form>
             </div>
         </div>
-        
-        
+
+
         {{-- Occurance Book  --}}
         <div class="row" id="occurance-book" style="display:none;">
             <div class="col-sm-12">
@@ -138,54 +138,120 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vardi_name">Name of Vardi Issuer ( वरदी जारीकर्त्याचे नाव ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="vardi_name">Name of Vardi Issuer ( वर्दी देण्याऱ्याचे नाव  ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="vardi_name" name="vardi_name" type="text" placeholder="Enter Name of Vardi Issuer">
                                     <span class="text-danger error-text vardi_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vardi_contact_no">Vardi Issuer's Contact No ( वर्दी जारीकर्त्याचा संपर्क क्र) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_contact_no" name="vardi_contact_no" type="text" placeholder="Enter Vardi Issuer's No">
+                                    <label class="col-form-label" for="vardi_contact_no">Vardi Issuer's Contact No ( दुरध्वनी क्रमांक ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_contact_no" name="vardi_contact_no" type="text" placeholder="Enter Vardi Issuer's No" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     <span class="text-danger error-text vardi_contact_no_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vardi_place">Vardi Location ( वर्दीचे ठिकाण ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_place" name="vardi_place" type="text" placeholder="Enter Vardi Location">
+                                    <label class="col-form-label" for="vardi_place">Address of the place of occurrence ( घटनास्थळाचा पत्ता  ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_place" name="vardi_place" type="text" placeholder="Enter Address of the place of occurrence">
                                     <span class="text-danger error-text vardi_place_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="owner_name">Owner's Name ( मालकाचे नाव ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="owner_name" name="owner_name" type="text" placeholder="Enter Owner's Name">
-                                    <span class="text-danger error-text owner_name_err"></span>
+                                    <label class="col-form-label" for="vardi_business">vardi's business ( धंदा ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_business" name="vardi_business" type="text" placeholder="Enter vardi's business">
+                                    <span class="text-danger error-text vardi_business_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="vaparkarta_name">Name Of User ( वापरकर्त्याचे नाव  ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name">
+                                    <label class="col-form-label" for="vaparkarta_name">Vardi's Tenant Name ( भाडेकऱ्यांचे नाव ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vardi's Tenant Name">
                                     <span class="text-danger error-text vaparkarta_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="incident_time">Incident Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="incident_time" name="incident_time" type="datetime-local">
-                                    <span class="text-danger error-text incident_time_err"></span>
+                                    <label class="col-form-label" for="owner_name">Vardi's Owner's Name ( मालकाचे नाव ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="owner_name" name="owner_name" type="text" placeholder="Enter vardi's Owner Name">
+                                    <span class="text-danger error-text owner_name_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="first_vehicle_departing_date_time">Timing Of The First Vehicle Departing On Verdi ( वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ   ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="first_vehicle_departing_date_time">Vardi's Uniform Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="first_vehicle_departing_date_time" name="first_vehicle_departing_date_time" type="datetime-local">
                                     <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="time_of_arrival_at_the_scene">Time Of Arrival At The Scene ( घटनास्थळी पोह्चल्याची वेळ ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="time_of_arrival_at_the_scene">Vardi's Time of first vehicle release on uniform (वर्दीवर पहिले वाहन सोडल्याची वेळ)<span class="text-danger">*</span></label>
                                     <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="datetime-local">
                                     <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="time_of_arrival_at_the_scene">Distance Of Incident Site From Fire Station ( अग्निशमन केंद्रापासून घटनास्तळाचे अंतर ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="distance">Distance from the main fire station/substation of the incident site (approximate) / ( घटना स्थळाचे मुख्य अग्निशमक / उपकेंद्रापासून अंतर (अंदाजे) ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="distance" name="distance" type="number" placeholder="Distance Of Incident Site From Fire Station In KM">
                                     <span class="text-danger error-text distance_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_km">Vardi's K.m / ( कि.मी ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_km" name="vardi_km" type="text" placeholder="Enter Vardi km">
+                                    <span class="text-danger error-text vardi_km_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_damage">Vardi's Damage description / ( नुकसान झालेले वर्णन  ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_damage" name="vardi_damage" type="text" placeholder="Enter Vardi Damage Description">
+                                    <span class="text-danger error-text vardi_damage_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_construction">Vardi's Construction etc / ( बांधकाम इत्यादी ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_construction" name="vardi_construction" type="text" placeholder="Enter Vardi Construction etc">
+                                    <span class="text-danger error-text vardi_construction_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_insurance">Vardi's Insurance is/is not / ( विमा आहे / नाही ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_insurance" name="vardi_insurance" type="text" placeholder="Enter Vardi's Insurance is/is not">
+                                    <span class="text-danger error-text vardi_insurance_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_uniform_type">Vardi's uniform type / ( वर्दी प्रकार ) <span class="text-danger">*</span></label>
+                                    {{-- <input class="form-control" id="distance" name="distance" type="number" placeholder="Distance Of Incident Site From Fire Station In KM"> --}}
+                                    <select name="vardi_uniform_type" id="vardi_uniform_type" class="form-control">
+                                        <option value="" >--Select Vardi's Uniform Type--</option>
+                                        <option value="आग">आग</option>
+                                        <option value="विमोचन">विमोचन</option>
+                                        <option value="वृक्ष">वृक्ष</option>
+                                        <option value="गॅस लिक">गॅस लिक</option>
+                                        <option value="डेडबॉडी">डेडबॉडी</option>
+                                        <option value="ऑइल">ऑइल</option>
+                                        <option value="इतर">इतर</option>
+                                    </select>
+                                     {{-- आग / विमोचन / वृक्ष / गॅस लिक / डेडबॉडी / ऑइल / इतर --}}
+                                    <span class="text-danger error-text vardi_uniform_type_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_approximate">Vardi's Approximate reason for uniform (fire/rescue) / ( वर्दीचे (आग / रेस्क्यू) अंदाजे कारण ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_approximate" name="vardi_approximate" type="text" placeholder="Enter Vardi's Approximate reason for uniform (fire/rescue)">
+                                    <span class="text-danger error-text vardi_approximate_err"></span>
                                 </div>
                             </div>
 
                         </div>
-
+                        <hr>
+                        <header class="card-header">
+                                <h4 class="card-title text-center"><b>Vardi's Information about financial losses(वित्तहानी बाबतची माहिती)</b></h4>
+                        </header>
+                        <div class="card-body py-2">
+                            <div class="mb-3 row">
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="direct_financial_loss">Direct financial loss (प्रत्यक्ष वित्तहानी ) <span class="text-danger">*</span></label>
+                                    {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
+                                    <input class="form-control" name="direct_financial_loss" id="direct_financial_loss" placeholder="Enter Direct Financial Loss">
+                                    <span class="text-danger error-text direct_financial_loss_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="financial_loss_saved">Financial loss saved (वाचविलेली वित्तहानी ) <span class="text-danger">*</span></label>
+                                    {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
+                                    <input class="form-control" name="financial_loss_saved" id="financial_loss_saved" placeholder="Enter Financial Loss Saved">
+                                    <span class="text-danger error-text financial_loss_saved_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="structural_damage_to_build">Structural damage to the building (इमारतीतील वास्तूचे नुकसान ) <span class="text-danger">*</span></label>
+                                    {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
+                                    <input class="form-control" name="structural_damage_to_build" id="structural_damage_to_build" placeholder="Enter Structural Damage To The Building">
+                                    <span class="text-danger error-text structural_damage_to_build_err"></span>
+                                </div>
+                            </div>
+                        </div>
                         <hr>
                         {{--Vardi Details( वर्दीची सविस्तर माहिती  )  --}}
                         <header class="card-header">
@@ -196,12 +262,12 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_description">Property Description Of The Fire Location (आग लागलेल्या ठिकाणच्या मालमतेचे वर्णन ) <span class="text-danger">*</span></label>
+                                    <label class="col-form-label" for="property_description">Vardi's Information about fire damage (आगीमुळे झालेल्या नुकसानाची माहिती ) <span class="text-danger">*</span></label>
                                     {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
-                                    <textarea class="form-control" name="property_description" id="property_description" placeholder="Enter Property Description Of The Fire Location" cols="30" rows="3"></textarea>
+                                    <input class="form-control" name="property_description" id="property_description" placeholder="Enter Vardi's Information About Fire Damage">
                                     <span class="text-danger error-text property_description_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="type_of_fire">Type of fire ( आगीचा प्रकार ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="type_of_fire" id="type_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
@@ -212,8 +278,8 @@
                                         <option value="E-Electrical">E-Electrical</option>
                                     </select>
                                     <span class="text-danger error-text type_of_fire_err"></span>
-                                </div>
-                                <div class="col-md-4">
+                                </div> --}}
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="limit_of_fire">Limit of fire ( आगीची मर्यदा )</label>
                                     <select class="form-control" name="limit_of_fire" id="limit_of_fire">
                                         <option value="">--Select Type Of Fire--</option>
@@ -221,70 +287,112 @@
                                         <option value="Medium">Medium(मध्यम)</option>
                                         <option value="High">High(उच्च)</option>
                                     </select>
-                                    {{-- <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire"> --}}
+                                    <input class="form-control" id="limit_of_fire" name="limit_of_fire" type="text" placeholder="Enter Limit Of Fire">
                                     <span class="text-danger error-text limit_of_fire_err"></span>
-                                </div>
+                                </div> --}}
+                                {{-- <div class="col-md-4">
+                                    <label class="col-form-label" for="possible_cause_of_fire">Date and time the vehicle was left at the scene ( घटनास्थळी वाहन सोडलेली दिनांक व वेळ ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire">
+                                    <input class="form-control" name="possible_cause_of_fire" id="possible_cause_of_fire" placeholder="Date and time the vehicle was left at the scene" cols="30" rows="3">
+                                    <span class="text-danger error-text possible_cause_of_fire_err"></span>
+                                </div> --}}
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="possible_cause_of_fire">Possible Cause Of Fire ( आगीचं शक्य कारण ) <span class="text-danger">*</span></label>
-                                    {{-- <input class="form-control" id="possible_cause_of_fire" name="possible_cause_of_fire" type="text" placeholder="Enter Possible Cause Of Fire"> --}}
-                                    <textarea class="form-control" name="possible_cause_of_fire" id="possible_cause_of_fire" placeholder="Enter Possible Cause Of Fire" cols="30" rows="3"></textarea>
+                                    <label class="col-form-label" for="possible_cause_of_fire"> Date and time the vehicle was left at the scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ)<span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-control" type="datetime-local" name="possible_cause_of_fire" id="possible_cause_of_fire" placeholder="Select date and time"
+                                        required>
                                     <span class="text-danger error-text possible_cause_of_fire_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="description_of_damage">Description Of Damage ( नुकसानीचे वर्णन )</label>
+                                    <label class="col-form-label" for="description_of_damage">Total time worked on site ( घटनास्थळी एकूण काम केलेली वेळ )</label>
                                     {{-- <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage"> --}}
-                                    <textarea class="form-control" name="description_of_damage" id="description_of_damage" placeholder="Enter Description Of Damage" cols="30" rows="3"></textarea>
+                                    {{-- <input class="form-control" name="description_of_damage" id="description_of_damage" placeholder="Enter Total time worked on site"> --}}
+                                    <input class="form-control" type="time" name="description_of_damage" id="description_of_damage" placeholder="Select time" required >
                                     <span class="text-danger error-text description_of_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_damage">Estimated Property Damage ( अंदाजित मालमत्तेचे नुकसान )</label>
-                                    <input class="form-control" id="property_damage" name="property_damage" type="text" placeholder="Enter Estimated property damage">
-                                    <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
+                                    <label class="col-form-label" for="property_damage">hours minutes ( तास मिनिटे  )</label>
+                                    <input class="form-control" id="property_damage" name="property_damage" type="time" placeholder="Enter hours minute">
+                                    {{-- <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small> --}}
                                     <span class="text-danger error-text property_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="area_damage">Estimated Surrounding Area Damage ( अंदाजित आसपासच्या क्षेत्राचे नुकसान ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="area_damage" name="area_damage" type="text" placeholder="Enter Estimated property damage">
+                                    <label class="col-form-label" for="area_damage">Vardi's Name of the officer left at the scene ( घटनास्थळी सोडलेल्या अधिकाऱ्याचे नाव ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="area_damage" name="area_damage" type="text" placeholder="Enter Vardi's Name of the officer left at the scene">
                                     <span class="text-danger error-text area_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="space_loss">Estimated Space Loss ( अंदाजित स्पेस लॉस )</label>
-                                    <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss">
+                                    <label class="col-form-label" for="space_loss">Type of Vardi's call ( कॉलचा प्रकार  )</label>
+                                    {{-- <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss"> --}}
+                                    <select name="space_loss" id="space_loss" class="form-control">
+                                        <option value="">--Select Type Of Vardi's Call--</option>
+                                        <option value="अस्सल">अस्सल</option>
+                                        <option value="बोगस">बोगस</option>
+                                    </select>
                                     <span class="text-danger error-text space_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="property_loss">Estimated loss of property ( मालमत्तेचे अंदाजे नुकसान  )</label>
-                                    <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property">
-                                    <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
+                                    <label class="col-form-label" for="property_loss">Vardi's Fire station name ( अग्निशमन केंद्राचे नाव  )</label>
+                                    <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Vardi's Fire station name">
+                                    {{-- <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small> --}}
                                     <span class="text-danger error-text property_loss_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( शेवटच्या क्षणी घटनास्थळी उपस्थित असलेल्या अधिकाऱ्यांचे नाव ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Name of the officer present at the scene at the last moment">
+                                    <label class="col-form-label" for="officer_name_present_at_last_moment">Type of vehicle ( वाहनाचा प्रकार ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text" placeholder="Enter Type of vehicle ( वाहनाचा प्रकार ) ">
                                     <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="date_of_departure_from_scene">Date of departure from the scene ( घटनास्तळावरून निघाल्याची तारीख ) <span class="text-danger">*</span></label>
                                     <input class="form-control" id="date_of_departure_from_scene" name="date_of_departure_from_scene" type="date" placeholder="Enter Date of departure from the scene">
                                     <span class="text-danger error-text date_of_departure_from_scene_err"></span>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="time_of_departure_from_scene">Time to leave the scene ( घटनास्तळावरून निघाल्याची वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="time_of_departure_from_scene" name="time_of_departure_from_scene" type="time" placeholder="Time to leave the scene">
+                                    <label class="col-form-label" for="time_of_departure_from_scene">Registration No ( नोंदणी क्रमांक ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="time_of_departure_from_scene" name="time_of_departure_from_scene" type="text" placeholder="Enter Registration Number">
                                     <span class="text-danger error-text time_of_departure_from_scene_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="total_time">Total Time ( एकुण वेळ ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_time" name="total_time" type="number" placeholder="Enter Total Time">
+                                    <label class="col-form-label" for="total_time">Turnout time ( टर्न आऊट घेतल्याची वेळ ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="total_time" name="total_time" type="time" placeholder="Enter TurnOut Time">
                                     <span class="text-danger error-text total_time_err"></span>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="col-form-label" for="total_hour">Total Hours ( एकुण तास ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="total_hour" name="total_hour" type="number" placeholder="Enter Total Hour">
+                                    <label class="col-form-label" for="total_hour">Vardi's Time to reach the scene ( घटना स्थळी पोहोचण्याची वेळ  ) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="total_hour" name="total_hour" type="time" placeholder="Enter Vardi's Time to reach the scene">
                                     <span class="text-danger error-text total_hour_err"></span>
                                 </div>
-                                <div class="col-md-4"></div>
-
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_leaving_time">Vardi's Time of leaving the scene ( घटनास्थळ सोडल्याची वेळ )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_leaving_time" name="vardi_leaving_time" type="time" placeholder="Enter Vardi's Time of leaving the scene">
+                                    <span class="text-danger error-text vardi_leaving_time_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_return_time">Vardi's Time of return to the fire station from the scene ( घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_return_time" name="vardi_return_time" type="time" placeholder="Enter Vardi's Time of return to the fire station from the scene">
+                                    <span class="text-danger error-text vardi_return_time_err"></span>
+                                </div>
+                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_total_distance">Vardi's total distance ( एकूण अंतर  )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_total_distance" name="vardi_total_distance" type="text" placeholder="Enter Vardi's total distance">
+                                    <span class="text-danger error-text vardi_total_distance_err"></span>
+                                </div>
+                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_pump_run">Vardi's How many hours did the pump run? ( किती तास पंप चालविला ?? )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_pump_run" name="vardi_pump_run" type="text" placeholder="Vardi's How many hours did the pump run?">
+                                    <span class="text-danger error-text vardi_pump_run_err"></span>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_officer_name">Officer - Title / Name ( अधिकारी - हुद्दा / नाव )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_officer_name" name="vardi_officer_name" type="text" placeholder="Enter Officer - Title / Name">
+                                    <span class="text-danger error-text vardi_officer_name_err"></span>
+                                </div>
+                                 <div class="col-md-4">
+                                    <label class="col-form-label" for="vardi_employee_name">Employee - Title / Name ( कर्मचारी - हुद्दा / नाव )<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="vardi_employee_name" name="vardi_employee_name" type="text" placeholder="Enter Employee - Title / Name">
+                                    <span class="text-danger error-text vardi_employee_name_err"></span>
+                                </div>
+                                {{-- <div class="col-md-4"></div>
                                 <div class="col-md-6">
                                     <label class="col-form-label" for="is_in_panvel">Is it within the limits of Panvel Municipal Corporation? ( पनवेल महानगरपालिकेच्या हद्दीत आहे का ? ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="is_in_panvel" id="is_in_panvel">
@@ -300,7 +408,7 @@
                                     <textarea class="form-control" name="address" id="address" cols="30" rows="2"></textarea>
                                     <span class="text-danger error-text address_err"></span>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -313,7 +421,7 @@
                         <div class="card-body py-2">
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">Rescue Work Done By Other Than Fire Department (अग्निशमन विभागा व्यतिरिक्त केलेले विमोचन कार्य)</h4>
+                                <h4 class="card-title text-center">Rescue Work Done By Other Than Fire Department (अग्निशमन दलाचा मदतीशिवाय सुटका केलेल्या व्यक्ती - पुरुष / स्त्री)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_one">Male Number(पुरुष संख्या) <span class="text-danger">*</span></label>
@@ -344,7 +452,7 @@
                             <div id="additional-fields"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">A Rescue Operation Performed By The Fire Department Without The Use Of A Rescue Vehicle (अग्निशमन विभागाने बचाव वाहनाचा वापर न करता केलेले विमोचन कार्य )</h4>
+                                <h4 class="card-title text-center">A Rescue Operation Performed By The Fire Department Without The Use Of A Rescue Vehicle (अग्निशमन दलाने अग्निशमन दलाकडील वाहनांच्या मदतीशिवाय सुटका करण्यात आलेल्या व्यक्ती - पुरुष / स्त्री)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_two">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
@@ -375,7 +483,7 @@
                             <div id="additional-fields-two"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">A Rescue Vehicle Was Used By The Fire Department For Rescue Operations (अग्निशमन विभागाने बचाव वाहनाचा वापर केलेले विमोचन कार्य)</h4>
+                                <h4 class="card-title text-center">A Rescue Vehicle Was Used By The Fire Department For Rescue Operations (अग्निशमन दलाने अग्निशमन दलाकडे वाहनाच्या / साधन सामुग्रीच्या मदतीने सुटका करण्यात आलेले व्यक्ती - पुरुष / स्त्री)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="male_three">Male Number (पुरुष संख्या) <span class="text-danger">*</span></label>
@@ -410,7 +518,7 @@
                         <hr>
                         {{--Rescuers And Rescuers From Fire( आगीमधुन विमोचन व वाचवलेल्या व्यक्ती )  --}}
                         <header class="card-header">
-                            <h4 class="card-title text-center"><b>Information About The Injured( जखमीबाबतची माहिती )</b></h4>
+                            <h4 class="card-title text-center"><b>Information About The Injured( मृत / जखमी - पुरुष / स्त्री - अग्निशमन / इतर )</b></h4>
                         </header>
 
                         <div class="card-body py-2">
@@ -535,7 +643,7 @@
                 </form>
             </div>
         </div>
-        
+
 
 
         {{-- Listing Table --}}
@@ -705,7 +813,7 @@
                     // Generate HTML table with the predefined headers
                     var tableHtml = '<h3 class="text-center"> Slip Details (स्लिप तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
-                    
+
                     // Use predefined headers
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Slip Date (स्लिप तारीख)</th>';
@@ -864,7 +972,7 @@
 
                     // Display table in the modal
                     $('#slipDetails').html(tableHtml);
-                    
+
                     // Show the modal
                     $('#viewSlipModal').modal('show');
                 },
@@ -913,7 +1021,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
@@ -959,7 +1067,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
@@ -1327,6 +1435,14 @@
         });
     });
 
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const field = document.getElementById('possible_cause_of_fire');
+        const now = new Date();
+        const localISOTime = now.toISOString().slice(0,16); // Format: YYYY-MM-DDTHH:MM
+        field.value = localISOTime;
+    });
 </script>
 
 
