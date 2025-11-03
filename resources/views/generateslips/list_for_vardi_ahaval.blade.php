@@ -27,12 +27,12 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="no_of_fireman[]" class="control-label">No Of FireMan (फायरमनची संख्या):</label>
                                             <input class="form-control" type="number" name="no_of_fireman[]" required>
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <label for="vehicle_no[]" class="control-label">Vehicle Number (वाहन क्रमांक):</label>
                                             <select class="form-control" name="vehicle_no[]" required>
@@ -47,7 +47,7 @@
                                             <label for="inform_call_datetime[]" class="control-label">Inform Call Date & Time (कॉलची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="inform_call_time[]" required>
                                         </div>
-    
+
                                         <div class="col-md-4">
                                             <label for="departure_vehicle_datetime[]" class="control-label">Departure Vehicle Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="departure_vehicle_datetime[]" required>
@@ -57,8 +57,8 @@
                                             <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival Date & Time (वाहन येण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_arrival_datetime[]" required>
                                         </div>
-    
-                                        <div class="col-md-4">                                            
+
+                                        <div class="col-md-4">
                                             <label for="vehicle_return_to_firestation_datetime[]" class="control-label">Vehicle Return To Fire Station Date & Time (वाहन अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
                                             <input class="form-control" type="datetime-local" name="vehicle_return_to_firestation_datetime[]" required>
                                         </div>
@@ -85,8 +85,8 @@
                 </form>
             </div>
         </div>
-        
-        
+
+
         {{-- Occurance Book  --}}
         <div class="row" id="occurance-book" style="display:none;">
             <div class="col-sm-12">
@@ -535,7 +535,7 @@
                 </form>
             </div>
         </div>
-        
+
 
 
         {{-- Listing Table --}}
@@ -705,7 +705,7 @@
                     // Generate HTML table with the predefined headers
                     var tableHtml = '<h3 class="text-center"> Slip Details (स्लिप तपशील) </h3><br>';
                     tableHtml += '<table class="table table-bordered">';
-                    
+
                     // Use predefined headers
                     tableHtml += '<thead><tr>';
                     tableHtml += '<th scope="col">Slip Date (स्लिप तारीख)</th>';
@@ -864,7 +864,7 @@
 
                     // Display table in the modal
                     $('#slipDetails').html(tableHtml);
-                    
+
                     // Show the modal
                     $('#viewSlipModal').modal('show');
                 },
@@ -913,7 +913,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
@@ -959,7 +959,7 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    
+
                     if (!data.error2)
                     swal("Successful!", data.success, "success")
                         .then((action) => {
