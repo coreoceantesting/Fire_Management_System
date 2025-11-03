@@ -189,12 +189,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_damage">Vardi's Damage description / ( नुकसान झालेले वर्णन  ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_damage" name="vardi_damage" type="text" placeholder="Enter Vardi Damage Description">
+                                    <textarea class="form-control" id="vardi_damage" name="vardi_damage" type="text" placeholder="Enter Vardi Damage Description"></textarea>
                                     <span class="text-danger error-text vardi_damage_err"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_construction">Vardi's Construction etc / ( बांधकाम इत्यादी ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_construction" name="vardi_construction" type="text" placeholder="Enter Vardi Construction etc">
+                                    <textarea class="form-control" id="vardi_construction" name="vardi_construction" type="text" placeholder="Enter Vardi Construction etc"></textarea>
                                     <span class="text-danger error-text vardi_construction_err"></span>
                                 </div>
                                 <div class="col-md-4">
@@ -264,7 +264,7 @@
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="property_description">Vardi's Information about fire damage (आगीमुळे झालेल्या नुकसानाची माहिती ) <span class="text-danger">*</span></label>
                                     {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
-                                    <input class="form-control" name="property_description" id="property_description" placeholder="Enter Vardi's Information About Fire Damage">
+                                    <textarea class="form-control" name="property_description" id="property_description" placeholder="Enter Vardi's Information About Fire Damage"></textarea>
                                     <span class="text-danger error-text property_description_err"></span>
                                 </div>
                                 {{-- <div class="col-md-4">
