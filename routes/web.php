@@ -74,7 +74,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::put('users/{user}/assign-role', [App\Http\Controllers\Admin\UserController::class, 'assignRole' ])->name('users.assign-role');
     Route::resource('roles', App\Http\Controllers\Admin\RoleController::class );
 
-    // Generate Slips 
+    // Generate Slips
     Route::get('slips-list', [App\Http\Controllers\GenerateSlipsController::class, 'index'])->name('slips_list');
     Route::post('store-slip', [App\Http\Controllers\GenerateSlipsController::class, 'store_slip'])->name('store_slip');
     Route::get('/download-slip-pdf/{slip_id}', [App\Http\Controllers\GenerateSlipsController::class, 'downloadSlipPdf'])->name('download-slip-pdf');
@@ -102,7 +102,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
 
 
     // list for vardi ahaval
-    Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list'); 
+    Route::get('list-for-vardi-ahaval', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_list'])->name('vardi_ahaval_list');
     Route::get('/get-slip-details/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'slip_details'])->name('slip_details');
     Route::post('/store-vardi-ahval', [App\Http\Controllers\OccuranceBookController::class, 'store_vardi_ahaval'])->name('store_vardi_ahaval');
     Route::get('/generate-vardi-ahaval-pdf/{slipId}', [App\Http\Controllers\OccuranceBookController::class, 'vardi_ahaval_pdf'])->name('generate.vardi.ahaval.pdf');
@@ -117,7 +117,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('yearly-slips', [App\Http\Controllers\ReportController::class, 'yearly_list'])->name('yearly_list');
     Route::get('action-taken-slips', [App\Http\Controllers\ReportController::class, 'action_taken_list'])->name('action_taken_list');
 
-    // filters 
+    // filters
     Route::get('/filter', [App\Http\Controllers\FiltersController::class, 'filter'])->name('filter');
     Route::get('/new-generated-slips-filter', [App\Http\Controllers\FiltersController::class, 'new_generated_filter'])->name('new_generated_filter');
     Route::get('/action-taken-slips-filter', [App\Http\Controllers\FiltersController::class, 'action_taken_slips_filter'])->name('action_taken_slips_filter');
@@ -130,7 +130,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::post('store-stock', [App\Http\Controllers\EquipmentsController::class, 'store_stock'])->name('store_stock');
     Route::get('/view-stock-list/{equipmentId}', [App\Http\Controllers\EquipmentsController::class, 'view_stock_list'])->name('view_stock_list');
 
-    // vehicle history 
+    // vehicle history
     Route::get('add-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'add_vechicle_details'])->name('add_vechicle_details');
     Route::post('store-vehicle-history-details', [App\Http\Controllers\VehicleHistoryController::class, 'store_vechicle_details'])->name('store_vechicle_details');
     Route::get('/view-vehicle-detail/{vehicleId}', [App\Http\Controllers\VehicleHistoryController::class, 'view_vehicle_detail'])->name('view_vehicle_detail');
@@ -163,7 +163,7 @@ Route::middleware(['auth','PreventBackHistory'])->group(function()
     Route::get('/add-equipment-details/{vehicle_no}', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'add_equipment_list'])->name('add_equipment_list');
     Route::post('store-equipment-details', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'store_equipment_details'])->name('store_equipment_details');
     Route::get('/get-equipment-details/{vehicle_no}', [App\Http\Controllers\Admin\Masters\VehicleDetailsController::class, 'get_equipment_list'])->name('get_equipment_list');
-    
+
 });
 
 

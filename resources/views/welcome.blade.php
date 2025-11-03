@@ -75,7 +75,7 @@
                     background-image: none;
                     background-color: #fff;
                     height: auto;
-                    display: flex: 
+                    display: flex:
                     justify-content: center;
                 }
 
@@ -195,7 +195,7 @@
                     }
                     .btn-11:active{
                     box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-                                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+                                -4px -4px 6px 0 rgba(116, 125, 136, .2),
                         inset -4px -4px 6px 0 rgba(255,255,255,.2),
                         inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
                     }
@@ -266,7 +266,8 @@
                         <h3 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h3>
                         <div class="container custompadding">
                             <div class="parent">
-                                <a href="https://fire-management.ulberp.com/login" target="_blank" class="custom-btn btn-11"><b>Fire Management</b><br>(अग्निशमन व्यवस्थापन)<div class="dot"></div></a>
+                                {{-- <a href="https://127.0.0.1:8000//login" target="_blank" class="custom-btn btn-11"><b>Fire Management</b><br>(अग्निशमन व्यवस्थापन)<div class="dot"></div></a> --}}
+                                <a href="http://127.0.0.1:8000/login" target="_blank">Fire Management</a>
                                 <a href="https://fire.smartpmc.co.in/" target="_blank" class="custom-btn btn-11"><b>Fire NOC</b><br>(अग्निशमन ना हरकत दाखला)<div class="dot"></div></a>
                                 {{-- <a href="https://pmc-fire-management.creatorkart.com/login" class="btn-gradient-1">Fire Management System</a>
                                 <a href="https://fire.smartpmc.co.in/" class="btn-gradient-1">Fire NOC</a> --}}

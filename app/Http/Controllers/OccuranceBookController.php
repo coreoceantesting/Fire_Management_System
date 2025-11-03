@@ -35,7 +35,7 @@ class OccuranceBookController extends Controller
     {
         // Fetch slip details based on $slipId
         $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
-        
+
         // Fetch additional data from slip_action_form
         $slipActionFormData = DB::table('slip_action_form')->select('*')->where('slip_id', $slipId)->first();
 
@@ -50,8 +50,8 @@ class OccuranceBookController extends Controller
             ->select(
                 'additional_help_details.inform_call_time',
                 'additional_help_details.vehicle_departure_time',
-                'additional_help_details.vehicle_arrival_time', 
-                'additional_help_details.vehicle_return_time', 
+                'additional_help_details.vehicle_arrival_time',
+                'additional_help_details.vehicle_return_time',
                 'additional_help_details.no_of_fireman',
                 'additional_help_details.type_of_vehicle',
                 'additional_help_details.vehicle_return_to_center_time',
@@ -90,7 +90,7 @@ class OccuranceBookController extends Controller
             'vehicle_arrival_datetime' => 'required|array',
             'vehicle_return_to_firestation_datetime' => 'required|array',
         ]);
-    
+
         // Store data in the database
         foreach ($request->input('fire_station') as $key => $fireStation) {
             DB::table('additional_help_details')->insert([
@@ -111,7 +111,7 @@ class OccuranceBookController extends Controller
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
         }
-        
+
         DB::table('slips')->where('slip_id',$request->input('slip_id'))->update([
             'is_additional_form_submitted' => '1',
             'slip_status' => 'Additional Help Submitted',
@@ -162,7 +162,7 @@ class OccuranceBookController extends Controller
     }
 
     // vardi ahawal List
-    
+
     public function vardi_ahaval_list()
     {
         $slip_list = DB::table('slips')->where('is_occurance_book_submitted','1')->latest()->get();
@@ -193,7 +193,7 @@ class OccuranceBookController extends Controller
 
     public function store_vardi_ahaval(Request $request)
     {
-        try 
+        try
         {
             $request->validate([
                 'vardi_name' => 'required|alpha',
@@ -201,12 +201,12 @@ class OccuranceBookController extends Controller
                 'vardi_place' => 'required',
                 'owner_name' => 'required|alpha',
                 'vaparkarta_name' => 'required|alpha',
-                'incident_time' => 'required',
+                // 'incident_time' => 'required',
                 'first_vehicle_departing_date_time' => 'required',
                 'time_of_arrival_at_the_scene' => 'required',
                 'distance' => 'required',
                 'property_description' => 'required',
-                'type_of_fire' => 'required',
+                // 'type_of_fire' => 'required',
                 // 'limit_of_fire' => 'required',
                 'possible_cause_of_fire' => 'required',
                 // 'description_of_damage' => 'required',
@@ -215,7 +215,7 @@ class OccuranceBookController extends Controller
                 // 'space_loss' => 'required',
                 // 'property_loss' => 'required',
                 'officer_name_present_at_last_moment' => 'required|alpha',
-                'date_of_departure_from_scene' => 'required',
+                // 'date_of_departure_from_scene' => 'required',
                 'time_of_departure_from_scene' => 'required',
                 'total_time' => 'required',
                 'total_hour' => 'required',
@@ -233,9 +233,25 @@ class OccuranceBookController extends Controller
                 'casualty_woman' => 'required',
                 'book_no' => 'required',
                 'page_no' => 'required',
-                'is_in_panvel' => 'required',
+                'vardi_business'=>'required',
+                'vardi_km'=>'required',
+                'vardi_damage'=>'required',
+                'vardi_construction'=>'required',
+                'vardi_insurance'=>'required',
+                'vardi_uniform_type'=>'required',
+                'vardi_approximate'=>'required',
+               'direct_financial_loss'=>'required',
+                'financial_loss_saved'=>'required',
+                'structural_damage_to_build'=>'required',
+               'vardi_leaving_time'=>'required',
+                'vardi_return_time'=>'required',
+               'vardi_total_distance'=>"required",
+                'vardi_pump_run'=>'required',
+                'vardi_officer_name'=>'required',
+                'vardi_employee_name'=>'required',
+                // 'is_in_panvel' => 'required',
             ]);
-    
+
             // Store data in the database
             DB::table('vardi_ahaval_details')->insert([
                 'slip_id' => $request->input('edit_model_id_new'),
@@ -244,12 +260,12 @@ class OccuranceBookController extends Controller
                 'vardi_place' => $request->input('vardi_place'),
                 'owner_name' => $request->input('owner_name'),
                 'vaparkarta_name' => $request->input('vaparkarta_name'),
-                'incident_time' => $request->input('incident_time'),
+                // 'incident_time' => $request->input('incident_time'),
                 'first_vehicle_departing_date_time' => $request->input('first_vehicle_departing_date_time'),
                 'time_of_arrival_at_the_scene' => $request->input('time_of_arrival_at_the_scene'),
                 'distance' => $request->input('distance'),
                 'property_description' => $request->input('property_description'),
-                'type_of_fire' => $request->input('type_of_fire'),
+                // 'type_of_fire' => $request->input('type_of_fire'),
                 'limit_of_fire' => $request->input('limit_of_fire'),
                 'possible_cause_of_fire' => $request->input('possible_cause_of_fire'),
                 'description_of_damage' => $request->input('description_of_damage'),
@@ -276,8 +292,24 @@ class OccuranceBookController extends Controller
                 'casualty_woman' => $request->input('casualty_woman'),
                 'book_no' => $request->input('book_no'),
                 'page_no' => $request->input('page_no'),
-                'is_in_panvel' => $request->input('is_in_panvel'),
+                // 'is_in_panvel' => $request->input('is_in_panvel'),
                 'address' => $request->input('address'),
+                'vardi_business'=>$request->input('vardi_business'),
+                'vardi_km'=>$request->input('vardi_km'),
+                'vardi_damage'=>$request->input('vardi_damage'),
+                'vardi_construction'=>$request->input('vardi_construction'),
+                'vardi_insurance'=>$request->input('vardi_insurance'),
+                'vardi_uniform_type'=>$request->input('vardi_uniform_type'),
+                'vardi_approximate'=>$request->input('vardi_approximate'),
+               'direct_financial_loss'=>$request->input('direct_financial_loss'),
+                'financial_loss_saved'=>$request->input('financial_loss_saved'),
+                'structural_damage_to_build'=>$request->input('structural_damage_to_build'),
+               'vardi_leaving_time'=>$request->input('vardi_leaving_time'),
+                'vardi_return_time'=>$request->input('vardi_return_time'),
+               'vardi_total_distance'=>$request->input('vardi_total_distance'),
+                'vardi_pump_run'=>$request->input('vardi_pump_run'),
+                'vardi_officer_name'=>$request->input('vardi_officer_name'),
+                'vardi_employee_name'=>$request->input('vardi_employee_name'),
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
@@ -285,7 +317,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the first set of fields
             $maleNames = $request->input('male_name', []);
             $femaleNames = $request->input('women_name', []);
-            
+
             foreach ($maleNames as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -307,7 +339,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the second set of fields
             $maleNamestwo = $request->input('male_name_two', []);
             $femaleNamestwo = $request->input('women_name_two', []);
-            
+
             foreach ($maleNamestwo as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -329,7 +361,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the third set of fields
             $maleNamesthree = $request->input('male_name_three', []);
             $femaleNamesthree = $request->input('women_name_three', []);
-            
+
             foreach ($maleNamesthree as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -351,7 +383,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the fourth set of fields
             $maleNamesfour = $request->input('male_name_four', []);
             $femaleNamesfour = $request->input('women_name_four', []);
-            
+
             foreach ($maleNamesfour as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -373,7 +405,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the five set of fields
             $maleNamesfive = $request->input('male_name_five', []);
             $femaleNamesfive = $request->input('women_name_five', []);
-            
+
             foreach ($maleNamesfive as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -395,7 +427,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the six set of fields
             $maleNamessix = $request->input('male_name_six', []);
             $femaleNamessix = $request->input('women_name_six', []);
-            
+
             foreach ($maleNamessix as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
@@ -413,7 +445,7 @@ class OccuranceBookController extends Controller
                     'created_at' => now(),
                 ]);
             }
-        
+
             DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
                 'is_vardi_ahaval_submitted' => '1',
                 'slip_status' => 'Vardi Ahval Submitted',
@@ -456,8 +488,8 @@ class OccuranceBookController extends Controller
         $occurance_book_details = DB::table('occurance_book')->where('slip_id', $slip_id)->first();
         $occurance_book_images = DB::table('occurance_book_photos')->where('slip_id', $slip_id)->get(['photo_path', 'photo_id']);
         return view('occurance_book.edit')->with(['occurance_book_details' => $occurance_book_details, 'occurance_book_images' => $occurance_book_images]);
-    } 
-    
+    }
+
     public function update_occurance_book(Request $request, $id)
     {
         $request->validate([
@@ -512,15 +544,15 @@ class OccuranceBookController extends Controller
         $vardi_details = DB::table('vardi_ahaval_details')->where('slip_id', $slip_id)->first();
         $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
         $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
-        return view('vardi_ahaval.edit')->with(['vardi_details' => $vardi_details, 
-                                                'male_rescue_details' => $male_rescue_details, 
+        return view('vardi_ahaval.edit')->with(['vardi_details' => $vardi_details,
+                                                'male_rescue_details' => $male_rescue_details,
                                                 'woman_rescue_details' => $woman_rescue_details]);
 
     }
 
     public function update_vardi_ahaval(Request $request, $id)
     {
-        try 
+        try
         {
             $request->validate([
                 'vardi_name' => 'required',
@@ -562,7 +594,7 @@ class OccuranceBookController extends Controller
                 'page_no' => 'required',
                 'is_in_panvel' => 'required',
             ]);
-    
+
             // Store data in the database
             DB::table('vardi_ahaval_details')->where('slip_id', $id)->update([
                 'vardi_name' => $request->input('vardi_name'),
@@ -615,7 +647,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the first set of fields
             $maleNames = $request->input('male_name', []);
             $femaleNames = $request->input('women_name', []);
-            
+
             foreach ($maleNames as $name) {
                 if (!empty($name)) {
                     DB::table('male_rescuers_details')->insert([
@@ -641,7 +673,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the second set of fields
             $maleNamestwo = $request->input('male_name_two', []);
             $femaleNamestwo = $request->input('women_name_two', []);
-            
+
             foreach ($maleNamestwo as $name) {
                 if (!empty($name)) {
                     DB::table('male_rescuers_details')->insert([
@@ -667,7 +699,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the third set of fields
             $maleNamesthree = $request->input('male_name_three', []);
             $femaleNamesthree = $request->input('women_name_three', []);
-            
+
             foreach ($maleNamesthree as $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $id,
@@ -691,7 +723,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the fourth set of fields
             $maleNamesfour = $request->input('male_name_four', []);
             $femaleNamesfour = $request->input('women_name_four', []);
-            
+
             foreach ($maleNamesfour as $name) {
                 if (!empty($name)) {
                     DB::table('male_rescuers_details')->insert([
@@ -717,7 +749,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the five set of fields
             $maleNamesfive = $request->input('male_name_five', []);
             $femaleNamesfive = $request->input('women_name_five', []);
-            
+
             foreach ($maleNamesfive as $name) {
                 if (!empty($name)) {
                     DB::table('male_rescuers_details')->insert([
@@ -743,7 +775,7 @@ class OccuranceBookController extends Controller
             // Store male and female names from the six set of fields
             $maleNamessix = $request->input('male_name_six', []);
             $femaleNamessix = $request->input('women_name_six', []);
-            
+
             foreach ($maleNamessix as $name) {
                 if (!empty($name)) {
                     DB::table('male_rescuers_details')->insert([
@@ -783,8 +815,8 @@ class OccuranceBookController extends Controller
         ->select(
             'additional_help_details.inform_call_time',
             'additional_help_details.vehicle_departure_time',
-            'additional_help_details.vehicle_arrival_time', 
-            'additional_help_details.vehicle_return_time', 
+            'additional_help_details.vehicle_arrival_time',
+            'additional_help_details.vehicle_return_time',
             'additional_help_details.no_of_fireman',
             'additional_help_details.center_name',
             'additional_help_details.type_of_vehicle',
@@ -809,7 +841,7 @@ class OccuranceBookController extends Controller
 
         // Create mPDF instance
         $pdf = new Mpdf();
-        
+
         // Write the view content to the PDF
         $pdf->WriteHTML($pdfview->render());
 
