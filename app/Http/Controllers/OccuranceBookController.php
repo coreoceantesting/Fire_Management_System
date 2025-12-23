@@ -317,20 +317,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the first set of fields
             $maleNames = $request->input('male_name', []);
             $femaleNames = $request->input('women_name', []);
+            $maleAges = $request->input('male_age', []);
+            $femaleAges = $request->input('women_age', []);
 
-            foreach ($maleNames as $name) {
+            foreach ($maleNames as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAges[$key] ?? null,
                     'type' => '1',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNames as $name) {
+            foreach ($femaleNames as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAges[$key] ?? null,
                     'type' => '1',
                     'created_at' => now(),
                 ]);
@@ -339,20 +343,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the second set of fields
             $maleNamestwo = $request->input('male_name_two', []);
             $femaleNamestwo = $request->input('women_name_two', []);
+            $maleAgesTwo = $request->input('male_age_two', []);
+            $femaleAgesTwo = $request->input('women_age_two', []);
 
-            foreach ($maleNamestwo as $name) {
+            foreach ($maleNamestwo as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAgesTwo[$key] ?? null,
                     'type' => '2',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNamestwo as $name) {
+            foreach ($femaleNamestwo as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAgesTwo[$key] ?? null,
                     'type' => '2',
                     'created_at' => now(),
                 ]);
@@ -361,20 +369,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the third set of fields
             $maleNamesthree = $request->input('male_name_three', []);
             $femaleNamesthree = $request->input('women_name_three', []);
+            $maleAgesThree = $request->input('male_age_three', []);
+            $femaleAgesThree = $request->input('women_age_three', []);
 
-            foreach ($maleNamesthree as $name) {
+            foreach ($maleNamesthree as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAgesThree[$key] ?? null,
                     'type' => '3',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNamesthree as $name) {
+            foreach ($femaleNamesthree as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAgesThree[$key] ?? null,
                     'type' => '3',
                     'created_at' => now(),
                 ]);
@@ -383,20 +395,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the fourth set of fields
             $maleNamesfour = $request->input('male_name_four', []);
             $femaleNamesfour = $request->input('women_name_four', []);
+            $maleAgesFour = $request->input('male_age_four', []);
+            $femaleAgesFour = $request->input('women_age_four', []);
 
-            foreach ($maleNamesfour as $name) {
+            foreach ($maleNamesfour as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAgesFour[$key] ?? null,
                     'type' => '4',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNamesfour as $name) {
+            foreach ($femaleNamesfour as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAgesFour[$key] ?? null,
                     'type' => '4',
                     'created_at' => now(),
                 ]);
@@ -405,20 +421,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the five set of fields
             $maleNamesfive = $request->input('male_name_five', []);
             $femaleNamesfive = $request->input('women_name_five', []);
+            $maleAgesFive = $request->input('male_age_five', []);
+            $femaleAgesFive = $request->input('women_age_five', []);
 
-            foreach ($maleNamesfive as $name) {
+            foreach ($maleNamesfive as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAgesFive[$key] ?? null,
                     'type' => '5',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNamesfive as $name) {
+            foreach ($femaleNamesfive as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAgesFive[$key] ?? null,
                     'type' => '5',
                     'created_at' => now(),
                 ]);
@@ -427,20 +447,24 @@ class OccuranceBookController extends Controller
             // Store male and female names from the six set of fields
             $maleNamessix = $request->input('male_name_six', []);
             $femaleNamessix = $request->input('women_name_six', []);
+            $maleAgesSix = $request->input('male_age_six', []);
+            $femaleAgesSix = $request->input('women_age_six', []);
 
-            foreach ($maleNamessix as $name) {
+            foreach ($maleNamessix as $key => $name) {
                 DB::table('male_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'male_name' => $name,
+                    'male_age' => $maleAgesSix[$key] ?? null,
                     'type' => '6',
                     'created_at' => now(),
                 ]);
             }
 
-            foreach ($femaleNamessix as $name) {
+            foreach ($femaleNamessix as $key => $name) {
                 DB::table('women_rescuers_details')->insert([
                     'slip_id' => $request->input('edit_model_id_new'),
                     'women_name' => $name,
+                    'women_age' => $femaleAgesSix[$key] ?? null,
                     'type' => '6',
                     'created_at' => now(),
                 ]);
@@ -810,6 +834,7 @@ class OccuranceBookController extends Controller
         // Retrieve data from the database (if needed for PDF content)
         $slipData = DB::table('slips')->where('slip_id', $id)->first();
         $vardiAhavalData = DB::table('vardi_ahaval_details')->where('slip_id', $id)->first();
+        // dd($vardiAhavalData);
         $actionTakenData = DB::table('slip_action_form')->where('slip_id', $id)->first();
         $additionalHelpDetails = DB::table('additional_help_details')
         ->select(

@@ -415,7 +415,7 @@
                         <hr>
                         {{--Rescuers And Rescuers From Fire( आगीमधुन विमोचन व वाचवलेल्या व्यक्ती )  --}}
                         <header class="card-header">
-                            <h4 class="card-title text-center"><b>Rescuers And Rescuers From Fire( आगीमधुन विमोचन व वाचवलेल्या व्यक्ती )</b></h4>
+                            <h4 class="card-title text-center"><b>Rescuers Done By Other Department/NGO/Person( आगीमधुन विमोचन व वाचवलेल्या व्यक्ती )</b></h4>
                         </header>
 
                         <div class="card-body py-2">
@@ -435,17 +435,25 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name">Male Name</label>
                                     <input class="form-control" id="male_name" name="male_name[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age">Male Age</label>
+                                    <input class="form-control" name="male_age[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name">Women Name</label>
                                     <input class="form-control" id="women_name" name="women_name[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age">Women Age</label>
+                                    <input class="form-control" name="women_age[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field">Add</button>
                                 </div>
                             </div>
@@ -466,17 +474,25 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name_two">Male Name</label>
                                     <input class="form-control" id="male_name_two" name="male_name_two[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_two_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age_two">Male Age</label>
+                                    <input class="form-control" name="male_age_two[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name_two">Women Name</label>
                                     <input class="form-control" id="women_name_two" name="women_name_two[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_two_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age_two">Women Age</label>
+                                    <input class="form-control" name="women_age_two[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field-two">Add</button>
                                 </div>
                             </div>
@@ -497,17 +513,25 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name_three">Male Name</label>
                                     <input class="form-control" id="male_name_three" name="male_name_three[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_three_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age_three">Male Age</label>
+                                    <input class="form-control" name="male_age_three[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name_three">Women Name</label>
                                     <input class="form-control" id="women_name_three" name="women_name_three[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_three_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age_three">Women Age</label>
+                                    <input class="form-control" name="women_age_three[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field-three">Add</button>
                                 </div>
                             </div>
@@ -539,24 +563,32 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name_four">Male Name</label>
                                     <input class="form-control" id="male_name_four" name="male_name_four[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_four_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age_four">Male Age</label>
+                                    <input class="form-control" name="male_age_four[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name_four">Women Name</label>
                                     <input class="form-control" id="women_name_four" name="women_name_four[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_four_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age_four">Women Age</label>
+                                    <input class="form-control" name="women_age_four[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field-four">Add</button>
                                 </div>
                             </div>
                             <div id="additional-fields-four"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">Wounded (जखमी)</h4>
+                                <h4 class="card-title text-center">Engerd (जखमी)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
@@ -571,24 +603,32 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name_five">Male Name</label>
                                     <input class="form-control" id="male_name_five" name="male_name_five[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_five_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age_five">Male Age</label>
+                                    <input class="form-control" name="male_age_five[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name_five">Women Name</label>
                                     <input class="form-control" id="women_name_five" name="women_name_five[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_five_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age_five">Women Age</label>
+                                    <input class="form-control" name="women_age_five[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field-five">Add</button>
                                 </div>
                             </div>
                             <div id="additional-fields-five"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">Casualty (मृत्यू)</h4>
+                                <h4 class="card-title text-center">Wounded (मृत्यू)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="casualty_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
@@ -603,17 +643,25 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="male_name_six">Male Name</label>
                                     <input class="form-control" id="male_name_six" name="male_name_six[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text male_name_six_err"></span>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="male_age_six">Male Age</label>
+                                    <input class="form-control" name="male_age_six[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-3">
                                     <label class="col-form-label" for="women_name_six">Women Name</label>
                                     <input class="form-control" id="women_name_six" name="women_name_six[]" placeholder="Enter Name" type="text" multiple>
                                     <span class="text-danger error-text women_name_six_err"></span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
+                                    <label class="col-form-label" for="women_age_six">Women Age</label>
+                                    <input class="form-control" name="women_age_six[]" placeholder="Enter Age" type="number">
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-success mt-5" id="add-field-six">Add</button>
                                 </div>
                             </div>
@@ -1265,13 +1313,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name[]" type="text" placeholder="Enter Name">
                 <span class="text-danger error-text male_name_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age[]" type="number" placeholder="Enter Age">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name[]" type="text" placeholder="Enter Name">
                 <span class="text-danger error-text women_name_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age[]" type="number" placeholder="Enter Age">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
@@ -1291,13 +1345,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name_two[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_two_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age_two[]" placeholder="Enter Age" type="number">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name_two[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_two_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age_two[]" placeholder="Enter Age" type="number">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
@@ -1317,13 +1377,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name_three[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_three_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age_three[]" placeholder="Enter Age" type="number">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name_three[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_three_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age_three[]" placeholder="Enter Age" type="number">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
@@ -1343,13 +1409,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name_four[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_four_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age_four[]" placeholder="Enter Age" type="number">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name_four[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_four_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age_four[]" placeholder="Enter Age" type="number">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
@@ -1369,13 +1441,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name_five[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_five_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age_five[]" placeholder="Enter Age" type="number">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name_five[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_five_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age_five[]" placeholder="Enter Age" type="number">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
@@ -1395,13 +1473,19 @@
         var newInputField = document.createElement('div');
         newInputField.className = 'mb-3 row';
         newInputField.innerHTML = `
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <input class="form-control" name="male_name_six[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text male_name_six_err"></span>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
+                <input class="form-control" name="male_age_six[]" placeholder="Enter Age" type="number">
+            </div>
+            <div class="col-md-3">
                 <input class="form-control" name="women_name_six[]" placeholder="Enter Name" type="text">
                 <span class="text-danger error-text women_name_six_err"></span>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="women_age_six[]" placeholder="Enter Age" type="number">
             </div>
             <div class="col-md-2">
                 <button type="button" class="btn btn-danger remove-photo">Remove</button>
