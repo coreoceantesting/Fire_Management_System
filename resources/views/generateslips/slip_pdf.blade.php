@@ -50,7 +50,7 @@
         <div class="card">
             <div class="card-header">
                 <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Panvel_Municipal_Corporation.png" alt="logo" width="130" height="100">
-               <h1>पनवेल महानगरपालिका अग्निशमन सेवा</h1> 
+               <h1>पनवेल महानगरपालिका अग्निशमन सेवा</h1>
                 <h2>Details slip(तपशील स्लिप)</h2>
             </div>
             <div class="card-body">
@@ -78,6 +78,10 @@
                     <tr>
                         <th>Incident Reason (घटनेचे कारण)</th>
                         <td>{{ $incident_reason }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fire Station (अग्निशमन स्टेशन)</th>
+                        <td>{{ $fire_station }}</td>
                     </tr>
                 </table>
             </div>

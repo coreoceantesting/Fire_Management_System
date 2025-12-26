@@ -18,9 +18,10 @@ class GenerateSlipsController extends Controller
     public function index()
     {
         $slip_list = DB::table('slips')->latest()->get();
+        $firestation_list = DB::table('fire_stations')->where('is_deleted','0')->get();
         $designation_list = DB::table('designations')->where('is_deleted','0')->get();
         $fire_cause_list = FireCause::where('is_deleted','0')->latest()->get();
-        return view('generateslips.slipslist', compact('slip_list','designation_list', 'fire_cause_list'));
+        return view('generateslips.slipslist', compact('slip_list','designation_list', 'fire_cause_list', 'firestation_list'));
     }
 
     public function store_slip(GenerateSlipsRequest $request)
@@ -38,6 +39,7 @@ class GenerateSlipsController extends Controller
             $data['caller_name'] = $input['caller_name'];
             $data['caller_mobile_no'] = $input['caller_mobile_no'];
             $data['incident_location_address'] = $input['incident_location'];
+            $data['fire_station'] = $input['fire_station'];
             $data['land_mark'] = $input['landmark'];
             $data['incident_reason'] = $input['incident_reason'];
             $data['pdf_name'] = $pdfFileName;
@@ -68,7 +70,7 @@ class GenerateSlipsController extends Controller
             ];
             DB::table('notifications')->insert($notificationData);
 
-            
+
 
             $pdf = new Mpdf();
             // Save the PDF file
@@ -80,6 +82,7 @@ class GenerateSlipsController extends Controller
                 'caller_name' => $input['caller_name'],
                 'caller_mobile_no' => $input['caller_mobile_no'],
                 'incident_location_address' => $input['incident_location'],
+                'fire_station' => $input['fire_station'],
                 'land_mark' => $input['landmark'],
                 'incident_reason' => $input['incident_reason'],
             ]);
@@ -100,7 +103,7 @@ class GenerateSlipsController extends Controller
             return $this->respondWithAjax($e, 'creating', 'Slip');
         }
     }
-    
+
     public function new_generated_slip()
     {
         $slip_list = DB::table('slips')->where('slip_status','Pending')->latest()->get();
@@ -164,7 +167,7 @@ class GenerateSlipsController extends Controller
                     'created_at' => now(),
                 ]);
             }
-            
+
             DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
                 'slip_status' => 'Action Form Submitted',
             ]);
@@ -220,6 +223,6 @@ class GenerateSlipsController extends Controller
     }
 
 
-    
+
 
 }

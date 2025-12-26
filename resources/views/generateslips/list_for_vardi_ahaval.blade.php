@@ -199,7 +199,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="vardi_insurance">Vardi's Insurance is/is not / ( विमा आहे / नाही ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="vardi_insurance" name="vardi_insurance" type="text" placeholder="Enter Vardi's Insurance is/is not">
+                                    <select name="vardi_insurance" id="vardi_insurance" class="form-control">
+                                        <option value="" >--Select Vardi's Insurance--</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
                                     <span class="text-danger error-text vardi_insurance_err"></span>
                                 </div>
                                 <div class="col-md-4">

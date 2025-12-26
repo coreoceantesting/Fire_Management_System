@@ -27,7 +27,8 @@ class GenerateSlipsRequest extends FormRequest
             'caller_mobile_no' => 'required|min:10|max:10',
             'incident_location' => 'required',
             'landmark' => 'required',
-            'incident_reason' => 'required'
+            'incident_reason' => 'required',
+            'fire_station' => 'required'
         ];
     }
 }

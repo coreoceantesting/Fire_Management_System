@@ -51,6 +51,17 @@
                                     </select>
                                     <span class="text-danger error-text incident_reason_err"></span>
                                 </div>
+                                <div class="col-md-4">
+                                    <label class="col-form-label" for="fire_station">Fire Station Name (फायर स्टेशनचे नाव) <span class="text-danger">*</span></label>
+                                    {{-- <input class="form-control" id="incident_reason" name="incident_reason" type="text" placeholder="Enter Incident Reason"> --}}
+                                    <select class="form-control" name="fire_station" id="fire_station">
+                                        <option value="">Select Fire Station</option>
+                                        @foreach ($firestation_list as $list)
+                                            <option value="{{ $list->name }}">{{ $list->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger error-text fire_station_err"></span>
+                                </div>
                             </div>
 
                         </div>
@@ -151,7 +162,7 @@
                             </form>
                         </div>
                     </div>
-                    
+
                     @php
                         $serialNumber = 1;
                     @endphp
