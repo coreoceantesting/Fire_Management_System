@@ -18,23 +18,23 @@ class OccuranceBookController extends Controller
     public function action_taken_slips_list()
     {
         $slip_list = DB::table('slips')
-        ->where('slip_status', '!=', 'pending')
-        ->where(function ($query) {
-            $query->where('is_occurance_book_submitted', '0')
-                ->orWhere('is_additional_form_submitted', '0');
-        })
-        ->latest()
-        ->get();
-        $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->where('is_deleted','0')->get();
-        $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
-        return view('generateslips.action_taken_list', compact('slip_list','designation_list','fire_station_list','vehicle_list'));
+            ->where('slip_status', '!=', 'pending')
+            ->where(function ($query) {
+                $query->where('is_occurance_book_submitted', '0')
+                    ->orWhere('is_additional_form_submitted', '0');
+            })
+            ->latest()
+            ->get();
+        $designation_list = DB::table('designations')->where('is_deleted', '0')->get();
+        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active', '0')->where('is_deleted', '0')->get();
+        $vehicle_list = DB::table('vehicle_details')->where('is_deleted', '0')->get();
+        return view('generateslips.action_taken_list', compact('slip_list', 'designation_list', 'fire_station_list', 'vehicle_list'));
     }
 
     public function view_action_taken_slip($slipId)
     {
         // Fetch slip details based on $slipId
-        $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
+        $slip = DB::table('slips')->select('slip_date', 'caller_name', 'caller_mobile_no', 'incident_location_address', 'land_mark', 'incident_reason', 'slip_status')->where('slip_id', $slipId)->first();
 
         // Fetch additional data from slip_action_form
         $slipActionFormData = DB::table('slip_action_form')->select('*')->where('slip_id', $slipId)->first();
@@ -58,13 +58,14 @@ class OccuranceBookController extends Controller
                 'additional_help_details.total_distance',
                 'additional_help_details.pumping_hours',
                 'vehicle_details.vehicle_number',
-                'fire_stations.name',)
+                'fire_stations.name',
+            )
             ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
             ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
             ->where('additional_help_details.slip_id', $slipId)
             ->get();
 
-        $occuranceBookDetails = DB::table('occurance_book')->select('occurance_book_date','occurance_book_description', 'occurance_book_remark')->where('slip_id', $slipId)->first();
+        $occuranceBookDetails = DB::table('occurance_book')->select('occurance_book_date', 'occurance_book_description', 'occurance_book_remark')->where('slip_id', $slipId)->first();
         $occuranceBookPhotos = DB::table('occurance_book_photos')->select('photo_path')->where('slip_id', $slipId)->get();
         // dd($occuranceBookPhotos);
 
@@ -112,12 +113,12 @@ class OccuranceBookController extends Controller
             ]);
         }
 
-        DB::table('slips')->where('slip_id',$request->input('slip_id'))->update([
+        DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
             'is_additional_form_submitted' => '1',
             'slip_status' => 'Additional Help Submitted',
         ]);
 
-        return response()->json(['success'=> 'Additional Help Submitted successfully!']);
+        return response()->json(['success' => 'Additional Help Submitted successfully!']);
     }
 
     public function store_occurance_book(Request $request)
@@ -138,7 +139,7 @@ class OccuranceBookController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
-        DB::table('slips')->where('slip_id',$request->input('slip_id_new'))->update([
+        DB::table('slips')->where('slip_id', $request->input('slip_id_new'))->update([
             'is_occurance_book_submitted' => '1',
             'slip_status' => 'Occurance Book Submitted',
         ]);
@@ -158,18 +159,18 @@ class OccuranceBookController extends Controller
             }
         }
 
-        return response()->json(['success'=> 'Occurance Book Submitted successfully!']);
+        return response()->json(['success' => 'Occurance Book Submitted successfully!']);
     }
 
     // vardi ahawal List
 
     public function vardi_ahaval_list()
     {
-        $slip_list = DB::table('slips')->where('is_occurance_book_submitted','1')->latest()->get();
-        $designation_list = DB::table('designations')->where('is_deleted','0')->get();
-        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active','0')->where('is_deleted','0')->get();
-        $vehicle_list = DB::table('vehicle_details')->where('is_deleted','0')->get();
-        return view('generateslips.list_for_vardi_ahaval', compact('slip_list','designation_list','fire_station_list','vehicle_list'));
+        $slip_list = DB::table('slips')->where('is_occurance_book_submitted', '1')->latest()->get();
+        $designation_list = DB::table('designations')->where('is_deleted', '0')->get();
+        $fire_station_list = DB::table('fire_stations')->where('fire_station_is_active', '0')->where('is_deleted', '0')->get();
+        $vehicle_list = DB::table('vehicle_details')->where('is_deleted', '0')->get();
+        return view('generateslips.list_for_vardi_ahaval', compact('slip_list', 'designation_list', 'fire_station_list', 'vehicle_list'));
     }
 
     public function slip_details($slipId)
@@ -177,10 +178,10 @@ class OccuranceBookController extends Controller
         // Fetch slip details based on $slipId
         // $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
         $slip_details = DB::table('slips')
-        ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time', 'slip_action_form.vehicle_arrival_time', 'slip_action_form.vehicle_departure_from_scene_time', 'slip_action_form.vehicle_arrival_at_center_time')
-        ->join('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
-        ->where('slips.slip_id', $slipId)
-        ->first();
+            ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time', 'slip_action_form.vehicle_arrival_time', 'slip_action_form.vehicle_departure_from_scene_time', 'slip_action_form.vehicle_arrival_at_center_time')
+            ->join('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
+            ->where('slips.slip_id', $slipId)
+            ->first();
 
         $response = [
             'result' => 1,
@@ -193,64 +194,72 @@ class OccuranceBookController extends Controller
 
     public function store_vardi_ahaval(Request $request)
     {
-        try
-        {
-            $request->validate([
-                'vardi_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-                'vardi_contact_no' => 'required',
-                'vardi_place' => 'required',
-                'owner_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-                'vaparkarta_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-                // 'incident_time' => 'required',
-                'first_vehicle_departing_date_time' => 'required',
-                'time_of_arrival_at_the_scene' => 'required',
-                'distance' => 'required',
-                'property_description' => 'required',
-                // 'type_of_fire' => 'required',
-                // 'limit_of_fire' => 'required',
-                'possible_cause_of_fire' => 'required',
-                // 'description_of_damage' => 'required',
-                // 'property_damage' => 'required',
-                'area_damage' => 'required',
-                // 'space_loss' => 'required',
-                // 'property_loss' => 'required',
-                'officer_name_present_at_last_moment' => 'required|regex:/^[a-zA-Z\s]+$/',
-                // 'date_of_departure_from_scene' => 'required',
-                'time_of_departure_from_scene' => 'required',
-                'total_time' => 'required',
-                'total_hour' => 'required',
-                'male_one' => 'required',
-                'woman_one' => 'required',
-                'male_two' => 'required',
-                'woman_two' => 'required',
-                'male_three' => 'required',
-                'woman_three' => 'required',
-                'deceased_male' => 'required',
-                'deceased_woman' => 'required',
-                'wounded_male' => 'required',
-                'wounded_woman' => 'required',
-                'casualty_male' => 'required',
-                'casualty_woman' => 'required',
-                'book_no' => 'required',
-                'page_no' => 'required',
-                'vardi_business'=>'required',
-                'vardi_km'=>'required',
-                'vardi_damage'=>'required',
-                'vardi_construction'=>'required',
-                'vardi_insurance'=>'required',
-                'vardi_uniform_type'=>'required',
-                'vardi_approximate'=>'required',
-               'direct_financial_loss'=>'required',
-                'financial_loss_saved'=>'required',
-                'structural_damage_to_build'=>'required',
-               'vardi_leaving_time'=>'required',
-                'vardi_return_time'=>'required',
-               'vardi_total_distance'=>"required",
-                'vardi_pump_run'=>'required',
-                'vardi_officer_name'=>'required',
-                'vardi_employee_name'=>'required',
-                // 'is_in_panvel' => 'required',
-            ]);
+        try {
+            $rules = [
+                'space_loss' => 'required',
+            ];
+
+            if ($request->input('space_loss') !== 'बोगस') {
+                $rules = array_merge($rules, [
+                    'vardi_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    'vardi_contact_no' => 'required',
+                    'vardi_place' => 'required',
+                    'owner_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    'vaparkarta_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    // 'incident_time' => 'required',
+                    'first_vehicle_departing_date_time' => 'required',
+                    'time_of_arrival_at_the_scene' => 'required',
+                    'distance' => 'required',
+                    'property_description' => 'required',
+                    // 'type_of_fire' => 'required',
+                    // 'limit_of_fire' => 'required',
+                    'possible_cause_of_fire' => 'required',
+                    // 'description_of_damage' => 'required',
+                    // 'property_damage' => 'required',
+                    'area_damage' => 'required',
+                    // 'space_loss' => 'required', // Already in base rules
+                    // 'property_loss' => 'required',
+                    'officer_name_present_at_last_moment' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    // 'date_of_departure_from_scene' => 'required',
+                    'time_of_departure_from_scene' => 'required',
+                    'total_time' => 'required',
+                    'total_hour' => 'required',
+                    'male_one' => 'required',
+                    'woman_one' => 'required',
+                    'male_two' => 'required',
+                    'woman_two' => 'required',
+                    'male_three' => 'required',
+                    'woman_three' => 'required',
+                    'deceased_male' => 'required',
+                    'deceased_woman' => 'required',
+                    'wounded_male' => 'required',
+                    'wounded_woman' => 'required',
+                    'casualty_male' => 'required',
+                    'casualty_woman' => 'required',
+                    'book_no' => 'required',
+                    'page_no' => 'required',
+                    'vardi_business' => 'required',
+                    'vardi_km' => 'required',
+                    'vardi_damage' => 'required',
+                    'vardi_construction' => 'required',
+                    'vardi_insurance' => 'required',
+                    'vardi_uniform_type' => 'required',
+                    'vardi_approximate' => 'required',
+                    'direct_financial_loss' => 'required',
+                    'financial_loss_saved' => 'required',
+                    'structural_damage_to_build' => 'required',
+                    'vardi_leaving_time' => 'required',
+                    'vardi_return_time' => 'required',
+                    'vardi_total_distance' => "required",
+                    'vardi_pump_run' => 'required',
+                    'vardi_officer_name' => 'required',
+                    'vardi_employee_name' => 'required',
+                    // 'is_in_panvel' => 'required',
+                ]);
+            }
+
+            $request->validate($rules);
+
 
             // Store data in the database
             DB::table('vardi_ahaval_details')->insert([
@@ -294,22 +303,22 @@ class OccuranceBookController extends Controller
                 'page_no' => $request->input('page_no'),
                 // 'is_in_panvel' => $request->input('is_in_panvel'),
                 'address' => $request->input('address'),
-                'vardi_business'=>$request->input('vardi_business'),
-                'vardi_km'=>$request->input('vardi_km'),
-                'vardi_damage'=>$request->input('vardi_damage'),
-                'vardi_construction'=>$request->input('vardi_construction'),
-                'vardi_insurance'=>$request->input('vardi_insurance'),
-                'vardi_uniform_type'=>$request->input('vardi_uniform_type'),
-                'vardi_approximate'=>$request->input('vardi_approximate'),
-               'direct_financial_loss'=>$request->input('direct_financial_loss'),
-                'financial_loss_saved'=>$request->input('financial_loss_saved'),
-                'structural_damage_to_build'=>$request->input('structural_damage_to_build'),
-               'vardi_leaving_time'=>$request->input('vardi_leaving_time'),
-                'vardi_return_time'=>$request->input('vardi_return_time'),
-               'vardi_total_distance'=>$request->input('vardi_total_distance'),
-                'vardi_pump_run'=>$request->input('vardi_pump_run'),
-                'vardi_officer_name'=>$request->input('vardi_officer_name'),
-                'vardi_employee_name'=>$request->input('vardi_employee_name'),
+                'vardi_business' => $request->input('vardi_business'),
+                'vardi_km' => $request->input('vardi_km'),
+                'vardi_damage' => $request->input('vardi_damage'),
+                'vardi_construction' => $request->input('vardi_construction'),
+                'vardi_insurance' => $request->input('vardi_insurance'),
+                'vardi_uniform_type' => $request->input('vardi_uniform_type'),
+                'vardi_approximate' => $request->input('vardi_approximate'),
+                'direct_financial_loss' => $request->input('direct_financial_loss'),
+                'financial_loss_saved' => $request->input('financial_loss_saved'),
+                'structural_damage_to_build' => $request->input('structural_damage_to_build'),
+                'vardi_leaving_time' => $request->input('vardi_leaving_time'),
+                'vardi_return_time' => $request->input('vardi_return_time'),
+                'vardi_total_distance' => $request->input('vardi_total_distance'),
+                'vardi_pump_run' => $request->input('vardi_pump_run'),
+                'vardi_officer_name' => $request->input('vardi_officer_name'),
+                'vardi_employee_name' => $request->input('vardi_employee_name'),
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);
@@ -470,7 +479,7 @@ class OccuranceBookController extends Controller
                 ]);
             }
 
-            DB::table('slips')->where('slip_id',$request->input('edit_model_id_new'))->update([
+            DB::table('slips')->where('slip_id', $request->input('edit_model_id_new'))->update([
                 'is_vardi_ahaval_submitted' => '1',
                 'slip_status' => 'Vardi Ahval Submitted',
             ]);
@@ -478,8 +487,7 @@ class OccuranceBookController extends Controller
             // pdf code
 
             return response()->json(['success' => 'Vardi Ahawal Submitted successfully!']);
-
-        }catch(ValidationException $e){
+        } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()]);
         }
     }
@@ -568,56 +576,65 @@ class OccuranceBookController extends Controller
         $vardi_details = DB::table('vardi_ahaval_details')->where('slip_id', $slip_id)->first();
         $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
         $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
-        return view('vardi_ahaval.edit')->with(['vardi_details' => $vardi_details,
-                                                'male_rescue_details' => $male_rescue_details,
-                                                'woman_rescue_details' => $woman_rescue_details]);
-
+        return view('vardi_ahaval.edit')->with([
+            'vardi_details' => $vardi_details,
+            'male_rescue_details' => $male_rescue_details,
+            'woman_rescue_details' => $woman_rescue_details
+        ]);
     }
 
     public function update_vardi_ahaval(Request $request, $id)
     {
-        try
-        {
-            $request->validate([
-                'vardi_name' => 'required',
-                'vardi_contact_no' => 'required',
-                'vardi_place' => 'required',
-                'owner_name' => 'required',
-                'vaparkarta_name' => 'required',
-                'incident_time' => 'required',
-                'first_vehicle_departing_date_time' => 'required',
-                'time_of_arrival_at_the_scene' => 'required',
-                'distance' => 'required',
-                'property_description' => 'required',
-                'type_of_fire' => 'required',
-                // 'limit_of_fire' => 'required',
-                'possible_cause_of_fire' => 'required',
-                // 'description_of_damage' => 'required',
-                // 'property_damage' => 'required',
-                'area_damage' => 'required',
-                // 'space_loss' => 'required',
-                // 'property_loss' => 'required',
-                'officer_name_present_at_last_moment' => 'required',
-                'date_of_departure_from_scene' => 'required',
-                'time_of_departure_from_scene' => 'required',
-                'total_time' => 'required',
-                'total_hour' => 'required',
-                'male_one' => 'required',
-                'woman_one' => 'required',
-                'male_two' => 'required',
-                'woman_two' => 'required',
-                'male_three' => 'required',
-                'woman_three' => 'required',
-                'deceased_male' => 'required',
-                'deceased_woman' => 'required',
-                'wounded_male' => 'required',
-                'wounded_woman' => 'required',
-                'casualty_male' => 'required',
-                'casualty_woman' => 'required',
-                'book_no' => 'required',
-                'page_no' => 'required',
-                'is_in_panvel' => 'required',
-            ]);
+        try {
+            $rules = [
+                'space_loss' => 'required',
+            ];
+
+            if ($request->input('space_loss') !== 'बोगस') {
+                $rules = array_merge($rules, [
+                    'vardi_name' => 'required',
+                    'vardi_contact_no' => 'required',
+                    'vardi_place' => 'required',
+                    'owner_name' => 'required',
+                    'vaparkarta_name' => 'required',
+                    'incident_time' => 'required',
+                    'first_vehicle_departing_date_time' => 'required',
+                    'time_of_arrival_at_the_scene' => 'required',
+                    'distance' => 'required',
+                    'property_description' => 'required',
+                    'type_of_fire' => 'required',
+                    // 'limit_of_fire' => 'required',
+                    'possible_cause_of_fire' => 'required',
+                    // 'description_of_damage' => 'required',
+                    // 'property_damage' => 'required',
+                    'area_damage' => 'required',
+                    // 'space_loss' => 'required',
+                    // 'property_loss' => 'required',
+                    'officer_name_present_at_last_moment' => 'required',
+                    'date_of_departure_from_scene' => 'required',
+                    'time_of_departure_from_scene' => 'required',
+                    'total_time' => 'required',
+                    'total_hour' => 'required',
+                    'male_one' => 'required',
+                    'woman_one' => 'required',
+                    'male_two' => 'required',
+                    'woman_two' => 'required',
+                    'male_three' => 'required',
+                    'woman_three' => 'required',
+                    'deceased_male' => 'required',
+                    'deceased_woman' => 'required',
+                    'wounded_male' => 'required',
+                    'wounded_woman' => 'required',
+                    'casualty_male' => 'required',
+                    'casualty_woman' => 'required',
+                    'book_no' => 'required',
+                    'page_no' => 'required',
+                    'is_in_panvel' => 'required',
+                ]);
+            }
+
+            $request->validate($rules);
+
 
             // Store data in the database
             DB::table('vardi_ahaval_details')->where('slip_id', $id)->update([
@@ -823,8 +840,7 @@ class OccuranceBookController extends Controller
             }
 
             return response()->json(['success' => 'Vardi Ahawal Updated successfully!']);
-
-        }catch(ValidationException $e){
+        } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()]);
         }
     }
@@ -837,27 +853,28 @@ class OccuranceBookController extends Controller
         // dd($vardiAhavalData);
         $actionTakenData = DB::table('slip_action_form')->where('slip_id', $id)->first();
         $additionalHelpDetails = DB::table('additional_help_details')
-        ->select(
-            'additional_help_details.inform_call_time',
-            'additional_help_details.vehicle_departure_time',
-            'additional_help_details.vehicle_arrival_time',
-            'additional_help_details.vehicle_return_time',
-            'additional_help_details.no_of_fireman',
-            'additional_help_details.center_name',
-            'additional_help_details.type_of_vehicle',
-            'additional_help_details.vehicle_return_to_center_time',
-            'additional_help_details.total_distance',
-            'additional_help_details.pumping_hours',
-            'vehicle_details.vehicle_number',
-            'fire_stations.name',)
-        ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
-        ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
-        ->where('additional_help_details.slip_id', $id)
-        ->get();
+            ->select(
+                'additional_help_details.inform_call_time',
+                'additional_help_details.vehicle_departure_time',
+                'additional_help_details.vehicle_arrival_time',
+                'additional_help_details.vehicle_return_time',
+                'additional_help_details.no_of_fireman',
+                'additional_help_details.center_name',
+                'additional_help_details.type_of_vehicle',
+                'additional_help_details.vehicle_return_to_center_time',
+                'additional_help_details.total_distance',
+                'additional_help_details.pumping_hours',
+                'vehicle_details.vehicle_number',
+                'fire_stations.name',
+            )
+            ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
+            ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
+            ->where('additional_help_details.slip_id', $id)
+            ->get();
         $workers_Details = DB::table('on_field_worker_details')
-        ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
-        ->where('on_field_worker_details.slip_action_form_id',$actionTakenData->slip_action_form_id)
-        ->get();
+            ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+            ->where('on_field_worker_details.slip_action_form_id', $actionTakenData->slip_action_form_id)
+            ->get();
         $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
         $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
 
@@ -874,7 +891,4 @@ class OccuranceBookController extends Controller
         return response($pdf->Output('vardi_ahaval.pdf', 'I'), 200)
             ->header('Content-Type', 'application/pdf');
     }
-
-
-
 }

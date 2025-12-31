@@ -266,8 +266,8 @@
                         <h3 class="text-center"><b>( अग्निशमन विभाग प्रणाली )</b></h3>
                         <div class="container custompadding">
                             <div class="parent">
-                                <a href="https://fire-management.ulberp.com/login" target="_blank" class="custom-btn btn-11"><b>Fire Management</b><br>(अग्निशमन व्यवस्थापन)<div class="dot"></div></a>
-                                {{-- <a href="http://127.0.0.1:8000/login" target="_blank"><b>Fire Management<b><br></br></a> --}}
+                                {{-- <a href="https://fire-management.ulberp.com/login" target="_blank" class="custom-btn btn-11"><b>Fire Management</b><br>(अग्निशमन व्यवस्थापन)<div class="dot"></div></a> --}}
+                                <a href="http://127.0.0.1:8000/login" target="_blank"><b>Fire Management<b><br></br></a>
                                 <a href="https://fire.smartpmc.co.in/" target="_blank" class="custom-btn btn-11"><b>Fire NOC</b><br>(अग्निशमन ना हरकत दाखला)<div class="dot"></div></a>
                                 {{-- <a href="https://pmc-fire-management.creatorkart.com/login" class="btn-gradient-1">Fire Management System</a> --}}
                                 {{-- <a href="https://fire.smartpmc.co.in/" class="btn-gradient-1">Fire NOC</a> --}}
