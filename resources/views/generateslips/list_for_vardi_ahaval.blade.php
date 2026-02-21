@@ -159,7 +159,19 @@
 
                     <div class="card-body py-2">
 
+
                         <div class="mb-3 row">
+                              <div class="col-md-4">
+                                <label class="col-form-label" for="space_loss">Type of Vardi's call ( कॉलचा प्रकार
+                                    )</label>
+                                {{-- <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss"> --}}
+                                <select name="space_loss" id="space_loss" class="form-control">
+                                    <option value="">--Select Type Of Vardi's Call--</option>
+                                    <option value="अस्सल">अस्सल</option>
+                                    <option value="बोगस">बोगस</option>
+                                </select>
+                                <span class="text-danger error-text space_loss_err"></span>
+                            </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_name">Name of Vardi Issuer ( वर्दी
                                     देण्याऱ्याचे नाव ) <span class="text-danger">*</span></label>
@@ -403,17 +415,7 @@
                                     placeholder="Enter Vardi's Name of the officer left at the scene">
                                 <span class="text-danger error-text area_damage_err"></span>
                             </div>
-                            <div class="col-md-4">
-                                <label class="col-form-label" for="space_loss">Type of Vardi's call ( कॉलचा प्रकार
-                                    )</label>
-                                {{-- <input class="form-control" id="space_loss" name="space_loss" type="text" placeholder="Enter Estimated Space Loss"> --}}
-                                <select name="space_loss" id="space_loss" class="form-control">
-                                    <option value="">--Select Type Of Vardi's Call--</option>
-                                    <option value="अस्सल">अस्सल</option>
-                                    <option value="बोगस">बोगस</option>
-                                </select>
-                                <span class="text-danger error-text space_loss_err"></span>
-                            </div>
+
                             <div class="col-md-4">
                                 <label class="col-form-label" for="property_loss">Vardi's Fire station name ( अग्निशमन
                                     केंद्राचे नाव )</label>
@@ -1771,78 +1773,68 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const spaceLossSelect = document.getElementById('space_loss');
-        const editForm = document.getElementById('editForm');
+   document.addEventListener('DOMContentLoaded', function () {
 
-        if (!spaceLossSelect || !editForm) return;
+    const spaceLossSelect = document.getElementById('space_loss');
+    const editForm = document.getElementById('editForm');
 
-        // Find all fields that are legally required in the HTML
-        // We assume the initial state (on page load) has the correct 'required' attributes for 'Assal' or strict mode.
-        // We exclude 'space_loss' itself because it must always be required.
-        let requiredFields = [];
+    if (!spaceLossSelect || !editForm) return;
 
-        // Populate the list of required fields based on the DOM state
-        editForm.querySelectorAll('[required]').forEach(function(el) {
-            if (el.id !== 'space_loss') {
-                requiredFields.push(el);
+    // ✅ All fields that must be required when "अस्सल" is selected
+    const requiredFieldIds = [
+        'vardi_name', 'vardi_contact_no', 'vardi_place', 'vardi_business',
+        'vaparkarta_name', 'owner_name',
+        'first_vehicle_departing_date_time',
+        'time_of_arrival_at_the_scene',
+        'distance', 'vardi_km', 'vardi_damage',
+        'vardi_construction', 'vardi_insurance',
+        'vardi_uniform_type', 'vardi_approximate',
+        'direct_financial_loss', 'financial_loss_saved',
+        'structural_damage_to_build',
+        'property_description',
+        'possible_cause_of_fire',
+        'description_of_damage',
+        'area_damage',
+        'officer_name_present_at_last_moment',
+        'time_of_departure_from_scene',
+        'total_time',
+        'total_hour',
+        'vardi_leaving_time',
+        'vardi_return_time',
+        'vardi_total_distance',
+        'vardi_pump_run',
+        'vardi_officer_name',
+        'vardi_employee_name',
+        'book_no',
+        'page_no'
+    ];
+
+    function toggleValidation() {
+
+        const isBogus = spaceLossSelect.value === 'बोगस';
+
+        requiredFieldIds.forEach(id => {
+
+            const element = document.getElementById(id);
+            if (!element) return;
+
+            const label = document.querySelector(`label[for="${id}"]`);
+            const star = label ? label.querySelector('.text-danger') : null;
+
+            if (isBogus) {
+                element.removeAttribute('required');
+                element.classList.remove('is-invalid');
+                if (star) star.style.display = 'none';
+            } else {
+                element.setAttribute('required', 'required');
+                if (star) star.style.display = 'inline';
             }
+
         });
+    }
 
-        // Also add fields that might be missing 'required' in HTML but are visually marked with * and should be validated
-        // (This covers fields like vardi_name if they were missing the attribute but intended to be required)
-        const additionalIds = [
-            'vardi_name', 'vardi_contact_no', 'vardi_place', 'vardi_business',
-            'vaparkarta_name', 'owner_name', 'first_vehicle_departing_date_time',
-            'time_of_arrival_at_the_scene', 'distance', 'vardi_km', 'vardi_damage',
-            'vardi_construction', 'vardi_insurance', 'vardi_uniform_type',
-            'vardi_approximate', 'direct_financial_loss', 'financial_loss_saved',
-            'structural_damage_to_build', 'property_description', 'possible_cause_of_fire',
-            'description_of_damage', 'area_damage', 'property_loss', 'officer_name_present_at_last_moment',
-            'time_of_departure_from_scene', 'total_time', 'total_hour', 'vardi_leaving_time',
-            'vardi_return_time', 'vardi_total_distance', 'vardi_pump_run', 'vardi_officer_name',
-            'vardi_employee_name', 'book_no', 'page_no'
-        ];
+    spaceLossSelect.addEventListener('change', toggleValidation);
 
-        additionalIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (el && !el.hasAttribute('required')) {
-                requiredFields.push(el);
-            }
-        });
-
-        function toggleValidation() {
-            const isBogus = spaceLossSelect.value === 'बोगस';
-
-            requiredFields.forEach(element => {
-                // Find the associated label to toggle the asterisk
-                let label = null;
-                if (element.id) {
-                    label = document.querySelector(`label[for="${element.id}"]`);
-                }
-
-                const starSpan = label ? label.querySelector('.text-danger') : null;
-
-                if (isBogus) {
-                    // Relax validation
-                    element.removeAttribute('required');
-                    element.classList.remove('is-invalid'); // Clear previous validation errors visually
-                    if (starSpan) {
-                        starSpan.style.display = 'none';
-                    }
-                } else {
-                    // Enforce validation (Assal or default)
-                    element.setAttribute('required', 'required');
-                    if (starSpan) {
-                        starSpan.style.display = 'inline';
-                    }
-                }
-            });
-        }
-
-        spaceLossSelect.addEventListener('change', toggleValidation);
-
-        // Run once on load to set initial state
-        toggleValidation();
-    });
+    toggleValidation(); // Run on page load
+});
 </script>
