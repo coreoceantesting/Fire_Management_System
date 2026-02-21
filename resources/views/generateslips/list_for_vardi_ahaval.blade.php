@@ -1773,15 +1773,17 @@
 </script>
 
 <script>
-   document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
 
     const spaceLossSelect = document.getElementById('space_loss');
     const editForm = document.getElementById('editForm');
 
     if (!spaceLossSelect || !editForm) return;
 
-    // ✅ All fields that must be required when "अस्सल" is selected
+    // ✅ All fields required when "अस्सल"
     const requiredFieldIds = [
+
+        // Main Info
         'vardi_name', 'vardi_contact_no', 'vardi_place', 'vardi_business',
         'vaparkarta_name', 'owner_name',
         'first_vehicle_departing_date_time',
@@ -1789,8 +1791,13 @@
         'distance', 'vardi_km', 'vardi_damage',
         'vardi_construction', 'vardi_insurance',
         'vardi_uniform_type', 'vardi_approximate',
-        'direct_financial_loss', 'financial_loss_saved',
+
+        // Financial
+        'direct_financial_loss',
+        'financial_loss_saved',
         'structural_damage_to_build',
+
+        // Details
         'property_description',
         'possible_cause_of_fire',
         'description_of_damage',
@@ -1805,6 +1812,22 @@
         'vardi_pump_run',
         'vardi_officer_name',
         'vardi_employee_name',
+
+        // 🔹 Rescue Section Counts
+        'male_one', 'woman_one',
+        'male_two', 'woman_two',
+        'male_three', 'woman_three',
+
+        // 🔹 Deceased Section
+        'deceased_male', 'deceased_woman',
+
+        // 🔹 Injured Section
+        'wounded_male', 'wounded_woman',
+
+        // 🔹 Casualty Section
+        'casualty_male', 'casualty_woman',
+
+        // Book
         'book_no',
         'page_no'
     ];
@@ -1829,12 +1852,10 @@
                 element.setAttribute('required', 'required');
                 if (star) star.style.display = 'inline';
             }
-
         });
     }
 
     spaceLossSelect.addEventListener('change', toggleValidation);
-
-    toggleValidation(); // Run on page load
+    toggleValidation();
 });
 </script>
