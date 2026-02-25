@@ -181,10 +181,10 @@
                     @endif
                 </td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th>आगीची मर्यदा</th>
                 <td>:- {{$vardiAhavalData->limit_of_fire}}</td>
-            </tr>
+            </tr> --}}
             <tr>
                 <th>आगीच शक्य कारण </th>
                 <td>:- {{$vardiAhavalData->possible_cause_of_fire}}</td>
@@ -241,7 +241,7 @@
                     @endif
                 </td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <th>हद्दीत नसल्यास पत्ता </th>
                 <td>:- 
                     @if($vardiAhavalData->is_in_panvel == "No")
@@ -250,7 +250,7 @@
                         -
                     @endif
                 </td>
-            </tr>
+            </tr> --}}
         </table>
 
         <hr>

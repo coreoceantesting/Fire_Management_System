@@ -202,7 +202,7 @@ class OccuranceBookController extends Controller
             if ($request->input('space_loss') !== 'बोगस') {
                 $rules = array_merge($rules, [
                     'vardi_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-                    'vardi_contact_no' => 'required',
+                    'vardi_contact_no' => 'required|min:10', //added by mayur
                     'vardi_place' => 'required',
                     'owner_name' => 'required|regex:/^[a-zA-Z\s]+$/',
                     'vaparkarta_name' => 'required|regex:/^[a-zA-Z\s]+$/',

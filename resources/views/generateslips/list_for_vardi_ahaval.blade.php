@@ -148,7 +148,8 @@
     <div class="row" id="editContainer" style="display:none;">
         <div class="col">
             <form class="form-horizontal form-bordered" action="{{ route('store_vardi_ahaval') }}" method="POST"
-                id="editForm">
+                id="editForm" novalidate> 
+                {{-- added by mayur novalidate attribute. --}}
                 @csrf
                 <input type="hidden" id="edit_model_id_new" name="edit_model_id_new" value="">
                 <section class="card">
@@ -1423,6 +1424,10 @@
             // Prevent the default form submission
             event.preventDefault();
 
+            // Clear previous errors added by mayur
+            $('.error-text').text('');
+            $('.form-control').removeClass('is-invalid');
+
             // Serialize the form data
             var formData = $(this).serialize();
             // alert(formData);
@@ -1848,6 +1853,9 @@
                 element.removeAttribute('required');
                 element.classList.remove('is-invalid');
                 if (star) star.style.display = 'none';
+                // Clear error message text added by Mayur
+                const errorSpan = document.querySelector('.' + id + '_err');
+                if (errorSpan) errorSpan.textContent = '';
             } else {
                 element.setAttribute('required', 'required');
                 if (star) star.style.display = 'inline';

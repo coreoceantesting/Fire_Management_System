@@ -623,13 +623,37 @@
 
         var workerDetailsTemplate = $('#worker-details-container .worker-details').clone();
 
+        // $('#addWorkerDetails').on('click', function() {
+        //     var newWorkerDetails = workerDetailsTemplate.clone();
+        //     $('#worker-details-container').append(newWorkerDetails);
+        // });
+
+        // $('#removeWorkerDetails').on('click', function() {
+        //     $('#worker-details-container .worker-details:last').remove();
+        // });
+
+
+
+        // Initially hide remove button added by mayur
+        $('#removeWorkerDetails').hide();
+
         $('#addWorkerDetails').on('click', function() {
             var newWorkerDetails = workerDetailsTemplate.clone();
+            newWorkerDetails.find('select').val('');
             $('#worker-details-container').append(newWorkerDetails);
+
+            if ($('#worker-details-container .worker-details').length > 1) {
+                $('#removeWorkerDetails').show();
+            }
         });
 
         $('#removeWorkerDetails').on('click', function() {
-            $('#worker-details-container .worker-details:last').remove();
+            if ($('#worker-details-container .worker-details').length > 1) {
+                $('#worker-details-container .worker-details:last').remove();
+            }
+            if ($('#worker-details-container .worker-details').length <= 1) {
+                $('#removeWorkerDetails').hide();
+            }
         });
 
 
