@@ -196,22 +196,20 @@
                                 <span class="text-danger error-text vardi_place_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="vardi_business">vardi's business ( धंदा ) <span
-                                        class="text-danger">*</span></label>
+                                <label class="col-form-label" for="vardi_business">vardi's business ( धंदा )</label>
                                 <input class="form-control" id="vardi_business" name="vardi_business" type="text"
                                     placeholder="Enter vardi's business">
                                 <span class="text-danger error-text vardi_business_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vaparkarta_name">Vardi's Tenant Name ( भाडेकऱ्यांचे
-                                    नाव ) <span class="text-danger">*</span></label>
+                                    नाव )</label>
                                 <input class="form-control" id="vaparkarta_name" name="vaparkarta_name"
                                     type="text" placeholder="Enter Vardi's Tenant Name">
                                 <span class="text-danger error-text vaparkarta_name_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="owner_name">Vardi's Owner's Name ( मालकाचे नाव )
-                                    <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="owner_name">Vardi's Owner's Name ( मालकाचे नाव )</label>
                                 <input class="form-control" id="owner_name" name="owner_name" type="text"
                                     placeholder="Enter vardi's Owner Name">
                                 <span class="text-danger error-text owner_name_err"></span>
@@ -296,6 +294,15 @@
                                     type="text"
                                     placeholder="Enter Vardi's Approximate reason for uniform (fire/rescue)">
                                 <span class="text-danger error-text vardi_approximate_err"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="reason_of_fire">Reason of Fire (आगीचे कारण) <span class="text-danger">*</span></label>
+                                <select name="reason_of_fire" id="reason_of_fire" class="form-control">
+                                    <option value="">--Select Reason of Fire--</option>
+                                    <option value="Natural">Natural (नैसर्गिक)</option>
+                                    <option value="Human">Human (मानवी)</option>
+                                </select>
+                                <span class="text-danger error-text reason_of_fire_err"></span>
                             </div>
                         </div>
 
@@ -742,7 +749,7 @@
                             <div id="additional-fields-four"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">Engerd (जखमी)</h4>
+                                <h4 class="card-title text-center">Injured (जखमी)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="wounded_male">Male Number (पुरुष संख्या ) <span
@@ -791,7 +798,7 @@
                             <div id="additional-fields-five"></div>
 
                             <div class="mb-3 row">
-                                <h4 class="card-title text-center">Wounded (मृत्यू)</h4>
+                                <h4 class="card-title text-center">Critically Injured (गंभीर जखमी)</h4>
                                 <hr>
                                 <div class="col-md-4">
                                     <label class="col-form-label" for="casualty_male">Male Number (पुरुष संख्या )
@@ -1396,8 +1403,8 @@
                 if (!data.error) {
                     // console.log(data);
                     $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
-                    // $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
-                    // $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
+                    $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
+                    $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
                     // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
                     // $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
                     // $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
@@ -1789,13 +1796,12 @@
     const requiredFieldIds = [
 
         // Main Info
-        'vardi_name', 'vardi_contact_no', 'vardi_place', 'vardi_business',
-        'vaparkarta_name', 'owner_name',
+        'vardi_name', 'vardi_contact_no', 'vardi_place',
         'first_vehicle_departing_date_time',
         'time_of_arrival_at_the_scene',
         'distance', 'vardi_km', 'vardi_damage',
         'vardi_construction', 'vardi_insurance',
-        'vardi_uniform_type', 'vardi_approximate',
+        'vardi_uniform_type', 'vardi_approximate', 'reason_of_fire',
 
         // Financial
         'direct_financial_loss',

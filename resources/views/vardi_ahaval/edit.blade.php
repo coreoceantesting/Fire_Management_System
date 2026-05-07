@@ -34,12 +34,12 @@
                                 <span class="text-danger error-text vardi_place_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="owner_name">Owner's Name ( मालकाचे नाव ) <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="owner_name">Vardi's Owner's Name ( मालकाचे नाव )</label>
                                 <input class="form-control" id="owner_name" name="owner_name" type="text" placeholder="Enter Owner's Name" value="{{ $vardi_details->owner_name }}">
                                 <span class="text-danger error-text owner_name_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="vaparkarta_name">Name Of User ( वापरकर्त्याचे नाव  ) <span class="text-danger">*</span></label>
+                                <label class="col-form-label" for="vaparkarta_name">Vardi's Tenant Name ( भाडेकऱ्यांचे नाव )</label>
                                 <input class="form-control" id="vaparkarta_name" name="vaparkarta_name" type="text" placeholder="Enter Vaparkarta Name" value="{{ $vardi_details->vaparkarta_name }}">
                                 <span class="text-danger error-text vaparkarta_name_err"></span>
                             </div>
@@ -138,6 +138,15 @@
                                 <input class="form-control" id="property_loss" name="property_loss" type="text" placeholder="Enter Estimated loss of property" value="{{ $vardi_details->property_loss }}">
                                 <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small>
                                 <span class="text-danger error-text property_loss_err"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="reason_of_fire">Reason of Fire (आगीचे कारण) <span class="text-danger">*</span></label>
+                                <select name="reason_of_fire" id="reason_of_fire" class="form-control">
+                                    <option value="">--Select Reason of Fire--</option>
+                                    <option value="Natural" @if($vardi_details->reason_of_fire == 'Natural') selected @endif>Natural (नैसर्गिक)</option>
+                                    <option value="Human" @if($vardi_details->reason_of_fire == 'Human') selected @endif>Human (मानवी)</option>
+                                </select>
+                                <span class="text-danger error-text reason_of_fire_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="officer_name_present_at_last_moment">Name of the officer present at the scene at the last moment ( अखेरच्या क्षणी घटनास्थळी उपस्थित असलेल्या अधिकाऱ्यांचे नाव ) <span class="text-danger">*</span></label>
@@ -447,7 +456,7 @@
                         <div id="additional-fields-four"></div>
 
                         <div class="mb-3 row">
-                            <h4 class="card-title text-center">Wounded (जखमी)</h4>
+                            <h4 class="card-title text-center">Injured (जखमी)</h4>
                             <hr>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="wounded_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
@@ -507,7 +516,7 @@
                         <div id="additional-fields-five"></div>
 
                         <div class="mb-3 row">
-                            <h4 class="card-title text-center">Casualty (मृत्यू)</h4>
+                            <h4 class="card-title text-center">Critically Injured (गंभीर जखमी)</h4>
                             <hr>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="casualty_male">Male Number (पुरुष संख्या ) <span class="text-danger">*</span></label>
