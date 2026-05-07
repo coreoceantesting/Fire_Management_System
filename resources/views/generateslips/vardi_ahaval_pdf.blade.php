@@ -190,6 +190,10 @@
                 <td>:- {{$vardiAhavalData->possible_cause_of_fire}}</td>
             </tr>
             <tr>
+                <th>आगीचे कारण </th>
+                <td>:- {{$vardiAhavalData->reason_of_fire}}</td>
+            </tr>
+            <tr>
                 <th>नुकसानीचे वर्णन</th>
                 <td>:- {{$vardiAhavalData->description_of_damage}}</td>
             </tr>
@@ -386,7 +390,7 @@
         <hr>
         <h4 class="text-center">४. जखमीबाबतची माहिती </h4>
         <div class="row rescuetable">
-            <div class="col-md-6">
+            <div class="col-md-4">
                <table>
                     <caption class="text-center"><b>मयत</b></caption>
                     <tr>
@@ -427,9 +431,9 @@
                 </table>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                <table>
-                    <caption class="text-center"><b>जखमी</b></caption>
+                    <caption class="text-center"><b>Injured (जखमी)</b></caption>
                     <tr>
                         <th>पुरुष संख्या</th>
                         <th>स्त्री संख्या</th>
@@ -466,8 +470,47 @@
                         </tr>
                     @endfor
                 </table>
-                
-            </div>            
+            </div>
+            <div class="col-md-4">
+               <table>
+                    <caption class="text-center"><b>Critically Injured (गंभीर जखमी)</b></caption>
+                    <tr>
+                        <th>पुरुष संख्या</th>
+                        <th>स्त्री संख्या</th>
+                    </tr>
+                    <tr>
+                        <td>{{$vardiAhavalData->casualty_male}}</td>
+                        <td>{{$vardiAhavalData->casualty_woman}}</td>
+                    </tr>
+                </table>
+
+                <table>
+                    <caption class="text-center" style="padding:10px"><b>व्यक्तींचे नाव</b></caption>
+                    <tr>
+                        <th>पुरुषांचे नाव</th>
+                        <th>महिलांचे नाव</th>
+                    </tr>
+                    @php
+                        $male_rescue_details_array = $male_rescue_details[6] ?? [];
+                        $woman_rescue_details_array = $woman_rescue_details[6] ?? [];
+                        $maxRows = max(count($male_rescue_details_array), count($woman_rescue_details_array));
+                    @endphp
+                    @for ($i = 0; $i < $maxRows; $i++)
+                        <tr>
+                            <td>
+                                @if (isset($male_rescue_details_array[$i]))
+                                    {{ $male_rescue_details_array[$i]->male_name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if (isset($woman_rescue_details_array[$i]))
+                                    {{ $woman_rescue_details_array[$i]->women_name }}
+                                @endif
+                            </td>
+                        </tr>
+                    @endfor
+                </table>
+            </div>
         </div>
 
         <hr>
@@ -552,7 +595,7 @@
         <p style="text-align: left">सदर घटनेची नोंद अग्निशमन केंद्र, पनवेल महानगरपालिका येथील घटनापुस्तक क्रमांक {{$vardiAhavalData->book_no}} मध्ये पुष्ठ क्र . {{$vardiAhavalData->page_no}} वर घेतलेली आहे . </p>
         <p style="text-align: left">सदरचा  नमुना(फॉरमॅट) हा स्टेट फायर एडवाइजरी काउंसिल यांनी दिलेल्या मार्गदर्शन तत्वावरून आहे .</p>
         <ul style="list-style-type:none; text-align:right; padding-top:8rem;">
-            <li>प्र.अग्निशमन विभाग प्रमुख</li>
+            <li>मुख्य अग्निशमन अधिकारी</li>
             <li>पनवेल महानगरपालिका</li>
         </ul>
 

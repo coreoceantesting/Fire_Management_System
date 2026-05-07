@@ -204,8 +204,6 @@ class OccuranceBookController extends Controller
                     'vardi_name' => 'required|regex:/^[a-zA-Z\s]+$/',
                     'vardi_contact_no' => 'required|min:10', //added by mayur
                     'vardi_place' => 'required',
-                    'owner_name' => 'required|regex:/^[a-zA-Z\s]+$/',
-                    'vaparkarta_name' => 'required|regex:/^[a-zA-Z\s]+$/',
                     // 'incident_time' => 'required',
                     'first_vehicle_departing_date_time' => 'required',
                     'time_of_arrival_at_the_scene' => 'required',
@@ -238,13 +236,13 @@ class OccuranceBookController extends Controller
                     'casualty_woman' => 'required',
                     'book_no' => 'required',
                     'page_no' => 'required',
-                    'vardi_business' => 'required',
                     'vardi_km' => 'required',
                     'vardi_damage' => 'required',
                     'vardi_construction' => 'required',
                     'vardi_insurance' => 'required',
                     'vardi_uniform_type' => 'required',
                     'vardi_approximate' => 'required',
+                    'reason_of_fire' => 'required',
                     'direct_financial_loss' => 'required',
                     'financial_loss_saved' => 'required',
                     'structural_damage_to_build' => 'required',
@@ -310,6 +308,7 @@ class OccuranceBookController extends Controller
                 'vardi_insurance' => $request->input('vardi_insurance'),
                 'vardi_uniform_type' => $request->input('vardi_uniform_type'),
                 'vardi_approximate' => $request->input('vardi_approximate'),
+                'reason_of_fire' => $request->input('reason_of_fire'),
                 'direct_financial_loss' => $request->input('direct_financial_loss'),
                 'financial_loss_saved' => $request->input('financial_loss_saved'),
                 'structural_damage_to_build' => $request->input('structural_damage_to_build'),
@@ -595,8 +594,6 @@ class OccuranceBookController extends Controller
                     'vardi_name' => 'required',
                     'vardi_contact_no' => 'required',
                     'vardi_place' => 'required',
-                    'owner_name' => 'required',
-                    'vaparkarta_name' => 'required',
                     'incident_time' => 'required',
                     'first_vehicle_departing_date_time' => 'required',
                     'time_of_arrival_at_the_scene' => 'required',
@@ -630,6 +627,7 @@ class OccuranceBookController extends Controller
                     'book_no' => 'required',
                     'page_no' => 'required',
                     'is_in_panvel' => 'required',
+                    'reason_of_fire' => 'required',
                 ]);
             }
 
@@ -677,6 +675,7 @@ class OccuranceBookController extends Controller
                 'page_no' => $request->input('page_no'),
                 'is_in_panvel' => $request->input('is_in_panvel'),
                 'address' => $request->input('address'),
+                'reason_of_fire' => $request->input('reason_of_fire'),
                 'created_by' => Auth::user()->id,
                 'created_at' => date('Y-m-d H:i:s'),
             ]);

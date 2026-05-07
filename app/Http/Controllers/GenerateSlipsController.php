@@ -85,6 +85,7 @@ class GenerateSlipsController extends Controller
                 'fire_station' => $input['fire_station'],
                 'land_mark' => $input['landmark'],
                 'incident_reason' => $input['incident_reason'],
+                'generated_by' => Auth::user()->name,
             ]);
 
             $pdf->WriteHTML($pdfView->render());
