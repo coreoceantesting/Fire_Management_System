@@ -23,7 +23,7 @@ class GenerateSlipsRequest extends FormRequest
     {
         return [
             'datetime' => 'required',
-            'caller_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'caller_name' => 'required|regex:/^[\p{L}\p{M}\s]+$/u',
             'caller_mobile_no' => 'required|min:10|max:10',
             'incident_location' => 'required',
             'landmark' => 'required',
