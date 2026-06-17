@@ -201,7 +201,7 @@ class OccuranceBookController extends Controller
 
             if ($request->input('space_loss') !== 'बोगस') {
                 $rules = array_merge($rules, [
-                    'vardi_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    'vardi_name' => 'required|regex:/^[\p{L}\p{M}\s]+$/u',
                     'vardi_contact_no' => 'required|min:10', //added by mayur
                     'vardi_place' => 'required',
                     // 'incident_time' => 'required',
@@ -217,7 +217,7 @@ class OccuranceBookController extends Controller
                     'area_damage' => 'required',
                     // 'space_loss' => 'required', // Already in base rules
                     // 'property_loss' => 'required',
-                    'officer_name_present_at_last_moment' => 'required|regex:/^[a-zA-Z\s]+$/',
+                    'officer_name_present_at_last_moment' => 'required|regex:/^[\p{L}\p{M}\s]+$/u',
                     // 'date_of_departure_from_scene' => 'required',
                     'time_of_departure_from_scene' => 'required',
                     'total_time' => 'required',
