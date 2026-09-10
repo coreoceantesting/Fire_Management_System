@@ -11,6 +11,13 @@ class FiltersController extends Controller
 {
     public function filter(Request $request)
     {
+        $request->validate([
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+        ], [
+            'end_date.after_or_equal' => 'End date must be greater than or equal to start date.',
+        ]);
+
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $status = $request->input('status');
@@ -27,7 +34,9 @@ class FiltersController extends Controller
 
         $slip_list = $slipQuery->latest()->get();
 
-        return view('generateslips.slipslist', compact('slip_list'));
+        $fire_cause_list = DB::table('fire_causes')->where('is_deleted','0')->latest()->get();
+        $firestation_list = DB::table('fire_stations')->where('is_deleted','0')->get();
+        return view('generateslips.slipslist', compact('slip_list','fire_cause_list','firestation_list'));
     }
 
     public function new_generated_filter(Request $request)

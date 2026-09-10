@@ -492,7 +492,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_pump_run">Vardi's How many hours did the pump
-                                    run? ( किती तास पंप चालविला ?? )<span class="text-danger">*</span></label>
+                                    run? ( किती तास पंप चालविला ? )<span class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_pump_run" name="vardi_pump_run" type="text"
                                     placeholder="Vardi's How many hours did the pump run?">
                                 <span class="text-danger error-text vardi_pump_run_err"></span>

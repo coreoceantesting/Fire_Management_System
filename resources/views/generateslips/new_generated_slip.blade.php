@@ -245,16 +245,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row align-items-center">
-                            <form action="{{ route('new_generated_filter') }}" method="GET" class="row">
+                            <form action="{{ route('new_generated_filter') }}" method="GET" class="row" id="filterForm">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-3 form-group">
                                         <label for="start-date">Start Date</label>
                                         <input required type="date" class="form-control" name="start_date" id="start-date" @if(request()->has('start_date')) value="{{ request('start_date') }}" @endif>
+                                        <span class="text-danger" id="start-date-error"></span>
                                     </div>
                                     <div class="col-md-3 form-group">
                                         <label for="end-date">End Date</label>
                                         <input required type="date" class="form-control" name="end_date" id="end-date" @if(request()->has('end_date')) value="{{ request('end_date') }}" @endif>
+                                        <span class="text-danger" id="end-date-error"></span>
                                     </div>
                                     <div class="col-md-3" style="margin-top: 43px;">
                                         <button type="submit" id="apply-filter" class="btn btn-primary">Apply Filter</button>

@@ -187,6 +187,47 @@
     }
 </script>
 
+{{-- Filter date validation --}}
+<script>
+    $(document).ready(function () {
+        const startDate = $('#start-date');
+        const endDate = $('#end-date');
+        const startDateError = $('#start-date-error');
+        const endDateError = $('#end-date-error');
+
+        function updateDateLimits() {
+            endDate.attr('min', startDate.val() || '');
+            startDate.attr('max', endDate.val() || '');
+        }
+
+        function validateDateRange() {
+            const isInvalid = startDate.val() && endDate.val() && startDate.val() > endDate.val();
+
+            startDate[0].setCustomValidity(isInvalid ? 'Start date must be less than or equal to end date.' : '');
+            endDate[0].setCustomValidity(isInvalid ? 'End date must be greater than or equal to start date.' : '');
+            startDateError.text(isInvalid ? 'Start date must be less than or equal to end date.' : '');
+            endDateError.text(isInvalid ? 'End date must be greater than or equal to start date.' : '');
+
+            return !isInvalid;
+        }
+
+        startDate.add(endDate).on('change', function () {
+            updateDateLimits();
+            validateDateRange();
+        });
+
+        $('#filterForm').on('submit', function (event) {
+            updateDateLimits();
+            if (!validateDateRange()) {
+                event.preventDefault();
+            }
+        });
+
+        updateDateLimits();
+        validateDateRange();
+    });
+</script>
+
 
 @stack('scripts')
 

@@ -145,15 +145,27 @@
             </tr>
             <tr>
                 <th>वर्दीची वेळ</th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->incident_time))}} / {{date('H:i:s', strtotime($vardiAhavalData->incident_time))}}</td>
+                <td>:-  
+                    @if(isset($vardiAhavalData->incident_time)) 
+                    {{date('Y-m-d', strtotime($vardiAhavalData->incident_time))}} / {{date('H:i:s', strtotime($vardiAhavalData->incident_time))}}
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ</th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}} / {{date('H:i;s', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}}</td>
+                <td>:- 
+                    @if(isset($vardiAhavalData->first_vehicle_departing_date_time))
+                    {{date('Y-m-d', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}} / {{date('H:i;s', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}}
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>घटनास्तळी पोह्चल्याची वेळ </th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H:i:s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}</td>
+                <td>:- 
+                    @if(isset($vardiAhavalData->time_of_arrival_at_the_scene))
+                    {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H:i:s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>अग्निशमन केंद्रापासून घटनास्तळाचे अंतर</th>
@@ -221,19 +233,23 @@
             </tr>
             <tr>
                 <th>घटनास्तळावरून निघाल्याची तारीख </th>
-                <td>:- {{date('Y-m-d', strtotime($vardiAhavalData->date_of_departure_from_scene))}} </td>
+                <td>:- 
+                    @if(isset($vardiAhavalData->date_of_departure_from_scene))
+                        {{date('Y-m-d', strtotime($vardiAhavalData->date_of_departure_from_scene))}}
+                    @endif
+                </td>
             </tr>
             <tr>
                 <th>घटनास्तळावरून निघाल्याची वेळ</th>
-                <td>:- {{date('H-i-s', strtotime($vardiAhavalData->time_of_departure_from_scene))}}</td>
+                <td>:- @if(isset($vardiAhavalData->time_of_departure_from_scene)) {{date('H-i-s', strtotime($vardiAhavalData->time_of_departure_from_scene))}} @endif</td>
             </tr>
             <tr>
                 <th>एकुण वेळ</th>
-                <td>:- {{$vardiAhavalData->total_time}}</td>
+                <td>:- @if(isset($vardiAhavalData->total_time)) {{$vardiAhavalData->total_time}} @endif</td>
             </tr>
             <tr>
                 <th>एकुण तास</th>
-                <td>:- {{$vardiAhavalData->total_hour}}</td>
+                <td>:- @if(isset($vardiAhavalData->total_hour)) {{$vardiAhavalData->total_hour}} @endif</td>
             </tr>
             <tr>
                 <th>पनवेल महानगरपालिकेच्या हद्दीत आहे का ?</th>
@@ -536,7 +552,7 @@
                           <td>{{$actionTakenData->center_name}}</td>
                           <td>{{$actionTakenData->type_of_vehicle}}</td>
                           <td>{{$actionTakenData->number_of_vehicle}}</td>
-                          <td>{{ date('Y-m-d H:i:s', strtotime($actionTakenData->vehicle_arrival_time)) }}</td>
+                          <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time)) }} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_time))}}</td>
                           <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_departure_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_departure_time))}}</td>
                           <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_departure_from_scene_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_departure_from_scene_time))}}</td>
                           <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_at_center_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_at_center_time))}}</td>
@@ -550,7 +566,7 @@
                             <td>{{$data->center_name}}</td>
                             <td>{{$data->type_of_vehicle}}</td>
                             <td>{{$data->vehicle_number}}</td>
-                            <td>{{ date('Y-m-d H:i:s', strtotime($data->vehicle_departure_time)) }}</td>
+                            <td>{{ date('Y-m-d', strtotime($data->vehicle_departure_time)) }} / {{date('H-i-s', strtotime($data->vehicle_departure_time))}}</td>
                             <td>{{date('Y-m-d', strtotime($data->vehicle_arrival_time))}} / {{date('H-i-s', strtotime($data->vehicle_arrival_time))}}</td>
                             <td>{{date('Y-m-d', strtotime($data->vehicle_return_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_time))}}</td>
                             <td>{{date('Y-m-d', strtotime($data->vehicle_return_to_center_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_to_center_time))}}</td>
