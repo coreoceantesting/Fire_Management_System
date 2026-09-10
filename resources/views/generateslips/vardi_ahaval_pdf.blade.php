@@ -199,7 +199,7 @@
             </tr> --}}
             <tr>
                 <th>आगीच शक्य कारण </th>
-                <td>:- {{$vardiAhavalData->possible_cause_of_fire}}</td>
+                <td>:- {{$vardiAhavalData->vardi_approximate}}</td>
             </tr>
             <tr>
                 <th>आगीचे कारण </th>
