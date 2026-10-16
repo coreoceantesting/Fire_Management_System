@@ -214,20 +214,35 @@
                                     placeholder="Enter vardi's Owner Name">
                                 <span class="text-danger error-text owner_name_err"></span>
                             </div>
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="first_vehicle_departing_date_time">Vardi's Uniform
                                     Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="first_vehicle_departing_date_time"
                                     name="first_vehicle_departing_date_time" type="datetime-local">
                                 <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
+                            </div> --}}
+
+                             <div class="col-md-4">
+                                <label class="col-form-label" for="vardi_time">Vardi's Uniform Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
+                                <input class="form-control" id="vardi_time" name="vardi_time" type="datetime-local">
+                                <span class="text-danger error-text vardi_time_err"></span>
                             </div>
-                            <div class="col-md-4">
+
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="time_of_arrival_at_the_scene">Vardi's Time of first
                                     vehicle release on uniform (वर्दीवर पहिले वाहन सोडल्याची वेळ)<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="time_of_arrival_at_the_scene"
                                     name="time_of_arrival_at_the_scene" type="datetime-local">
                                 <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
+                            </div> --}}
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="first_vehicle_departing_date_time">Vardi's Time of first
+                                    vehicle release on uniform (वर्दीवर पहिले वाहन सोडल्याची वेळ)<span
+                                        class="text-danger">*</span></label>
+                                <input class="form-control" id="first_vehicle_departing_date_time"
+                                    name="first_vehicle_departing_date_time" type="datetime-local">
+                                <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="distance">Distance from the main fire
@@ -246,11 +261,11 @@
                                 <span class="text-danger error-text vardi_km_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="vardi_damage">Vardi's Damage description / ( नुकसान
+                                <label class="col-form-label" for="property_description">Vardi's Damage description / ( नुकसान
                                     झालेले वर्णन ) <span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="vardi_damage" name="vardi_damage" type="text"
+                                <textarea class="form-control" id="property_description" name="property_description" type="text"
                                     placeholder="Enter Vardi Damage Description"></textarea>
-                                <span class="text-danger error-text vardi_damage_err"></span>
+                                <span class="text-danger error-text property_description_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_construction">Vardi's Construction etc / (
@@ -351,15 +366,14 @@
                     <div class="card-body py-2">
 
                         <div class="mb-3 row">
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="property_description">Vardi's Information about
                                     fire damage (आगीमुळे झालेल्या नुकसानाची माहिती ) <span
                                         class="text-danger">*</span></label>
-                                {{-- <input class="form-control" id="property_description" name="property_description" type="text" placeholder="Enter Property Description Of The Fire Location"> --}}
                                 <textarea class="form-control" name="property_description" id="property_description"
                                     placeholder="Enter Vardi's Information About Fire Damage"></textarea>
                                 <span class="text-danger error-text property_description_err"></span>
-                            </div>
+                            </div> --}}
                             {{-- <div class="col-md-4">
                                     <label class="col-form-label" for="type_of_fire">Type of fire ( आगीचा प्रकार ) <span class="text-danger">*</span></label>
                                     <select class="form-control" name="type_of_fire" id="type_of_fire">
@@ -389,7 +403,7 @@
                                     <input class="form-control" name="possible_cause_of_fire" id="possible_cause_of_fire" placeholder="Date and time the vehicle was left at the scene" cols="30" rows="3">
                                     <span class="text-danger error-text possible_cause_of_fire_err"></span>
                                 </div> --}}
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="possible_cause_of_fire"> Date and time the vehicle
                                     was left at the scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ)<span
                                         class="text-danger">*</span>
@@ -397,39 +411,44 @@
                                 <input class="form-control" type="datetime-local" name="possible_cause_of_fire"
                                     id="possible_cause_of_fire" placeholder="Select date and time" required>
                                 <span class="text-danger error-text possible_cause_of_fire_err"></span>
+                            </div> --}}
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="time_of_departure_from_scene"> Date and time the vehicle
+                                    was left at the scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ)<span
+                                        class="text-danger">*</span>
+                                </label>
+                                <input class="form-control" type="datetime-local" name="time_of_departure_from_scene"
+                                    id="time_of_departure_from_scene" placeholder="Select date and time" required>
+                                <span class="text-danger error-text time_of_departure_from_scene_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="description_of_damage">Total time worked on site (
-                                    घटनास्थळी एकूण काम केलेली वेळ )</label>
-                                {{-- <input class="form-control" id="description_of_damage" name="description_of_damage" type="text" placeholder="Enter Description Of Damage"> --}}
-                                {{-- <input class="form-control" name="description_of_damage" id="description_of_damage" placeholder="Enter Total time worked on site"> --}}
-                                <input class="form-control" type="time" name="description_of_damage"
-                                    id="description_of_damage" placeholder="Select time" required>
-                                <span class="text-danger error-text description_of_damage_err"></span>
+                                <label class="col-form-label" for="total_time">Total time worked on site (
+                                    घटनास्थळी एकूण काम केलेली वेळ ) <span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" name="total_time"
+                                    id="total_time" placeholder="Enter Total Time">
+                                <span class="text-danger error-text total_time_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="property_damage">hours minutes ( तास मिनिटे
+                                <label class="col-form-label" for="total_hour">hours minutes ( तास मिनिटे
                                     )</label>
-                                <input class="form-control" id="property_damage" name="property_damage"
-                                    type="time" placeholder="Enter hours minute">
-                                {{-- <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small> --}}
-                                <span class="text-danger error-text property_damage_err"></span>
+                                <input class="form-control" id="total_hour" name="total_hour"
+                                    type="text" placeholder="Enter hours minute">
+                                <span class="text-danger error-text total_hour_err"></span>
                             </div>
                             <div class="col-md-4">
-                                <label class="col-form-label" for="area_damage">Vardi's Name of the officer left at
+                                <label class="col-form-label" for="officer_name_present_at_last_moment">Vardi's Name of the officer left at
                                     the scene ( घटनास्थळी सोडलेल्या अधिकाऱ्याचे नाव ) <span
                                         class="text-danger">*</span></label>
-                                <input class="form-control" id="area_damage" name="area_damage" type="text"
+                                <input class="form-control" id="officer_name_present_at_last_moment" name="officer_name_present_at_last_moment" type="text"
                                     placeholder="Enter Vardi's Name of the officer left at the scene">
-                                <span class="text-danger error-text area_damage_err"></span>
+                                <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                             </div>
 
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="property_loss">Vardi's Fire station name ( अग्निशमन
                                     केंद्राचे नाव )</label>
                                 <input class="form-control" id="property_loss" name="property_loss" type="text"
                                     placeholder="Enter Vardi's Fire station name">
-                                {{-- <small>(in lakhs) as per insurance company survey ((लाखात) विमा कंपनी सर्वेक्षण नुसार)</small> --}}
                                 <span class="text-danger error-text property_loss_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -440,11 +459,6 @@
                                     placeholder="Enter Type of vehicle ( वाहनाचा प्रकार ) ">
                                 <span class="text-danger error-text officer_name_present_at_last_moment_err"></span>
                             </div>
-                            {{-- <div class="col-md-4">
-                                    <label class="col-form-label" for="date_of_departure_from_scene">Date of departure from the scene ( घटनास्तळावरून निघाल्याची तारीख ) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="date_of_departure_from_scene" name="date_of_departure_from_scene" type="date" placeholder="Enter Date of departure from the scene">
-                                    <span class="text-danger error-text date_of_departure_from_scene_err"></span>
-                                </div> --}}
                             <div class="col-md-4">
                                 <label class="col-form-label" for="time_of_departure_from_scene">Registration No (
                                     नोंदणी क्रमांक ) <span class="text-danger">*</span></label>
@@ -459,13 +473,20 @@
                                 <input class="form-control" id="total_time" name="total_time" type="time"
                                     placeholder="Enter TurnOut Time">
                                 <span class="text-danger error-text total_time_err"></span>
-                            </div>
-                            <div class="col-md-4">
+                            </div> --}}
+                            {{-- <div class="col-md-4">
                                 <label class="col-form-label" for="total_hour">Vardi's Time to reach the scene ( घटना
                                     स्थळी पोहोचण्याची वेळ ) <span class="text-danger">*</span></label>
                                 <input class="form-control" id="total_hour" name="total_hour" type="time"
                                     placeholder="Enter Vardi's Time to reach the scene">
                                 <span class="text-danger error-text total_hour_err"></span>
+                            </div> --}}
+                            <div class="col-md-4">
+                                <label class="col-form-label" for="time_of_arrival_at_the_scene">Vardi's Time to reach the scene ( घटना
+                                    स्थळी पोहोचण्याची वेळ ) <span class="text-danger">*</span></label>
+                                <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="time"
+                                    placeholder="Enter Vardi's Time to reach the scene">
+                                <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_leaving_time">Vardi's Time of leaving the
@@ -1253,7 +1274,7 @@
 
                         data.occuranceBookPhotos.forEach(photo => {
                             tableHtml += '<tr>';
-                            tableHtml += '<td><a href="storage/' + photo
+                            tableHtml += '<td><a href="{{ asset('storage') }}/' + photo
                                 .photo_path +
                                 '" target="_blank">View Document</a></td>';
                             tableHtml += '</tr>';
@@ -1404,7 +1425,15 @@
                     // console.log(data);
                     $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
                     $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
-                    $("#editForm input[name='vardi_contact_no']").val(data.slip_data.caller_mobile_no);
+                    if (data.slip_data.vehicle_departure_from_scene_time) {
+                        let depTime = data.slip_data.vehicle_departure_from_scene_time.replace(' ', 'T').slice(0, 16);
+                        $("#editForm input[name='time_of_departure_from_scene']").val(depTime);
+                    } else if (data.slip_data.vehicle_arrival_time) {
+                        let arrTime = data.slip_data.vehicle_arrival_time.replace(' ', 'T').slice(0, 16);
+                        $("#editForm input[name='time_of_departure_from_scene']").val(arrTime);
+                    }
+
+                    
                     // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
                     // $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
                     // $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
@@ -1426,10 +1455,15 @@
 {{-- store vardi ahaval --}}
 <script>
     $(document).ready(function() {
+        $('#editSubmit').on('click', function(e) {
+            console.log("Submit button clicked!");
+        });
+
         // submitting form
         $('#editForm').submit(function(event) {
             // Prevent the default form submission
             event.preventDefault();
+            console.log("Form submit event triggered!");
 
             // Clear previous errors added by mayur
             $('.error-text').text('');
@@ -1437,7 +1471,7 @@
 
             // Serialize the form data
             var formData = $(this).serialize();
-            // alert(formData);
+            console.log("Form data being sent:", formData);
 
             // Make an AJAX request
             $.ajax({
@@ -1445,15 +1479,19 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
+                    console.log("Server response:", data);
                     if (!data.error2) {
                         if (data.errors) {
+                            console.error("=== FORM VALIDATION ERRORS ===", data.errors);
                             // Display validation errors
                             $.each(data.errors, function(field, messages) {
+                                console.warn("Validation error on field [" + field + "]:", messages);
                                 $('.' + field + '_err').text(
                                 messages); // Display all messages if there are multiple
                                 $("[name='" + field + "']").addClass('is-invalid');
                             });
                         } else if (data.success) {
+                            console.log("Submission successful:", data.success);
                             swal("Successful!", data.success, "success")
                                 .then((action) => {
                                     window.location.href =
@@ -1461,12 +1499,13 @@
                                 });
                         }
                     } else {
+                        console.error("Server error:", data.error2);
                         swal("Error!", data.error2, "error");
                     }
                 },
                 error: function(error) {
                     // Handle error response
-                    console.log(error);
+                    console.error("AJAX Error:", error);
                 }
             });
         });
@@ -1509,13 +1548,19 @@
     var totalHourInput = document.getElementById('total_hour');
 
     // Attach an event listener to detect changes in the input fields
-    firstVehicleDeparting.addEventListener('change', updateTotalTime);
-    timeOfDeparture.addEventListener('change', updateTotalTime);
+    if (firstVehicleDeparting && timeOfDeparture) {
+        firstVehicleDeparting.addEventListener('change', updateTotalTime);
+        timeOfDeparture.addEventListener('change', updateTotalTime);
+    }
 
     function updateTotalTime() {
+        if (!firstVehicleDeparting || !timeOfDeparture || !firstVehicleDeparting.value || !timeOfDeparture.value) return;
+
         // Get the values from the input fields
         var startTime = new Date(firstVehicleDeparting.value);
-        var endTime = new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
+        var endTime = timeOfDeparture.value.includes('T')
+            ? new Date(timeOfDeparture.value)
+            : new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
 
         // Check if end date is earlier than start date (yesterday's start date and today's end date)
         if (endTime < startTime) {
@@ -1523,31 +1568,28 @@
             endTime.setDate(endTime.getDate() + 1);
         }
 
-        var dateObject = new Date(startTime);
-        var dateObjectTwo = new Date(endTime);
-
-        // Get the time in HH:mm:ss format
-        var timeone = dateObject.toLocaleTimeString('en-US', {
-            hour12: false
-        });
-        var timetwo = dateObjectTwo.toLocaleTimeString('en-US', {
-            hour12: false
-        });
-
         // Calculate the time difference
         var timeDiff = endTime - startTime;
-        var hours = Math.floor(timeDiff / 3600000); // 1 hour = 3600000 milliseconds
 
-        // Display the values in the total time and total hour input fields
-        totalTimeInput.value = timeone + ' To ' + timetwo;
-        totalHourInput.value = formatTimeDifference(timeDiff);
+        var dateObject = new Date(startTime);
+        var dateObjectTwo = new Date(endTime);
+        var timeone = dateObject.toLocaleTimeString('en-US', { hour12: false });
+        var timetwo = dateObjectTwo.toLocaleTimeString('en-US', { hour12: false });
+
+        if (totalTimeInput && !isNaN(timeDiff) && timeDiff >= 0) {
+            totalTimeInput.value = timeone + ' To ' + timetwo;
+        }
+
+        if (totalHourInput && !isNaN(timeDiff) && timeDiff >= 0) {
+            totalHourInput.value = formatTimeDifference(timeDiff);
+        }
     }
 
     function formatTimeDifference(timeDiff) {
         // Format the time difference in HH:mm format
         var hours = Math.floor(timeDiff / 3600000);
         var minutes = Math.floor((timeDiff % 3600000) / 60000);
-        return hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+        return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
     }
 </script>
 
@@ -1799,7 +1841,7 @@
         'vardi_name', 'vardi_contact_no', 'vardi_place',
         'first_vehicle_departing_date_time',
         'time_of_arrival_at_the_scene',
-        'distance', 'vardi_km', 'vardi_damage',
+        'distance', 'vardi_km',
         'vardi_construction', 'vardi_insurance',
         'vardi_uniform_type', 'vardi_approximate', 'reason_of_fire',
 
@@ -1810,13 +1852,12 @@
 
         // Details
         'property_description',
-        'possible_cause_of_fire',
-        'description_of_damage',
-        'area_damage',
+        // 'possible_cause_of_fire',
         'officer_name_present_at_last_moment',
         'time_of_departure_from_scene',
         'total_time',
-        'total_hour',
+        // 'total_hour',
+        'vardi_time',
         'vardi_leaving_time',
         'vardi_return_time',
         'vardi_total_distance',

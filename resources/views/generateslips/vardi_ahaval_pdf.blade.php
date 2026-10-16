@@ -160,7 +160,7 @@
                 </td>
             </tr>
             <tr>
-                <th>घटनास्तळी पोह्चल्याची वेळ </th>
+                <th>घटनास्थळी पोहोचल्याची वेळ </th>
                 <td>:- 
                     @if(isset($vardiAhavalData->time_of_arrival_at_the_scene))
                     {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H:i:s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}
@@ -168,7 +168,7 @@
                 </td>
             </tr>
             <tr>
-                <th>अग्निशमन केंद्रापासून घटनास्तळाचे अंतर</th>
+                <th>अग्निशमन केंद्रापासून घटनास्थळाचे अंतर</th>
                 <td>:- {{$vardiAhavalData->distance}} कि.मी </td>
             </tr>
         </table>
@@ -228,11 +228,11 @@
                 </td>
             </tr>
             <tr>
-                <th>अखेरच्या क्षणी घटनास्तळी असलेल्या अधिकारीचें नाव</th>
+                <th>अखेरच्या क्षणी घटनास्थळी असलेल्या अधिकाऱ्यांचे नाव</th>
                 <td>:- {{$vardiAhavalData->officer_name_present_at_last_moment}}</td>
             </tr>
             <tr>
-                <th>घटनास्तळावरून निघाल्याची तारीख </th>
+                <th>घटनास्थळावरून निघाल्याची तारीख </th>
                 <td>:- 
                     @if(isset($vardiAhavalData->date_of_departure_from_scene))
                         {{date('Y-m-d', strtotime($vardiAhavalData->date_of_departure_from_scene))}}
@@ -240,7 +240,7 @@
                 </td>
             </tr>
             <tr>
-                <th>घटनास्तळावरून निघाल्याची वेळ</th>
+                <th>घटनास्थळावरून निघाल्याची वेळ</th>
                 <td>:- @if(isset($vardiAhavalData->time_of_departure_from_scene)) {{date('H-i-s', strtotime($vardiAhavalData->time_of_departure_from_scene))}} @endif</td>
             </tr>
             <tr>

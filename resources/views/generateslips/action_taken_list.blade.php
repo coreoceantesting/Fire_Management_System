@@ -760,7 +760,7 @@
 
                         data.occuranceBookPhotos.forEach(photo => {
                             tableHtml += '<tr>';
-                            tableHtml += '<td><a href="storage/' + photo.photo_path + '" target="_blank">View Document</a></td>';
+                            tableHtml += '<td><a href="{{ asset('storage') }}/' + photo.photo_path + '" target="_blank">View Document</a></td>';
                             tableHtml += '</tr>';
                         });
 
