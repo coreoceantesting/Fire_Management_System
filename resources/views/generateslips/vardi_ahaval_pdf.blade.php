@@ -112,10 +112,13 @@
                 <p style="text-align: left;">विभाग :- अग्निशमन केंद्र पनवेल</p>
             </div>
             <div class="col-md-6">
-                <p style="text-align: right;">वर्दीची तारीख : {{ date('d-m-Y', strtotime($slipData->slip_date)) }}</p>
+                <p style="text-align: right;">वर्दीची तारीख : {{ !empty($slipData->slip_date) ? date('d-m-Y', strtotime($slipData->slip_date)) : '-' }}</p>
             </div>   
-            <div class="col-md-12">
-                <p style="text-align: left;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{$vardiAhavalData->officer_name_present_at_last_moment}}</p>
+            <div class="col-md-6">
+                <p style="text-align: left;">कॉलचा प्रकार : {{ $vardiAhavalData->space_loss ?? 'अस्सल' }}</p>
+            </div>
+            <div class="col-md-6">
+                <p style="text-align: right;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{ $vardiAhavalData->vardi_employee_name ?? (!in_array($vardiAhavalData->officer_name_present_at_last_moment ?? '', ['vehicle', 'Fire Type of vehicle', 'fire rescue', 'Zane Hayes']) ? $vardiAhavalData->officer_name_present_at_last_moment : ($vardiAhavalData->vardi_officer_name ?? '-')) }}</p>
             </div>         
         </div>
 
@@ -135,41 +138,66 @@
                 <th>वर्दीचे ठिकाण</th>
                 <td>:- {{$vardiAhavalData->vardi_place}}</td>
             </tr>
+            @if(!empty($vardiAhavalData->vardi_business))
+            <tr>
+                <th>धंदा</th>
+                <td>:- {{$vardiAhavalData->vardi_business}}</td>
+            </tr>
+            @endif
             <tr>
                 <th>मालकाचे नाव</th>
                 <td>:- {{$vardiAhavalData->owner_name}}</td>
             </tr>
             <tr>
-                <th>वापर करणाऱ्याचे नाव</th>
+                <th>वापर करणाऱ्याचे नाव / भाडेकऱ्यांचे नाव</th>
                 <td>:- {{$vardiAhavalData->vaparkarta_name}}</td>
             </tr>
             <tr>
                 <th>वर्दीची वेळ</th>
                 <td>:-  
-                    @if(isset($vardiAhavalData->incident_time)) 
-                    {{date('Y-m-d', strtotime($vardiAhavalData->incident_time))}} / {{date('H:i:s', strtotime($vardiAhavalData->incident_time))}}
+                    @php
+                        $incidentTime = !empty($vardiAhavalData->incident_time) ? $vardiAhavalData->incident_time : (!empty($actionTakenData->call_time) ? $actionTakenData->call_time : (!empty($slipData->slip_date) ? $slipData->slip_date : null));
+                    @endphp
+                    @if($incidentTime)
+                        {{ date('d-m-Y', strtotime($incidentTime)) }} / {{ date('H:i:s', strtotime($incidentTime)) }}
+                    @else
+                        -
                     @endif
                 </td>
             </tr>
             <tr>
                 <th>वर्दीवर प्रथम रवाना झालेल्या गाडीची वेळ</th>
                 <td>:- 
-                    @if(isset($vardiAhavalData->first_vehicle_departing_date_time))
-                    {{date('Y-m-d', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}} / {{date('H:i;s', strtotime($vardiAhavalData->first_vehicle_departing_date_time))}}
+                    @php
+                        $firstVehicleTime = !empty($vardiAhavalData->first_vehicle_departing_date_time) ? $vardiAhavalData->first_vehicle_departing_date_time : (!empty($actionTakenData->vehicle_departure_time) ? $actionTakenData->vehicle_departure_time : null);
+                    @endphp
+                    @if($firstVehicleTime)
+                        {{ date('d-m-Y', strtotime($firstVehicleTime)) }} / {{ date('H:i:s', strtotime($firstVehicleTime)) }}
+                    @else
+                        -
                     @endif
                 </td>
             </tr>
             <tr>
-                <th>घटनास्थळी पोहोचल्याची वेळ </th>
+                <th>घटनास्थळी पोहोचल्याची वेळ</th>
                 <td>:- 
-                    @if(isset($vardiAhavalData->time_of_arrival_at_the_scene))
-                    {{date('Y-m-d', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}} / {{date('H:i:s', strtotime($vardiAhavalData->time_of_arrival_at_the_scene))}}
+                    @php
+                        $arrivalSceneTime = !empty($vardiAhavalData->time_of_arrival_at_the_scene) ? $vardiAhavalData->time_of_arrival_at_the_scene : (!empty($actionTakenData->vehicle_arrival_time) ? $actionTakenData->vehicle_arrival_time : null);
+                    @endphp
+                    @if($arrivalSceneTime)
+                        @if(preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($arrivalSceneTime)))
+                            {{ trim($arrivalSceneTime) }}
+                        @else
+                            {{ date('d-m-Y', strtotime($arrivalSceneTime)) }} / {{ date('H:i:s', strtotime($arrivalSceneTime)) }}
+                        @endif
+                    @else
+                        -
                     @endif
                 </td>
             </tr>
             <tr>
                 <th>अग्निशमन केंद्रापासून घटनास्थळाचे अंतर</th>
-                <td>:- {{$vardiAhavalData->distance}} कि.मी </td>
+                <td>:- {{ $vardiAhavalData->distance ?? ($vardiAhavalData->vardi_km ?? ($actionTakenData->total_distance ?? '-')) }} कि.मी </td>
             </tr>
         </table>
 
@@ -178,99 +206,199 @@
 
         <table class="vardi">
             <tr>
-                <th>आग लागलेल्या ठिकाणच्या मालमत्तेचे  वर्णन</th>
-                <td>:- {{$vardiAhavalData->property_description}}</td>
-            </tr>
-            <tr>
-                <th>आगीचा प्रकार</th>
-                <td>:- 
-                    @if($vardiAhavalData->limit_of_fire == "Low")
-                    कमी
-                    @elseif($vardiAhavalData->limit_of_fire == "Medium")
-                    मध्यम
-                    @else
-                    उच्च
-                    @endif
-                </td>
-            </tr>
-            {{-- <tr>
-                <th>आगीची मर्यदा</th>
-                <td>:- {{$vardiAhavalData->limit_of_fire}}</td>
-            </tr> --}}
-            <tr>
-                <th>आगीच शक्य कारण </th>
-                <td>:- {{$vardiAhavalData->vardi_approximate}}</td>
-            </tr>
-            <tr>
-                <th>आगीचे कारण </th>
-                <td>:- {{$vardiAhavalData->reason_of_fire}}</td>
+                <th>कॉलचा प्रकार</th>
+                <td>:- {{ $vardiAhavalData->space_loss ?? 'अस्सल' }}</td>
             </tr>
             <tr>
                 <th>नुकसानीचे वर्णन</th>
-                <td>:- {{$vardiAhavalData->description_of_damage}}</td>
+                <td>:- 
+                    @php
+                        $damageDesc = !empty($vardiAhavalData->vardi_damage) && !preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($vardiAhavalData->vardi_damage)) 
+                            ? $vardiAhavalData->vardi_damage 
+                            : (!empty($vardiAhavalData->description_of_damage) && !preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($vardiAhavalData->description_of_damage)) 
+                                ? $vardiAhavalData->description_of_damage 
+                                : ($vardiAhavalData->property_description ?? '-'));
+                    @endphp
+                    {{ $damageDesc }}
+                </td>
+            </tr>
+            @if(!empty($vardiAhavalData->vardi_construction))
+            <tr>
+                <th>बांधकाम इत्यादी</th>
+                <td>:- {{ $vardiAhavalData->vardi_construction }}</td>
+            </tr>
+            @endif
+            <tr>
+                <th>वर्दीचा प्रकार / आगीचा प्रकार</th>
+                <td>:- 
+                    @if(!empty($vardiAhavalData->vardi_uniform_type))
+                        {{ $vardiAhavalData->vardi_uniform_type }}
+                    @elseif(!empty($vardiAhavalData->type_of_fire))
+                        {{ $vardiAhavalData->type_of_fire }}
+                    @elseif($vardiAhavalData->limit_of_fire == "Low")
+                        कमी (Low)
+                    @elseif($vardiAhavalData->limit_of_fire == "Medium")
+                        मध्यम (Medium)
+                    @elseif($vardiAhavalData->limit_of_fire == "High")
+                        उच्च (High)
+                    @else
+                        -
+                    @endif
+                </td>
             </tr>
             <tr>
-                <th>अंदाजित नुकसान
+                <th>आगीचे / वर्दीचे शक्य कारण</th>
+                <td>:- {{ $vardiAhavalData->vardi_approximate ?? ($vardiAhavalData->possible_cause_of_fire ?? '-') }}</td>
+            </tr>
+            <tr>
+                <th>आगीचे कारण</th>
+                <td>:- 
+                    @if($vardiAhavalData->reason_of_fire == 'Natural')
+                        नैसर्गिक (Natural)
+                    @elseif($vardiAhavalData->reason_of_fire == 'Human')
+                        मानवी (Human)
+                    @else
+                        {{ $vardiAhavalData->reason_of_fire ?? '-' }}
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <th>आग लागलेल्या ठिकाणच्या मालमत्तेचे वर्णन</th>
+                <td>:- 
+                    @php
+                        $propDesc = !empty($vardiAhavalData->property_description) && !preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($vardiAhavalData->property_description)) 
+                            ? $vardiAhavalData->property_description 
+                            : ($vardiAhavalData->vardi_damage ?? '-');
+                    @endphp
+                    {{ $propDesc }}
+                </td>
+            </tr>
+            <tr>
+                <th>अंदाजित नुकसान (वित्तहानी बाबतची माहिती)
                     <ol>
-                        <li>मालमत्ता</li>
-                        <li>आजुबाजुचा परिसर </li>
-                        <li>जागेचे नुकसान</li>
-                        <li>वस्तुचे नुकसान</li>
+                        <li>प्रत्यक्ष वित्तहानी (मालमत्ता)</li>
+                        <li>वाचविलेली वित्तहानी (आजुबाजुचा परिसर)</li>
+                        <li>इमारतीतील वास्तूचे नुकसान (जागेचे नुकसान)</li>
+                        <li>विमा सर्वेक्षण / वस्तुचे नुकसान</li>
                     </ol>
                 </th>
                 <td>
+                    @php
+                        $propDamage = !empty($vardiAhavalData->direct_financial_loss) ? $vardiAhavalData->direct_financial_loss : $vardiAhavalData->property_damage;
+                        if (preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($propDamage ?? ''))) {
+                            $propDamage = !empty($vardiAhavalData->direct_financial_loss) ? $vardiAhavalData->direct_financial_loss : '-';
+                        }
+
+                        $areaDamage = !empty($vardiAhavalData->financial_loss_saved) ? $vardiAhavalData->financial_loss_saved : $vardiAhavalData->area_damage;
+                        if (str_contains($areaDamage ?? '', 'अधिकाऱ्याचे नाव') || str_contains($areaDamage ?? '', 'officer') || str_contains($areaDamage ?? '', 'Finn Horn')) {
+                            $areaDamage = !empty($vardiAhavalData->financial_loss_saved) ? $vardiAhavalData->financial_loss_saved : '-';
+                        }
+
+                        $spaceLoss = !empty($vardiAhavalData->structural_damage_to_build) ? $vardiAhavalData->structural_damage_to_build : $vardiAhavalData->space_loss;
+                        if ($spaceLoss == 'अस्सल' || $spaceLoss == 'बोगस') {
+                            $spaceLoss = !empty($vardiAhavalData->structural_damage_to_build) ? $vardiAhavalData->structural_damage_to_build : '-';
+                        }
+
+                        $propLoss = !empty($vardiAhavalData->property_loss) ? $vardiAhavalData->property_loss : null;
+                        if (str_contains($propLoss ?? '', 'केंद्राचे नाव') || str_contains($propLoss ?? '', 'Fire station') || str_contains($propLoss ?? '', 'कळंबोली') || str_contains($propLoss ?? '', 'Kane Benjamin')) {
+                            $propLoss = null;
+                        }
+                        if (empty($propLoss)) {
+                            $propLoss = !empty($vardiAhavalData->vardi_insurance) ? 'विमा: ' . ($vardiAhavalData->vardi_insurance == 'Yes' ? 'होय' : ($vardiAhavalData->vardi_insurance == 'No' ? 'नाही' : $vardiAhavalData->vardi_insurance)) : '-';
+                        }
+                    @endphp
                     <ul style="list-style-type: none; padding-left: 0;">
-                        <li>:- {{$vardiAhavalData->property_damage}} (लाखात ) विमा कंपनी सर्वेक्षणानुसार </li>
-                        <li>:- {{$vardiAhavalData->area_damage}}</li>
-                        <li>:- {{$vardiAhavalData->space_loss}}</li>
-                        <li>:- {{$vardiAhavalData->property_loss}} (लाखात ) विमा कंपनी सर्वेक्षणानुसार </li>
+                        <li>:- {{ $propDamage ?? '-' }} @if(!empty($propDamage) && $propDamage != '-' && !str_contains($propDamage, 'लाखात') && !str_contains($propDamage, 'Direct')) (लाखात ) विमा कंपनी सर्वेक्षणानुसार @endif</li>
+                        <li>:- {{ $areaDamage ?? '-' }}</li>
+                        <li>:- {{ $spaceLoss ?? '-' }}</li>
+                        <li>:- {{ $propLoss ?? '-' }} @if(!empty($propLoss) && $propLoss != '-' && !str_contains($propLoss, 'विमा') && !str_contains($propLoss, 'लाखात')) (लाखात ) विमा कंपनी सर्वेक्षणानुसार @endif</li>
                     </ul>
                 </td>
             </tr>
             <tr>
                 <th>अखेरच्या क्षणी घटनास्थळी असलेल्या अधिकाऱ्यांचे नाव</th>
-                <td>:- {{$vardiAhavalData->officer_name_present_at_last_moment}}</td>
-            </tr>
-            <tr>
-                <th>घटनास्थळावरून निघाल्याची तारीख </th>
                 <td>:- 
-                    @if(isset($vardiAhavalData->date_of_departure_from_scene))
-                        {{date('Y-m-d', strtotime($vardiAhavalData->date_of_departure_from_scene))}}
-                    @endif
+                    @php
+                        $officerName = $vardiAhavalData->officer_name_present_at_last_moment ?? '';
+                        if (empty($officerName) || in_array($officerName, ['vehicle', 'Fire Type of vehicle', 'fire rescue', 'Zane Hayes'])) {
+                            $officerName = $vardiAhavalData->vardi_officer_name ?? (!empty($vardiAhavalData->area_damage) && !str_contains($vardiAhavalData->area_damage, 'अधिकाऱ्याचे नाव') ? $vardiAhavalData->area_damage : '-');
+                        }
+                    @endphp
+                    {{ $officerName }}
                 </td>
+            </tr>
+            @if(!empty($vardiAhavalData->vardi_employee_name))
+            <tr>
+                <th>कर्मचारी - हुद्दा / नाव</th>
+                <td>:- {{ $vardiAhavalData->vardi_employee_name }}</td>
+            </tr>
+            @endif
+            @php
+                $depDate = null;
+                $depTime = null;
+
+                if (!empty($vardiAhavalData->date_of_departure_from_scene) && strtotime($vardiAhavalData->date_of_departure_from_scene)) {
+                    $depDate = date('d-m-Y', strtotime($vardiAhavalData->date_of_departure_from_scene));
+                } elseif (!empty($vardiAhavalData->time_of_departure_from_scene) && strtotime($vardiAhavalData->time_of_departure_from_scene)) {
+                    $depDate = date('d-m-Y', strtotime($vardiAhavalData->time_of_departure_from_scene));
+                } elseif (!empty($actionTakenData->vehicle_departure_from_scene_time) && strtotime($actionTakenData->vehicle_departure_from_scene_time)) {
+                    $depDate = date('d-m-Y', strtotime($actionTakenData->vehicle_departure_from_scene_time));
+                } elseif (!empty($slipData->slip_date) && strtotime($slipData->slip_date)) {
+                    $depDate = date('d-m-Y', strtotime($slipData->slip_date));
+                }
+
+                if (!empty($vardiAhavalData->vardi_leaving_time)) {
+                    $depTime = $vardiAhavalData->vardi_leaving_time;
+                } elseif (!empty($vardiAhavalData->time_of_departure_from_scene) && strtotime($vardiAhavalData->time_of_departure_from_scene)) {
+                    $depTime = date('H:i:s', strtotime($vardiAhavalData->time_of_departure_from_scene));
+                } elseif (!empty($actionTakenData->vehicle_departure_from_scene_time) && strtotime($actionTakenData->vehicle_departure_from_scene_time)) {
+                    $depTime = date('H:i:s', strtotime($actionTakenData->vehicle_departure_from_scene_time));
+                }
+            @endphp
+            <tr>
+                <th>घटनास्थळावरून निघाल्याची तारीख</th>
+                <td>:- {{ $depDate ?? '-' }}</td>
             </tr>
             <tr>
                 <th>घटनास्थळावरून निघाल्याची वेळ</th>
-                <td>:- @if(isset($vardiAhavalData->time_of_departure_from_scene)) {{date('H-i-s', strtotime($vardiAhavalData->time_of_departure_from_scene))}} @endif</td>
+                <td>:- {{ $depTime ?? '-' }}</td>
+            </tr>
+            @if(!empty($vardiAhavalData->vardi_return_time) || !empty($actionTakenData->vehicle_arrival_at_center_time))
+            <tr>
+                <th>घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ</th>
+                <td>:- {{ $vardiAhavalData->vardi_return_time ?? (!empty($actionTakenData->vehicle_arrival_at_center_time) ? date('H:i:s', strtotime($actionTakenData->vehicle_arrival_at_center_time)) : '-') }}</td>
+            </tr>
+            @endif
+            <tr>
+                <th>एकुण काम केलेली वेळ</th>
+                <td>:- {{ $vardiAhavalData->total_time ?? '-' }}</td>
             </tr>
             <tr>
-                <th>एकुण वेळ</th>
-                <td>:- @if(isset($vardiAhavalData->total_time)) {{$vardiAhavalData->total_time}} @endif</td>
+                <th>तास / मिनिटे</th>
+                <td>:- {{ $vardiAhavalData->total_hour ?? '-' }}</td>
             </tr>
+            @if(!empty($vardiAhavalData->vardi_total_distance) || !empty($actionTakenData->total_distance))
             <tr>
-                <th>एकुण तास</th>
-                <td>:- @if(isset($vardiAhavalData->total_hour)) {{$vardiAhavalData->total_hour}} @endif</td>
+                <th>एकूण अंतर</th>
+                <td>:- {{ $vardiAhavalData->vardi_total_distance ?? $actionTakenData->total_distance }} कि.मी</td>
             </tr>
+            @endif
+            @if(!empty($vardiAhavalData->vardi_pump_run) || !empty($actionTakenData->pumping_hours))
+            <tr>
+                <th>पंप चालविलेला तास</th>
+                <td>:- {{ $vardiAhavalData->vardi_pump_run ?? $actionTakenData->pumping_hours }} तास</td>
+            </tr>
+            @endif
             <tr>
                 <th>पनवेल महानगरपालिकेच्या हद्दीत आहे का ?</th>
                 <td>:- 
                     @if($vardiAhavalData->is_in_panvel == "No")
                         नाही 
                     @else
-                        हो
+                        होय
                     @endif
                 </td>
             </tr>
-            {{-- <tr>
-                <th>हद्दीत नसल्यास पत्ता </th>
-                <td>:- 
-                    @if($vardiAhavalData->is_in_panvel == "No")
-                        {{$vardiAhavalData->address}}
-                    @else
-                        -
-                    @endif
-                </td>
-            </tr> --}}
         </table>
 
         <hr>
