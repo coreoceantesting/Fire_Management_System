@@ -686,7 +686,7 @@
                           <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_at_center_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_at_center_time))}}</td>
                           {{-- <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_time))}}</td> --}}
                           <td>{{$actionTakenData->total_distance}} कि .मी </td>
-                          <td>{{$actionTakenData->pumping_hours}} कि .मी </td>
+                          <td>{{$actionTakenData->pumping_hours}} @if(!empty($actionTakenData->pumping_hours) && !str_contains($actionTakenData->pumping_hours, 'तास')) तास @endif</td>
                           {{-- <td>{{$actionTakenData->center_name}}</td> --}}
                         </tr>
                         @foreach($additionalHelpDetails as $data)
@@ -699,7 +699,7 @@
                             <td>{{date('Y-m-d', strtotime($data->vehicle_return_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_time))}}</td>
                             <td>{{date('Y-m-d', strtotime($data->vehicle_return_to_center_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_to_center_time))}}</td>
                             <td>{{$data->total_distance}} कि .मी </td>
-                            <td>{{$data->pumping_hours}} कि .मी </td>
+                            <td>{{$data->pumping_hours}} @if(!empty($data->pumping_hours) && !str_contains($data->pumping_hours, 'तास')) तास @endif</td>
                         </tr>
                         @endforeach
                       </tbody>

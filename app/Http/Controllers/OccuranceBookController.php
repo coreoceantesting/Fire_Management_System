@@ -225,21 +225,55 @@ class OccuranceBookController extends Controller
 
     public function slip_details($slipId)
     {
-        // Fetch slip details based on $slipId
-        // $slip = DB::table('slips')->select('slip_date','caller_name','caller_mobile_no','incident_location_address','land_mark','incident_reason','slip_status')->where('slip_id',$slipId)->first();
+        // Fetch slip details based on $slipId along with slip_action_form data
         $slip_details = DB::table('slips')
-            ->select('slips.slip_id', 'slips.caller_name', 'slips.caller_mobile_no', 'slips.incident_location_address', 'slip_action_form.call_time', 'slip_action_form.vehicle_departure_time', 'slip_action_form.vehicle_arrival_time', 'slip_action_form.vehicle_departure_from_scene_time', 'slip_action_form.vehicle_arrival_at_center_time')
-            ->join('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
+            ->select(
+                'slips.slip_id',
+                'slips.slip_date',
+                'slips.caller_name',
+                'slips.caller_mobile_no',
+                'slips.incident_location_address',
+                'slips.land_mark',
+                'slips.incident_reason',
+                'slip_action_form.slip_action_form_id',
+                'slip_action_form.call_time',
+                'slip_action_form.center_name',
+                'slip_action_form.type_of_vehicle',
+                'slip_action_form.number_of_vehicle',
+                'slip_action_form.vehicle_departure_time',
+                'slip_action_form.vehicle_arrival_time',
+                'slip_action_form.vehicle_departure_from_scene_time',
+                'slip_action_form.vehicle_arrival_at_center_time',
+                'slip_action_form.total_distance',
+                'slip_action_form.pumping_hours'
+            )
+            ->leftJoin('slip_action_form', 'slips.slip_id', '=', 'slip_action_form.slip_id')
             ->where('slips.slip_id', $slipId)
+            ->orderBy('slip_action_form.slip_action_form_id', 'desc')
             ->first();
+
+        // Fetch worker details from on_field_worker_details with designation
+        $worker_details = [];
+        if ($slip_details && !empty($slip_details->slip_action_form_id)) {
+            $worker_details = DB::table('on_field_worker_details')
+                ->select(
+                    'on_field_worker_details.worker_name',
+                    'on_field_worker_details.worker_designation',
+                    'designations.designation_name'
+                )
+                ->leftJoin('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+                ->where('on_field_worker_details.slip_action_form_id', $slip_details->slip_action_form_id)
+                ->get();
+        }
 
         $response = [
             'result' => 1,
             'slip_data' => $slip_details,
+            'worker_data' => $worker_details,
         ];
 
-        // Return a view or JSON response with slip details
-        return $response;
+        // Return JSON response with slip details and worker details
+        return response()->json($response);
     }
 
     public function store_vardi_ahaval(Request $request)

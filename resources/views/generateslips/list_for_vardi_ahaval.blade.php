@@ -1409,6 +1409,45 @@
 
 <!-- get slip data -->
 <script>
+    function formatDateTimeLocal(str) {
+        if (!str) return '';
+        str = String(str).trim();
+        let dmyMatch = str.match(/^(\d{2})[-/](\d{2})[-/](\d{4})[T ](\d{2}):(\d{2})/);
+        if (dmyMatch) {
+            return `${dmyMatch[3]}-${dmyMatch[2]}-${dmyMatch[1]}T${dmyMatch[4]}:${dmyMatch[5]}`;
+        }
+        let ymdMatch = str.match(/^(\d{4})[-/](\d{2})[-/](\d{2})[T ](\d{2}):(\d{2})/);
+        if (ymdMatch) {
+            return `${ymdMatch[1]}-${ymdMatch[2]}-${ymdMatch[3]}T${ymdMatch[4]}:${ymdMatch[5]}`;
+        }
+        let d = new Date(str);
+        if (!isNaN(d.getTime())) {
+            let year = d.getFullYear();
+            let month = String(d.getMonth() + 1).padStart(2, '0');
+            let day = String(d.getDate()).padStart(2, '0');
+            let hours = String(d.getHours()).padStart(2, '0');
+            let minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+        return '';
+    }
+
+    function formatTime(str) {
+        if (!str) return '';
+        str = String(str).trim();
+        let timeMatch = str.match(/(?:[T ]|^)(\d{2}):(\d{2})/);
+        if (timeMatch) {
+            return `${timeMatch[1]}:${timeMatch[2]}`;
+        }
+        let d = new Date(str);
+        if (!isNaN(d.getTime())) {
+            let hours = String(d.getHours()).padStart(2, '0');
+            let minutes = String(d.getMinutes()).padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+        return '';
+    }
+
     $("#buttons-datatables").on("click", ".edit-element", function(e) {
         e.preventDefault();
         var model_id = $(this).attr("data-id");
@@ -1422,32 +1461,114 @@
             },
             success: function(data, textStatus, jqXHR) {
                 editFormBehaviour();
-                if (!data.error) {
-                    // console.log(data);
-                    $("#editForm input[name='edit_model_id_new']").val(data.slip_data.slip_id);
-                    $("#editForm input[name='vardi_name']").val(data.slip_data.caller_name);
-                    if (data.slip_data.vehicle_departure_from_scene_time) {
-                        let depTime = data.slip_data.vehicle_departure_from_scene_time.replace(' ', 'T').slice(0, 16);
-                        $("#editForm input[name='time_of_departure_from_scene']").val(depTime);
-                    } else if (data.slip_data.vehicle_arrival_time) {
-                        let arrTime = data.slip_data.vehicle_arrival_time.replace(' ', 'T').slice(0, 16);
-                        $("#editForm input[name='time_of_departure_from_scene']").val(arrTime);
+                if (!data.error && data.slip_data) {
+                    var slip = data.slip_data;
+                    var workers = data.worker_data || [];
+
+                    // 1. Slip ID
+                    $("#editForm input[name='edit_model_id_new']").val(slip.slip_id || '');
+
+                    // 2. Caller / Vardi Details
+                    $("#editForm input[name='vardi_name']").val(slip.caller_name || '');
+                    $("#editForm input[name='vardi_contact_no']").val(slip.caller_mobile_no || '');
+                    $("#editForm input[name='vardi_place']").val(slip.incident_location_address || '');
+
+                    if (slip.incident_reason) {
+                        $("#editForm input[name='vardi_approximate']").val(slip.incident_reason);
+
+                        // Also attempt matching vardi_uniform_type dropdown if present
+                        let reason = slip.incident_reason.trim();
+                        if ($("#editForm select[name='vardi_uniform_type'] option[value='" + reason + "']").length > 0) {
+                            $("#editForm select[name='vardi_uniform_type']").val(reason);
+                        } else if (reason.toLowerCase().includes('fire') || reason.includes('आग')) {
+                            $("#editForm select[name='vardi_uniform_type']").val('आग');
+                        }
                     }
 
+                    // 3. Call Date & Time -> vardi_time (कॉल तारीख आणि वेळ)
+                    let callTimeFormatted = formatDateTimeLocal(slip.call_time || slip.slip_date);
+                    if (callTimeFormatted) {
+                        $("#editForm input[name='vardi_time']").val(callTimeFormatted);
+                    }
 
-                    // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
-                    // $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
-                    // $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
-                    // $("#editForm input[name='time_of_arrival_at_the_scene']").val(data.slip_data.vehicle_arrival_time);
-                    // const dateTimeParts = data.slip_data.vehicle_departure_from_scene_time.split(' ');
-                    // $("#editForm input[name='date_of_departure_from_scene']").val(dateTimeParts[0]);
-                    // $("#editForm input[name='time_of_departure_from_scene']").val(dateTimeParts[1]);
-                } else {
+                    // 4. Vehicle Departure Date & Time -> first_vehicle_departing_date_time (वाहन सुटण्याची तारीख आणि वेळ)
+                    let depTimeFormatted = formatDateTimeLocal(slip.vehicle_departure_time);
+                    if (depTimeFormatted) {
+                        $("#editForm input[name='first_vehicle_departing_date_time']").val(depTimeFormatted);
+                    }
+
+                    // 5. Vehicle Arrival DateTime -> time_of_arrival_at_the_scene (वाहन घटनास्थळी पोहोचण्याची वेळ - type="time")
+                    let arrTimeFormatted = formatTime(slip.vehicle_arrival_time);
+                    if (arrTimeFormatted) {
+                        $("#editForm input[name='time_of_arrival_at_the_scene']").val(arrTimeFormatted);
+                    }
+
+                    // 6. Time of departure from scene -> time_of_departure_from_scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ - type="datetime-local")
+                    let depSceneFormatted = formatDateTimeLocal(slip.vehicle_departure_from_scene_time);
+                    if (depSceneFormatted) {
+                        $("#editForm input[name='time_of_departure_from_scene']").val(depSceneFormatted);
+                    }
+
+                    // 7. Time of departure from scene -> vardi_leaving_time (घटनास्थळ सोडल्याची वेळ - type="time")
+                    let leavingTimeFormatted = formatTime(slip.vehicle_departure_from_scene_time);
+                    if (leavingTimeFormatted) {
+                        $("#editForm input[name='vardi_leaving_time']").val(leavingTimeFormatted);
+                    }
+
+                    // 8. Time of arrival at center -> vardi_return_time (केंद्रामध्ये आल्याची वेळ / घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ - type="time")
+                    let returnTimeFormatted = formatTime(slip.vehicle_arrival_at_center_time);
+                    if (returnTimeFormatted) {
+                        $("#editForm input[name='vardi_return_time']").val(returnTimeFormatted);
+                    }
+
+                    // 9. Total Distance In KM -> distance, vardi_km, vardi_total_distance (एकूण अतंर)
+                    if (slip.total_distance !== null && slip.total_distance !== undefined && slip.total_distance !== '') {
+                        $("#editForm input[name='distance']").val(slip.total_distance);
+                        $("#editForm input[name='vardi_km']").val(slip.total_distance);
+                        $("#editForm input[name='vardi_total_distance']").val(slip.total_distance);
+                    }
+
+                    // 10. Pumping hours -> vardi_pump_run (पंपिंग तास)
+                    if (slip.pumping_hours !== null && slip.pumping_hours !== undefined && slip.pumping_hours !== '') {
+                        $("#editForm input[name='vardi_pump_run']").val(slip.pumping_hours);
+                    }
+
+                    // 11. Staff Name & Staff Details (कर्मचाऱ्यांचे नाव आणि तपशील)
+                    if (workers && workers.length > 0) {
+                        let officerWorker = workers.find(function(w) {
+                            let des = (w.designation_name || '').toLowerCase();
+                            return des.includes('officer') || des.includes('अधिकारी') || des.includes('lead') || des.includes('प्रमुख');
+                        }) || workers[0];
+
+                        // officer_name_present_at_last_moment only allows letters and spaces (regex: /^[\p{L}\p{M}\s]+$/u)
+                        let officerCleanName = (officerWorker.worker_name || '').trim();
+                        $("#editForm input[name='officer_name_present_at_last_moment']").val(officerCleanName);
+
+                        let officerWithTitle = officerWorker.designation_name
+                            ? (officerWorker.designation_name + ' - ' + officerWorker.worker_name)
+                            : officerWorker.worker_name;
+                        $("#editForm input[name='vardi_officer_name']").val(officerWithTitle);
+
+                        // Employee - Title / Name
+                        let otherWorkers = workers.filter(function(w) { return w !== officerWorker; });
+                        let empList = (otherWorkers.length > 0 ? otherWorkers : workers).map(function(w) {
+                            return w.designation_name ? (w.designation_name + ' - ' + w.worker_name) : w.worker_name;
+                        });
+                        $("#editForm input[name='vardi_employee_name']").val(empList.join(', '));
+                    }
+
+                    // 12. Calculate total time worked on site
+                    if (typeof updateTotalTime === 'function') {
+                        updateTotalTime();
+                    }
+                    $("#editForm input[name='first_vehicle_departing_date_time']").trigger('change');
+                    $("#editForm input[name='time_of_departure_from_scene']").trigger('change');
+                } else if (data.error) {
                     alert(data.error);
                 }
             },
             error: function(error, jqXHR, textStatus, errorThrown) {
-                alert("Some thing went wrong");
+                alert("Something went wrong");
             },
         });
     });
