@@ -614,10 +614,22 @@
     firstVehicleDeparting.addEventListener('change', updateTotalTime);
     timeOfDeparture.addEventListener('change', updateTotalTime);
 
+    function format24HourTime(d) {
+        if (!d || isNaN(d.getTime())) return '';
+        let hours = String(d.getHours()).padStart(2, '0');
+        let minutes = String(d.getMinutes()).padStart(2, '0');
+        let seconds = String(d.getSeconds()).padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
+    }
+
     function updateTotalTime() {
+        if (!firstVehicleDeparting || !timeOfDeparture || !firstVehicleDeparting.value || !timeOfDeparture.value) return;
+
         // Get the values from the input fields
         var startTime = new Date(firstVehicleDeparting.value);
-        var endTime = new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
+        var endTime = timeOfDeparture.value.includes('T')
+            ? new Date(timeOfDeparture.value)
+            : new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
 
         // Check if end date is earlier than start date (yesterday's start date and today's end date)
         if (endTime < startTime) {
@@ -628,24 +640,33 @@
         var dateObject = new Date(startTime);
         var dateObjectTwo = new Date(endTime);
 
-        // Get the time in HH:mm:ss format
-        var timeone = dateObject.toLocaleTimeString('en-US', { hour12: false });
-        var timetwo = dateObjectTwo.toLocaleTimeString('en-US', { hour12: false });
+        // Strict 24-hour format without AM/PM
+        var timeone = format24HourTime(dateObject);
+        var timetwo = format24HourTime(dateObjectTwo);
 
         // Calculate the time difference
         var timeDiff = endTime - startTime;
-        var hours = Math.floor(timeDiff / 3600000); // 1 hour = 3600000 milliseconds
 
         // Display the values in the total time and total hour input fields
-        totalTimeInput.value = timeone + ' To ' + timetwo;
-        totalHourInput.value = formatTimeDifference(timeDiff);
+        if (totalTimeInput && !isNaN(timeDiff) && timeDiff >= 0) {
+            totalTimeInput.value = timeone + ' To ' + timetwo;
+        }
+        if (totalHourInput && !isNaN(timeDiff) && timeDiff >= 0) {
+            var formattedDiff = formatTimeDifference(timeDiff);
+            totalHourInput.value = formattedDiff;
+
+            var pumpRunInput = document.getElementById('vardi_pump_run');
+            if (pumpRunInput && !pumpRunInput.value) {
+                pumpRunInput.value = formattedDiff;
+            }
+        }
     }
 
     function formatTimeDifference(timeDiff) {
-        // Format the time difference in HH:mm format
+        // Format the time difference in HH:mm 24-hour format
         var hours = Math.floor(timeDiff / 3600000);
         var minutes = Math.floor((timeDiff % 3600000) / 60000);
-        return hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+        return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
     }
 </script>
 

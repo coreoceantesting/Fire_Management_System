@@ -252,6 +252,80 @@ class OccuranceBookController extends Controller
             ->orderBy('slip_action_form.slip_action_form_id', 'desc')
             ->first();
 
+        if ($slip_details) {
+            // Ensure pumping_hours is retrieved if available in any related action record
+            if (empty($slip_details->pumping_hours)) {
+                $actForm = DB::table('slip_action_form')
+                    ->where('slip_id', $slipId)
+                    ->whereNotNull('pumping_hours')
+                    ->where('pumping_hours', '!=', '')
+                    ->orderBy('slip_action_form_id', 'desc')
+                    ->first();
+                if ($actForm && !empty($actForm->pumping_hours)) {
+                    $slip_details->pumping_hours = $actForm->pumping_hours;
+                }
+            }
+
+            if (empty($slip_details->pumping_hours)) {
+                $addHelp = DB::table('additional_help_details')
+                    ->where('slip_id', $slipId)
+                    ->whereNotNull('pumping_hours')
+                    ->where('pumping_hours', '!=', '')
+                    ->first();
+                if ($addHelp && !empty($addHelp->pumping_hours)) {
+                    $slip_details->pumping_hours = $addHelp->pumping_hours;
+                }
+            }
+
+            if (empty($slip_details->pumping_hours)) {
+                $prevVardi = DB::table('vardi_ahaval_details')
+                    ->where('slip_id', $slipId)
+                    ->whereNotNull('vardi_pump_run')
+                    ->where('vardi_pump_run', '!=', '')
+                    ->first();
+                if ($prevVardi && !empty($prevVardi->vardi_pump_run)) {
+                    $slip_details->pumping_hours = $prevVardi->vardi_pump_run;
+                }
+            }
+
+            // Ensure vehicle_arrival_at_center_time is retrieved from any related records
+            if (empty($slip_details->vehicle_arrival_at_center_time)) {
+                $actCenter = DB::table('slip_action_form')
+                    ->where('slip_id', $slipId)
+                    ->whereNotNull('vehicle_arrival_at_center_time')
+                    ->where('vehicle_arrival_at_center_time', '!=', '')
+                    ->orderBy('slip_action_form_id', 'desc')
+                    ->first();
+                if ($actCenter && !empty($actCenter->vehicle_arrival_at_center_time)) {
+                    $slip_details->vehicle_arrival_at_center_time = $actCenter->vehicle_arrival_at_center_time;
+                }
+            }
+
+            if (empty($slip_details->vehicle_arrival_at_center_time)) {
+                $addHelpCenter = DB::table('additional_help_details')
+                    ->where('slip_id', $slipId)
+                    ->where(function($q) {
+                        $q->whereNotNull('vehicle_return_to_center_time')
+                          ->orWhereNotNull('vehicle_return_time');
+                    })
+                    ->first();
+                if ($addHelpCenter) {
+                    $slip_details->vehicle_arrival_at_center_time = $addHelpCenter->vehicle_return_to_center_time ?? $addHelpCenter->vehicle_return_time;
+                }
+            }
+
+            if (empty($slip_details->vehicle_arrival_at_center_time)) {
+                $vardiCenter = DB::table('vardi_ahaval_details')
+                    ->where('slip_id', $slipId)
+                    ->whereNotNull('vardi_return_time')
+                    ->where('vardi_return_time', '!=', '')
+                    ->first();
+                if ($vardiCenter && !empty($vardiCenter->vardi_return_time)) {
+                    $slip_details->vehicle_arrival_at_center_time = $vardiCenter->vardi_return_time;
+                }
+            }
+        }
+
         // Fetch worker details from on_field_worker_details with designation
         $worker_details = [];
         if ($slip_details && !empty($slip_details->slip_action_form_id)) {
@@ -263,6 +337,19 @@ class OccuranceBookController extends Controller
                 )
                 ->leftJoin('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
                 ->where('on_field_worker_details.slip_action_form_id', $slip_details->slip_action_form_id)
+                ->get();
+        }
+
+        if (empty($worker_details) || count($worker_details) === 0) {
+            $worker_details = DB::table('on_field_worker_details')
+                ->select(
+                    'on_field_worker_details.worker_name',
+                    'on_field_worker_details.worker_designation',
+                    'designations.designation_name'
+                )
+                ->leftJoin('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+                ->join('slip_action_form', 'on_field_worker_details.slip_action_form_id', '=', 'slip_action_form.slip_action_form_id')
+                ->where('slip_action_form.slip_id', $slipId)
                 ->get();
         }
 

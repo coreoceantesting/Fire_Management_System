@@ -484,15 +484,15 @@
                             <div class="col-md-4">
                                 <label class="col-form-label" for="time_of_arrival_at_the_scene">Vardi's Time to reach the scene ( घटना
                                     स्थळी पोहोचण्याची वेळ ) <span class="text-danger">*</span></label>
-                                <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="time"
-                                    placeholder="Enter Vardi's Time to reach the scene">
+                                <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="text"
+                                    placeholder="HH:mm (24 तास वेळ, उदा. 01:13)">
                                 <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_leaving_time">Vardi's Time of leaving the
                                     scene ( घटनास्थळ सोडल्याची वेळ )<span class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_leaving_time" name="vardi_leaving_time"
-                                    type="time" placeholder="Enter Vardi's Time of leaving the scene">
+                                    type="text" placeholder="HH:mm (24 तास वेळ, उदा. 01:37)">
                                 <span class="text-danger error-text vardi_leaving_time_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -500,8 +500,8 @@
                                     fire station from the scene ( घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ )<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_return_time" name="vardi_return_time"
-                                    type="time"
-                                    placeholder="Enter Vardi's Time of return to the fire station from the scene">
+                                    type="text"
+                                    placeholder="HH:mm (24 तास वेळ, उदा. 02:05)">
                                 <span class="text-danger error-text vardi_return_time_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -1409,17 +1409,44 @@
 
 <!-- get slip data -->
 <script>
+    function parse24HourParts(hStr, mStr, ampm) {
+        let h = parseInt(hStr, 10);
+        let m = String(mStr).padStart(2, '0');
+        if (ampm) {
+            let p = ampm.toUpperCase().trim();
+            if (p === 'PM' && h < 12) h += 12;
+            if (p === 'AM' && h === 12) h = 0;
+        }
+        return {
+            h: String(h).padStart(2, '0'),
+            m: m
+        };
+    }
+
     function formatDateTimeLocal(str) {
         if (!str) return '';
         str = String(str).trim();
-        let dmyMatch = str.match(/^(\d{2})[-/](\d{2})[-/](\d{4})[T ](\d{2}):(\d{2})/);
+
+        // Match DD-MM-YYYY or DD/MM/YYYY with optional seconds and optional AM/PM
+        let dmyMatch = str.match(/^(\d{1,2})[-/](\d{1,2})[-/](\d{4})[T ](\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(AM|PM|am|pm))?/i);
         if (dmyMatch) {
-            return `${dmyMatch[3]}-${dmyMatch[2]}-${dmyMatch[1]}T${dmyMatch[4]}:${dmyMatch[5]}`;
+            let day = String(dmyMatch[1]).padStart(2, '0');
+            let month = String(dmyMatch[2]).padStart(2, '0');
+            let year = dmyMatch[3];
+            let t = parse24HourParts(dmyMatch[4], dmyMatch[5], dmyMatch[6]);
+            return `${year}-${month}-${day}T${t.h}:${t.m}`;
         }
-        let ymdMatch = str.match(/^(\d{4})[-/](\d{2})[-/](\d{2})[T ](\d{2}):(\d{2})/);
+
+        // Match YYYY-MM-DD or YYYY/MM/DD with optional seconds and optional AM/PM
+        let ymdMatch = str.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})[T ](\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(AM|PM|am|pm))?/i);
         if (ymdMatch) {
-            return `${ymdMatch[1]}-${ymdMatch[2]}-${ymdMatch[3]}T${ymdMatch[4]}:${ymdMatch[5]}`;
+            let year = ymdMatch[1];
+            let month = String(ymdMatch[2]).padStart(2, '0');
+            let day = String(ymdMatch[3]).padStart(2, '0');
+            let t = parse24HourParts(ymdMatch[4], ymdMatch[5], ymdMatch[6]);
+            return `${year}-${month}-${day}T${t.h}:${t.m}`;
         }
+
         let d = new Date(str);
         if (!isNaN(d.getTime())) {
             let year = d.getFullYear();
@@ -1435,10 +1462,21 @@
     function formatTime(str) {
         if (!str) return '';
         str = String(str).trim();
-        let timeMatch = str.match(/(?:[T ]|^)(\d{2}):(\d{2})/);
-        if (timeMatch) {
-            return `${timeMatch[1]}:${timeMatch[2]}`;
+
+        if (str.includes('T')) {
+            let parts = str.split('T');
+            if (parts[1]) str = parts[1];
+        } else if (str.includes(' ')) {
+            let parts = str.split(' ');
+            if (parts[1]) str = parts[1] + (parts[2] ? ' ' + parts[2] : '');
         }
+
+        let timeMatch = str.match(/(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(AM|PM|am|pm))?/i);
+        if (timeMatch) {
+            let t = parse24HourParts(timeMatch[1], timeMatch[2], timeMatch[3]);
+            return `${t.h}:${t.m}`;
+        }
+
         let d = new Date(str);
         if (!isNaN(d.getTime())) {
             let hours = String(d.getHours()).padStart(2, '0');
@@ -1446,6 +1484,14 @@
             return `${hours}:${minutes}`;
         }
         return '';
+    }
+
+    function format24HourTime(d) {
+        if (!d || isNaN(d.getTime())) return '';
+        let hours = String(d.getHours()).padStart(2, '0');
+        let minutes = String(d.getMinutes()).padStart(2, '0');
+        let seconds = String(d.getSeconds()).padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`;
     }
 
     $("#buttons-datatables").on("click", ".edit-element", function(e) {
@@ -1485,52 +1531,57 @@
                         }
                     }
 
-                    // 3. Call Date & Time -> vardi_time (कॉल तारीख आणि वेळ)
+                    // 3. Call Date & Time -> vardi_time (कॉल तारीख आणि वेळ - 24 hr)
                     let callTimeFormatted = formatDateTimeLocal(slip.call_time || slip.slip_date);
                     if (callTimeFormatted) {
                         $("#editForm input[name='vardi_time']").val(callTimeFormatted);
                     }
 
-                    // 4. Vehicle Departure Date & Time -> first_vehicle_departing_date_time (वाहन सुटण्याची तारीख आणि वेळ)
+                    // 4. Vehicle Departure Date & Time -> first_vehicle_departing_date_time (वाहन सुटण्याची तारीख आणि वेळ - 24 hr)
                     let depTimeFormatted = formatDateTimeLocal(slip.vehicle_departure_time);
                     if (depTimeFormatted) {
                         $("#editForm input[name='first_vehicle_departing_date_time']").val(depTimeFormatted);
                     }
 
-                    // 5. Vehicle Arrival DateTime -> time_of_arrival_at_the_scene (वाहन घटनास्थळी पोहोचण्याची वेळ - type="time")
+                    // 5. Vehicle Arrival DateTime -> time_of_arrival_at_the_scene (वाहन घटनास्थळी पोहोचण्याची वेळ - 24 hr)
                     let arrTimeFormatted = formatTime(slip.vehicle_arrival_time);
                     if (arrTimeFormatted) {
-                        $("#editForm input[name='time_of_arrival_at_the_scene']").val(arrTimeFormatted);
+                        $("#editForm input[name='time_of_arrival_at_the_scene'], #editForm #time_of_arrival_at_the_scene").val(arrTimeFormatted);
                     }
 
-                    // 6. Time of departure from scene -> time_of_departure_from_scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ - type="datetime-local")
+                    // 6. Time of departure from scene -> time_of_departure_from_scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ - 24 hr)
                     let depSceneFormatted = formatDateTimeLocal(slip.vehicle_departure_from_scene_time);
                     if (depSceneFormatted) {
                         $("#editForm input[name='time_of_departure_from_scene']").val(depSceneFormatted);
                     }
 
-                    // 7. Time of departure from scene -> vardi_leaving_time (घटनास्थळ सोडल्याची वेळ - type="time")
+                    // 7. Time of departure from scene -> vardi_leaving_time (घटनास्थळ सोडल्याची वेळ - 24 hr)
                     let leavingTimeFormatted = formatTime(slip.vehicle_departure_from_scene_time);
                     if (leavingTimeFormatted) {
-                        $("#editForm input[name='vardi_leaving_time']").val(leavingTimeFormatted);
+                        $("#editForm input[name='vardi_leaving_time'], #editForm #vardi_leaving_time").val(leavingTimeFormatted);
                     }
 
-                    // 8. Time of arrival at center -> vardi_return_time (केंद्रामध्ये आल्याची वेळ / घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ - type="time")
-                    let returnTimeFormatted = formatTime(slip.vehicle_arrival_at_center_time);
+                    // 8. Time of arrival at center -> vardi_return_time (केंद्रामध्ये आल्याची वेळ / घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ - 24 hr)
+                    let rawReturnTime = slip.vehicle_arrival_at_center_time || slip.vehicle_return_to_center_time || slip.vehicle_return_time || slip.vardi_return_time;
+                    let returnTimeFormatted = formatTime(rawReturnTime);
                     if (returnTimeFormatted) {
-                        $("#editForm input[name='vardi_return_time']").val(returnTimeFormatted);
+                        $("#editForm input[name='vardi_return_time'], #editForm #vardi_return_time").val(returnTimeFormatted);
                     }
 
                     // 9. Total Distance In KM -> distance, vardi_km, vardi_total_distance (एकूण अतंर)
                     if (slip.total_distance !== null && slip.total_distance !== undefined && slip.total_distance !== '') {
-                        $("#editForm input[name='distance']").val(slip.total_distance);
-                        $("#editForm input[name='vardi_km']").val(slip.total_distance);
-                        $("#editForm input[name='vardi_total_distance']").val(slip.total_distance);
+                        $("#editForm input[name='distance'], #editForm #distance").val(slip.total_distance);
+                        $("#editForm input[name='vardi_km'], #editForm #vardi_km").val(slip.total_distance);
+                        $("#editForm input[name='vardi_total_distance'], #editForm #vardi_total_distance").val(slip.total_distance);
                     }
 
                     // 10. Pumping hours -> vardi_pump_run (पंपिंग तास)
-                    if (slip.pumping_hours !== null && slip.pumping_hours !== undefined && slip.pumping_hours !== '') {
-                        $("#editForm input[name='vardi_pump_run']").val(slip.pumping_hours);
+                    var $pumpInput = $("#editForm input[name='vardi_pump_run'], #editForm #vardi_pump_run");
+                    if (slip.pumping_hours !== null && slip.pumping_hours !== undefined && String(slip.pumping_hours).trim() !== '') {
+                        $pumpInput.val(slip.pumping_hours);
+                        if ($pumpInput[0]) $pumpInput[0].dataset.autoCalculated = 'false';
+                    } else {
+                        if ($pumpInput[0]) $pumpInput[0].dataset.autoCalculated = 'true';
                     }
 
                     // 11. Staff Name & Staff Details (कर्मचाऱ्यांचे नाव आणि तपशील)
@@ -1541,23 +1592,24 @@
                         }) || workers[0];
 
                         // officer_name_present_at_last_moment only allows letters and spaces (regex: /^[\p{L}\p{M}\s]+$/u)
-                        let officerCleanName = (officerWorker.worker_name || '').trim();
-                        $("#editForm input[name='officer_name_present_at_last_moment']").val(officerCleanName);
+                        // Strip dots (e.g. from "Mr.") and symbols so validation does not fail
+                        let officerCleanName = (officerWorker.worker_name || '').replace(/[^\p{L}\p{M}\s]/gu, '').replace(/\s+/g, ' ').trim();
+                        $("#editForm input[name='officer_name_present_at_last_moment'], #editForm #officer_name_present_at_last_moment").val(officerCleanName);
 
                         let officerWithTitle = officerWorker.designation_name
                             ? (officerWorker.designation_name + ' - ' + officerWorker.worker_name)
                             : officerWorker.worker_name;
-                        $("#editForm input[name='vardi_officer_name']").val(officerWithTitle);
+                        $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val(officerWithTitle);
 
                         // Employee - Title / Name
                         let otherWorkers = workers.filter(function(w) { return w !== officerWorker; });
                         let empList = (otherWorkers.length > 0 ? otherWorkers : workers).map(function(w) {
                             return w.designation_name ? (w.designation_name + ' - ' + w.worker_name) : w.worker_name;
                         });
-                        $("#editForm input[name='vardi_employee_name']").val(empList.join(', '));
+                        $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val(empList.join(', '));
                     }
 
-                    // 12. Calculate total time worked on site
+                    // 12. Calculate total time worked on site (24-hour format)
                     if (typeof updateTotalTime === 'function') {
                         updateTotalTime();
                     }
@@ -1745,6 +1797,13 @@
     var timeOfDeparture = document.getElementById('time_of_departure_from_scene');
     var totalTimeInput = document.getElementById('total_time');
     var totalHourInput = document.getElementById('total_hour');
+    var pumpRunInput = document.getElementById('vardi_pump_run');
+
+    if (pumpRunInput) {
+        pumpRunInput.addEventListener('input', function() {
+            this.dataset.autoCalculated = 'false';
+        });
+    }
 
     // Attach an event listener to detect changes in the input fields
     if (firstVehicleDeparting && timeOfDeparture) {
@@ -1772,20 +1831,29 @@
 
         var dateObject = new Date(startTime);
         var dateObjectTwo = new Date(endTime);
-        var timeone = dateObject.toLocaleTimeString('en-US', { hour12: false });
-        var timetwo = dateObjectTwo.toLocaleTimeString('en-US', { hour12: false });
+
+        // Strict 24-hour format without AM/PM
+        var timeone = format24HourTime(dateObject);
+        var timetwo = format24HourTime(dateObjectTwo);
 
         if (totalTimeInput && !isNaN(timeDiff) && timeDiff >= 0) {
             totalTimeInput.value = timeone + ' To ' + timetwo;
         }
 
         if (totalHourInput && !isNaN(timeDiff) && timeDiff >= 0) {
-            totalHourInput.value = formatTimeDifference(timeDiff);
+            var formattedDiff = formatTimeDifference(timeDiff);
+            totalHourInput.value = formattedDiff;
+
+            // Auto-update Pumping hours (पंपिंग तास) if not manually specified
+            if (pumpRunInput && (!pumpRunInput.value || pumpRunInput.dataset.autoCalculated === 'true')) {
+                pumpRunInput.value = formattedDiff;
+                pumpRunInput.dataset.autoCalculated = 'true';
+            }
         }
     }
 
     function formatTimeDifference(timeDiff) {
-        // Format the time difference in HH:mm format
+        // Format the time difference in HH:mm 24-hour format
         var hours = Math.floor(timeDiff / 3600000);
         var minutes = Math.floor((timeDiff % 3600000) / 60000);
         return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
