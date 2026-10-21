@@ -336,10 +336,6 @@ class OccuranceBookController extends Controller
                     ? date('Y-m-d H:i:s', strtotime($request->input('time_of_departure_from_scene')))
                     : null);
 
-            $timeArrivalAtScene = !empty($request->input('time_arrival_at_scene'))
-                ? date('Y-m-d H:i:s', strtotime($request->input('time_arrival_at_scene')))
-                : null;
-
             // Store data in the database
             DB::table('vardi_ahaval_details')->insert([
                 'slip_id' => $request->input('edit_model_id_new'),
@@ -351,7 +347,6 @@ class OccuranceBookController extends Controller
                 // 'incident_time' => $request->input('incident_time'),
                 'first_vehicle_departing_date_time' => $firstVehicleDeparting,
                 'time_of_arrival_at_the_scene' => $timeOfArrival,
-                'time_arrival_at_scene' => $timeArrivalAtScene ?? $dateOfDeparture,
                 'distance' => $request->input('distance'),
                 'property_description' => $request->input('property_description'),
                 // 'type_of_fire' => $request->input('type_of_fire'),
@@ -736,6 +731,27 @@ class OccuranceBookController extends Controller
 
             $request->validate($rules, $customMessages);
 
+            $firstVehicleDeparting = !empty($request->input('first_vehicle_departing_date_time'))
+                ? date('Y-m-d H:i:s', strtotime($request->input('first_vehicle_departing_date_time')))
+                : null;
+
+            $timeOfArrival = $request->input('time_of_arrival_at_the_scene');
+            if (!empty($timeOfArrival)) {
+                if (preg_match('/^\d{1,2}:\d{2}(:\d{2})?$/', trim($timeOfArrival))) {
+                    $baseDate = $firstVehicleDeparting ? date('Y-m-d', strtotime($firstVehicleDeparting)) : date('Y-m-d');
+                    $timeOfArrival = date('Y-m-d H:i:s', strtotime($baseDate . ' ' . trim($timeOfArrival)));
+                } else {
+                    $timeOfArrival = date('Y-m-d H:i:s', strtotime($timeOfArrival));
+                }
+            } else {
+                $timeOfArrival = null;
+            }
+
+            $dateOfDeparture = !empty($request->input('date_of_departure_from_scene'))
+                ? date('Y-m-d H:i:s', strtotime($request->input('date_of_departure_from_scene')))
+                : (!empty($request->input('time_of_departure_from_scene'))
+                    ? date('Y-m-d H:i:s', strtotime($request->input('time_of_departure_from_scene')))
+                    : null);
 
             // Store data in the database
             DB::table('vardi_ahaval_details')->where('slip_id', $id)->update([
@@ -745,8 +761,8 @@ class OccuranceBookController extends Controller
                 'owner_name' => $request->input('owner_name'),
                 'vaparkarta_name' => $request->input('vaparkarta_name'),
                 'incident_time' => $request->input('incident_time'),
-                'first_vehicle_departing_date_time' => $request->input('first_vehicle_departing_date_time'),
-                'time_of_arrival_at_the_scene' => $request->input('time_of_arrival_at_the_scene'),
+                'first_vehicle_departing_date_time' => $firstVehicleDeparting,
+                'time_of_arrival_at_the_scene' => $timeOfArrival,
                 'distance' => $request->input('distance'),
                 'property_description' => $request->input('property_description'),
                 'type_of_fire' => $request->input('type_of_fire'),
@@ -758,7 +774,7 @@ class OccuranceBookController extends Controller
                 'space_loss' => $request->input('space_loss'),
                 'property_loss' => $request->input('property_loss'),
                 'officer_name_present_at_last_moment' => $request->input('officer_name_present_at_last_moment'),
-                'date_of_departure_from_scene' => $request->input('date_of_departure_from_scene'),
+                'date_of_departure_from_scene' => $dateOfDeparture,
                 'time_of_departure_from_scene' => $request->input('time_of_departure_from_scene'),
                 'total_time' => $request->input('total_time'),
                 'total_hour' => $request->input('total_hour'),
