@@ -1143,6 +1143,7 @@
                         '</td>';
                     tableHtml += '<td>' + data.slip_action_form_data.number_of_vehicle +
                         '</td>';
+                        // ... (remaining data here)
                     tableHtml += '<td>' + data.slip_action_form_data
                         .vehicle_departure_time + '</td>';
                     tableHtml += '<td>' + data.slip_action_form_data.vehicle_arrival_time +
