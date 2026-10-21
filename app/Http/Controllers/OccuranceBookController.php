@@ -82,84 +82,134 @@ class OccuranceBookController extends Controller
 
     public function store_additional(Request $request)
     {
-        $request->validate([
-            'fire_station' => 'required|array',
-            'no_of_fireman' => 'required|array',
-            'vehicle_no' => 'required|array',
-            'inform_call_time' => 'required|array',
-            'departure_vehicle_datetime' => 'required|array',
-            'vehicle_arrival_datetime' => 'required|array',
-            'vehicle_return_to_firestation_datetime' => 'required|array',
-        ]);
-
-        // Store data in the database
-        foreach ($request->input('fire_station') as $key => $fireStation) {
-            DB::table('additional_help_details')->insert([
-                'slip_id' => $request->input('slip_id'),
-                'center_name' => "पनवेल",
-                'fire_station_name' => $fireStation,
-                'no_of_fireman' => $request->input('no_of_fireman')[$key],
-                'vehicle_number' => $request->input('vehicle_no')[$key],
-                'type_of_vehicle' => $request->input('type_of_vehicle')[$key],
-                'inform_call_time' => $request->input('inform_call_time')[$key],
-                'vehicle_departure_time' => $request->input('departure_vehicle_datetime')[$key],
-                'vehicle_arrival_time' => $request->input('vehicle_arrival_datetime')[$key],
-                'vehicle_return_time' => $request->input('vehicle_return_to_firestation_datetime')[$key],
-                'vehicle_return_to_center_time' => $request->input('vehicle_return_to_center_datetime')[$key],
-                'total_distance' => $request->input('total_distance')[$key],
-                'pumping_hours' => $request->input('pumping_hours')[$key],
-                'created_by' => Auth::user()->id,
-                'created_at' => date('Y-m-d H:i:s'),
+        try {
+            $request->validate([
+                'fire_station' => 'required|array',
+                'no_of_fireman' => 'required|array',
+                'vehicle_no' => 'required|array',
+                'inform_call_time' => 'required|array',
+                'departure_vehicle_datetime' => 'required|array',
+                'vehicle_arrival_datetime' => 'required|array',
+                'vehicle_return_to_firestation_datetime' => 'required|array',
             ]);
+
+            // Store data in the database
+            foreach ($request->input('fire_station') as $key => $fireStation) {
+                $informCall = !empty($request->input('inform_call_time')[$key]) ? date('Y-m-d H:i:s', strtotime($request->input('inform_call_time')[$key])) : null;
+                $vehDep = !empty($request->input('departure_vehicle_datetime')[$key]) ? date('Y-m-d H:i:s', strtotime($request->input('departure_vehicle_datetime')[$key])) : null;
+                $vehArr = !empty($request->input('vehicle_arrival_datetime')[$key]) ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_arrival_datetime')[$key])) : null;
+                $vehRet = !empty($request->input('vehicle_return_to_firestation_datetime')[$key]) ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_return_to_firestation_datetime')[$key])) : null;
+                $vehRetCenter = !empty($request->input('vehicle_return_to_center_datetime')[$key]) ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_return_to_center_datetime')[$key])) : null;
+
+                DB::table('additional_help_details')->insert([
+                    'slip_id' => $request->input('slip_id'),
+                    'center_name' => "पनवेल",
+                    'fire_station_name' => $fireStation,
+                    'no_of_fireman' => $request->input('no_of_fireman')[$key],
+                    'vehicle_number' => $request->input('vehicle_no')[$key],
+                    'type_of_vehicle' => $request->input('type_of_vehicle')[$key] ?? null,
+                    'inform_call_time' => $informCall,
+                    'vehicle_departure_time' => $vehDep,
+                    'vehicle_arrival_time' => $vehArr,
+                    'vehicle_return_time' => $vehRet,
+                    'vehicle_return_to_center_time' => $vehRetCenter,
+                    'total_distance' => $request->input('total_distance')[$key] ?? null,
+                    'pumping_hours' => $request->input('pumping_hours')[$key] ?? null,
+                    'created_by' => Auth::user()->id,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+            }
+
+            DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
+                'is_additional_form_submitted' => '1',
+                'slip_status' => 'Additional Help Submitted',
+            ]);
+
+            return response()->json(['success' => 'Additional Help Submitted successfully!']);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error($e);
+            if ($e->getCode() == 22007 || str_contains($e->getMessage(), '1292 Incorrect datetime value')) {
+                if (preg_match("/for column ['`]([^'`]+)['`]/", $e->getMessage(), $matches)) {
+                    $column = $matches[1];
+                    return response()->json([
+                        'errors' => [
+                            $column => ['अवैध तारीख आणि वेळ (कृपया 4-अंकी वैध वर्ष प्रविष्ट करा). / Invalid date and time format.']
+                        ]
+                    ], 422);
+                }
+            }
+            return response()->json(['error2' => 'Database error: ' . $e->getMessage()], 500);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            return response()->json(['error2' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }
-
-        DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
-            'is_additional_form_submitted' => '1',
-            'slip_status' => 'Additional Help Submitted',
-        ]);
-
-        return response()->json(['success' => 'Additional Help Submitted successfully!']);
     }
 
     public function store_occurance_book(Request $request)
     {
-        $request->validate([
-            'datetime_new' => 'required',
-            'description' => 'required',
-            'remark' => 'required',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,gif',
-        ]);
+        try {
+            $request->validate([
+                'datetime_new' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
+                'description' => 'required',
+                'remark' => 'required',
+                'photos.*' => 'image|mimes:jpeg,png,jpg,gif',
+            ], [
+                'datetime_new.*' => 'कृपया वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid date and time.',
+            ]);
 
-        $occuranceBookId = DB::table('occurance_book')->insertGetId([
-            'slip_id' => $request->input('slip_id_new'),
-            'occurance_book_date' => $request->input('datetime_new'),
-            'occurance_book_description' => $request->input('description'),
-            'occurance_book_remark' => $request->input('remark'),
-            'created_by' => Auth::user()->id,
-            'created_at' => date('Y-m-d H:i:s'),
-        ]);
+            $occuranceDate = $request->filled('datetime_new') ? date('Y-m-d H:i:s', strtotime($request->input('datetime_new'))) : null;
 
-        DB::table('slips')->where('slip_id', $request->input('slip_id_new'))->update([
-            'is_occurance_book_submitted' => '1',
-            'slip_status' => 'Occurance Book Submitted',
-        ]);
+            $occuranceBookId = DB::table('occurance_book')->insertGetId([
+                'slip_id' => $request->input('slip_id_new'),
+                'occurance_book_date' => $occuranceDate,
+                'occurance_book_description' => $request->input('description'),
+                'occurance_book_remark' => $request->input('remark'),
+                'created_by' => Auth::user()->id,
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
 
-        // Handle photo uploads
-        if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $filePath = $photo->store('occuranceBookImages', 'public'); // Store the photo in the 'photos' directory in 'public' disk
+            DB::table('slips')->where('slip_id', $request->input('slip_id_new'))->update([
+                'is_occurance_book_submitted' => '1',
+                'slip_status' => 'Occurance Book Submitted',
+            ]);
 
-                // Insert the photo data into the database
-                DB::table('occurance_book_photos')->insert([
-                    'occurance_book_id' => $occuranceBookId,
-                    'slip_id' => $request->input('slip_id_new'),
-                    'photo_path' => $filePath,
-                    'created_at' => now(),
-                ]);
+            // Handle photo uploads
+            if ($request->hasFile('photos')) {
+                foreach ($request->file('photos') as $photo) {
+                    $filePath = $photo->store('occuranceBookImages', 'public'); // Store the photo in the 'photos' directory in 'public' disk
+
+                    // Insert the photo data into the database
+                    DB::table('occurance_book_photos')->insert([
+                        'occurance_book_id' => $occuranceBookId,
+                        'slip_id' => $request->input('slip_id_new'),
+                        'photo_path' => $filePath,
+                        'created_at' => now(),
+                    ]);
+                }
             }
-        }
 
-        return response()->json(['success' => 'Occurance Book Submitted successfully!']);
+            return response()->json(['success' => 'Occurance Book Submitted successfully!']);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error($e);
+            if ($e->getCode() == 22007 || str_contains($e->getMessage(), '1292 Incorrect datetime value')) {
+                if (preg_match("/for column ['`]([^'`]+)['`]/", $e->getMessage(), $matches)) {
+                    $column = $matches[1];
+                    return response()->json([
+                        'errors' => [
+                            $column => ['अवैध तारीख आणि वेळ (कृपया 4-अंकी वैध वर्ष प्रविष्ट करा). / Invalid date and time format.']
+                        ]
+                    ], 422);
+                }
+            }
+            return response()->json(['error2' => 'Database error: ' . $e->getMessage()], 500);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            return response()->json(['error2' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
+        }
     }
 
     // vardi ahawal List
@@ -205,7 +255,7 @@ class OccuranceBookController extends Controller
                     'vardi_contact_no' => 'required|min:10', //added by mayur
                     'vardi_place' => 'required',
                     // 'incident_time' => 'required',
-                    'first_vehicle_departing_date_time' => 'required',
+                    'first_vehicle_departing_date_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                     'time_of_arrival_at_the_scene' => 'required',
                     'distance' => 'required',
                     'property_description' => 'required',
@@ -219,7 +269,7 @@ class OccuranceBookController extends Controller
                     // 'property_loss' => 'required',
                     'officer_name_present_at_last_moment' => 'required|regex:/^[\p{L}\p{M}\s]+$/u',
                     // 'date_of_departure_from_scene' => 'required',
-                    'time_of_departure_from_scene' => 'required',
+                    'time_of_departure_from_scene' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                     'total_time' => 'required',
                     // 'total_hour' => 'required',
                     'male_one' => 'required',
@@ -256,7 +306,12 @@ class OccuranceBookController extends Controller
                 ]);
             }
 
-            $request->validate($rules);
+            $customMessages = [
+                'first_vehicle_departing_date_time.*' => 'कृपया पहिल्या वाहनाची सुटण्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid departure date & time.',
+                'time_of_departure_from_scene.*' => 'कृपया घटनास्तळावरुन निघाल्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid departure date & time.',
+            ];
+
+            $request->validate($rules, $customMessages);
 
 
             $firstVehicleDeparting = !empty($request->input('first_vehicle_departing_date_time'))
@@ -514,7 +569,23 @@ class OccuranceBookController extends Controller
 
             return response()->json(['success' => 'Vardi Ahawal Submitted successfully!']);
         } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()]);
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error($e);
+            if ($e->getCode() == 22007 || str_contains($e->getMessage(), '1292 Incorrect datetime value')) {
+                if (preg_match("/for column ['`]([^'`]+)['`]/", $e->getMessage(), $matches)) {
+                    $column = $matches[1];
+                    return response()->json([
+                        'errors' => [
+                            $column => ['अवैध तारीख आणि वेळ स्वरूप (कृपया वैध 4-अंकी वर्ष प्रविष्ट करा). / Invalid date and time format.']
+                        ]
+                    ], 422);
+                }
+            }
+            return response()->json(['error2' => 'Database error: ' . $e->getMessage()], 500);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            return response()->json(['error2' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }
     }
 
@@ -622,7 +693,7 @@ class OccuranceBookController extends Controller
                     'vardi_contact_no' => 'required',
                     'vardi_place' => 'required',
                     'incident_time' => 'required',
-                    'first_vehicle_departing_date_time' => 'required',
+                    'first_vehicle_departing_date_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                     'time_of_arrival_at_the_scene' => 'required',
                     'distance' => 'required',
                     'property_description' => 'required',
@@ -636,7 +707,7 @@ class OccuranceBookController extends Controller
                     // 'property_loss' => 'required',
                     'officer_name_present_at_last_moment' => 'required',
                     'date_of_departure_from_scene' => 'required',
-                    'time_of_departure_from_scene' => 'required',
+                    'time_of_departure_from_scene' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                     'total_time' => 'required',
                     'total_hour' => 'required',
                     'male_one' => 'required',
@@ -658,7 +729,12 @@ class OccuranceBookController extends Controller
                 ]);
             }
 
-            $request->validate($rules);
+            $customMessages = [
+                'first_vehicle_departing_date_time.*' => 'कृपया पहिल्या वाहनाची सुटण्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid departure date & time.',
+                'time_of_departure_from_scene.*' => 'कृपया घटनास्तळावरुन निघाल्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid departure date & time.',
+            ];
+
+            $request->validate($rules, $customMessages);
 
 
             // Store data in the database
@@ -867,7 +943,23 @@ class OccuranceBookController extends Controller
 
             return response()->json(['success' => 'Vardi Ahawal Updated successfully!']);
         } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()]);
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error($e);
+            if ($e->getCode() == 22007 || str_contains($e->getMessage(), '1292 Incorrect datetime value')) {
+                if (preg_match("/for column ['`]([^'`]+)['`]/", $e->getMessage(), $matches)) {
+                    $column = $matches[1];
+                    return response()->json([
+                        'errors' => [
+                            $column => ['अवैध तारीख आणि वेळ स्वरूप (कृपया वैध 4-अंकी वर्ष प्रविष्ट करा). / Invalid date and time format.']
+                        ]
+                    ], 422);
+                }
+            }
+            return response()->json(['error2' => 'Database error: ' . $e->getMessage()], 500);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            return response()->json(['error2' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }
     }
 

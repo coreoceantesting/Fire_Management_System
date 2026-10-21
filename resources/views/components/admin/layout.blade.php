@@ -150,22 +150,26 @@
 {{-- Add / Update Form validation --}}
 <script>
     function resetErrors() {
-        var form = document.getElementById('addForm');
-        var data = new FormData(form);
-        for (var [key, value] of data) {
-            var field = key.replace('[]', '');
-            $('.' + field + '_err').text('');
-            $("[name='"+field+"']").removeClass('is-invalid');
-            $("[name='"+field+"']").addClass('is-valid');
+        var addForm = document.getElementById('addForm');
+        if (addForm) {
+            var data = new FormData(addForm);
+            for (var [key, value] of data) {
+                var field = key.replace('[]', '');
+                $('.' + field + '_err').text('');
+                $("[name='"+field+"']").removeClass('is-invalid');
+                $("[name='"+field+"']").addClass('is-valid');
+            }
         }
 
-        var form = document.getElementById('editForm');
-        var data = new FormData(form);
-        for (var [key, value] of data) {
-            var field = key.replace('[]', '');
-            $('.' + field + '_err').text('');
-            $("[name='"+field+"']").removeClass('is-invalid');
-            $("[name='"+field+"']").addClass('is-valid');
+        var editForm = document.getElementById('editForm');
+        if (editForm) {
+            var data = new FormData(editForm);
+            for (var [key, value] of data) {
+                var field = key.replace('[]', '');
+                $('.' + field + '_err').text('');
+                $("[name='"+field+"']").removeClass('is-invalid');
+                $("[name='"+field+"']").addClass('is-valid');
+            }
         }
     }
 
@@ -177,6 +181,30 @@
             $("[name='"+field+"']").removeClass('is-valid');
         });
     }
+
+    $(document).ready(function() {
+        // Enforce min and max on all datetime-local inputs
+        $('input[type="datetime-local"]').each(function() {
+            if (!$(this).attr('min')) {
+                $(this).attr('min', '1900-01-01T00:00');
+            }
+            if (!$(this).attr('max')) {
+                $(this).attr('max', '2099-12-31T23:59');
+            }
+        });
+
+        // Globally prevent and auto-correct 5+ digit years (e.g. 82026 -> 2026)
+        $(document).on('input change blur', 'input[type="datetime-local"]', function() {
+            let val = $(this).val();
+            if (val) {
+                let match = val.match(/^(\d{5,})(-\d{2}-\d{2}.*)$/);
+                if (match) {
+                    let fixedYear = match[1].slice(-4);
+                    $(this).val(fixedYear + match[2]);
+                }
+            }
+        });
+    });
 
     function editFormBehaviour() {
         $("#addContainer").slideUp();

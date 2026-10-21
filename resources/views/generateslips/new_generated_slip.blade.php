@@ -119,13 +119,13 @@
                         <div class="card-body py-2">
                             <div class="form-group row">
                                 <div class="col-md-4">
-                                    <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) <span class="text-danger">*</span></label>:</label>
-                                    <input class="form-control" type="datetime-local" id="call_time" name="call_time">
+                                    <label for="call_time" class="control-label">Call Date & Time (कॉल तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
+                                    <input class="form-control" type="datetime-local" id="call_time" name="call_time" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                     <span class="text-danger error-text call_time_err"></span>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label for="number_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>:</label>
+                                    <label for="number_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span>:</label>
                                     <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" >
                                         <option value="">--Select Number Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -136,7 +136,7 @@
                                 </div>
 
                                 {{-- <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span></label>:</label>
+                                    <label for="type_of_vehicle" class="control-label">Vehicle Number (वाहनाचा नंबर) <span class="text-danger">*</span>:</label>
                                     <select class="form-control" name="number_of_vehicle" id="number_of_vehicle" required>
                                         <option value="">--Select Number Of Vehicle--</option>
                                         @foreach($vehicle_list as $list)
@@ -146,7 +146,7 @@
                                 </div> --}}
 
                                 <div class="col-md-4">
-                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span></label>
+                                    <label for="type_of_vehicle" class="control-label">Type Of Vehicle (वाहनाचा प्रकार) <span class="text-danger">*</span>:</label>
                                     <select class="form-control" name="type_of_vehicle" id="type_of_vehicle" >
                                         <option value="">--Select Type Of Vehicle--</option>
                                     </select>
@@ -155,25 +155,25 @@
 
                                 <div class="col-md-6">
                                     <label for="vehicle_departure_time" class="control-label">Vehicle Departure Date & Time (वाहन सुटण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_departure_time" id="vehicle_departure_time" >
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_time" id="vehicle_departure_time" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                     <span class="text-danger error-text vehicle_departure_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_arrival_time" class="control-label">Vehicle Arrival DateTime (वाहन पोचण्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_time" id="vehicle_arrival_time">
+                                    <input class="form-control" type="datetime-local" name="vehicle_arrival_time" id="vehicle_arrival_time" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                     <span class="text-danger error-text vehicle_arrival_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_departure_from_scene_time" class="control-label">Time of departure from the scene (वाहन घटनास्तळावरुन निघाल्याची तारीख आणि वेळ) <span class="text-danger">*</span>:</label>
-                                    <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" id="vehicle_departure_from_scene_time">
+                                    <input class="form-control" type="datetime-local" name="vehicle_departure_from_scene_time" id="vehicle_departure_from_scene_time" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                     <span class="text-danger error-text vehicle_departure_from_scene_time_err"></span>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="vehicle_arrival_at_center_time" class="control-label">Time of arrival at the centre (केंद्रामध्ये आल्याची वेळ) <span class="text-danger">*</span>:</label>
-                                    <input class="form-control" type="datetime-local" id="vehicle_arrival_at_center_time" name="vehicle_arrival_at_center_time">
+                                    <input class="form-control" type="datetime-local" id="vehicle_arrival_at_center_time" name="vehicle_arrival_at_center_time" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                     <span class="text-danger error-text vehicle_arrival_at_center_time_err"></span>
                                 </div>
 
@@ -659,13 +659,81 @@
         });
 
 
+        function displaySlipActionErrors(errors) {
+            $('#slipactionform .error-text').text('');
+            $('#slipactionform .form-control').removeClass('is-invalid');
+            let firstInvalidField = null;
+
+            $.each(errors, function(field, messages) {
+                let cleanField = field.replace(/\.\d+/g, '').replace('[]', '');
+                $('.' + cleanField + '_err').text(Array.isArray(messages) ? messages[0] : messages);
+                let $input = $("#slipactionform [name='" + cleanField + "'], #slipactionform [name='" + field + "'], #slipactionform #" + cleanField);
+                $input.addClass('is-invalid');
+                if (!firstInvalidField && $input.length && $input.is(':visible')) {
+                    firstInvalidField = $input;
+                }
+            });
+
+            if (firstInvalidField) {
+                $('html, body').animate({
+                    scrollTop: firstInvalidField.offset().top - 120
+                }, 400);
+                firstInvalidField.focus();
+            }
+        }
+
+        // Auto-correct datetime-local if year has more than 4 digits (e.g., 82026 -> 2026)
+        $('#slipactionform').on('input change blur', 'input[type="datetime-local"]', function() {
+            let val = $(this).val();
+            if (val) {
+                let match = val.match(/^(\d{5,})(-\d{2}-\d{2}.*)$/);
+                if (match) {
+                    let fixedYear = match[1].slice(-4);
+                    $(this).val(fixedYear + match[2]);
+                }
+                $(this).removeClass('is-invalid');
+                let name = $(this).attr('name');
+                if (name) {
+                    $('.' + name + '_err').text('');
+                }
+            }
+        });
+
         // submitting form
         $('#slipactionform').submit(function(event) {
             // Prevent the default form submission
             event.preventDefault();
 
             // Reset previous errors
-            resetErrors();
+            $('#slipactionform .error-text').text('');
+            $('#slipactionform .form-control').removeClass('is-invalid');
+
+            // Client-side verification for valid 4-digit years in datetime fields
+            let hasDateError = false;
+            let firstDateErrField = null;
+            $(this).find('input[type="datetime-local"]').each(function() {
+                let val = $(this).val();
+                let name = $(this).attr('name');
+                if (val) {
+                    let yearMatch = val.match(/^(\d+)-/);
+                    if (!yearMatch || yearMatch[1].length !== 4 || parseInt(yearMatch[1]) < 1900 || parseInt(yearMatch[1]) > 2099) {
+                        $('.' + name + '_err').text('कृपया वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid date & time.');
+                        $(this).addClass('is-invalid');
+                        hasDateError = true;
+                        if (!firstDateErrField) firstDateErrField = $(this);
+                    }
+                }
+            });
+
+            if (hasDateError) {
+                if (firstDateErrField) {
+                    $('html, body').animate({
+                        scrollTop: firstDateErrField.offset().top - 120
+                    }, 400);
+                    firstDateErrField.focus();
+                }
+                return false;
+            }
 
             // Serialize the form data
             var formData = $(this).serialize();
@@ -676,26 +744,37 @@
                 type: 'POST',
                 data: formData,
                 success: function(data) {
-                    if (!data.error2) {
-                        if (data.errors) {
-                            // Display validation errors
-                            $.each(data.errors, function(field, messages) {
-                                $('.' + field + '_err').text(messages); // Display all messages if there are multiple
-                                $("[name='"+field+"']").addClass('is-invalid');
+                    if (data.errors) {
+                        displaySlipActionErrors(data.errors);
+                    } else if (data.success) {
+                        swal("Successful!", data.success, "success")
+                            .then((action) => {
+                                window.location.href = '{{ route('new_generated_slip') }}';
                             });
-                        } else if (data.success) {
-                            swal("Successful!", data.success, "success")
-                                .then((action) => {
-                                    window.location.href = '{{ route('new_generated_slip') }}';
-                                });
-                        }
-                    } else {
+                    } else if (data.error2) {
                         swal("Error!", data.error2, "error");
                     }
                 },
-                error: function(error) {
-                    // Handle error response
-                    console.log(error);
+                statusCode: {
+                    422: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            displaySlipActionErrors(xhr.responseJSON.errors);
+                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                            swal("Validation Error", xhr.responseJSON.message, "error");
+                        }
+                    },
+                    500: function(xhr) {
+                        let msg = "Something went wrong please try again";
+                        if (xhr.responseJSON && xhr.responseJSON.error2) {
+                            msg = xhr.responseJSON.error2;
+                        }
+                        swal("Error occured!", msg, "error");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status !== 422 && xhr.status !== 500) {
+                        swal("Error!", "Something went wrong please try again", "error");
+                    }
                 }
             });
         });

@@ -52,21 +52,21 @@
                                     <div class="col-md-4">
                                         <label for="inform_call_datetime[]" class="control-label">Inform Call Date &
                                             Time (कॉलची तारीख आणि वेळ):</label>
-                                        <input class="form-control" type="datetime-local" name="inform_call_time[]"
+                                        <input class="form-control" type="datetime-local" name="inform_call_time[]" min="1900-01-01T00:00" max="2099-12-31T23:59"
                                             required>
                                     </div>
 
                                     <div class="col-md-4">
                                         <label for="departure_vehicle_datetime[]" class="control-label">Departure
                                             Vehicle Date & Time (वाहन सुटण्याची तारीख आणि वेळ):</label>
-                                        <input class="form-control" type="datetime-local"
+                                        <input class="form-control" type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59"
                                             name="departure_vehicle_datetime[]" required>
                                     </div>
 
                                     <div class="col-md-4">
                                         <label for="vehicle_arrival_datetime[]" class="control-label">Vehicle Arrival
                                             Date & Time (वाहन येण्याची तारीख आणि वेळ):</label>
-                                        <input class="form-control" type="datetime-local"
+                                        <input class="form-control" type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59"
                                             name="vehicle_arrival_datetime[]" required>
                                     </div>
 
@@ -74,7 +74,7 @@
                                         <label for="vehicle_return_to_firestation_datetime[]"
                                             class="control-label">Vehicle Return To Fire Station Date & Time (वाहन
                                             अग्निशमन केंद्रावर परतण्याची तारीख आणि वेळ):</label>
-                                        <input class="form-control" type="datetime-local"
+                                        <input class="form-control" type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59"
                                             name="vehicle_return_to_firestation_datetime[]" required>
                                     </div>
                                 </div>
@@ -116,7 +116,7 @@
                                 <label class="col-form-label" for="datetime_new">Date & Time (तारीख वेळ) <span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="datetime_new" name="datetime_new"
-                                    type="datetime-local" required>
+                                    type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59" required>
                                 <span class="text-danger error-text datetime_new_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -148,7 +148,7 @@
     <div class="row" id="editContainer" style="display:none;">
         <div class="col">
             <form class="form-horizontal form-bordered" action="{{ route('store_vardi_ahaval') }}" method="POST"
-                id="editForm" novalidate> 
+                id="editForm" novalidate>
                 {{-- added by mayur novalidate attribute. --}}
                 @csrf
                 <input type="hidden" id="edit_model_id_new" name="edit_model_id_new" value="">
@@ -224,7 +224,7 @@
 
                              <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_time">Vardi's Uniform Time ( वर्दीची वेळ ) <span class="text-danger">*</span></label>
-                                <input class="form-control" id="vardi_time" name="vardi_time" type="datetime-local">
+                                <input class="form-control" id="vardi_time" name="vardi_time" type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                 <span class="text-danger error-text vardi_time_err"></span>
                             </div>
 
@@ -241,7 +241,7 @@
                                     vehicle release on uniform (वर्दीवर पहिले वाहन सोडल्याची वेळ)<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="first_vehicle_departing_date_time"
-                                    name="first_vehicle_departing_date_time" type="datetime-local">
+                                    name="first_vehicle_departing_date_time" type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                 <span class="text-danger error-text first_vehicle_departing_date_time_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -418,7 +418,7 @@
                                         class="text-danger">*</span>
                                 </label>
                                 <input class="form-control" type="datetime-local" name="time_of_departure_from_scene"
-                                    id="time_of_departure_from_scene" placeholder="Select date and time" required>
+                                    id="time_of_departure_from_scene" min="1900-01-01T00:00" max="2099-12-31T23:59" placeholder="Select date and time" required>
                                 <span class="text-danger error-text time_of_departure_from_scene_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -1433,7 +1433,7 @@
                         $("#editForm input[name='time_of_departure_from_scene']").val(arrTime);
                     }
 
-                    
+
                     // $("#editForm input[name='vardi_place']").val(data.slip_data.incident_location_address);
                     // $("#editForm input[name='incident_time']").val(data.slip_data.call_time);
                     // $("#editForm input[name='first_vehicle_departing_date_time']").val(data.slip_data.vehicle_departure_time);
@@ -1459,15 +1459,82 @@
             console.log("Submit button clicked!");
         });
 
+        function displayVardiErrors(errors) {
+            $('.error-text').text('');
+            $('.form-control').removeClass('is-invalid');
+            let firstErr = null;
+
+            console.error("=== FORM VALIDATION ERRORS ===", errors);
+            $.each(errors, function(field, messages) {
+                console.warn("Validation error on field [" + field + "]:", messages);
+                let cleanField = field.replace(/\.\d+/g, '').replace('[]', '');
+                $('.' + cleanField + '_err').text(Array.isArray(messages) ? messages[0] : messages);
+                let $input = $("#editForm [name='" + cleanField + "'], #editForm [name='" + field + "'], #editForm #" + cleanField);
+                $input.addClass('is-invalid');
+                if (!firstErr && $input.length && $input.is(':visible')) {
+                    firstErr = $input;
+                }
+            });
+
+            if (firstErr) {
+                $('html, body').animate({ scrollTop: firstErr.offset().top - 120 }, 400);
+                firstErr.focus();
+            }
+        }
+
+        // Auto-correct datetime-local if year has more than 4 digits (e.g. 82026 -> 2026)
+        $('#editForm, #additional-help-store, #store-occurance-book').on('input change blur', 'input[type="datetime-local"]', function() {
+            let val = $(this).val();
+            if (val) {
+                let match = val.match(/^(\d{5,})(-\d{2}-\d{2}.*)$/);
+                if (match) {
+                    let fixedYear = match[1].slice(-4);
+                    $(this).val(fixedYear + match[2]);
+                }
+                $(this).removeClass('is-invalid');
+                let name = $(this).attr('name');
+                if (name) {
+                    let clean = name.replace('[]', '');
+                    $('.' + clean + '_err').text('');
+                }
+            }
+        });
+
         // submitting form
         $('#editForm').submit(function(event) {
             // Prevent the default form submission
             event.preventDefault();
             console.log("Form submit event triggered!");
 
-            // Clear previous errors added by mayur
+            // Clear previous errors
             $('.error-text').text('');
             $('.form-control').removeClass('is-invalid');
+
+            // Client-side verification for valid 4-digit years in datetime fields
+            let hasDateError = false;
+            let firstDateErrField = null;
+            $(this).find('input[type="datetime-local"]').each(function() {
+                let val = $(this).val();
+                let name = $(this).attr('name');
+                if (val) {
+                    let yearMatch = val.match(/^(\d+)-/);
+                    if (!yearMatch || yearMatch[1].length !== 4 || parseInt(yearMatch[1]) < 1900 || parseInt(yearMatch[1]) > 2099) {
+                        let cleanName = name ? name.replace('[]', '') : '';
+                        $('.' + cleanName + '_err').text('कृपया वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please select a valid date & time.');
+                        $(this).addClass('is-invalid');
+                        hasDateError = true;
+                        if (!firstDateErrField) firstDateErrField = $(this);
+                    }
+                }
+            });
+
+            if (hasDateError) {
+                if (firstDateErrField) {
+                    $('html, body').animate({ scrollTop: firstDateErrField.offset().top - 120 }, 400);
+                    firstDateErrField.focus();
+                }
+                return false;
+            }
 
             // Serialize the form data
             var formData = $(this).serialize();
@@ -1482,20 +1549,12 @@
                     console.log("Server response:", data);
                     if (!data.error2) {
                         if (data.errors) {
-                            console.error("=== FORM VALIDATION ERRORS ===", data.errors);
-                            // Display validation errors
-                            $.each(data.errors, function(field, messages) {
-                                console.warn("Validation error on field [" + field + "]:", messages);
-                                $('.' + field + '_err').text(
-                                messages); // Display all messages if there are multiple
-                                $("[name='" + field + "']").addClass('is-invalid');
-                            });
+                            displayVardiErrors(data.errors);
                         } else if (data.success) {
                             console.log("Submission successful:", data.success);
                             swal("Successful!", data.success, "success")
                                 .then((action) => {
-                                    window.location.href =
-                                        '{{ route('vardi_ahaval_list') }}';
+                                    window.location.href = '{{ route('vardi_ahaval_list') }}';
                                 });
                         }
                     } else {
@@ -1503,9 +1562,27 @@
                         swal("Error!", data.error2, "error");
                     }
                 },
-                error: function(error) {
-                    // Handle error response
-                    console.error("AJAX Error:", error);
+                statusCode: {
+                    422: function(xhr) {
+                        if (xhr.responseJSON && xhr.responseJSON.errors) {
+                            displayVardiErrors(xhr.responseJSON.errors);
+                        } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                            swal("Validation Error", xhr.responseJSON.message, "error");
+                        }
+                    },
+                    500: function(xhr) {
+                        let msg = "Something went wrong please try again";
+                        if (xhr.responseJSON && xhr.responseJSON.error2) {
+                            msg = xhr.responseJSON.error2;
+                        }
+                        swal("Error occured!", msg, "error");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status !== 422 && xhr.status !== 500) {
+                        console.error("AJAX Error:", xhr);
+                        swal("Error!", "Something went wrong please try again", "error");
+                    }
                 }
             });
         });

@@ -127,46 +127,70 @@ class GenerateSlipsController extends Controller
     {
         try {
             // Validate the request data
-            $request->validate([
-                'call_time' => 'required',
+            $rules = [
+                'slip_id' => 'required',
+                'call_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                 'type_of_vehicle' => 'required',
                 'number_of_vehicle' => 'required',
-                'vehicle_arrival_time' => 'required',
-                'vehicle_departure_from_scene_time' => 'required',
-                'vehicle_arrival_at_center_time' => 'required',
+                'vehicle_departure_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
+                'vehicle_arrival_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
+                'vehicle_departure_from_scene_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
+                'vehicle_arrival_at_center_time' => ['required', 'date_format:Y-m-d\TH:i,Y-m-d\TH:i:s,Y-m-d H:i,Y-m-d H:i:s', 'regex:/^(19|20)\d{2}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?$/'],
                 // 'total_distance' => 'required',
                 // 'pumping_hours' => 'required',
-                'vehicle_departure_time' => 'required',
                 'worker_name.*' => 'required',
                 'worker_designation.*' => 'required',
-            ]);
+            ];
+
+            $messages = [
+                'call_time.*' => 'कृपया कॉलची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid call date & time.',
+                'vehicle_departure_time.*' => 'कृपया वाहन सुटण्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid vehicle departure date & time.',
+                'vehicle_arrival_time.*' => 'कृपया वाहन पोचण्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid vehicle arrival date & time.',
+                'vehicle_departure_from_scene_time.*' => 'कृपया घटनास्तळावरुन निघाल्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid departure date & time.',
+                'vehicle_arrival_at_center_time.*' => 'कृपया केंद्रामध्ये आल्याची वैध तारीख आणि वेळ निवडा (वर्ष ४ अंकी असावे) / Please enter a valid vehicle arrival at center date & time.',
+                'type_of_vehicle.required' => 'वाहनाचा प्रकार निवडा / Please select type of vehicle.',
+                'number_of_vehicle.required' => 'वाहनाचा नंबर निवडा / Please select vehicle number.',
+                'worker_name.*.required' => 'कर्मचाऱ्यांचे नाव आवश्यक आहे / Worker name is required.',
+                'worker_designation.*.required' => 'कर्मचाऱ्यांचे तपशील आवश्यक आहे / Worker designation is required.',
+            ];
+
+            $request->validate($rules, $messages);
+
+            // Format datetime values properly for MySQL
+            $callTime = $request->filled('call_time') ? date('Y-m-d H:i:s', strtotime($request->input('call_time'))) : null;
+            $departureTime = $request->filled('vehicle_departure_time') ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_departure_time'))) : null;
+            $arrivalTime = $request->filled('vehicle_arrival_time') ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_arrival_time'))) : null;
+            $departureFromScene = $request->filled('vehicle_departure_from_scene_time') ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_departure_from_scene_time'))) : null;
+            $arrivalAtCenter = $request->filled('vehicle_arrival_at_center_time') ? date('Y-m-d H:i:s', strtotime($request->input('vehicle_arrival_at_center_time'))) : null;
 
             // Store data in slip_action_forms table
             $slipActionForm = DB::table('slip_action_form')->insertGetId([
                 'slip_id' => $request->input('slip_id'),
-                'call_time' => $request->input('call_time'),
+                'call_time' => $callTime,
                 'center_name' => "पनवेल",
                 'type_of_vehicle' => $request->input('type_of_vehicle'),
                 'number_of_vehicle' => $request->input('number_of_vehicle'),
-                'vehicle_arrival_time' => $request->input('vehicle_arrival_time'),
-                'vehicle_departure_from_scene_time' => $request->input('vehicle_departure_from_scene_time'),
-                'vehicle_arrival_at_center_time' => $request->input('vehicle_arrival_at_center_time'),
+                'vehicle_arrival_time' => $arrivalTime,
+                'vehicle_departure_from_scene_time' => $departureFromScene,
+                'vehicle_arrival_at_center_time' => $arrivalAtCenter,
                 'total_distance' => $request->input('total_distance'),
                 'pumping_hours' => $request->input('pumping_hours'),
-                'vehicle_departure_time' => $request->input('vehicle_departure_time'),
+                'vehicle_departure_time' => $departureTime,
                 'created_by' => Auth::user()->id,
                 'created_at' => now(),
             ]);
 
             // Store worker details in on_field_worker_details table
-            foreach ($request->input('worker_name') as $key => $workerName) {
-                DB::table('on_field_worker_details')->insert([
-                    'slip_action_form_id' => $slipActionForm,
-                    'worker_name' => $workerName,
-                    'worker_designation' => $request->input('worker_designation')[$key],
-                    'created_by' => Auth::user()->id,
-                    'created_at' => now(),
-                ]);
+            if ($request->has('worker_name')) {
+                foreach ($request->input('worker_name') as $key => $workerName) {
+                    DB::table('on_field_worker_details')->insert([
+                        'slip_action_form_id' => $slipActionForm,
+                        'worker_name' => $workerName,
+                        'worker_designation' => $request->input('worker_designation')[$key] ?? null,
+                        'created_by' => Auth::user()->id,
+                        'created_at' => now(),
+                    ]);
+                }
             }
 
             DB::table('slips')->where('slip_id', $request->input('slip_id'))->update([
@@ -175,8 +199,25 @@ class GenerateSlipsController extends Controller
 
             return response()->json(['success' => 'Action Form Submitted successfully!']);
         } catch (ValidationException $e) {
-            // If validation fails, return validation errors
-            return response()->json(['errors' => $e->errors()]);
+            // If validation fails, return validation errors with 422 status
+            return response()->json(['errors' => $e->errors()], 422);
+        } catch (\Illuminate\Database\QueryException $e) {
+            \Log::error($e);
+            // If database query fails due to invalid datetime format, identify the exact column
+            if ($e->getCode() == 22007 || str_contains($e->getMessage(), '1292 Incorrect datetime value')) {
+                if (preg_match("/for column ['`]([^'`]+)['`]/", $e->getMessage(), $matches)) {
+                    $column = $matches[1];
+                    return response()->json([
+                        'errors' => [
+                            $column => ['अवैध तारीख आणि वेळ (कृपया वैध 4-अंकी वर्ष प्रविष्ट करा). / Invalid date and time format.']
+                        ]
+                    ], 422);
+                }
+            }
+            return response()->json(['error2' => 'Database error: ' . $e->getMessage()], 500);
+        } catch (\Throwable $e) {
+            \Log::error($e);
+            return response()->json(['error2' => 'An unexpected error occurred: ' . $e->getMessage()], 500);
         }
     }
 
