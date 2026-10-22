@@ -484,15 +484,15 @@
                             <div class="col-md-4">
                                 <label class="col-form-label" for="time_of_arrival_at_the_scene">Vardi's Time to reach the scene ( घटना
                                     स्थळी पोहोचण्याची वेळ ) <span class="text-danger">*</span></label>
-                                <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene" type="text"
-                                    placeholder="HH:mm (24 तास वेळ, उदा. 01:13)">
+                                <input class="form-control" id="time_of_arrival_at_the_scene" name="time_of_arrival_at_the_scene"
+                                    type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                 <span class="text-danger error-text time_of_arrival_at_the_scene_err"></span>
                             </div>
                             <div class="col-md-4">
                                 <label class="col-form-label" for="vardi_leaving_time">Vardi's Time of leaving the
                                     scene ( घटनास्थळ सोडल्याची वेळ )<span class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_leaving_time" name="vardi_leaving_time"
-                                    type="text" placeholder="HH:mm (24 तास वेळ, उदा. 01:37)">
+                                    type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                 <span class="text-danger error-text vardi_leaving_time_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -500,8 +500,7 @@
                                     fire station from the scene ( घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ )<span
                                         class="text-danger">*</span></label>
                                 <input class="form-control" id="vardi_return_time" name="vardi_return_time"
-                                    type="text"
-                                    placeholder="HH:mm (24 तास वेळ, उदा. 02:05)">
+                                    type="datetime-local" min="1900-01-01T00:00" max="2099-12-31T23:59">
                                 <span class="text-danger error-text vardi_return_time_err"></span>
                             </div>
                             <div class="col-md-4">
@@ -1423,7 +1422,7 @@
         };
     }
 
-    function formatDateTimeLocal(str) {
+    function formatDateTimeLocal(str, fallbackBase) {
         if (!str) return '';
         str = String(str).trim();
 
@@ -1445,6 +1444,22 @@
             let day = String(ymdMatch[3]).padStart(2, '0');
             let t = parse24HourParts(ymdMatch[4], ymdMatch[5], ymdMatch[6]);
             return `${year}-${month}-${day}T${t.h}:${t.m}`;
+        }
+
+        // Match time only: HH:mm with optional seconds and AM/PM
+        let timeOnlyMatch = str.match(/^(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(AM|PM|am|pm))?$/i);
+        if (timeOnlyMatch) {
+            let t = parse24HourParts(timeOnlyMatch[1], timeOnlyMatch[2], timeOnlyMatch[3]);
+            let baseDate = '';
+            if (fallbackBase && String(fallbackBase).includes('T')) {
+                baseDate = String(fallbackBase).split('T')[0];
+            } else if (fallbackBase && String(fallbackBase).includes('-')) {
+                baseDate = String(fallbackBase).split(' ')[0];
+            } else {
+                let now = new Date();
+                baseDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            }
+            return `${baseDate}T${t.h}:${t.m}`;
         }
 
         let d = new Date(str);
@@ -1534,36 +1549,35 @@
                     // 3. Call Date & Time -> vardi_time (कॉल तारीख आणि वेळ - 24 hr)
                     let callTimeFormatted = formatDateTimeLocal(slip.call_time || slip.slip_date);
                     if (callTimeFormatted) {
-                        $("#editForm input[name='vardi_time']").val(callTimeFormatted);
+                        $("#editForm input[name='vardi_time'], #editForm #vardi_time").val(callTimeFormatted);
                     }
 
                     // 4. Vehicle Departure Date & Time -> first_vehicle_departing_date_time (वाहन सुटण्याची तारीख आणि वेळ - 24 hr)
-                    let depTimeFormatted = formatDateTimeLocal(slip.vehicle_departure_time);
+                    let depTimeFormatted = formatDateTimeLocal(slip.vehicle_departure_time, callTimeFormatted);
                     if (depTimeFormatted) {
-                        $("#editForm input[name='first_vehicle_departing_date_time']").val(depTimeFormatted);
+                        $("#editForm input[name='first_vehicle_departing_date_time'], #editForm #first_vehicle_departing_date_time").val(depTimeFormatted);
                     }
 
                     // 5. Vehicle Arrival DateTime -> time_of_arrival_at_the_scene (वाहन घटनास्थळी पोहोचण्याची वेळ - 24 hr)
-                    let arrTimeFormatted = formatTime(slip.vehicle_arrival_time);
+                    let arrTimeFormatted = formatDateTimeLocal(slip.vehicle_arrival_time, depTimeFormatted || callTimeFormatted);
                     if (arrTimeFormatted) {
                         $("#editForm input[name='time_of_arrival_at_the_scene'], #editForm #time_of_arrival_at_the_scene").val(arrTimeFormatted);
                     }
 
                     // 6. Time of departure from scene -> time_of_departure_from_scene (घटनास्थळी वाहन सोडलेली दिनांक व वेळ - 24 hr)
-                    let depSceneFormatted = formatDateTimeLocal(slip.vehicle_departure_from_scene_time);
+                    let depSceneFormatted = formatDateTimeLocal(slip.vehicle_departure_from_scene_time, arrTimeFormatted || depTimeFormatted || callTimeFormatted);
                     if (depSceneFormatted) {
-                        $("#editForm input[name='time_of_departure_from_scene']").val(depSceneFormatted);
+                        $("#editForm input[name='time_of_departure_from_scene'], #editForm #time_of_departure_from_scene").val(depSceneFormatted);
                     }
 
                     // 7. Time of departure from scene -> vardi_leaving_time (घटनास्थळ सोडल्याची वेळ - 24 hr)
-                    let leavingTimeFormatted = formatTime(slip.vehicle_departure_from_scene_time);
-                    if (leavingTimeFormatted) {
-                        $("#editForm input[name='vardi_leaving_time'], #editForm #vardi_leaving_time").val(leavingTimeFormatted);
+                    if (depSceneFormatted) {
+                        $("#editForm input[name='vardi_leaving_time'], #editForm #vardi_leaving_time").val(depSceneFormatted);
                     }
 
                     // 8. Time of arrival at center -> vardi_return_time (केंद्रामध्ये आल्याची वेळ / घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ - 24 hr)
                     let rawReturnTime = slip.vehicle_arrival_at_center_time || slip.vehicle_return_to_center_time || slip.vehicle_return_time || slip.vardi_return_time;
-                    let returnTimeFormatted = formatTime(rawReturnTime);
+                    let returnTimeFormatted = formatDateTimeLocal(rawReturnTime, depSceneFormatted || arrTimeFormatted || depTimeFormatted || callTimeFormatted);
                     if (returnTimeFormatted) {
                         $("#editForm input[name='vardi_return_time'], #editForm #vardi_return_time").val(returnTimeFormatted);
                     }

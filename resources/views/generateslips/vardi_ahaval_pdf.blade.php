@@ -349,10 +349,23 @@
 
                 if (!empty($vardiAhavalData->vardi_leaving_time)) {
                     $depTime = $vardiAhavalData->vardi_leaving_time;
+                    if (strpos($depTime, 'T') !== false || strpos($depTime, ' ') !== false || preg_match('/^\d{4}-\d{2}-\d{2}/', $depTime)) {
+                        $depTime = date('H:i:s', strtotime($depTime));
+                    }
                 } elseif (!empty($vardiAhavalData->time_of_departure_from_scene) && strtotime($vardiAhavalData->time_of_departure_from_scene)) {
                     $depTime = date('H:i:s', strtotime($vardiAhavalData->time_of_departure_from_scene));
                 } elseif (!empty($actionTakenData->vehicle_departure_from_scene_time) && strtotime($actionTakenData->vehicle_departure_from_scene_time)) {
                     $depTime = date('H:i:s', strtotime($actionTakenData->vehicle_departure_from_scene_time));
+                }
+
+                $retTimeRaw = !empty($vardiAhavalData->vardi_return_time) ? $vardiAhavalData->vardi_return_time : (!empty($actionTakenData->vehicle_arrival_at_center_time) ? $actionTakenData->vehicle_arrival_at_center_time : null);
+                $retTimeDisplay = '-';
+                if (!empty($retTimeRaw)) {
+                    if (strpos($retTimeRaw, 'T') !== false || strpos($retTimeRaw, ' ') !== false || preg_match('/^\d{4}-\d{2}-\d{2}/', $retTimeRaw)) {
+                        $retTimeDisplay = date('H:i:s', strtotime($retTimeRaw));
+                    } else {
+                        $retTimeDisplay = $retTimeRaw;
+                    }
                 }
             @endphp
             <tr>
@@ -366,7 +379,7 @@
             @if(!empty($vardiAhavalData->vardi_return_time) || !empty($actionTakenData->vehicle_arrival_at_center_time))
             <tr>
                 <th>घटनास्थळ वरून फायर स्टेशनला परत आल्याची वेळ</th>
-                <td>:- {{ $vardiAhavalData->vardi_return_time ?? (!empty($actionTakenData->vehicle_arrival_at_center_time) ? date('H:i:s', strtotime($actionTakenData->vehicle_arrival_at_center_time)) : '-') }}</td>
+                <td>:- {{ $retTimeDisplay }}</td>
             </tr>
             @endif
             <tr>
