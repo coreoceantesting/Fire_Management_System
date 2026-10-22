@@ -709,12 +709,42 @@ class OccuranceBookController extends Controller
     {
         // Fetch data related to the slip
         $slipData = DB::table('slips')->where('slip_id', $slip_id)->first();
+        $vardiAhavalData = DB::table('vardi_ahaval_details')->where('slip_id', $slip_id)->first();
+        $actionTakenData = DB::table('slip_action_form')->where('slip_id', $slip_id)->first();
+        $additionalHelpDetails = DB::table('additional_help_details')
+            ->select(
+                'additional_help_details.inform_call_time',
+                'additional_help_details.vehicle_departure_time',
+                'additional_help_details.vehicle_arrival_time',
+                'additional_help_details.vehicle_return_time',
+                'additional_help_details.no_of_fireman',
+                'additional_help_details.center_name',
+                'additional_help_details.type_of_vehicle',
+                'additional_help_details.vehicle_return_to_center_time',
+                'additional_help_details.total_distance',
+                'additional_help_details.pumping_hours',
+                'vehicle_details.vehicle_number',
+                'fire_stations.name'
+            )
+            ->join('fire_stations', 'additional_help_details.fire_station_name', '=', 'fire_stations.fire_station_id')
+            ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
+            ->where('additional_help_details.slip_id', $slip_id)
+            ->get();
+        $workers_Details = [];
+        if ($actionTakenData && !empty($actionTakenData->slip_action_form_id)) {
+            $workers_Details = DB::table('on_field_worker_details')
+                ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+                ->where('on_field_worker_details.slip_action_form_id', $actionTakenData->slip_action_form_id)
+                ->get();
+        }
+        $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
+        $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $slip_id)->get()->groupBy('type');
 
         // Create mPDF instance
         $mpdf = new Mpdf();
 
         // Use mPDF to generate the PDF from the view
-        $pdf = view('generateslips.vardi_ahaval_pdf', compact('slipData'))->render();
+        $pdf = view('generateslips.vardi_ahaval_pdf', compact('slipData', 'vardiAhavalData', 'actionTakenData', 'additionalHelpDetails', 'workers_Details', 'male_rescue_details', 'woman_rescue_details'))->render();
 
         // Save the generated PDF to a temporary file
         $formattedDatetime = date('Y-m-d_H_i_s', strtotime($slipData->slip_date));
@@ -1126,10 +1156,13 @@ class OccuranceBookController extends Controller
             ->join('vehicle_details', 'additional_help_details.vehicle_number', '=', 'vehicle_details.vehicle_id')
             ->where('additional_help_details.slip_id', $id)
             ->get();
-        $workers_Details = DB::table('on_field_worker_details')
-            ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
-            ->where('on_field_worker_details.slip_action_form_id', $actionTakenData->slip_action_form_id)
-            ->get();
+        $workers_Details = [];
+        if ($actionTakenData && !empty($actionTakenData->slip_action_form_id)) {
+            $workers_Details = DB::table('on_field_worker_details')
+                ->join('designations', 'on_field_worker_details.worker_designation', '=', 'designations.designation_id')
+                ->where('on_field_worker_details.slip_action_form_id', $actionTakenData->slip_action_form_id)
+                ->get();
+        }
         $male_rescue_details = DB::table('male_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
         $woman_rescue_details = DB::table('women_rescuers_details')->where('slip_id', $id)->get()->groupBy('type');
 

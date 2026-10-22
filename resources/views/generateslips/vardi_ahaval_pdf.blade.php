@@ -689,28 +689,30 @@
                         </tr>
                       </thead>
                       <tbody>
+                        @if($actionTakenData)
                         <tr>
                           <td>{{$actionTakenData->center_name}}</td>
                           <td>{{$actionTakenData->type_of_vehicle}}</td>
                           <td>{{$actionTakenData->number_of_vehicle}}</td>
-                          <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time)) }} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_time))}}</td>
-                          <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_departure_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_departure_time))}}</td>
-                          <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_departure_from_scene_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_departure_from_scene_time))}}</td>
-                          <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_at_center_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_at_center_time))}}</td>
-                          {{-- <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time))}} / {{date('H-i-s', strtotime($actionTakenData->vehicle_arrival_time))}}</td> --}}
+                          <td>{{ !empty($actionTakenData->vehicle_departure_time) ? date('Y-m-d', strtotime($actionTakenData->vehicle_departure_time)) . ' / ' . date('H:i:s', strtotime($actionTakenData->vehicle_departure_time)) : '-' }}</td>
+                          <td>{{ !empty($actionTakenData->vehicle_arrival_time) ? date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time)) . ' / ' . date('H:i:s', strtotime($actionTakenData->vehicle_arrival_time)) : '-' }}</td>
+                          <td>{{ !empty($actionTakenData->vehicle_departure_from_scene_time) ? date('Y-m-d', strtotime($actionTakenData->vehicle_departure_from_scene_time)) . ' / ' . date('H:i:s', strtotime($actionTakenData->vehicle_departure_from_scene_time)) : '-' }}</td>
+                          <td>{{ !empty($actionTakenData->vehicle_arrival_at_center_time) ? date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_at_center_time)) . ' / ' . date('H:i:s', strtotime($actionTakenData->vehicle_arrival_at_center_time)) : '-' }}</td>
+                          {{-- <td>{{date('Y-m-d', strtotime($actionTakenData->vehicle_arrival_time))}} / {{date('H:i:s', strtotime($actionTakenData->vehicle_arrival_time))}}</td> --}}
                           <td>{{$actionTakenData->total_distance}} कि .मी </td>
                           <td>{{$actionTakenData->pumping_hours}} @if(!empty($actionTakenData->pumping_hours) && !str_contains($actionTakenData->pumping_hours, 'तास')) तास @endif</td>
                           {{-- <td>{{$actionTakenData->center_name}}</td> --}}
                         </tr>
+                        @endif
                         @foreach($additionalHelpDetails as $data)
                         <tr>
                             <td>{{$data->center_name}}</td>
                             <td>{{$data->type_of_vehicle}}</td>
                             <td>{{$data->vehicle_number}}</td>
-                            <td>{{ date('Y-m-d', strtotime($data->vehicle_departure_time)) }} / {{date('H-i-s', strtotime($data->vehicle_departure_time))}}</td>
-                            <td>{{date('Y-m-d', strtotime($data->vehicle_arrival_time))}} / {{date('H-i-s', strtotime($data->vehicle_arrival_time))}}</td>
-                            <td>{{date('Y-m-d', strtotime($data->vehicle_return_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_time))}}</td>
-                            <td>{{date('Y-m-d', strtotime($data->vehicle_return_to_center_time))}} / {{date('H-i-s', strtotime($data->vehicle_return_to_center_time))}}</td>
+                            <td>{{ !empty($data->vehicle_departure_time) ? date('Y-m-d', strtotime($data->vehicle_departure_time)) . ' / ' . date('H:i:s', strtotime($data->vehicle_departure_time)) : '-' }}</td>
+                            <td>{{ !empty($data->vehicle_arrival_time) ? date('Y-m-d', strtotime($data->vehicle_arrival_time)) . ' / ' . date('H:i:s', strtotime($data->vehicle_arrival_time)) : '-' }}</td>
+                            <td>{{ !empty($data->vehicle_return_time) ? date('Y-m-d', strtotime($data->vehicle_return_time)) . ' / ' . date('H:i:s', strtotime($data->vehicle_return_time)) : '-' }}</td>
+                            <td>{{ !empty($data->vehicle_return_to_center_time) ? date('Y-m-d', strtotime($data->vehicle_return_to_center_time)) . ' / ' . date('H:i:s', strtotime($data->vehicle_return_to_center_time)) : '-' }}</td>
                             <td>{{$data->total_distance}} कि .मी </td>
                             <td>{{$data->pumping_hours}} @if(!empty($data->pumping_hours) && !str_contains($data->pumping_hours, 'तास')) तास @endif</td>
                         </tr>
