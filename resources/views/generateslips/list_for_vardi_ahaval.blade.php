@@ -1514,6 +1514,11 @@
         var model_id = $(this).attr("data-id");
         var url = "{{ route('slip_details', ':model_id') }}";
 
+        // Ensure Officer and Employee fields start cleared
+        $("#editForm input[name='officer_name_present_at_last_moment'], #editForm #officer_name_present_at_last_moment").val('');
+        $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val('');
+        $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val('');
+
         $.ajax({
             url: url.replace(':model_id', model_id),
             type: 'GET',
@@ -1598,30 +1603,10 @@
                         if ($pumpInput[0]) $pumpInput[0].dataset.autoCalculated = 'true';
                     }
 
-                    // 11. Staff Name & Staff Details (कर्मचाऱ्यांचे नाव आणि तपशील)
-                    if (workers && workers.length > 0) {
-                        let officerWorker = workers.find(function(w) {
-                            let des = (w.designation_name || '').toLowerCase();
-                            return des.includes('officer') || des.includes('अधिकारी') || des.includes('lead') || des.includes('प्रमुख');
-                        }) || workers[0];
-
-                        // officer_name_present_at_last_moment only allows letters and spaces (regex: /^[\p{L}\p{M}\s]+$/u)
-                        // Strip dots (e.g. from "Mr.") and symbols so validation does not fail
-                        let officerCleanName = (officerWorker.worker_name || '').replace(/[^\p{L}\p{M}\s]/gu, '').replace(/\s+/g, ' ').trim();
-                        $("#editForm input[name='officer_name_present_at_last_moment'], #editForm #officer_name_present_at_last_moment").val(officerCleanName);
-
-                        let officerWithTitle = officerWorker.designation_name
-                            ? (officerWorker.designation_name + ' - ' + officerWorker.worker_name)
-                            : officerWorker.worker_name;
-                        $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val(officerWithTitle);
-
-                        // Employee - Title / Name
-                        let otherWorkers = workers.filter(function(w) { return w !== officerWorker; });
-                        let empList = (otherWorkers.length > 0 ? otherWorkers : workers).map(function(w) {
-                            return w.designation_name ? (w.designation_name + ' - ' + w.worker_name) : w.worker_name;
-                        });
-                        $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val(empList.join(', '));
-                    }
+                    // 11. Officer & Employee details should NOT be auto-filled
+                    $("#editForm input[name='officer_name_present_at_last_moment'], #editForm #officer_name_present_at_last_moment").val('');
+                    $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val('');
+                    $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val('');
 
                     // 12. Calculate total time worked on site (24-hour format)
                     if (typeof updateTotalTime === 'function') {
