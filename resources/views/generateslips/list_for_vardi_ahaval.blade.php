@@ -1609,11 +1609,18 @@
                     $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val('');
 
                     // 12. Calculate total time worked on site (24-hour format)
+                    if (slip.calculated_total_time) {
+                        $("#editForm input[name='total_time'], #editForm #total_time").val(slip.calculated_total_time);
+                    }
+                    if (slip.calculated_total_hour) {
+                        $("#editForm input[name='total_hour'], #editForm #total_hour").val(slip.calculated_total_hour);
+                    }
                     if (typeof updateTotalTime === 'function') {
                         updateTotalTime();
                     }
-                    $("#editForm input[name='first_vehicle_departing_date_time']").trigger('change');
+                    $("#editForm input[name='time_of_arrival_at_the_scene']").trigger('change');
                     $("#editForm input[name='time_of_departure_from_scene']").trigger('change');
+                    $("#editForm input[name='vardi_leaving_time']").trigger('change');
                 } else if (data.error) {
                     alert(data.error);
                 }
@@ -1791,9 +1798,10 @@
 
 {{-- time calculation --}}
 <script>
-    // Get the input elements
-    var firstVehicleDeparting = document.getElementById('first_vehicle_departing_date_time');
+    // Get the input elements for site arrival and departure
+    var vehicleArrivalAtScene = document.getElementById('time_of_arrival_at_the_scene');
     var timeOfDeparture = document.getElementById('time_of_departure_from_scene');
+    var vardiLeavingTime = document.getElementById('vardi_leaving_time');
     var totalTimeInput = document.getElementById('total_time');
     var totalHourInput = document.getElementById('total_hour');
     var pumpRunInput = document.getElementById('vardi_pump_run');
@@ -1804,22 +1812,47 @@
         });
     }
 
-    // Attach an event listener to detect changes in the input fields
-    if (firstVehicleDeparting && timeOfDeparture) {
-        firstVehicleDeparting.addEventListener('change', updateTotalTime);
+    // Attach event listeners to detect changes in the arrival and departure fields
+    if (vehicleArrivalAtScene) {
+        vehicleArrivalAtScene.addEventListener('change', updateTotalTime);
+        vehicleArrivalAtScene.addEventListener('input', updateTotalTime);
+    }
+    if (timeOfDeparture) {
         timeOfDeparture.addEventListener('change', updateTotalTime);
+        timeOfDeparture.addEventListener('input', updateTotalTime);
+    }
+    if (vardiLeavingTime) {
+        vardiLeavingTime.addEventListener('change', updateTotalTime);
+        vardiLeavingTime.addEventListener('input', updateTotalTime);
     }
 
+    // Also jQuery event listeners on form inputs
+    $(document).on('change input', "#editForm input[name='time_of_arrival_at_the_scene'], #editForm input[name='time_of_departure_from_scene'], #editForm input[name='vardi_leaving_time']", function() {
+        updateTotalTime();
+    });
+
     function updateTotalTime() {
-        if (!firstVehicleDeparting || !timeOfDeparture || !firstVehicleDeparting.value || !timeOfDeparture.value) return;
+        var arrivalElem = document.getElementById('time_of_arrival_at_the_scene') || document.querySelector("#editForm input[name='time_of_arrival_at_the_scene']");
+        var departureElem = document.getElementById('time_of_departure_from_scene') || document.querySelector("#editForm input[name='time_of_departure_from_scene']");
+        var leavingElem = document.getElementById('vardi_leaving_time') || document.querySelector("#editForm input[name='vardi_leaving_time']");
+        var totalTimeElem = document.getElementById('total_time') || document.querySelector("#editForm input[name='total_time']");
+        var totalHourElem = document.getElementById('total_hour') || document.querySelector("#editForm input[name='total_hour']");
+        var pumpElem = document.getElementById('vardi_pump_run') || document.querySelector("#editForm input[name='vardi_pump_run']");
+
+        var startVal = arrivalElem && arrivalElem.value ? arrivalElem.value : '';
+        var endVal = (departureElem && departureElem.value) ? departureElem.value : (leavingElem && leavingElem.value ? leavingElem.value : '');
+
+        if (!startVal || !endVal) return;
 
         // Get the values from the input fields
-        var startTime = new Date(firstVehicleDeparting.value);
-        var endTime = timeOfDeparture.value.includes('T')
-            ? new Date(timeOfDeparture.value)
-            : new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
+        var startTime = new Date(startVal);
+        var endTime = endVal.includes('T')
+            ? new Date(endVal)
+            : new Date(`${startVal.split('T')[0]}T${endVal}`);
 
-        // Check if end date is earlier than start date (yesterday's start date and today's end date)
+        if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) return;
+
+        // Check if end date is earlier than start date (yesterday's start date and today's end date / midnight crossing)
         if (endTime < startTime) {
             // Adjust the end date to tomorrow
             endTime.setDate(endTime.getDate() + 1);
@@ -1835,18 +1868,18 @@
         var timeone = format24HourTime(dateObject);
         var timetwo = format24HourTime(dateObjectTwo);
 
-        if (totalTimeInput && !isNaN(timeDiff) && timeDiff >= 0) {
-            totalTimeInput.value = timeone + ' To ' + timetwo;
+        if (totalTimeElem && !isNaN(timeDiff) && timeDiff >= 0) {
+            totalTimeElem.value = timeone + ' To ' + timetwo;
         }
 
-        if (totalHourInput && !isNaN(timeDiff) && timeDiff >= 0) {
+        if (totalHourElem && !isNaN(timeDiff) && timeDiff >= 0) {
             var formattedDiff = formatTimeDifference(timeDiff);
-            totalHourInput.value = formattedDiff;
+            totalHourElem.value = formattedDiff;
 
             // Auto-update Pumping hours (पंपिंग तास) if not manually specified
-            if (pumpRunInput && (!pumpRunInput.value || pumpRunInput.dataset.autoCalculated === 'true')) {
-                pumpRunInput.value = formattedDiff;
-                pumpRunInput.dataset.autoCalculated = 'true';
+            if (pumpElem && (!pumpElem.value || pumpElem.dataset.autoCalculated === 'true')) {
+                pumpElem.value = formattedDiff;
+                pumpElem.dataset.autoCalculated = 'true';
             }
         }
     }

@@ -605,14 +605,18 @@
 {{-- time calculation --}}
 <script>
     // Get the input elements
+    var vehicleArrivalAtScene = document.getElementById('time_of_arrival_at_the_scene');
     var firstVehicleDeparting = document.getElementById('first_vehicle_departing_date_time');
     var timeOfDeparture = document.getElementById('time_of_departure_from_scene');
+    var dateOfDeparture = document.getElementById('date_of_departure_from_scene');
     var totalTimeInput = document.getElementById('total_time');
     var totalHourInput = document.getElementById('total_hour');
 
-    // Attach an event listener to detect changes in the input fields
-    firstVehicleDeparting.addEventListener('change', updateTotalTime);
-    timeOfDeparture.addEventListener('change', updateTotalTime);
+    // Attach event listeners to detect changes in the input fields
+    if (vehicleArrivalAtScene) vehicleArrivalAtScene.addEventListener('change', updateTotalTime);
+    if (firstVehicleDeparting) firstVehicleDeparting.addEventListener('change', updateTotalTime);
+    if (timeOfDeparture) timeOfDeparture.addEventListener('change', updateTotalTime);
+    if (dateOfDeparture) dateOfDeparture.addEventListener('change', updateTotalTime);
 
     function format24HourTime(d) {
         if (!d || isNaN(d.getTime())) return '';
@@ -623,13 +627,17 @@
     }
 
     function updateTotalTime() {
-        if (!firstVehicleDeparting || !timeOfDeparture || !firstVehicleDeparting.value || !timeOfDeparture.value) return;
+        var startElem = (vehicleArrivalAtScene && vehicleArrivalAtScene.value) ? vehicleArrivalAtScene : firstVehicleDeparting;
+        if (!startElem || !timeOfDeparture || !startElem.value || !timeOfDeparture.value) return;
 
         // Get the values from the input fields
-        var startTime = new Date(firstVehicleDeparting.value);
+        var startTime = new Date(startElem.value);
+        var endDateStr = (dateOfDeparture && dateOfDeparture.value) ? dateOfDeparture.value : startElem.value.split('T')[0];
         var endTime = timeOfDeparture.value.includes('T')
             ? new Date(timeOfDeparture.value)
-            : new Date(`${firstVehicleDeparting.value.split('T')[0]}T${timeOfDeparture.value}`);
+            : new Date(`${endDateStr}T${timeOfDeparture.value}`);
+
+        if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) return;
 
         // Check if end date is earlier than start date (yesterday's start date and today's end date)
         if (endTime < startTime) {

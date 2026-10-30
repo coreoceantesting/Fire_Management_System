@@ -324,6 +324,24 @@ class OccuranceBookController extends Controller
                     $slip_details->vehicle_arrival_at_center_time = $vardiCenter->vardi_return_time;
                 }
             }
+
+            // Calculate total time worked on site from Vehicle Arrival DateTime to Time of departure from the scene
+            if (!empty($slip_details->vehicle_arrival_time) && !empty($slip_details->vehicle_departure_from_scene_time)) {
+                $start = strtotime($slip_details->vehicle_arrival_time);
+                $end = strtotime($slip_details->vehicle_departure_from_scene_time);
+                if ($start && $end) {
+                    if ($end < $start) {
+                        $end += 86400; // Next day
+                    }
+                    $diff = $end - $start;
+                    if ($diff >= 0) {
+                        $h = floor($diff / 3600);
+                        $m = floor(($diff % 3600) / 60);
+                        $slip_details->calculated_total_time = date('H:i:s', $start) . ' To ' . date('H:i:s', $end);
+                        $slip_details->calculated_total_hour = sprintf('%02d:%02d', $h, $m);
+                    }
+                }
+            }
         }
 
         // Fetch worker details from on_field_worker_details with designation
