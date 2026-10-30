@@ -118,7 +118,7 @@
                 <p style="text-align: left;">कॉलचा प्रकार : {{ $vardiAhavalData->space_loss ?? 'अस्सल' }}</p>
             </div>
             <div class="col-md-6">
-                <p style="text-align: right;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{ $vardiAhavalData->vardi_employee_name ?? (!in_array($vardiAhavalData->officer_name_present_at_last_moment ?? '', ['vehicle', 'Fire Type of vehicle', 'fire rescue', 'Zane Hayes']) ? $vardiAhavalData->officer_name_present_at_last_moment : ($vardiAhavalData->vardi_officer_name ?? '-')) }}</p>
+                <p style="text-align: right;">घटनास्थळी असलेल्या कर्मचाऱ्यांचे नाव: - {{ !empty(trim($vardiAhavalData->officer_name_present_at_last_moment ?? '')) ? $vardiAhavalData->officer_name_present_at_last_moment : '-' }}</p>
             </div>         
         </div>
 
