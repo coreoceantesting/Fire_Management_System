@@ -1518,6 +1518,9 @@
         $("#editForm input[name='officer_name_present_at_last_moment'], #editForm #officer_name_present_at_last_moment").val('');
         $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val('');
         $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val('');
+        // Ensure Total time worked on site and hours minutes fields start cleared (no auto fill, allow manual entry)
+        $("#editForm input[name='total_time'], #editForm #total_time").val('');
+        $("#editForm input[name='total_hour'], #editForm #total_hour").val('');
 
         $.ajax({
             url: url.replace(':model_id', model_id),
@@ -1608,13 +1611,9 @@
                     $("#editForm input[name='vardi_officer_name'], #editForm #vardi_officer_name").val('');
                     $("#editForm input[name='vardi_employee_name'], #editForm #vardi_employee_name").val('');
 
-                    // 12. Calculate total time worked on site (24-hour format)
-                    if (slip.calculated_total_time) {
-                        $("#editForm input[name='total_time'], #editForm #total_time").val(slip.calculated_total_time);
-                    }
-                    if (slip.calculated_total_hour) {
-                        $("#editForm input[name='total_hour'], #editForm #total_hour").val(slip.calculated_total_hour);
-                    }
+                    // 12. Total time worked on site & hours minutes should NOT be auto-filled (manual entry by admin and user)
+                    $("#editForm input[name='total_time'], #editForm #total_time").val('');
+                    $("#editForm input[name='total_hour'], #editForm #total_hour").val('');
                     if (typeof updateTotalTime === 'function') {
                         updateTotalTime();
                     }
@@ -1868,13 +1867,9 @@
         var timeone = format24HourTime(dateObject);
         var timetwo = format24HourTime(dateObjectTwo);
 
-        if (totalTimeElem && !isNaN(timeDiff) && timeDiff >= 0) {
-            totalTimeElem.value = timeone + ' To ' + timetwo;
-        }
-
-        if (totalHourElem && !isNaN(timeDiff) && timeDiff >= 0) {
+        // Total time worked on site & hours minutes are NOT auto-filled; allow manual entry by admin and user
+        if (!isNaN(timeDiff) && timeDiff >= 0) {
             var formattedDiff = formatTimeDifference(timeDiff);
-            totalHourElem.value = formattedDiff;
 
             // Auto-update Pumping hours (पंपिंग तास) if not manually specified
             if (pumpElem && (!pumpElem.value || pumpElem.dataset.autoCalculated === 'true')) {
